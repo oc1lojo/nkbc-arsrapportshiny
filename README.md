@@ -1,12 +1,3 @@
----
-author: "Lina Benson"
-date: "21 september 2017"
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Syfte
 
 Skapar shiny appar till Årsrapport 2016 för Nationellt kvalitetsregister för bröstcancer (NKBC).
@@ -23,4 +14,4 @@ Beror av externt dataset med sjukhuskoder, täckningsgrader och rådata från re
 
 # Frågor
 
-Kontakta nationellt ansvarig statistiker NKBC, RCC Stockholm-Gotland. 
+Kontakta nationellt ansvarig statistiker för NKBC, RCC Stockholm-Gotland. 
