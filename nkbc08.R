@@ -1,0 +1,75 @@
+######################################################
+# Project: Årsrapport 2016
+NAME <- "nkbc08"
+# Created by: Lina Benson 
+# Created date: 2017-08-09
+# Software: R x64 v 3.3.3
+# Status: Final
+# Updated by: 
+# Updated date:
+# Updated description: 
+######################################################
+
+
+# Enbart en operation (ingen omoperation pga tumördata) i bröst eller axill ------------------------------------------------
+GLOBALS <- defGlobals(LAB = "Enbart en operation (ingen omoperation pga tumördata) i bröst eller axill",
+                      POP = "opererade fall utan fjärrmetastaser vid diagnos.",
+                      SHORTLAB = "Enbart en operation",
+                      SJHKODUSE <- "a_kir_sjhkod",
+                      TARGET = c(80, 90)
+                      )
+
+dftemp <- addSjhData(dfmain)
+
+dftemp <- dftemp %>%
+  mutate(
+    # Hantera missing
+    op_kir_sekbrost_Värde  = ifelse(op_kir_sekbrost_Värde %in% c(0,1), op_kir_sekbrost_Värde, NA),
+    op_kir_sekaxill_Värde  = ifelse(op_kir_sekaxill_Värde %in% c(0,1), op_kir_sekaxill_Värde, NA),
+    
+    # slå ihop axill och brost
+    outcome = pmax(op_kir_sekbrost_Värde, op_kir_sekaxill_Värde),
+    
+    outcome = as.logical(!outcome)                                    
+  ) %>%
+  filter(
+    # Ej fjärrmetastaser vid diagnos
+    !a_tnm_mklass_Värde %in% c(10),
+    !a_planbeh_typ_Värde %in% c(3),
+    
+    !is.na(region)
+  ) %>%
+  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+
+
+link <- rccShiny(
+  data = dftemp,
+  folder = NAME,
+  path = OUTPUTPATH,
+  outcomeTitle = GLOBALS$LAB,
+  folderLinkText = GLOBALS$SHORTLAB,
+  geoUnitsPatient = FALSE,
+  textBeforeSubtitle = GLOBALS$SHORTPOP,
+  description = c(
+    paste0(
+      "Om det vid analys av den bortopererade vävnaden visar sig att tumörvävnad kan ha kvarlämnats blir patienten ofta rekommenderad en omoperation.", 
+      descTarg()
+    ),
+    descTolk, 
+    descTekBes()
+  ),
+  varOther = list(
+    list(
+      var = "agegroup",
+      label = c("Ålder vid diagnos")
+    ),
+    list(
+      var = "invasiv",
+      label = c("Invasivitet")
+    )
+  ),
+  targetValues = GLOBALS$TARGET
+)
+
+cat(link)
+#runApp(paste0("Output/apps/sv/",NAME))

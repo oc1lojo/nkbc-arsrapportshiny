@@ -1,0 +1,77 @@
+######################################################
+# Project: Årsrapport 2016
+NAME <- "nkbc17"
+# Created by: Lina Benson 
+# Created date: 2017-08-09
+# Software: R x64 v 3.3.3
+# Status: 
+# Updated by: 
+# Updated date:
+# Updated description: 
+######################################################
+
+
+# Tid från välgrundad misstanke om cancer till första besök i specialiserad vård ------------------------------------------------
+
+GLOBALS <- defGlobals(LAB = "Välgrundad misstanke till första besök i specialiserad vård",
+                      POP = "alla anmälda fall.",
+                      SJHKODUSE <- "a_inr_sjhkod",
+                      TARGET = c(75, 90)
+                      )
+
+dftemp <- addSjhData(dfmain)
+
+dftemp <- dftemp %>%
+  mutate(
+    d_a_diag_misscadat = ifelse(!is.na(ymd(a_diag_misscadat)),
+                                ymd(a_diag_misscadat), ymd(a_diag_kontdat)),
+    
+    outcome = as.numeric(ymd(a_diag_besdat) - d_a_diag_misscadat),
+    
+    outcome = ifelse(outcome < 0, 0, outcome)
+  ) %>%
+  filter(
+    # Endast fall med år från 2013 (1:a kontakt tillkom 2013)
+    period >= 2013,
+    
+    !is.na(region)
+  ) %>%
+  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+
+
+link <- rccShiny(
+  data = dftemp,
+  folder = NAME,
+  path = OUTPUTPATH,
+  outcomeTitle = GLOBALS$LAB,
+  folderLinkText = GLOBALS$SHORTLAB,
+  geoUnitsPatient = FALSE,
+  textBeforeSubtitle = GLOBALS$SHORTPOP,
+  description = c(
+    paste0(
+      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.", 
+      descTarg()
+    ),  
+    paste0(
+      MisstCa,
+      "<p></p>",
+      descTolk
+    ),
+    descTekBes()
+  ),
+  varOther = list(
+    list(
+      var = "agegroup",
+      label = c("Ålder vid diagnos")
+    ),
+    list(
+      var = "invasiv",
+      label = c("Invasivitet")
+    )
+  ),
+  propWithinValue = 7, 
+  targetValues = GLOBALS$TARGET
+)
+
+cat(link)
+#runApp(paste0("Output/apps/sv/",NAME))
