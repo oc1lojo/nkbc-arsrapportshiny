@@ -11,8 +11,8 @@ NAME <- "nkbc08"
 ######################################################
 
 
-# Enbart en operation (ingen omoperation pga tumördata) i bröst eller axill ------------------------------------------------
-GLOBALS <- defGlobals(LAB = "Enbart en operation (ingen omoperation pga tumördata) i bröst eller axill",
+# Enbart en operation (ingen omoperation pga tumördata) i bröst ------------------------------------------------
+GLOBALS <- defGlobals(LAB = "Enbart en operation (ingen omoperation pga tumördata) i bröst",
                       POP = "opererade fall utan fjärrmetastaser vid diagnos.",
                       SHORTLAB = "Enbart en operation",
                       SJHKODUSE <- "a_kir_sjhkod",
@@ -24,11 +24,7 @@ dftemp <- addSjhData(dfmain)
 dftemp <- dftemp %>%
   mutate(
     # Hantera missing
-    op_kir_sekbrost_Värde  = ifelse(op_kir_sekbrost_Värde %in% c(0,1), op_kir_sekbrost_Värde, NA),
-    op_kir_sekaxill_Värde  = ifelse(op_kir_sekaxill_Värde %in% c(0,1), op_kir_sekaxill_Värde, NA),
-    
-    # slå ihop axill och brost
-    outcome = pmax(op_kir_sekbrost_Värde, op_kir_sekaxill_Värde),
+    outcome  = ifelse(op_kir_sekbrost_Värde %in% c(0,1), op_kir_sekbrost_Värde, NA),
     
     outcome = as.logical(!outcome)                                    
   ) %>%
