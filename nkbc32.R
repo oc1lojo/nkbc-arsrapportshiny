@@ -46,7 +46,7 @@ dftemp <- dftemp %>%
     d_kemo == TRUE,
     
     # HER2+ (amplifiering eller 3+). Finns inga fjärrisar så behöver ej titta på PAD från anmälan
-    her2_op == 2,
+    her2_op == 1,
     
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),

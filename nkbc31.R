@@ -41,7 +41,7 @@ dftemp <- dftemp %>%
     invasiv == "Invasiv",
     
     # ER+. Finns inga fjärrisar så behöver ej titta på PAD från anmälan
-    er_op == 2,
+    er_op == 1,
     
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),

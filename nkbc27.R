@@ -43,7 +43,7 @@ dftemp <- dftemp %>%
     invasiv == "Invasiv",
     
     # ER-. Finns inga fjärrisar så behöver ej titta på PAD från anmälan
-    er_op == 1,
+    er_op == 2,
     
     # Tumörstorlek > 10 mm eller spridning till lymfkörtlar
     (op_pad_invstl > 10 | op_pad_lglmetant > 0),
