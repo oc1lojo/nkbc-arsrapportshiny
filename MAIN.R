@@ -26,6 +26,7 @@ YEAR = 2016
 OUTPUTPATH = "Output"
 
 dfmain <- arsrap %>%
+  mutate_if(is.factor, as.character) %>%
   mutate(
     agegroup = cut(a_pat_alder, c(0, 36, 46, 56, 66, 76, 120) , 
                    include.lowest = TRUE, 
@@ -100,20 +101,18 @@ dfmain <- arsrap %>%
                    ),
     
     # fix 1.sjukhus ansvarigt för rapportering av onkologisk behandling/2.onkologiskt sjukhus/3.anmälande sjukhus
-    d_onkans_sjhkod = ifelse(!is.na(as.numeric(op_onk_sjhkod)), 
-                             as.numeric(op_onk_sjhkod), 
-                             ifelse(!is.na(as.numeric(a_onk_sjhkod)), 
-                                           as.numeric(a_onk_sjhkod), 
-                                           a_inr_sjhkod)
-                                    ),
-    
+    d_onkans_sjhkod = coalesce(as.numeric(op_onk_sjhkod), 
+                               as.numeric(a_onk_rappsjhkod), 
+                               as.numeric(a_onk_sjhkod), 
+                               as.numeric(a_inr_sjhkod)
+                               ),
+
     # fix 1.sjukhus ansvarigt för rapportering av uppföljning/2.onkologiskt sjukhus/3.anmälande sjukhus
-    d_uppfans_sjhkod = ifelse(!is.na(as.numeric(op_uppf_sjhkod)), 
-                             as.numeric(op_uppf_sjhkod), 
-                             ifelse(!is.na(as.numeric(a_onk_sjhkod)), 
-                                           as.numeric(a_onk_sjhkod), 
-                                           a_inr_sjhkod)
-                             )
+    d_uppfans_sjhkod = coalesce(as.numeric(op_uppf_sjhkod), 
+                               as.numeric(a_uppf_sjhkod), 
+                               as.numeric(a_onk_sjhkod), 
+                               as.numeric(a_inr_sjhkod)
+    )
   ) %>%
   filter( # default vilka år som ska visas
     period >= 2009,
