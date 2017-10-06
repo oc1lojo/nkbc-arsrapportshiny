@@ -23,8 +23,7 @@ dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
-    d_a_diag_misscadat = ifelse(!is.na(ymd(a_diag_misscadat)),
-                                ymd(a_diag_misscadat), ymd(a_diag_kontdat)),
+    d_a_diag_misscadat = ymd(coalesce(a_diag_misscadat, a_diag_kontdat)),
     outcome = as.numeric(ymd(op_kir_dat) - d_a_diag_misscadat),
     outcome = ifelse(outcome < 0, 0, outcome)
   ) %>%

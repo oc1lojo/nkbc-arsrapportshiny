@@ -23,9 +23,7 @@ dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
-    d_a_diag_misscadat = ifelse(!is.na(ymd(a_diag_misscadat)),
-                                ymd(a_diag_misscadat), ymd(a_diag_kontdat)),
-    
+    d_a_diag_misscadat = ymd(coalesce(a_diag_misscadat, a_diag_kontdat)),
     d_pre_onk_dat = pmin(ymd(pre_kemo_dat), 
                          ymd(pre_rt_dat), 
                          ymd(pre_endo_dat), 
