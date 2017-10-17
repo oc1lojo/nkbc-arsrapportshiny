@@ -65,10 +65,6 @@ link <- rccShiny(
     list(
       var = "agegroup",
       label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "invasiv",
-      label = c("Invasivitet")
     )
   ),
   targetValues = GLOBALS$TARGET
