@@ -15,7 +15,7 @@ NAME <- "nkbc31"
 
 GLOBALS <- defGlobals(LAB = "Endokrin behandling",
                       POP = "opererade östrogenreceptor positiva invasiva fall utan fjärrmetastaser vid diagnos.",
-                      SHORTPOP = "opererade ER+ invasiva fall med större tumörer utan fjärrmetastaser vid diagnos.",
+                      SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
                       SJHKODUSE <- "a_onk_sjhkod",
                       TARGET = c(90, 95)
                       )
