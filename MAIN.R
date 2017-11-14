@@ -50,6 +50,7 @@ dfmain <- arsrap %>%
     
     # Derivering av invasiv cancer
     invasiv = pmin(a_pad_invasiv_Värde, op_pad_invasiv_Värde, na.rm = TRUE),
+    invasiv = ifelse(invasiv == 98, NA, invasiv), ## added 2017-11-09
     invasiv = factor(invasiv, c(1, 2, NA), 
                      c("Invasiv", "Ej invasiv", "Uppgift saknas"),
                      exclude = NULL),

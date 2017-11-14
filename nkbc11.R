@@ -31,12 +31,11 @@ dftemp <- dftemp %>%
     # Extent infördes mitten av 2014
     period >= 2015,  
     
-    # Endast planerad primär opereration
-    a_planbeh_typ_Värde %in% c(1), 
+    # Endast primär opereration (planerad om utförd ej finns)
+    (op_kir_Värde %in% 1 | is.na(op_kir_Värde) & a_planbeh_typ_Värde %in% 1),
     
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),
-    #!a_planbeh_typ_Värde %in% c(3),
     
     # Exkludera fall som ej op i bröstet
     !op_kir_brost_Värde %in% c(3),

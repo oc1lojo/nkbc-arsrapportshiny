@@ -63,8 +63,7 @@ dftemp <- dftemp %>%
     
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),
-    !a_planbeh_typ_Värde %in% c(3),
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, agegroup, invasiv, 

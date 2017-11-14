@@ -36,8 +36,8 @@ dftemp <- dftemp %>%
     # Endast opererade
     !is.na(op_kir_dat),
     
-    # Endast planerad primär opereration (pga att info om tumörstorlek och spridning till N behövs)
-    a_planbeh_typ_Värde %in% c(1),
+    # Endast primär opereration (planerad om utfärd ej finns) (pga att info om tumörstorlek och spridning till N behövs)
+    (op_kir_Värde %in% 1 | is.na(op_kir_Värde) & a_planbeh_typ_Värde %in% 1),
     
     # Endast invasiv cancer
     invasiv == "Invasiv",
@@ -50,7 +50,6 @@ dftemp <- dftemp %>%
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),
-    !a_planbeh_typ_Värde %in% c(3),
     
     !is.na(region)
   ) %>%

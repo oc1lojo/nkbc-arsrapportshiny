@@ -42,15 +42,14 @@ dftemp <- dftemp %>%
     invasiv == "Invasiv",
     
     # Endast mastektomi
-    op_kir_brost_Värde %in% c(2, 4),
+    op_kir_brost_Värde %in% c(2),
     
     # Spridning till lymfkörtlar
     op_pad_lglmetant > 0,
     
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),
-    !a_planbeh_typ_Värde %in% c(3),
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, agegroup, invasiv, pN)

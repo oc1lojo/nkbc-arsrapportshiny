@@ -14,8 +14,8 @@ NAME <- "nkbc13"
 # Täckningsgrad för rapportering av preoperativ onkologisk behandling ------------------------------------------------
 
 GLOBALS <- defGlobals(LAB = "Täckningsgrad för rapportering av preoperativ onkologisk behandling",
-                      POP = "opererade fall utan fjärrmetastaser vid diagnos med planerad preoperativ onkologisk behandling.",
-                      SHORTPOP = "fall utan fjärrmetastaser vid diagnos med planerad preoperativ onkologisk behandling.",
+                      POP = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
+                      SHORTPOP = "fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
                       SJHKODUSE <- "d_onkans_sjhkod",
                       TARGET = c(70, 85)
                       )
@@ -35,13 +35,12 @@ dftemp <- dftemp %>%
     
     # Endast opererade
     !is.na(op_kir_dat), 
-    
-    # Endast planerad preop onk behandling
-    a_planbeh_typ_Värde %in% c(2),
+
+    # Endast preoponk behandling (planerad om utförd ej finns)
+    (op_kir_Värde %in% 2 | is.na(op_kir_Värde) & a_planbeh_typ_Värde %in% 2),
     
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),
-    !a_planbeh_typ_Värde %in% c(3),
     
     !is.na(region)
     

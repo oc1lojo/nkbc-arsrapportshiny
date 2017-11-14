@@ -43,12 +43,12 @@ dftemp <- dftemp %>%
     # Endast opererade
     !is.na(op_kir_dat), 
     
-    # Endast planerad preoperativ onkologisk behandling
-    a_planbeh_typ_Värde %in% c(2),
+    # Endast preop onk behandling (planerad om utförd ej finns)
+    (op_kir_Värde %in% 2 | is.na(op_kir_Värde) & a_planbeh_typ_Värde %in% 2),
+    
     
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),
-    !a_planbeh_typ_Värde %in% c(3),
     
     !is.na(region)
   ) %>%
