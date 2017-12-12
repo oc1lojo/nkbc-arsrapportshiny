@@ -24,12 +24,12 @@ dftemp <- dftemp %>%
   mutate(
     # M
     outcome = factor(
-      mapvalues(a_tnm_nklass_Värde, 
+      mapvalues(a_tnm_mklass_Värde, 
                 from = c(0, 10, 20, NA), 
-                to = c(1, 2, 99, 99)
+                to = c(1, 2, 3, 99)
       ),
-      levels = c(1, 2, 99),
-      labels = c("Nej (M0)", "Ja (M1)", "Uppgift saknas")
+      levels = c(1, 2, 3, 99),
+      labels = c("Nej (M0)", "Ja (M1)", "Kan ej bedömas (MX)", "Uppgift saknas")
     )
   ) %>%
   filter(
@@ -51,7 +51,11 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     "Fall med fjärrmetastaser definieras som upptäckta inom 3 månader från provtagningsdatum (diagnosdatum).", 
-    descTolk, 
+    paste0(
+      "Fom 2013 är det inte längre möjligt att registrera en tumör som att fjärrmetastaser ej kan bedömas (MX) i NKBC.
+      <p></p>",
+      descTolk
+    ),
     descTekBes()
   ),
   varOther = list(
