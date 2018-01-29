@@ -42,7 +42,7 @@ dftemp <- dftemp %>%
     invasiv == "Invasiv",
     
     # Endast mastektomi
-    op_kir_brost_Värde %in% c(2),
+    op_kir_brost_Värde %in% c(2, 4),
     
     # Spridning till lymfkörtlar
     op_pad_lglmetant > 0,

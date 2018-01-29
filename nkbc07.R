@@ -28,7 +28,7 @@ dftemp <- dftemp %>%
   ) %>%
   filter(
     # Endast mastektomi 
-    op_kir_brost_Värde %in% c(2),
+    op_kir_brost_Värde %in% c(2, 4),
     
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),
