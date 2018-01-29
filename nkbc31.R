@@ -13,8 +13,8 @@ NAME <- "nkbc31"
 
 # Endokrin behandling ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Endokrin behandling",
-                      POP = "opererade östrogenreceptor positiva invasiva fall utan fjärrmetastaser vid diagnos.",
+GLOBALS <- defGlobals(LAB = "Endokrinbehandling",
+                      POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
                       SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
                       SJHKODUSE <- "a_onk_sjhkod",
                       TARGET = c(90, 95)
@@ -61,13 +61,13 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Endokrin behandling bör erbjudas till alla patienter med östrogenreceptorpositiv (ER+) bröstcancer. I de fall där samsjuklighet föreligger får nyttan med endokrin behandling avvägas.", 
+      "Endokrinbehandling bör erbjudas till alla patienter med östrogenreceptorpositiv (ER+) bröstcancer. I de fall där samsjuklighet föreligger får nyttan med endokrin behandling avvägas.", 
       descTarg()
     ),
     paste0(
-      "Både preoperativ och postoperativ endokrin behandling är medtaget i beräkningen.
+      "Både preoperativ och postoperativ endokrinbehandling är medtaget i beräkningen.
       <p></p>
-      Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrina behandling i huvudsak pga biverkningar.
+      Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak pga biverkningar.
       <p></p>",
       onkRed,
       "<p></p>",

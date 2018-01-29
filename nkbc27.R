@@ -14,7 +14,7 @@ NAME <- "nkbc27"
 # Postoperativ cytostatikabehandling ------------------------------------------------
 
 GLOBALS <- defGlobals(LAB = "Postoperativ cytostatikabehandling",
-                      POP = "primärt opererade östrogenreceptor negativa invasiva fall med tumörstorlek > 10mm eller spridning till lymfkörtlar utan fjärrmetastaser vid diagnos.",
+                      POP = "primärt opererade östrogenreceptornegativa invasiva fall med tumörstorlek > 10mm eller spridning till lymfkörtlar utan fjärrmetastaser vid diagnos.",
                       SHORTPOP = "primärt opererade ER- invasiva fall med större tumörer utan fjärrmetastaser vid diagnos.",
                       SJHKODUSE <- "a_onk_sjhkod",
                       TARGET = c(80, 90)
