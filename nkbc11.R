@@ -37,8 +37,8 @@ dftemp <- dftemp %>%
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% c(10),
     
-    # Exkludera fall som ej op i bröstet
-    !op_kir_brost_Värde %in% c(3),
+    # Exkludera fall som ej op i bröstet eller missing
+    !(op_kir_brost_Värde %in% 3 | is.na(op_kir_brost_Värde)),
     
     # Extent <= 30mm (invasiv) resp 20mm (in situ)
     (max_extent <= 30 & invasiv == "Invasiv" |
