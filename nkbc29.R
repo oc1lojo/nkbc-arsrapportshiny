@@ -39,7 +39,7 @@ dftemp <- dftemp %>%
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
     
-    # Endast mastektomi
+    # Endast mastektomi och subkutan mastektomi
     op_kir_brost_Värde %in% c(2, 4),
     
     # Spridning till lymfkörtlar
