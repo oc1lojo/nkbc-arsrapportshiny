@@ -1,13 +1,11 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc11"
 # Created by: Lina Benson 
 # Created date: 2017-08-09
 # Software: R x64 v 3.3.3
 # Status: Final
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git 
 ######################################################
 
 
@@ -32,21 +30,21 @@ dftemp <- dftemp %>%
     period >= 2015,  
     
     # Endast primär opereration (planerad om utförd ej finns)
-    (op_kir_Värde %in% 1 | is.na(op_kir_Värde) & a_planbeh_typ_Värde %in% 1),
+    prim_op == 1,
     
     # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% c(10),
+    !a_tnm_mklass_Värde %in% 10,
     
     # Exkludera fall som ej op i bröstet eller missing
-    !(op_kir_brost_Värde %in% 3 | is.na(op_kir_brost_Värde)),
+    op_kir_brost_Värde %in% c(1, 2, 4),
     
     # Extent <= 30mm (invasiv) resp 20mm (in situ)
-    (max_extent <= 30 & invasiv == "Invasiv" |
-       max_extent <= 20 & invasiv == "Ej invasiv"),
+    (max_extent <= 30 & invasiv == "Invasiv cancer" |
+       max_extent <= 20 & invasiv == "Enbart cancer in situ"),
     
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
 
 link <- rccShiny(
@@ -67,12 +65,12 @@ link <- rccShiny(
   ),
   varOther = list(
     list(
-      var = "agegroup",
+      var = "a_pat_alder",
       label = c("Ålder vid diagnos")
     ),
     list(
       var = "invasiv",
-      label = c("Invasivitet")
+      label = c("Invasivitet vid diagnos")
     )
   ),
   targetValues = GLOBALS$TARGET

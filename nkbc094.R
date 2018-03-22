@@ -1,18 +1,17 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc094"
 # Created by: Lina Benson 
 # Created date: 2017-08-09
 # Software: R x64 v 3.3.3
 # Status: Final
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git 
 ######################################################
 
 
 # Population - Biologisk subtyp ------------------------------------------------
-GLOBALS <- defGlobals(LAB = "Biologisk subtyp",
+GLOBALS <- defGlobals(LAB = "Biologisk subtyp vid diagnos",
+                      SHORTLAB = "Biologisk subtyp",
                       POP = "invasiva fall.",
                       SJHKODUSE <- "a_inr_sjhkod"
                       )
@@ -25,11 +24,11 @@ dftemp <- dftemp %>%
   ) %>%
   filter(
     # Endast invasiv cancer
-    invasiv == "Invasiv",
+    invasiv == "Invasiv cancer",
     
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
 
 link <- rccShiny(
@@ -53,7 +52,7 @@ link <- rccShiny(
   ),
   varOther = list(
     list(
-      var = "agegroup",
+      var = "a_pat_alder",
       label = c("Ålder vid diagnos")
     )
   )

@@ -1,13 +1,11 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc35"
 # Created by: Lina Benson 
 # Created date: 2017-08-10
 # Software: R x64 v 3.3.3
-# Status: 
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Status: Final
+# Updated: se git
 ######################################################
 
 
@@ -46,7 +44,7 @@ dftemp <- dftemp %>%
       
     # ER
     er = ifelse(is.na(er), 99, er),
-    er = factor(er, c(1, 2, 99), c("Negativ", "Positiv", "Uppgift saknas"))
+    er = factor(er, c(1, 2, 99), c("Positiv", "Negativ", "Uppgift saknas"))
   ) %>%
   filter(
     # Reg av given onkologisk behandling
@@ -59,14 +57,14 @@ dftemp <- dftemp %>%
     !is.na(op_kir_dat),
 
     # Endast invasiv cancer
-    invasiv == "Invasiv",
+    invasiv == "Invasiv cancer",
     
     # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% c(10),
+    !a_tnm_mklass_Värde %in% 10,
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv, 
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv, 
          er, Tstad, Nstad)
 
 
@@ -98,7 +96,7 @@ link <- rccShiny(
   ),
   varOther = list(
     list(
-      var = "agegroup",
+      var = "a_pat_alder",
       label = c("Ålder vid diagnos")
     ),
     list(

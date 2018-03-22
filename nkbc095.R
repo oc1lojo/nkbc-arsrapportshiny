@@ -1,20 +1,18 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc095"
 # Created by: Lina Benson 
 # Created date: 2017-08-09
 # Software: R x64 v 3.3.3
 # Status: Final
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git 
 ######################################################
 
 
 # Population - Spridning till lymfkörtlarna (klinisk) ------------------------------------------------
 GLOBALS <- defGlobals(LAB = "Spridning till lymfkörtlarna (klinisk) vid diagnos",
                       SHORTLAB = "Spridning till lymfkörtlarna",
-                      POP = "invasiva fall.",
+                      POP = "alla anmälda fall.",
                       SJHKODUSE <- "a_inr_sjhkod"
                       )
 
@@ -34,11 +32,13 @@ dftemp <- dftemp %>%
   ) %>%
   filter(
     # Endast invasiv cancer
-    invasiv == "Invasiv",
+    # invasiv == "Invasiv cancer", Bortselekterat pga om väljer enbart invasiv 
+    # cancer så tas alla med uppgift saknas på invasiv bort. Dock några fel? reg 
+    # in situ och N1 men men...
     
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
 
 link <- rccShiny(
@@ -56,7 +56,7 @@ link <- rccShiny(
   ),
   varOther = list(
     list(
-      var = "agegroup",
+      var = "a_pat_alder",
       label = c("Ålder vid diagnos")
     )
   )

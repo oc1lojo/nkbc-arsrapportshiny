@@ -1,13 +1,11 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc33"
 # Created by: Lina Benson 
 # Created date: 2017-08-09
 # Software: R x64 v 3.3.3
 # Status: 
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git
 ######################################################
 
 

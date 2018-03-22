@@ -1,13 +1,11 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc27"
 # Created by: Lina Benson 
 # Created date: 2017-08-10
 # Software: R x64 v 3.3.3
 # Status: 
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git 
 ######################################################
 
 
@@ -36,24 +34,25 @@ dftemp <- dftemp %>%
     # Endast opererade
     !is.na(op_kir_dat),
     
-    # Endast primär opereration (planerad om utfärd ej finns) (pga att info om tumörstorlek och spridning till N behövs)
-    (op_kir_Värde %in% 1 | is.na(op_kir_Värde) & a_planbeh_typ_Värde %in% 1),
+    # Endast primär opereration (planerad om utfärd ej finns) 
+    # (pga att info om tumörstorlek och spridning till N behövs)
+    prim_op == 1, 
     
     # Endast invasiv cancer
-    invasiv == "Invasiv",
+    invasiv == "Invasiv cancer",
     
-    # ER-. Finns inga fjärrisar så behöver ej titta på PAD från anmälan
-    er_op == 2,
+    # ER- 
+    er == 2,
     
     # Tumörstorlek > 10 mm eller spridning till lymfkörtlar
     (op_pad_invstl > 10 | op_pad_lglmetant > 0),
 
     # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% c(10),
+    !a_tnm_mklass_Värde %in% 10,
     
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
 
 link <- rccShiny(
@@ -84,7 +83,7 @@ link <- rccShiny(
   ),
   varOther = list(
     list(
-      var = "agegroup",
+      var = "a_pat_alder",
       label = c("Ålder vid diagnos")
     )
   ),

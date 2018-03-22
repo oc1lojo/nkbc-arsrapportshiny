@@ -1,13 +1,11 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc34"
 # Created by: Lina Benson 
 # Created date: 2017-08-09
 # Software: R x64 v 3.3.3
-# Status: 
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Status: Final
+# Updated: se git
 ######################################################
 
 
@@ -32,12 +30,12 @@ dftemp <- dftemp %>%
     period <= YEAR - 5,
     
     # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% c(10),
+    !a_tnm_mklass_Värde %in% 10,
 
     !is.na(region)
     
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
 
 link <- rccShiny(

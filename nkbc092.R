@@ -1,13 +1,11 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc092"
 # Created by: Lina Benson 
 # Created date: 2017-08-09
 # Software: R x64 v 3.3.3
 # Status: Final
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git 
 ######################################################
 
 
@@ -46,7 +44,7 @@ link <- rccShiny(
   varOther = list(
     list(
       var = "invasiv",
-      label = c("Invasivitet")
+      label = c("Invasivitet vid diagnos")
     )
   ),
   propWithinUnit = "år",

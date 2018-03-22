@@ -1,13 +1,11 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 # Name: MAIN.R
 # Created by: Lina Benson 
 # Created date: 2017-06-16
 # Software: R x64 v 3.3.3
 # Status: 
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git 
 ######################################################
 
 #devtools::install_bitbucket("cancercentrum/rccShiny")
@@ -19,23 +17,15 @@ library(shiny)
 library(rccShiny)
 library(Hmisc)
 
-# Omkodning av register som behövs innan massuppdatering iom ombyggnad
-source("omkodning_pre_ombyggnad.R", encoding = "utf8")
+## Ändra dataset
+load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-03-14/nkbc_nat_id 2018-03-14 09-23-02.zip", exdir = tempdir()))
 
-YEAR = 2016
+YEAR = 2017
 OUTPUTPATH = "Output"
 
-dfmain <- arsrap %>%
+dfmain <- df %>%
   mutate_if(is.factor, as.character) %>%
   mutate(
-    agegroup = cut(a_pat_alder, c(0, 36, 46, 56, 66, 76, 120) , 
-                   include.lowest = TRUE, 
-                   right = FALSE, 
-                   labels = FALSE),
-    agegroup = factor(agegroup,
-                      levels = c(1,2,3,4,5,6,NA),
-                      labels = c("0-35", "36-45", "46-55", "56-65", "66-75",">75", "Uppgift saknas"),
-                      exclude = NULL),
     period = year(a_diag_dat), # Den period som appar visas för 
     opyear = year(op_kir_dat),
 #    landsting_lkf = as.numeric(substr(a_pat_lkfdia, 1, 2)),
@@ -52,9 +42,12 @@ dfmain <- arsrap %>%
     invasiv = pmin(a_pad_invasiv_Värde, op_pad_invasiv_Värde, na.rm = TRUE),
     invasiv = ifelse(invasiv == 98, NA, invasiv), ## added 2017-11-09
     invasiv = factor(invasiv, c(1, 2, NA), 
-                     c("Invasiv", "Ej invasiv", "Uppgift saknas"),
+                     c("Invasiv cancer", "Enbart cancer in situ", "Uppgift saknas"),
                      exclude = NULL),
     
+    # Derivering av primär operation
+    prim_op = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
+
     # Biologisk subtyp 
     # ER, 1 = pos, 2 = neg
     er_op = case_when(op_pad_erproc < 10 | is.na(op_pad_erproc) & op_pad_er_Värde %in% 2 ~ 2,
@@ -65,8 +58,8 @@ dfmain <- arsrap %>%
                      a_pad_erproc >= 10 | is.na(a_pad_erproc) & a_pad_er_Värde %in% 1 ~ 1
                      ),
 
-    er = ifelse(a_planbeh_typ_Värde == 1, er_op, 
-                ifelse(a_planbeh_typ_Värde == 2, er_a, 
+    er = ifelse(prim_op  == 1, er_op, 
+                ifelse(prim_op %in% c(2, 3), er_a, 
                        NA)),
     
     # PR, 1 = pos, 2 = neg
@@ -78,8 +71,8 @@ dfmain <- arsrap %>%
                      a_pad_prproc >= 10 | is.na(a_pad_prproc) & a_pad_pr_Värde %in% 1 ~ 1
                      ),
 
-    pr = ifelse(a_planbeh_typ_Värde == 1, pr_op, 
-                ifelse(a_planbeh_typ_Värde == 2, pr_a, 
+    pr = ifelse(prim_op == 1, pr_op, 
+                ifelse(prim_op %in% c(2, 3), pr_a, 
                        NA)),
      
     # HER2, 1 = pos, 2 = neg
@@ -89,8 +82,8 @@ dfmain <- arsrap %>%
     her2_a = case_when(a_pad_her2_Värde %in% 3 | a_pad_her2ish_Värde %in% 1 ~ 1, 
                        a_pad_her2_Värde %in% c(1,2) | a_pad_her2ish_Värde %in% 2 ~ 2),
 
-    her2 = ifelse(a_planbeh_typ_Värde == 1, her2_op, 
-                  ifelse(a_planbeh_typ_Värde == 2, her2_a, 
+    her2 = ifelse(prim_op == 1, her2_op, 
+                  ifelse(prim_op %in% c(2, 3), her2_a, 
                          NA)),
                
     subtyp = factor(case_when(er %in% 2 & pr %in% 2 & her2 %in% 2 ~ 1, 
@@ -120,7 +113,7 @@ dfmain <- arsrap %>%
     period <= YEAR
 )
 
-# Läsa på sjukhusdata
+# Läsa på namn på sjukhus (hämtat från organisationsenhetsregistret)
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
 
 sjukhuskoder <- sjukhuskoder %>%

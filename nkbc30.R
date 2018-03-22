@@ -1,13 +1,11 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc30"
 # Created by: Lina Benson 
 # Created date: 2017-08-10
 # Software: R x64 v 3.3.3
 # Status: 
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git
 ######################################################
 
 
@@ -33,7 +31,7 @@ dftemp <- dftemp %>%
     
     !is.na(region)
   ) %>%
-  select(landsting, region, period, outcome, agegroup, invasiv, subtyp)
+  select(landsting, region, period, outcome, a_pat_alder, invasiv, subtyp)
 
 
 link <- rccShiny(
@@ -58,12 +56,12 @@ link <- rccShiny(
   ),
   varOther = list(
     list(
-      var = "agegroup",
+      var = "a_pat_alder",
       label = c("Ålder vid diagnos")
     ),
     list(
       var = "invasiv",
-      label = c("Invasivitet")
+      label = c("Invasivitet vid diagnos")
     ),
     list(
       var = "subtyp",

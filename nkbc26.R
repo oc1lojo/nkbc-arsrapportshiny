@@ -1,13 +1,11 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc26"
 # Created by: Lina Benson 
 # Created date: 2017-08-09
 # Software: R x64 v 3.3.3
 # Status: 
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git 
 ######################################################
 
 
@@ -30,18 +28,18 @@ dftemp <- dftemp %>%
   ) %>%
   filter(
     # Endast invasiv cancer
-    invasiv == "Invasiv",
+    invasiv == "Invasiv cancer",
     
     # Klinisk N0 
-    a_tnm_nklass_Värde %in% c(0),
+    a_tnm_nklass_Värde == 0,
     
     # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% c(10),
+    !a_tnm_mklass_Värde %in% 10,
 
     !is.na(region)
     
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
 
 link <- rccShiny(
@@ -62,7 +60,7 @@ link <- rccShiny(
   ),
   varOther = list(
     list(
-      var = "agegroup",
+      var = "a_pat_alder",
       label = c("Ålder vid diagnos")
     )
   ),

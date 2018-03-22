@@ -1,20 +1,19 @@
 ######################################################
-# Project: Årsrapport 2016
+# Project: Årsrapport
 NAME <- "nkbc07"
 # Created by: Lina Benson 
 # Created date: 2017-08-09
 # Software: R x64 v 3.3.3
 # Status: Final
-# Updated by: 
-# Updated date:
-# Updated description: 
+# Updated: se git 
 ######################################################
 
 
 # Omedelbara rekonstruktioner vid mastektomi ------------------------------------------------
 
 GLOBALS <- defGlobals(LAB = "Omedelbara rekonstruktioner vid mastektomi",
-                      POP = "mastektomerade fall utan fjärrmetastaser vid diagnos.",
+                      SHORTPOP = "mastektomerade fall utan fjärrmetastaser vid diagnos.",
+                      POP = "fall med mastektomi eller subkutan mastektomi utan fjärrmetastaser vid diagnos.",
                       SJHKODUSE <- "a_kir_sjhkod",
                       TARGET = c(15, 20)
                       )
@@ -27,15 +26,15 @@ dftemp <- dftemp %>%
     outcome = as.logical(ifelse(op_kir_dirrek_Värde %in% c(0, 1), op_kir_dirrek_Värde, NA))
   ) %>%
   filter(
-    # Endast mastektomi 
+    # Endast mastektomi och subkutan mastektomi
     op_kir_brost_Värde %in% c(2, 4),
     
     # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% c(10),
+    !a_tnm_mklass_Värde %in% 10,
     
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
 
 link <- rccShiny(
@@ -56,12 +55,12 @@ link <- rccShiny(
   ),
   varOther = list(
     list(
-      var = "agegroup",
+      var = "a_pat_alder",
       label = c("Ålder vid diagnos")
     ),
     list(
       var = "invasiv",
-      label = c("Invasivitet")
+      label = c("Invasivitet vid diagnos")
     )
   ),
   targetValues = GLOBALS$TARGET
