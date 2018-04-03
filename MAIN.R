@@ -18,7 +18,7 @@ library(rccShiny)
 library(Hmisc)
 
 ## Ändra dataset
-load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-03-14/nkbc_nat_id 2018-03-14 09-23-02.zip", exdir = tempdir()))
+load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-03-22/nkbc_nat_id 2018-03-22 13-05-29.zip", exdir = tempdir()))
 
 YEAR = 2017
 OUTPUTPATH = "Output"
@@ -37,17 +37,20 @@ dfmain <- df %>%
     region_lkf = mapvalues(REGION_NAMN, from = c("Region Sthlm/Gotland", "Region Uppsala/Örebro", "Region Sydöstra", 
                                                  "Region Syd", "Region Väst", "Region Norr"), 
                        to = c(1, 2, 3, 4, 5, 6)),
-    
+
+    # Derivering av primär operation
+    prim_op = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
+
     # Derivering av invasiv cancer
-    invasiv = pmin(a_pad_invasiv_Värde, op_pad_invasiv_Värde, na.rm = TRUE),
+    invasiv = ifelse(prim_op  == 1, op_pad_invasiv_Värde, 
+            ifelse(prim_op %in% c(2, 3) | is.na(prim_op), a_pad_invasiv_Värde, 
+                   NA)),
+    
     invasiv = ifelse(invasiv == 98, NA, invasiv), ## added 2017-11-09
     invasiv = factor(invasiv, c(1, 2, NA), 
                      c("Invasiv cancer", "Enbart cancer in situ", "Uppgift saknas"),
                      exclude = NULL),
     
-    # Derivering av primär operation
-    prim_op = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
-
     # Biologisk subtyp 
     # ER, 1 = pos, 2 = neg
     er_op = case_when(op_pad_erproc < 10 | is.na(op_pad_erproc) & op_pad_er_Värde %in% 2 ~ 2,
