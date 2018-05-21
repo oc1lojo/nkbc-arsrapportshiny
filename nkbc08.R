@@ -13,7 +13,7 @@ NAME <- "nkbc08"
 GLOBALS <- defGlobals(LAB = "Enbart en operation (ingen omoperation pga tumördata) i bröst",
                       POP = "opererade fall utan fjärrmetastaser vid diagnos.",
                       SHORTLAB = "Enbart en operation",
-                      SJHKODUSE <- "a_kir_sjhkod",
+                      SJHKODUSE <- "op_inr_sjhkod",
                       TARGET = c(80, 90)
                       )
 

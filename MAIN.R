@@ -18,7 +18,9 @@ library(rccShiny)
 library(Hmisc)
 
 ## Ändra dataset
-load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-03-22/nkbc_nat_id 2018-03-22 13-05-29.zip", exdir = tempdir()))
+
+# Rottab
+load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-05-02/nkbc_nat_id 2018-05-02 08-35-37.zip", exdir = tempdir()))
 
 YEAR = 2017
 OUTPUTPATH = "Output"
@@ -90,6 +92,7 @@ dfmain <- df %>%
                          NA)),
                
     subtyp = factor(case_when(er %in% 2 & pr %in% 2 & her2 %in% 2 ~ 1, 
+                              is.na(er) | is.na(pr) | is.na(her2) ~ 99,
                               her2 %in% 1 ~ 2,
                               er %in% 1 | pr %in% 1 ~ 3, 
                               TRUE ~ 99
@@ -98,25 +101,27 @@ dfmain <- df %>%
                    ),
     
     # fix 1.sjukhus ansvarigt för rapportering av onkologisk behandling/2.onkologiskt sjukhus/3.anmälande sjukhus
-    d_onkans_sjhkod = coalesce(as.numeric(op_onk_sjhkod), 
+    d_onkpostans_sjhkod = coalesce(as.numeric(post_inr_sjhkod), 
+                               as.numeric(op_onk_sjhkod), 
                                as.numeric(a_onk_rappsjhkod), 
                                as.numeric(a_onk_sjhkod), 
                                as.numeric(a_inr_sjhkod)
                                ),
-
-    # fix 1.sjukhus ansvarigt för rapportering av uppföljning/2.onkologiskt sjukhus/3.anmälande sjukhus
-    d_uppfans_sjhkod = coalesce(as.numeric(op_uppf_sjhkod), 
-                               as.numeric(a_uppf_sjhkod), 
+    d_onkpreans_sjhkod = coalesce(as.numeric(pre_inr_sjhkod), 
+                               as.numeric(op_onk_sjhkod), 
+                               as.numeric(a_onk_rappsjhkod), 
                                as.numeric(a_onk_sjhkod), 
-                               as.numeric(a_inr_sjhkod)
-    )
+                               as.numeric(a_inr_sjhkod)),
+    # fix 1) post onk sjukhus 2) pre onk sjukhus
+    d_onk_sjhkod = coalesce(as.numeric(post_inr_sjhkod),
+                               as.numeric(pre_inr_sjhkod))
   ) %>%
   filter( # default vilka år som ska visas
     period >= 2009,
     period <= YEAR
 )
 
-# Läsa på namn på sjukhus (hämtat från organisationsenhetsregistret)
+# Läsa på namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
 
 sjukhuskoder <- sjukhuskoder %>%
@@ -199,7 +204,6 @@ source("nkbc30.R", encoding = "utf8")
 source("nkbc31.R", encoding = "utf8") 
 source("nkbc32.R", encoding = "utf8") 
 source("nkbc33.R", encoding = "utf8") 
-source("nkbc34.R", encoding = "utf8")
 source("nkbc35.R", encoding = "utf8")
 
 #detach("package:rccShiny", unload=TRUE)

@@ -49,6 +49,8 @@ link <- rccShiny(
       descTarg()
     ),  
     paste0(
+      "Startpunkten för SVF har tolkats olika av vårdgivare vilket ger upphov till variation varför ledtiden skall tolkas med försiktighet.
+      <p></p>",
       MisstCa,
       "<p></p>",
       descTolk

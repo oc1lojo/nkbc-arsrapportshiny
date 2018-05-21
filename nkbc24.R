@@ -13,7 +13,7 @@ NAME <- "nkbc24"
 
 GLOBALS <- defGlobals(LAB = "Patienten ingår i preoperativ studie",
                       POP = "fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
-                      SJHKODUSE <- "a_onk_sjhkod"
+                      SJHKODUSE <- "pre_inr_sjhkod"
                       )
 
 dftemp <- addSjhData(dfmain)

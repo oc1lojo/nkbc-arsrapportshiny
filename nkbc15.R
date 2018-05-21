@@ -13,7 +13,7 @@ NAME <- "nkbc15"
 
 GLOBALS <- defGlobals(LAB = "Välgrundad misstanke om cancer till operation",
                       POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "a_kir_sjhkod",
+                      SJHKODUSE <- "op_inr_sjhkod",
                       TARGET = c(75, 90)
                       )
 
@@ -57,6 +57,8 @@ link <- rccShiny(
       descTarg()
     ),     
     paste0(
+      "Startpunkten för SVF har tolkats olika av vårdgivare vilket ger upphov till variation varför ledtiden skall tolkas med försiktighet.
+      <p></p>",
       MisstCa,
       "<p></p>",
       descTolk

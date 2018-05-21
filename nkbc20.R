@@ -13,7 +13,7 @@ NAME <- "nkbc20"
 
 GLOBALS <- defGlobals(LAB = "Första behandlingsdiskussion till preoperativ onkologisk behandling",
                       POP = "fall utan fjärrmetastaser vid diagnos med planerad preoperativ onkologisk behandling.",
-                      SJHKODUSE <- "a_onk_sjhkod",
+                      SJHKODUSE <- "pre_inr_sjhkod",
                       TARGET = c(75, 90)
                       )
 
@@ -64,8 +64,12 @@ link <- rccShiny(
       <p></p>
       Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.", 
       descTarg()
-    ),     
-    descTolk,
+    ),
+    paste0(
+      "Andelen preoperativt behandlade patienter varierar i landet och före start av behandling görs flera undersökningar som kan förlänga tiden till start. Många patienter som startar preoperativ onkologisk behandling ingår i behandlingsstudier där vissa undersökningar är obligatoriska som annars hade gjorts senare. Siffrorna skall därför tolkas med viss försiktighet.
+      <p></p>",
+      descTolk
+    ),
     descTekBes()
   ),
   varOther = list(

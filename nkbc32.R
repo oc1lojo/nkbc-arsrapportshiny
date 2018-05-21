@@ -14,7 +14,7 @@ NAME <- "nkbc32"
 GLOBALS <- defGlobals(LAB = "Antikroppsbehandling bland cytostatikabehandlade",
                       POP = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos.",
                       SHORTPOP = "opererade, cytostatikabehandlade HER2+ invasiva fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "a_onk_sjhkod",
+                      SJHKODUSE <- "d_onk_sjhkod",
                       TARGET = c(90, 95)
                       )
 
@@ -64,7 +64,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.", 
+      "Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.", 
       descTarg()
     ),
     paste0(

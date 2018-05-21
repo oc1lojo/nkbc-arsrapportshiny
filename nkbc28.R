@@ -13,7 +13,7 @@ NAME <- "nkbc28"
 
 GLOBALS <- defGlobals(LAB = "Strålbehandling efter bröstbevarande operation",
                       POP = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "a_onk_sjhkod",
+                      SJHKODUSE <- "post_inr_sjhkod",
                       TARGET = c(90, 95)
                       )
 
@@ -57,7 +57,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Strålbehandling efter operation minskar risk för återfall. I de fall där samsjuklighet föreligger får nyttan med strålbehandling avvägas.", 
+      "Strålbehandling efter bröstbevarande operation minskar risk för återfall. I de fall där samsjuklighet föreligger får nyttan med strålbehandling avvägas med hänsyn till övriga medicinska faktorer.", 
       descTarg()
     ),
     paste0(

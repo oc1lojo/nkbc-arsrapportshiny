@@ -13,7 +13,7 @@ NAME <- "nkbc14"
 
 GLOBALS <- defGlobals(LAB = "Täckningsgrad för rapportering av postoperativ onkologisk behandling",
                       POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "d_onkans_sjhkod",
+                      SJHKODUSE <- "d_onkpostans_sjhkod",
                       TARGET = c(70, 85)
                       )
 

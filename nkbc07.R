@@ -14,7 +14,7 @@ NAME <- "nkbc07"
 GLOBALS <- defGlobals(LAB = "Omedelbara rekonstruktioner vid mastektomi",
                       SHORTPOP = "mastektomerade fall utan fjärrmetastaser vid diagnos.",
                       POP = "fall med mastektomi eller subkutan mastektomi utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "a_kir_sjhkod",
+                      SJHKODUSE <- "op_inr_sjhkod",
                       TARGET = c(15, 20)
                       )
 
@@ -47,7 +47,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Omedelbar rekonstruktion innebär att en bröstform återskapas i samband med att ett helt bröst opereras bort.", 
+      "Omedelbar rekonstruktion innebär att en bröstform återskapas i samband med att ett helt bröst opereras bort. Bröstrekonstruktion kan göras senare efter avslutad onkologisk behandling.", 
       descTarg()
     ),
     descTolk, 

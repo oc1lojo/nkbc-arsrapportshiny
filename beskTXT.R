@@ -15,17 +15,14 @@ sjhTXT <- function(SJHKODUSE = GLOBALS$SJHKODUSE){
   if (SJHKODUSE == "a_inr_sjhkod") {
     sjhTXT <- "anmälande sjukhus"
   }
-  else if (SJHKODUSE == "a_onk_sjhkod") {
+  else if (SJHKODUSE %in% c("post_inr_sjhkod", "pre_inr_sjhkod", "d_onk_sjhkod")) {
     sjhTXT <- "onkologiskt sjukhus"
   }
-  else if (SJHKODUSE == "a_kir_sjhkod") {
+  else if (SJHKODUSE == "op_inr_sjhkod") {
     sjhTXT <- "opererande sjukhus"
   }
-  else if (SJHKODUSE == "d_onkans_sjhkod") {
-    sjhTXT <- "sjukhus ansvarigt för rapportering av onkologisk behandling. Om detta saknas används i första hand onkologiskt sjukhus och i andra hand anmälande sjukhus"
-  }
-  else if (SJHKODUSE == "d_uppfans_sjhkod") {
-    sjhTXT <- "sjukhus ansvarigt för rapportering av uppföljning. Om detta saknas används i första hand onkologiskt sjukhus och i andra hand anmälande sjukhus"
+  else if (SJHKODUSE %in% c("d_onkpreans_sjhkod", "d_onkpostans_sjhkod")) {
+    sjhTXT <- "rapporterande onkologiskt sjukhus och om detta saknas sjukhus ansvarigt för rapportering av onkologisk behandling, onkologiskt sjukhus, anmälande sjukhus"
   }
   return(sjhTXT)
 }

@@ -13,7 +13,7 @@ NAME <- "nkbc35"
 
 GLOBALS <- defGlobals(LAB = "Cytostatikabehandling",
                       POP = "opererade, invasiva fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "a_onk_sjhkod"
+                      SJHKODUSE <- "d_onk_sjhkod"
                       )
 
 dftemp <- addSjhData(dfmain)
@@ -78,8 +78,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Cytostatikabehandling rekommenderas i allmänhet vid bröstcancer med spridning till axillens lymfkörtlar, men även utan lymfkörtelengagemang om tumören har svag hormonell känslighet och/eller då det föreligger riskfaktorer.",
-      descTarg()
+      "Pre- eller postoperativ cytostatikabehandling rekommenderas i allmänhet vid bröstcancer med spridning till axillens lymfkörtlar, men även utan lymfkörtelengagemang om tumören har svag hormonell känslighet och/eller då det föreligger riskfaktorer."
     ),
     paste0(
       "Både preoperativ och postoperativ cytostatikabehandling är medtaget i beräkningen.

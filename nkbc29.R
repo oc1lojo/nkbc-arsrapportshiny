@@ -13,7 +13,7 @@ NAME <- "nkbc29"
 
 GLOBALS <- defGlobals(LAB = "Strålbehandling efter mastektomi",
                       POP = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "a_onk_sjhkod",
+                      SJHKODUSE <- "post_inr_sjhkod",
                       TARGET = c(90, 95)
                       )
 
@@ -63,7 +63,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Då hela bröstet opereras bort (mastektomi) anses oftast inte strålbehandling behövas. Vid spridning till lymfkörtlarna bör strålbehandling ges både mot bröstkorgsväggen och omgivande lymfkörtlar.", 
+      "Då hela bröstet opererats bort (mastektomi) behövs oftast inte strålbehandling. Vid spridning till lymfkörtlar bör strålbehandling ges både mot bröstkorgsväggen och lymfkörtlar.", 
       descTarg()
     ),
     paste0(

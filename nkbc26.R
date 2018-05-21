@@ -14,7 +14,7 @@ NAME <- "nkbc26"
 GLOBALS <- defGlobals(LAB = "Sentinel node operation",
                       POP = "invasiva fall utan spridning till lymfkörtlar (klinisk diagnos) eller fjärrmetastaser vid diagnos.",
                       SHORTPOP = "invasiva fall utan spridning till lymfkörtlar eller fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "a_kir_sjhkod",
+                      SJHKODUSE <- "op_inr_sjhkod",
                       TARGET = c(90, 95)
                       )
 

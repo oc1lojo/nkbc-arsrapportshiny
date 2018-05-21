@@ -14,7 +14,7 @@ NAME <- "nkbc11"
 GLOBALS <- defGlobals(LAB = "Bröstbevarande operation", 
                       POP = "primärt opererade fall med invasiv cancer <=30 mm eller ej invasiv cancer <=20 mm utan fjärrmetastaser vid diagnos.",
                       SHORTPOP = "primärt opererade fall med små tumörer utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "a_kir_sjhkod",
+                      SJHKODUSE <- "op_inr_sjhkod",
                       TARGET = c(70, 80)
                       )
 
@@ -57,7 +57,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Bröstbevarande operation rekommenderas som förstahandsoperation vid mindre eller medelstor tumörutbredning.", 
+      "Ett bröstbevarande ingrepp och  strålbehandling är  standradingrepp  för majoriten av tidigt upptäckta bröstcancrar . Tumörens egenskaper, form och storlek på bröstet spelar roll för av av kirurgisk operationsmetod.", 
       descTarg()
     ),
     descTolk, 

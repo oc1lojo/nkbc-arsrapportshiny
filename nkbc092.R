@@ -25,7 +25,7 @@ dftemp <- dftemp %>%
   filter(
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, agegroup, invasiv)
+  select(landsting, region, sjukhus, period, outcome, invasiv)
 
 
 link <- rccShiny(

@@ -13,7 +13,7 @@ NAME <- "nkbc10"
 GLOBALS <- defGlobals(LAB = "Fullständig patologirapport (Grad, ER, PR, HER2, Ki67)",
                       POP = "primärt opererade fall med invasiv cancer utan fjärrmetastaser vid diagnos.",
                       SHORTLAB = "Fullständig patologirapport",
-                      SJHKODUSE <- "a_kir_sjhkod",
+                      SJHKODUSE <- "op_inr_sjhkod",
                       TARGET = c(95, 98)
                       )
 
