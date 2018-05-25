@@ -45,7 +45,8 @@ descTolk <- paste0(
 descTarg <- function(){
     paste0(
       "<p></p>",
-      paste0("Målnivåer: ", GLOBALS$TARGET[1], "% (låg) ", GLOBALS$TARGET[2], "% (hög)")
+      if (length(GLOBALS$TARGET) == 1) paste0("Målnivå: ", GLOBALS$TARGET[1], "%"),
+      if (length(GLOBALS$TARGET) == 2) paste0("Målnivåer: ", GLOBALS$TARGET[1], "% (låg) ", GLOBALS$TARGET[2], "% (hög)")
     )
 }
 
