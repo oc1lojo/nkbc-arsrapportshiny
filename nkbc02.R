@@ -2,12 +2,13 @@ NAME <- "nkbc02"
 
 # Kontaktsjuksköterska ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Patienten har erbjudits, i journalen dokumenterad, kontaktsjuksköterska", 
-                      POP = "alla anmälda fall.",
-                      SHORTLAB = "Kontaktsjuksköterska", 
-                      SJHKODUSE <- "a_inr_sjhkod",
-                      TARGET = c(80, 95)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Patienten har erbjudits, i journalen dokumenterad, kontaktsjuksköterska",
+  POP = "alla anmälda fall.",
+  SHORTLAB = "Kontaktsjuksköterska",
+  SJHKODUSE <- "a_inr_sjhkod",
+  TARGET = c(80, 95)
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -19,9 +20,8 @@ dftemp <- dftemp %>%
   filter(
     # kontaktsjuksköterska tillkom mitten av 2014
     period >= 2015,
-    
+
     !is.na(region)
-    
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
@@ -36,10 +36,10 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Enligt den Nationella  Cancerstrategin (SOU 2009:11) ska alla cancerpatienter erbjudas en kontaktsjuksköterska.", 
+      "Enligt den Nationella  Cancerstrategin (SOU 2009:11) ska alla cancerpatienter erbjudas en kontaktsjuksköterska.",
       descTarg()
-    ),  
-    descTolk, 
+    ),
+    descTolk,
     descTekBes()
   ),
   varOther = list(
@@ -56,4 +56,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

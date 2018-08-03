@@ -2,40 +2,42 @@ NAME <- "nkbc20"
 
 # Tid från första behandlingsdiskussion till preoperativ onkologisk behandling (cytostatika, strålning, endokrin) ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Första behandlingsdiskussion till preoperativ onkologisk behandling",
-                      POP = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
-                      SJHKODUSE <- "pre_inr_sjhkod",
-                      TARGET = c(75, 90)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Första behandlingsdiskussion till preoperativ onkologisk behandling",
+  POP = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
+  SJHKODUSE <- "pre_inr_sjhkod",
+  TARGET = c(75, 90)
+)
 
 dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
-    d_pre_onk_dat = pmin(as.Date(pre_kemo_dat), 
-                         as.Date(pre_rt_dat), 
-                         as.Date(pre_endo_dat), 
-                         na.rm = TRUE),
-    
+    d_pre_onk_dat = pmin(as.Date(pre_kemo_dat),
+      as.Date(pre_rt_dat),
+      as.Date(pre_endo_dat),
+      na.rm = TRUE
+    ),
+
     outcome = as.numeric(ymd(d_pre_onk_dat) - ymd(a_planbeh_infopatdat)),
     outcome = ifelse(outcome < 0, 0, outcome)
   ) %>%
   filter(
     # Reg av given onkologisk behandling
     period >= 2012,
-    
+
     # ett år bakåt då info från onk behandling blanketter
     period <= YEAR - 1,
-    
+
     # Endast opererade
-    !is.na(op_kir_dat), 
-    
+    !is.na(op_kir_dat),
+
     # Endast preop onk behandling (planerad om utförd ej finns)
-    prim_op == 2, 
-    
+    prim_op == 2,
+
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
@@ -53,7 +55,7 @@ link <- rccShiny(
     paste0(
       "I preoperativ onkologisk behandling ingår cytostatika, strålning eller endokrin behandling.
       <p></p>
-      Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.", 
+      Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
       descTarg()
     ),
     paste0(
@@ -73,9 +75,9 @@ link <- rccShiny(
       label = c("Invasivitet vid diagnos")
     )
   ),
-  propWithinValue = 14, 
+  propWithinValue = 14,
   targetValues = GLOBALS$TARGET
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

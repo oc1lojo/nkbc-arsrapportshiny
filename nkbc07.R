@@ -2,12 +2,13 @@ NAME <- "nkbc07"
 
 # Omedelbara rekonstruktioner vid mastektomi ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Omedelbara rekonstruktioner vid mastektomi",
-                      SHORTPOP = "mastektomerade fall utan fjärrmetastaser vid diagnos.",
-                      POP = "fall med mastektomi eller subkutan mastektomi utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "op_inr_sjhkod",
-                      TARGET = c(15, 20)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Omedelbara rekonstruktioner vid mastektomi",
+  SHORTPOP = "mastektomerade fall utan fjärrmetastaser vid diagnos.",
+  POP = "fall med mastektomi eller subkutan mastektomi utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "op_inr_sjhkod",
+  TARGET = c(15, 20)
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -19,10 +20,10 @@ dftemp <- dftemp %>%
   filter(
     # Endast mastektomi och subkutan mastektomi
     op_kir_brost_Värde %in% c(2, 4),
-    
+
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
@@ -38,10 +39,10 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Omedelbar rekonstruktion innebär att en bröstform återskapas i samband med att ett helt bröst opereras bort. Bröstrekonstruktion kan göras senare efter avslutad onkologisk behandling.", 
+      "Omedelbar rekonstruktion innebär att en bröstform återskapas i samband med att ett helt bröst opereras bort. Bröstrekonstruktion kan göras senare efter avslutad onkologisk behandling.",
       descTarg()
     ),
-    descTolk, 
+    descTolk,
     descTekBes()
   ),
   varOther = list(
@@ -58,4 +59,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

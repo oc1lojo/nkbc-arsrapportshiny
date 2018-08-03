@@ -1,11 +1,12 @@
 NAME <- "nkbc092"
 
 # Population - Ålder vid diagnos ------------------------------------------------
-GLOBALS <- defGlobals(LAB = "Ålder vid diagnos",
-                      SHORTLAB = "Ålder",
-                      POP = "alla anmälda fall.",
-                      SJHKODUSE <- "a_inr_sjhkod"
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Ålder vid diagnos",
+  SHORTLAB = "Ålder",
+  POP = "alla anmälda fall.",
+  SJHKODUSE <- "a_inr_sjhkod"
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -28,8 +29,8 @@ link <- rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    "Det är ovanligt med bröstcancer i unga år.", 
-    descTolk, 
+    "Det är ovanligt med bröstcancer i unga år.",
+    descTolk,
     descTekBes()
   ),
   varOther = list(
@@ -43,4 +44,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

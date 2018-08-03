@@ -2,12 +2,13 @@ NAME <- "nkbc31"
 
 # Endokrin behandling ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Endokrinbehandling",
-                      POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
-                      SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "d_onk_sjhkod",
-                      TARGET = c(90, 95)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Endokrinbehandling",
+  POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
+  SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "d_onk_sjhkod",
+  TARGET = c(90, 95)
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -19,19 +20,19 @@ dftemp <- dftemp %>%
   filter(
     # Reg av given onkologisk behandling
     period >= 2012,
-    
+
     # ett år bakåt då info från onk behandling blanketter
     period <= YEAR - 1,
-    
+
     # Endast opererade
     !is.na(op_kir_dat),
-    
+
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
-    
+
     # ER+
     er == 1,
-    
+
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
 
@@ -50,7 +51,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Endokrinbehandling bör erbjudas till alla patienter med östrogenreceptorpositiv (ER+) bröstcancer. I de fall där samsjuklighet föreligger får nyttan med endokrin behandling avvägas med hänsyn till övriga medicinska faktorer.", 
+      "Endokrinbehandling bör erbjudas till alla patienter med östrogenreceptorpositiv (ER+) bröstcancer. I de fall där samsjuklighet föreligger får nyttan med endokrin behandling avvägas med hänsyn till övriga medicinska faktorer.",
       descTarg()
     ),
     paste0(
@@ -74,4 +75,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

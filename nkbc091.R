@@ -1,19 +1,20 @@
 NAME <- "nkbc091"
 
 # Population - kön ------------------------------------------------
-GLOBALS <- defGlobals(LAB = "Kön vid diagnos",
-                      SHORTLAB = "Kön",
-                      POP = "alla anmälda fall.",
-                      SJHKODUSE <- "a_inr_sjhkod"
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Kön vid diagnos",
+  SHORTLAB = "Kön",
+  POP = "alla anmälda fall.",
+  SJHKODUSE <- "a_inr_sjhkod"
+)
 
 dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
-    outcome = factor(KON_VALUE, 
-                 levels = c(1, 2),
-                 labels = c("Män", "Kvinnor")
+    outcome = factor(KON_VALUE,
+      levels = c(1, 2),
+      labels = c("Män", "Kvinnor")
     )
   ) %>%
   filter(
@@ -31,8 +32,8 @@ link <- rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    "Bröstcancer drabbar både män och kvinnor.", 
-    descTolk, 
+    "Bröstcancer drabbar både män och kvinnor.",
+    descTolk,
     descTekBes()
   ),
   varOther = list(
@@ -48,4 +49,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

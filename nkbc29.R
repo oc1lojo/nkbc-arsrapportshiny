@@ -2,40 +2,41 @@ NAME <- "nkbc29"
 
 # Strålbehandling efter mastektomi ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Strålbehandling efter mastektomi",
-                      POP = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "post_inr_sjhkod",
-                      TARGET = c(90, 95)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Strålbehandling efter mastektomi",
+  POP = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "post_inr_sjhkod",
+  TARGET = c(90, 95)
+)
 
 dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
     outcome = as.logical(post_rt_Värde),
-    
-    pN = cut(op_pad_lglmetant, c(1,4,100), 
-             include.lowest = TRUE, 
-             right = FALSE,
-             labels = c("1-3 metastaser", "=> 4 metastaser")
+
+    pN = cut(op_pad_lglmetant, c(1, 4, 100),
+      include.lowest = TRUE,
+      right = FALSE,
+      labels = c("1-3 metastaser", "=> 4 metastaser")
     )
   ) %>%
   filter(
     # Reg av given onkologisk behandling
     period >= 2012,
-    
+
     # ett år bakåt då info från onk behandling blanketter
     period <= YEAR - 1,
-    
+
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
-    
+
     # Endast mastektomi och subkutan mastektomi
     op_kir_brost_Värde %in% c(2, 4),
-    
+
     # Spridning till lymfkörtlar
     op_pad_lglmetant > 0,
-    
+
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
 
@@ -54,7 +55,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Då hela bröstet opererats bort (mastektomi) behövs oftast inte strålbehandling. Vid spridning till lymfkörtlar bör strålbehandling ges både mot bröstkorgsväggen och lymfkörtlar.", 
+      "Då hela bröstet opererats bort (mastektomi) behövs oftast inte strålbehandling. Vid spridning till lymfkörtlar bör strålbehandling ges både mot bröstkorgsväggen och lymfkörtlar.",
       descTarg()
     ),
     paste0(
@@ -80,4 +81,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

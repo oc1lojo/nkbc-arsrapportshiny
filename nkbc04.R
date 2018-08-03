@@ -2,11 +2,12 @@ NAME <- "nkbc04"
 
 # Multidisciplinär konferens inför behandlingstart ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Multidisciplinär konferens inför behandlingstart",
-                      POP = "alla anmälda fall.",
-                      SJHKODUSE <- "a_inr_sjhkod",
-                      TARGET = c(90, 99)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Multidisciplinär konferens inför behandlingstart",
+  POP = "alla anmälda fall.",
+  SJHKODUSE <- "a_inr_sjhkod",
+  TARGET = c(90, 99)
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -31,10 +32,10 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Att definierade specialister och professioner deltar i MDK och formulerar behandlingsrekommendationer har betydelse för vårdprocess för jämlik vård, kunskapsstyrd vård och för kvalitetssäkring.", 
+      "Att definierade specialister och professioner deltar i MDK och formulerar behandlingsrekommendationer har betydelse för vårdprocess för jämlik vård, kunskapsstyrd vård och för kvalitetssäkring.",
       descTarg()
-    ),  
-    descTolk, 
+    ),
+    descTolk,
     descTekBes()
   ),
   varOther = list(
@@ -51,4 +52,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

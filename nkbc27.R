@@ -2,12 +2,13 @@ NAME <- "nkbc27"
 
 # Postoperativ cytostatikabehandling ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Postoperativ cytostatikabehandling",
-                      POP = "primärt opererade östrogenreceptornegativa invasiva fall med tumörstorlek > 10mm eller spridning till lymfkörtlar utan fjärrmetastaser vid diagnos.",
-                      SHORTPOP = "primärt opererade ER- invasiva fall med större tumörer utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "post_inr_sjhkod",
-                      TARGET = c(80, 90)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Postoperativ cytostatikabehandling",
+  POP = "primärt opererade östrogenreceptornegativa invasiva fall med tumörstorlek > 10mm eller spridning till lymfkörtlar utan fjärrmetastaser vid diagnos.",
+  SHORTPOP = "primärt opererade ER- invasiva fall med större tumörer utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "post_inr_sjhkod",
+  TARGET = c(80, 90)
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -18,29 +19,29 @@ dftemp <- dftemp %>%
   filter(
     # Reg av given onkologisk behandling
     period >= 2012,
-    
+
     # ett år bakåt då info från onk behandling blanketter
     period <= YEAR - 1,
-    
+
     # Endast opererade
     !is.na(op_kir_dat),
-    
-    # Endast primär opereration (planerad om utfärd ej finns) 
+
+    # Endast primär opereration (planerad om utfärd ej finns)
     # (pga att info om tumörstorlek och spridning till N behövs)
-    prim_op == 1, 
-    
+    prim_op == 1,
+
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
-    
-    # ER- 
+
+    # ER-
     er == 2,
-    
+
     # Tumörstorlek > 10 mm eller spridning till lymfkörtlar
     (op_pad_invstl > 10 | op_pad_lglmetant > 0),
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
@@ -82,4 +83,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

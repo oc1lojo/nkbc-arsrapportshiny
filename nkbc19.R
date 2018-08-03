@@ -2,30 +2,31 @@ NAME <- "nkbc19"
 
 # Tid från första behandlingsdiskussion till operation ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Första behandlingsdiskussion till operation",
-                      POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "op_inr_sjhkod",
-                      TARGET = c(75, 90)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Första behandlingsdiskussion till operation",
+  POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "op_inr_sjhkod",
+  TARGET = c(75, 90)
+)
 
 dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
     outcome = as.numeric(ymd(op_kir_dat) - ymd(a_planbeh_infopatdat)),
-    
+
     outcome = ifelse(outcome < 0, 0, outcome)
   ) %>%
   filter(
     # Endast opererade
-    !is.na(op_kir_dat), 
-    
+    !is.na(op_kir_dat),
+
     # Endast primär opereration (planerad om utförd ej finns)
-    prim_op == 1, 
-    
+    prim_op == 1,
+
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
@@ -41,9 +42,9 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.", 
+      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
       descTarg()
-    ), 
+    ),
     descTolk,
     descTekBes()
   ),
@@ -57,9 +58,9 @@ link <- rccShiny(
       label = c("Invasivitet vid diagnos")
     )
   ),
-  propWithinValue = 14, 
+  propWithinValue = 14,
   targetValues = GLOBALS$TARGET
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

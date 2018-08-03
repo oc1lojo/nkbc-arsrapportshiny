@@ -2,24 +2,25 @@ NAME <- "nkbc30"
 
 # 5 års överlevnad ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Observerad 5 års överlevnad",
-                      POP = "alla anmälda fall.",
-                      SJHKODUSE <- "a_inr_sjhkod",
-                      TARGET = c(88)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Observerad 5 års överlevnad",
+  POP = "alla anmälda fall.",
+  SJHKODUSE <- "a_inr_sjhkod",
+  TARGET = c(88)
+)
 
 dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
-    lastdate = ymd(paste0(YEAR,"-12-31")),
+    lastdate = ymd(paste0(YEAR, "-12-31")),
     surv_time = ymd(VITALSTATUSDATUM_ESTIMAT) - ymd(a_diag_dat),
-    outcome = surv_time >= 365.25*5
+    outcome = surv_time >= 365.25 * 5
   ) %>%
   filter(
     # 5 års överlevnad så krävs 5 års uppföljning
     period <= YEAR - 5,
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, period, outcome, a_pat_alder, invasiv, subtyp)
@@ -35,11 +36,11 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Total överlevnad betraktas som det viktigaste utfallsmåttet. Observerad överlevnad anger de bröstcancerfall som överlevt 5 år efter diagnos. Dödsorsakerna kan vara andra än bröstcancer.", 
+      "Total överlevnad betraktas som det viktigaste utfallsmåttet. Observerad överlevnad anger de bröstcancerfall som överlevt 5 år efter diagnos. Dödsorsakerna kan vara andra än bröstcancer.",
       descTarg()
     ),
     paste0(
-      "Uppgifter som rör 5 års överlevnad redovisas enbart tom ",YEAR - 5,".
+      "Uppgifter som rör 5 års överlevnad redovisas enbart tom ", YEAR - 5, ".
       <p></p>",
       descTolk
     ),
@@ -63,4 +64,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

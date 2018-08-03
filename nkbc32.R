@@ -2,12 +2,13 @@ NAME <- "nkbc32"
 
 # Antikroppsbehandling bland cytostatikabehandlade ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Antikroppsbehandling bland cytostatikabehandlade",
-                      POP = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos.",
-                      SHORTPOP = "opererade, cytostatikabehandlade HER2+ invasiva fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "d_onk_sjhkod",
-                      TARGET = c(90, 95)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Antikroppsbehandling bland cytostatikabehandlade",
+  POP = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos.",
+  SHORTPOP = "opererade, cytostatikabehandlade HER2+ invasiva fall utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "d_onk_sjhkod",
+  TARGET = c(90, 95)
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -15,28 +16,28 @@ dftemp <- dftemp %>%
   mutate(
     # Går på det som finns, pre eller postop. Om det ena saknas antas samma som finns för det andra.
     outcome = as.logical(pmax(post_antikropp_Värde, pre_antikropp_Värde, na.rm = TRUE)),
-    
+
     d_kemo = as.logical(pmax(post_kemo_Värde, pre_kemo_Värde, na.rm = TRUE))
   ) %>%
   filter(
     # Reg av given onkologisk behandling
     period >= 2012,
-    
+
     # ett år bakåt då info från onk behandling blanketter
     period <= YEAR - 1,
-    
+
     # Endast opererade
     !is.na(op_kir_dat),
-    
+
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
-    
+
     # Endast cytostatikabehandlade
     d_kemo == TRUE,
-    
-    # HER2+ (amplifiering eller 3+). 
+
+    # HER2+ (amplifiering eller 3+).
     her2 == 1,
-    
+
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
 
@@ -55,7 +56,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.", 
+      "Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.",
       descTarg()
     ),
     paste0(
@@ -77,4 +78,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

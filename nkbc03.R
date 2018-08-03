@@ -2,12 +2,13 @@ NAME <- "nkbc03"
 
 # Min vårdplan ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Individuell vårdplan (Min Vårdplan) har upprättats i samråd med patienten", 
-                      POP = "alla anmälda fall.",
-                      SHORTLAB = "Min vårdplan", 
-                      SJHKODUSE <- "a_inr_sjhkod",
-                      TARGET = c(80, 95)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Individuell vårdplan (Min Vårdplan) har upprättats i samråd med patienten",
+  POP = "alla anmälda fall.",
+  SHORTLAB = "Min vårdplan",
+  SJHKODUSE <- "a_inr_sjhkod",
+  TARGET = c(80, 95)
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -19,9 +20,8 @@ dftemp <- dftemp %>%
   filter(
     # min vp tillkom mitten av 2014
     period >= 2015,
-    
+
     !is.na(region)
-    
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
@@ -36,10 +36,10 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "En individuell skriftlig vårdplan, kallad Min vårdplan, ska tas fram för varje patient med cancer enligt den  Nationella Cancerstrategin (SOU 2009:11).", 
+      "En individuell skriftlig vårdplan, kallad Min vårdplan, ska tas fram för varje patient med cancer enligt den  Nationella Cancerstrategin (SOU 2009:11).",
       descTarg()
-    ),  
-    descTolk, 
+    ),
+    descTolk,
     descTekBes()
   ),
   varOther = list(
@@ -56,6 +56,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
-
-
+# runApp(paste0("Output/apps/sv/",NAME))

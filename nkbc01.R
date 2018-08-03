@@ -2,31 +2,31 @@ NAME <- "nkbc01"
 
 # Screeningupptäckt bröstcancer ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Screeningupptäckt bröstcancer", 
-                      POP = "kvinnor i åldrarna 40-74 år vid diagnos.",
-                      SJHKODUSE <- "a_inr_sjhkod",
-                      TARGET = c(60, 70) 
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Screeningupptäckt bröstcancer",
+  POP = "kvinnor i åldrarna 40-74 år vid diagnos.",
+  SJHKODUSE <- "a_inr_sjhkod",
+  TARGET = c(60, 70)
+)
 
 dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
     a_pat_alder = as.numeric(a_pat_alder),
-    
+
     # Hantera missing
-    outcome = as.logical(ifelse(a_diag_screening_Värde %in% c(0,1), a_diag_screening_Värde, NA))
+    outcome = as.logical(ifelse(a_diag_screening_Värde %in% c(0, 1), a_diag_screening_Värde, NA))
   ) %>%
   filter(
     # Ålder 40-74 år vid diagnos
     a_pat_alder <= 74,
     a_pat_alder >= 40,
-    
+
     # Enbart kvinnor
     KON_VALUE == 2,
 
     !is.na(region)
-    
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
@@ -40,9 +40,9 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Mammografiscreening erbjuds alla kvinnor mellan 40–74 år.", 
+      "Mammografiscreening erbjuds alla kvinnor mellan 40–74 år.",
       descTarg()
-      ),  
+    ),
     paste0(
       "Definitionen av \"screeningupptäckt fall\" kan enligt erfarenhet tolkas olika vilket kan påverka siffrorna. 
       Enligt kvalitetsregistret avses enbart de fall som diagnostiserats i samband med en kallelse till den landstingsorganiserade screeningmammografin. 
@@ -50,7 +50,7 @@ link <- rccShiny(
       Det finns en osäkerhet avseende andel screeningupptäckta fall då det på vissa orter bara finns en mammografinenhet som både utför screening och klinisk mammografi.
       <p></p>",
       descTolk
-    ), 
+    ),
     descTekBes()
   ),
   varOther = list(
@@ -67,6 +67,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
-
-
+# runApp(paste0("Output/apps/sv/",NAME))

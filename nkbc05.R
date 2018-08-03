@@ -2,11 +2,12 @@ NAME <- "nkbc05"
 
 # Multidisciplinär konferens efter operation ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Multidisciplinär konferens efter operation",
-                      POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "op_inr_sjhkod",
-                      TARGET = c(90, 99)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Multidisciplinär konferens efter operation",
+  POP = "opererade fall utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "op_inr_sjhkod",
+  TARGET = c(90, 99)
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -18,10 +19,10 @@ dftemp <- dftemp %>%
   filter(
     # Endast opererade
     !is.na(op_kir_dat),
-    
+
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
@@ -37,10 +38,10 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Att definierade specialister och professioner deltar i MDK och formulerar behandlingsrekommendationer har betydelse för vårdprocess för jämlik vård, kunskapsstyrd vård och för kvalitetssäkring.", 
+      "Att definierade specialister och professioner deltar i MDK och formulerar behandlingsrekommendationer har betydelse för vårdprocess för jämlik vård, kunskapsstyrd vård och för kvalitetssäkring.",
       descTarg()
-    ),  
-    descTolk, 
+    ),
+    descTolk,
     descTekBes()
   ),
   varOther = list(
@@ -57,4 +58,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

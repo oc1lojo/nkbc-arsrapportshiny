@@ -1,11 +1,12 @@
 NAME <- "nkbc093"
 
 # Population - Invasivitet ------------------------------------------------
-GLOBALS <- defGlobals(LAB = "Invasivitet vid diagnos",
-                      SHORTLAB = "Invasivitet",
-                      POP = "alla anmälda fall.",
-                      SJHKODUSE <- "a_inr_sjhkod"
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Invasivitet vid diagnos",
+  SHORTLAB = "Invasivitet",
+  POP = "alla anmälda fall.",
+  SJHKODUSE <- "a_inr_sjhkod"
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -28,8 +29,8 @@ link <- rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    "Invasiv cancer innebär att cancercellerna infiltrerar i bröstkörtelns stödjevävnad och kan sprida sig via lymfsystemet eller blodbanan till andra organ. Cancer in situ (CIS),  ett förstadium till bröstcancer, innebär att cancercellerna ligger inuti bröstets utförsgångar och  körtlar. CIS kan inte spridas, det vill säga ge upphov till fjärrmetastaser.", 
-    descTolk, 
+    "Invasiv cancer innebär att cancercellerna infiltrerar i bröstkörtelns stödjevävnad och kan sprida sig via lymfsystemet eller blodbanan till andra organ. Cancer in situ (CIS),  ett förstadium till bröstcancer, innebär att cancercellerna ligger inuti bröstets utförsgångar och  körtlar. CIS kan inte spridas, det vill säga ge upphov till fjärrmetastaser.",
+    descTolk,
     descTekBes()
   ),
   varOther = list(
@@ -41,4 +42,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

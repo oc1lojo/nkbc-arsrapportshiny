@@ -2,11 +2,12 @@ NAME <- "nkbc06"
 
 # Fastställd diagnos innan operation ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Fastställd diagnos innan operation",
-                      POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "a_inr_sjhkod",
-                      TARGET = c(80, 90)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Fastställd diagnos innan operation",
+  POP = "opererade fall utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "a_inr_sjhkod",
+  TARGET = c(80, 90)
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -18,10 +19,10 @@ dftemp <- dftemp %>%
   filter(
     # Endast opererade
     !is.na(op_kir_dat),
-    
+
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
@@ -37,14 +38,14 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "En fastställd diagnos innan behandlingsstart är viktigt för planering och genomförande av behandling och undvikande av omoperationer.", 
+      "En fastställd diagnos innan behandlingsstart är viktigt för planering och genomförande av behandling och undvikande av omoperationer.",
       descTarg()
-    ),  
+    ),
     paste0(
       "Det kan ibland vara nödvändigt att operera patienten innan diagnosen är fastställd för att undvika alltför långa utredningstider. Fastställd diagnos måste vägas mot tidsåtgång.
       <p></p>",
       descTolk
-    ), 
+    ),
     descTekBes()
   ),
   varOther = list(
@@ -61,4 +62,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

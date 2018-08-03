@@ -2,10 +2,11 @@ NAME <- "nkbc25"
 
 # Patienten ingår i postoperativ studie ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Patienten ingår i postoperativ studie",
-                      POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "post_inr_sjhkod"
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Patienten ingår i postoperativ studie",
+  POP = "opererade fall utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "post_inr_sjhkod"
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -17,16 +18,16 @@ dftemp <- dftemp %>%
   filter(
     # Reg av given onkologisk behandling
     period >= 2012,
-    
+
     # ett år bakåt då info från onk behandling blanketter
     period <= YEAR - 1,
-    
+
     # Endast opererade
-    !is.na(op_kir_dat), 
+    !is.na(op_kir_dat),
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
@@ -41,10 +42,10 @@ link <- rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt. Detta gäller alla typer av studier (t.ex. kliniska, omvårdnad, fysioterapi).", 
+    "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt. Detta gäller alla typer av studier (t.ex. kliniska, omvårdnad, fysioterapi).",
     paste0(
       onkRed,
-      "<p></p>", 
+      "<p></p>",
       descTolk
     ),
     descTekBes()
@@ -62,4 +63,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

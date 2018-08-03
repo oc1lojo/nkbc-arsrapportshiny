@@ -2,17 +2,19 @@ NAME <- "nkbc33"
 
 # Täckningsgrad, anmälan till kvalitetsregistret ------------------------------------------------
 
-GLOBALS <- defGlobals(LAB = "Täckningsgrad mot cancerregistret", 
-                      POP = "alla anmälda fall.",
-                      SJHKODUSE <- "a_inr_sjhkod", 
-                      TARGET = c(95, 99)
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Täckningsgrad mot cancerregistret",
+  POP = "alla anmälda fall.",
+  SJHKODUSE <- "a_inr_sjhkod",
+  TARGET = c(95, 99)
+)
 
 tack <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.1/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
-dftemp <- data.frame(region = c(rep(tack$region, tack$finns), rep(tack$region, tack$ejfinns)),
-                    period = c(rep(tack$ar, tack$finns), rep(tack$ar, tack$ejfinns)),
-                    outcome = c(rep(rep(TRUE, dim(tack)[1]), tack$finns), rep(rep(FALSE, dim(tack)[1]), tack$ejfinns))
-                    )
+dftemp <- data.frame(
+  region = c(rep(tack$region, tack$finns), rep(tack$region, tack$ejfinns)),
+  period = c(rep(tack$ar, tack$finns), rep(tack$ar, tack$ejfinns)),
+  outcome = c(rep(rep(TRUE, dim(tack)[1]), tack$finns), rep(rep(FALSE, dim(tack)[1]), tack$ejfinns))
+)
 
 
 link <- rccShiny(
@@ -23,9 +25,9 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Anmälan till cancerregistret och anmälan till kvalitetsregistret är kombinerade och därmed undviks dubbelarbete.", 
+      "Anmälan till cancerregistret och anmälan till kvalitetsregistret är kombinerade och därmed undviks dubbelarbete.",
       descTarg()
-    ), 
+    ),
     ettFallBrost,
     paste0(
       "Population: ", GLOBALS$POP,
@@ -34,7 +36,7 @@ link <- rccShiny(
     )
   ),
   targetValues = GLOBALS$TARGET
-  )
+)
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

@@ -1,11 +1,12 @@
 NAME <- "nkbc094"
 
 # Population - Biologisk subtyp ------------------------------------------------
-GLOBALS <- defGlobals(LAB = "Biologisk subtyp vid diagnos",
-                      SHORTLAB = "Biologisk subtyp",
-                      POP = "invasiva fall.",
-                      SJHKODUSE <- "a_inr_sjhkod"
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Biologisk subtyp vid diagnos",
+  SHORTLAB = "Biologisk subtyp",
+  POP = "invasiva fall.",
+  SJHKODUSE <- "a_inr_sjhkod"
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -16,7 +17,7 @@ dftemp <- dftemp %>%
   filter(
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
-    
+
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
@@ -37,8 +38,8 @@ link <- rccShiny(
     <p></p>  
     HER2-positiva – tumörer har många kopior av HER2-genen (amplifiering) vilket leder till en ökning av antalet HER2-receptorer på cellytan. Detta i sin tur stimulerar till snabb tillväxt. 
     <p></p>
-    Trippelnegativ – tumörer saknar östrogenreceptorer (ER) och progesteronreceptorer (PgR) och överuttrycker inte HER2. Den är varken hormonkänslig eller känslig för behandling riktad mot HER2-receptorn.", 
-    descTolk, 
+    Trippelnegativ – tumörer saknar östrogenreceptorer (ER) och progesteronreceptorer (PgR) och överuttrycker inte HER2. Den är varken hormonkänslig eller känslig för behandling riktad mot HER2-receptorn.",
+    descTolk,
     descTekBes()
   ),
   varOther = list(
@@ -50,4 +51,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))
