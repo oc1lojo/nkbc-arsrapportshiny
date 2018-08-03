@@ -1,8 +1,9 @@
 NAME <- "nkbc35test2"
-GLOBALS <- defGlobals(LAB = "Cytostatikabehandling",
-                      POP = "opererade, invasiva fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "d_onk_sjhkod"
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Cytostatikabehandling",
+  POP = "opererade, invasiva fall utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "d_onk_sjhkod"
+)
 
 dftemp <- addSjhData(dfmain)
 
@@ -16,32 +17,34 @@ dftemp <- dftemp %>%
       post_kemo_Värde == 0 | pre_kemo_Värde == 0 ~ 0
     ),
     levels = c(0, 1, 2, 3),
-    labels = c("Ingen", 
-               "Enbart preoperativ", 
-               "Enbart postoperativ",
-               "Både pre-och postoperativ")
+    labels = c(
+      "Ingen",
+      "Enbart preoperativ",
+      "Enbart postoperativ",
+      "Både pre-och postoperativ"
+    )
     ),
-    
+
     # T
     Tstad = factor(
-      mapvalues(a_tnm_tklass_Värde, 
-                from = c(0, 5, 10, 20, 30, 42, 44, 45, 46, 50, NA), 
-                to = c(1, 1, 1, 2, 2, 2, 2, 2, 2, 99, 99)
-                ),
+      mapvalues(a_tnm_tklass_Värde,
+        from = c(0, 5, 10, 20, 30, 42, 44, 45, 46, 50, NA),
+        to = c(1, 1, 1, 2, 2, 2, 2, 2, 2, 99, 99)
+      ),
       levels = c(1, 2, 99),
       labels = c("<=20mm (T0/T1)", ">20mm (T2-T4)", "Uppgift saknas")
     ),
-    
+
     # N
     Nstad = factor(
-      mapvalues(a_tnm_nklass_Värde, 
-                from = c(0, 10, 20, 30, 40, NA), 
-                to = c(1, 2, 2, 2, 99, 99)
-                ),
+      mapvalues(a_tnm_nklass_Värde,
+        from = c(0, 10, 20, 30, 40, NA),
+        to = c(1, 2, 2, 2, 99, 99)
+      ),
       levels = c(1, 2, 99),
       labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")
     ),
-      
+
     # ER
     er = ifelse(is.na(er), 99, er),
     er = factor(er, c(1, 2, 99), c("Positiv", "Negativ", "Uppgift saknas"))
@@ -49,23 +52,25 @@ dftemp <- dftemp %>%
   filter(
     # Reg av given onkologisk behandling
     period >= 2012,
-    
+
     # ett år bakåt då info från onk behandling blanketter
     period <= YEAR - 1,
-    
+
     # Endast opererade
     !is.na(op_kir_dat),
 
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
-    
+
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv, 
-         er, Tstad, Nstad)
+  select(
+    landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv,
+    er, Tstad, Nstad
+  )
 
 link <- rccShiny(
   data = dftemp,
@@ -113,4 +118,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))

@@ -1,25 +1,29 @@
 NAME <- "nkbc37"
 
-GLOBALS <- defGlobals(LAB = "Typ av onkologi",
-                      POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "op_inr_sjhkod"
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Typ av onkologi",
+  POP = "opererade fall utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "op_inr_sjhkod"
+)
 
 dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
     # Prim op eller preop onk beh
-    outcome = factor(prim_op, 
-                     levels = c(1, 2), 
-                     labels = c("Primär operation",
-                                "Preoperativ onkologisk behandling")),
-    
+    outcome = factor(prim_op,
+      levels = c(1, 2),
+      labels = c(
+        "Primär operation",
+        "Preoperativ onkologisk behandling"
+      )
+    ),
+
     # N
     Nstad = factor(
-      mapvalues(a_tnm_nklass_Värde, 
-                from = c(0, 10, 20, 30, 40, NA), 
-                to = c(1, 2, 2, 2, 99, 99)
+      mapvalues(a_tnm_nklass_Värde,
+        from = c(0, 10, 20, 30, 40, NA),
+        to = c(1, 2, 2, 2, 99, 99)
       ),
       levels = c(1, 2, 99),
       labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")
@@ -72,4 +76,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))
