@@ -1,7 +1,7 @@
 NAME <- "nkbc37"
 
 GLOBALS <- defGlobals(
-  LAB = "Typ av onkologi",
+  LAB = "Typ av primär behandling",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",
   SJHKODUSE <- "op_inr_sjhkod"
 )
