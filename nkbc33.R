@@ -17,7 +17,7 @@ GLOBALS <- defGlobals(LAB = "Täckningsgrad mot cancerregistret",
                       TARGET = c(95, 99)
                       )
 
-tack <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017 april/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
+tack <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.1/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
 dftemp <- data.frame(region = c(rep(tack$region, tack$finns), rep(tack$region, tack$ejfinns)),
                     period = c(rep(tack$ar, tack$finns), rep(tack$ar, tack$ejfinns)),
                     outcome = c(rep(rep(TRUE, dim(tack)[1]), tack$finns), rep(rep(FALSE, dim(tack)[1]), tack$ejfinns))
