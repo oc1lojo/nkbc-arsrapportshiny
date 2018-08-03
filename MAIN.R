@@ -1,5 +1,6 @@
-# devtools::install_bitbucket("cancercentrum/rccShiny")
+# Ladda paket ------------------------------------------------------------------
 
+# devtools::install_bitbucket("cancercentrum/rccShiny")
 library(plyr)
 library(dplyr)
 library(lubridate)
@@ -7,14 +8,58 @@ library(shiny)
 library(rccShiny)
 library(Hmisc)
 
-## Ändra dataset
-
-# Rottab
-load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-05-02/nkbc_nat_id 2018-05-02 08-35-37.zip", exdir = tempdir()))
+# Läs in/Definera "konstanter" och hjälpfunktioner -----------------------------
 
 YEAR <- 2017
 OUTPUTPATH <- "Output"
 
+source("beskTXT.R", encoding = "utf8")
+
+addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
+  names(df)[names(df) == SJHKODUSE] <- "sjhkod"
+  
+  df[, "sjhkod"] <- as.numeric(df[, "sjhkod"])
+  
+  df <- left_join(df,
+                  sjukhuskoder,
+                  by = c("sjhkod" = "sjukhuskod")
+  ) %>%
+    mutate(
+      region = mapvalues(region_sjh_txt,
+                         from = c("Sthlm/Gotland", "Uppsala/Örebro", "Sydöstra", "Syd", "Väst", "Norr"),
+                         to = c(1, 2, 3, 4, 5, 6)
+      ),
+      region = ifelse(is.na(region), region_lkf, region),
+      landsting = substr(sjhkod, 1, 2),
+      # Fulfix Bröstmottagningen, Christinakliniken Sh & Stockholms bröstklinik så hamnar i Stockholm
+      landsting = ifelse(sjhkod %in% c(97333, 97563), 10, landsting),
+      landsting = ifelse(landsting %in% c(
+        seq(10, 13),
+        seq(21, 28),
+        30,
+        seq(41, 42),
+        seq(50, 57),
+        seq(61, 65)
+        # seq(91,96)
+      ),
+      landsting,
+      NA
+      )
+    )
+  return(df)
+}
+
+# Läs in data ------------------------------------------------------------------
+
+# Rottabell
+load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-05-02/nkbc_nat_id 2018-05-02 08-35-37.zip", exdir = tempdir()))
+
+# Läs på namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
+load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
+
+# Bearbeta data ----------------------------------------------------------------
+
+# Bearbeta huvud-dataram
 dfmain <- df %>%
   mutate_if(is.factor, as.character) %>%
   mutate(
@@ -139,9 +184,7 @@ dfmain <- df %>%
     period <= YEAR
   )
 
-# Läsa på namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
-load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
-
+# Bearbeta dataram med sjukhuskoder
 sjukhuskoder <- sjukhuskoder %>%
   rename(
     sjukhus = sjukhusnamn,
@@ -153,41 +196,7 @@ sjukhuskoder <- sjukhuskoder %>%
     sjukhus = ifelse(sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA, sjukhus)
   )
 
-addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
-  names(df)[names(df) == SJHKODUSE] <- "sjhkod"
-
-  df[, "sjhkod"] <- as.numeric(df[, "sjhkod"])
-
-  df <- left_join(df,
-    sjukhuskoder,
-    by = c("sjhkod" = "sjukhuskod")
-  ) %>%
-    mutate(
-      region = mapvalues(region_sjh_txt,
-        from = c("Sthlm/Gotland", "Uppsala/Örebro", "Sydöstra", "Syd", "Väst", "Norr"),
-        to = c(1, 2, 3, 4, 5, 6)
-      ),
-      region = ifelse(is.na(region), region_lkf, region),
-      landsting = substr(sjhkod, 1, 2),
-      # Fulfix Bröstmottagningen, Christinakliniken Sh & Stockholms bröstklinik så hamnar i Stockholm
-      landsting = ifelse(sjhkod %in% c(97333, 97563), 10, landsting),
-      landsting = ifelse(landsting %in% c(
-        seq(10, 13),
-        seq(21, 28),
-        30,
-        seq(41, 42),
-        seq(50, 57),
-        seq(61, 65)
-        # seq(91,96)
-      ),
-      landsting,
-      NA
-      )
-    )
-  return(df)
-}
-
-source("beskTXT.R", encoding = "utf8")
+# Skapa shiny-applikationer ----------------------------------------------------
 
 # Täckningsgrad
 source("nkbc33_tackning_mot_cancerreg.R", encoding = "utf8")
