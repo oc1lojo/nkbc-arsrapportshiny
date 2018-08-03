@@ -57,6 +57,9 @@ load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-05-02/nkbc_
 # Läs på namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
 
+# Läs in data för täckningsgrad mot cancerregistret
+tackning_tbl <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.1/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
+
 # Bearbeta data ----------------------------------------------------------------
 
 # Bearbeta huvud-dataram

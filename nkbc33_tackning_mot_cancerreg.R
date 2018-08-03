@@ -7,11 +7,19 @@ GLOBALS <- defGlobals(
   TARGET = c(95, 99)
 )
 
-tack <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.1/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
 dftemp <- data.frame(
-  region = c(rep(tack$region, tack$finns), rep(tack$region, tack$ejfinns)),
-  period = c(rep(tack$ar, tack$finns), rep(tack$ar, tack$ejfinns)),
-  outcome = c(rep(rep(TRUE, dim(tack)[1]), tack$finns), rep(rep(FALSE, dim(tack)[1]), tack$ejfinns))
+  region = c(
+    rep(tackning_tbl$region, tackning_tbl$finns),
+    rep(tackning_tbl$region, tackning_tbl$ejfinns)
+  ),
+  period = c(
+    rep(tackning_tbl$ar, tackning_tbl$finns),
+    rep(tackning_tbl$ar, tackning_tbl$ejfinns)
+  ),
+  outcome = c(
+    rep(rep(TRUE, dim(tackning_tbl)[1]), tackning_tbl$finns),
+    rep(rep(FALSE, dim(tackning_tbl)[1]), tackning_tbl$ejfinns)
+  )
 )
 
 link <- rccShiny(
