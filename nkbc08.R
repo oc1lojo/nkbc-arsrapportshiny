@@ -1,13 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc08"
-# Created by: Lina Benson 
-# Created date: 2017-08-09
-# Software: R x64 v 3.3.3
-# Status: Final
-# Updated: se git 
-######################################################
-
 
 # Enbart en operation (ingen omoperation pga tumördata) i bröst ------------------------------------------------
 GLOBALS <- defGlobals(LAB = "Enbart en operation (ingen omoperation pga tumördata) i bröst",

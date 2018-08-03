@@ -1,13 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc15"
-# Created by: Lina Benson 
-# Created date: 2017-08-09
-# Software: R x64 v 3.3.3
-# Status: 
-# Updated: se git 
-######################################################
-
 
 # Tid från välgrundad misstanke om cancer (före 2016 från 1:a kontakt) till operation ------------------------------------------------
 

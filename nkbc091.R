@@ -1,13 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc091"
-# Created by: Lina Benson 
-# Created date: 2017-08-09
-# Software: R x64 v 3.3.3
-# Status: Final
-# Updated: se git 
-######################################################
-
 
 # Population - kön ------------------------------------------------
 GLOBALS <- defGlobals(LAB = "Kön vid diagnos",

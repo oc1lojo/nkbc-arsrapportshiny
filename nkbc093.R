@@ -1,13 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc093"
-# Created by: Lina Benson 
-# Created date: 2017-08-09
-# Software: R x64 v 3.3.3
-# Status: Final
-# Updated: se git 
-######################################################
-
 
 # Population - Invasivitet ------------------------------------------------
 GLOBALS <- defGlobals(LAB = "Invasivitet vid diagnos",

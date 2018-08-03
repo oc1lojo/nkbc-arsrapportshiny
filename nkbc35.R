@@ -1,13 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc35"
-# Created by: Lina Benson 
-# Created date: 2017-08-10
-# Software: R x64 v 3.3.3
-# Status: Final
-# Updated: se git
-######################################################
-
 
 # Cytostatikabehandling ------------------------------------------------
 

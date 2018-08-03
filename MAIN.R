@@ -1,13 +1,3 @@
-######################################################
-# Project: Årsrapport
-# Name: MAIN.R
-# Created by: Lina Benson 
-# Created date: 2017-06-16
-# Software: R x64 v 3.3.3
-# Status: 
-# Updated: se git 
-######################################################
-
 #devtools::install_bitbucket("cancercentrum/rccShiny")
 
 library(plyr)

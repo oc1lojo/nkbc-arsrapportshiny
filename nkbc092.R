@@ -1,13 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc092"
-# Created by: Lina Benson 
-# Created date: 2017-08-09
-# Software: R x64 v 3.3.3
-# Status: Final
-# Updated: se git 
-######################################################
-
 
 # Population - Ålder vid diagnos ------------------------------------------------
 GLOBALS <- defGlobals(LAB = "Ålder vid diagnos",

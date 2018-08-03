@@ -1,13 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc20"
-# Created by: Lina Benson 
-# Created date: 2017-08-09
-# Software: R x64 v 3.3.3
-# Status: 
-# Updated: se git 
-######################################################
-
 
 # Tid från första behandlingsdiskussion till preoperativ onkologisk behandling (cytostatika, strålning, endokrin) ------------------------------------------------
 

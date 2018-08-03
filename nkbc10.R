@@ -1,13 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc10"
-# Created by: Lina Benson 
-# Created date: 2017-08-09
-# Software: R x64 v 3.3.3
-# Status: Final
-# Updated: se git 
-######################################################
-
 
 # Fullständig patologirapport (Grad, ER, PR, HER2, Ki67) ------------------------------------------------
 GLOBALS <- defGlobals(LAB = "Fullständig patologirapport (Grad, ER, PR, HER2, Ki67)",

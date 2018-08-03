@@ -1,13 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc094"
-# Created by: Lina Benson 
-# Created date: 2017-08-09
-# Software: R x64 v 3.3.3
-# Status: Final
-# Updated: se git 
-######################################################
-
 
 # Population - Biologisk subtyp ------------------------------------------------
 GLOBALS <- defGlobals(LAB = "Biologisk subtyp vid diagnos",
