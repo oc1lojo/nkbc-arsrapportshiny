@@ -10,19 +10,20 @@ dftemp <- addSjhData(dfmain)
 dftemp <- dftemp %>%
   mutate(
     # Pre eller postoperativ
-    outcome = factor(case_when(
-      post_kemo_Värde == 1 & pre_kemo_Värde == 1 ~ 3,
-      pre_kemo_Värde == 1 ~ 1,
-      post_kemo_Värde == 1 ~ 2,
-      post_kemo_Värde == 0 | pre_kemo_Värde == 0 ~ 0
-    ),
-    levels = c(0, 1, 2, 3),
-    labels = c(
-      "Ingen",
-      "Enbart preoperativ",
-      "Enbart postoperativ",
-      "Både pre-och postoperativ"
-    )
+    outcome = factor(
+      case_when(
+        post_kemo_Värde == 1 & pre_kemo_Värde == 1 ~ 1,
+        pre_kemo_Värde == 1 ~ 0,
+        post_kemo_Värde == 1 ~ 2,
+        post_kemo_Värde == 0 | pre_kemo_Värde == 0 ~ 3
+      ),
+      levels = c(0, 1, 2, 3),
+      labels = c(
+        "Enbart preoperativ",
+        "Både pre-och postoperativ",
+        "Enbart postoperativ",
+        "Ingen"
+      )
     ),
 
     # T

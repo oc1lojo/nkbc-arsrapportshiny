@@ -15,19 +15,20 @@ dftemp <- dftemp %>%
     # outcome = as.logical(pmax(post_endo_Värde, pre_endo_Värde, na.rm = TRUE)),
 
     # Pre eller postoperativ
-    outcome = factor(case_when(
-      post_endo_Värde == 1 & pre_endo_Värde == 1 ~ 3,
-      pre_endo_Värde == 1 ~ 1,
-      post_endo_Värde == 1 ~ 2,
-      post_endo_Värde == 0 | pre_endo_Värde == 0 ~ 0
-    ),
-    levels = c(0, 1, 2, 3),
-    labels = c(
-      "Ingen",
-      "Enbart preoperativ",
-      "Enbart postoperativ",
-      "Både pre-och postoperativ"
-    )
+    outcome = factor(
+      case_when(
+        post_endo_Värde == 1 & pre_endo_Värde == 1 ~ 1,
+        pre_endo_Värde == 1 ~ 0,
+        post_endo_Värde == 1 ~ 2,
+        post_endo_Värde == 0 | pre_endo_Värde == 0 ~ 3
+      ),
+      levels = c(0, 1, 2, 3),
+      labels = c(
+        "Enbart preoperativ",
+        "Både pre-och postoperativ",
+        "Enbart postoperativ",
+        "Ingen"
+      )
     )
   ) %>%
   filter(
