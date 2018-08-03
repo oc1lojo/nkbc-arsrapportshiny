@@ -189,39 +189,54 @@ addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
 
 source("beskTXT.R", encoding = "utf8")
 
-source("nkbc01.R", encoding = "utf8")
-source("nkbc02.R", encoding = "utf8")
-source("nkbc03.R", encoding = "utf8")
-source("nkbc04.R", encoding = "utf8")
-source("nkbc05.R", encoding = "utf8")
-source("nkbc06.R", encoding = "utf8")
-source("nkbc07.R", encoding = "utf8")
-source("nkbc08.R", encoding = "utf8")
-source("nkbc091.R", encoding = "utf8")
-source("nkbc092.R", encoding = "utf8")
-source("nkbc093.R", encoding = "utf8")
-source("nkbc094.R", encoding = "utf8")
-source("nkbc095.R", encoding = "utf8")
-source("nkbc096.R", encoding = "utf8")
-source("nkbc10.R", encoding = "utf8")
-source("nkbc11.R", encoding = "utf8")
-source("nkbc13.R", encoding = "utf8")
-source("nkbc14.R", encoding = "utf8")
-source("nkbc15.R", encoding = "utf8")
-source("nkbc16.R", encoding = "utf8")
-source("nkbc17.R", encoding = "utf8")
-source("nkbc19.R", encoding = "utf8")
-source("nkbc20.R", encoding = "utf8")
-source("nkbc22.R", encoding = "utf8")
-source("nkbc23.R", encoding = "utf8")
-source("nkbc24.R", encoding = "utf8")
-source("nkbc25.R", encoding = "utf8")
-source("nkbc26.R", encoding = "utf8")
-source("nkbc27.R", encoding = "utf8")
-source("nkbc28.R", encoding = "utf8")
-source("nkbc29.R", encoding = "utf8")
-source("nkbc30.R", encoding = "utf8")
-source("nkbc31.R", encoding = "utf8")
-source("nkbc32.R", encoding = "utf8")
-source("nkbc33.R", encoding = "utf8")
-source("nkbc35.R", encoding = "utf8")
+# Täckningsgrad
+source("nkbc33_tackning_mot_cancerreg.R", encoding = "utf8")
+source("nkbc13_tackning_for_preop_beh.R", encoding = "utf8")
+source("nkbc14_tackning_for_postop_beh.R", encoding = "utf8")
+
+# Population
+source("nkbc091_pop_kon.R", encoding = "utf8")
+source("nkbc092_pop_alder.R", encoding = "utf8")
+source("nkbc093_pop_invasiv.R", encoding = "utf8")
+source("nkbc094_pop_subtyp.R", encoding = "utf8")
+source("nkbc095_pop_n.R", encoding = "utf8")
+source("nkbc096_pop_m.R", encoding = "utf8")
+
+# Ledtider
+source("nkbc15_ledtid_misstanke_till_op.R", encoding = "utf8")
+source("nkbc16_ledtid_misstanke_till_preop_beh.R", encoding = "utf8")
+source("nkbc17_ledtid_misstanke_till_besok_spec.R", encoding = "utf8")
+source("nkbc19_ledtid_behdisk_till_op.R", encoding = "utf8")
+source("nkbc20_ledtid_behdisk_till_preop_beh.R", encoding = "utf8")
+source("nkbc22_ledtid_op_till_cytostatikabeh.R", encoding = "utf8")
+source("nkbc23_ledtid_op_till_stralbeh.R", encoding = "utf8")
+
+# Diagnostik
+source("nkbc01_diag_screening.R", encoding = "utf8")
+source("nkbc04_diag_mdk_innan_beh.R", encoding = "utf8")
+source("nkbc05_diag_mdk_efter_op.R", encoding = "utf8")
+source("nkbc06_diag_klar_innan_op.R", encoding = "utf8")
+source("nkbc10_diag_komplett_patologi.R", encoding = "utf8")
+
+# Omvårdnad
+source("nkbc02_omv_kontaktssk.R", encoding = "utf8")
+source("nkbc03_omv_vardplan.R", encoding = "utf8")
+
+# Kirurgi
+source("nkbc11_kir_brostbev_op.R", encoding = "utf8")
+source("nkbc07_kir_direktrek.R", encoding = "utf8")
+source("nkbc08_kir_omop.R", encoding = "utf8")
+source("nkbc26_kir_sentinel_node.R", encoding = "utf8")
+
+# Onkologisk behandling
+source("nkbc35_onk_cytostatikabeh.R", encoding = "utf8")
+source("nkbc27_onk_postop_cytostatikabeh_bland_erneg.R", encoding = "utf8")
+source("nkbc28_onk_stralbeh_efter_brostbev_op.R", encoding = "utf8")
+source("nkbc29_onk_stralbeh_efter_mastektomi.R", encoding = "utf8")
+source("nkbc31_onk_endokrin_beh_bland_erpos.R", encoding = "utf8")
+source("nkbc32_onk_antikroppbeh_bland_cytostatikabeh_her2pos.R", encoding = "utf8")
+source("nkbc24_onk_pat_i_preop_studie.R", encoding = "utf8")
+source("nkbc25_onk_pat_i_postop_studie.R", encoding = "utf8")
+
+# Överlevnad
+source("nkbc30_overlevnad_5ar.R", encoding = "utf8")
