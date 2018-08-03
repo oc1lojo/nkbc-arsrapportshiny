@@ -1,16 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc35test2"
-# Created by: Lina Benson 
-# Created date: 2017-08-10
-# Software: R x64 v 3.3.3
-# Status: Final
-# Updated: se git
-######################################################
-
-
-# Cytostatikabehandling ------------------------------------------------
-
 GLOBALS <- defGlobals(LAB = "Cytostatikabehandling",
                       POP = "opererade, invasiva fall utan fjärrmetastaser vid diagnos.",
                       SJHKODUSE <- "d_onk_sjhkod"
@@ -78,7 +66,6 @@ dftemp <- dftemp %>%
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv, 
          er, Tstad, Nstad)
-
 
 link <- rccShiny(
   data = dftemp,

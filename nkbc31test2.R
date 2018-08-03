@@ -1,15 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc31test2"
-# Created by: Lina Benson 
-# Created date: 2017-08-09
-# Software: R x64 v 3.3.3
-# Status: 
-# Updated: se git
-######################################################
-
-
-# Endokrin behandling ------------------------------------------------
 
 GLOBALS <- defGlobals(LAB = "Endokrinbehandling",
                       POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
@@ -60,7 +49,6 @@ dftemp <- dftemp %>%
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
-
 
 link <- rccShiny(
   data = dftemp,
