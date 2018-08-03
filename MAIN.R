@@ -20,10 +20,11 @@ dfmain <- df %>%
   mutate(
     period = year(a_diag_dat), # Den period som appar visas för
     opyear = year(op_kir_dat),
-    #    landsting_lkf = as.numeric(substr(a_pat_lkfdia, 1, 2)),
-    #    landsting_lkf = ifelse(landsting_lkf %in% c(1, seq(3,10), seq(12,14), seq(17,25)),
-    #                                                landsting_lkf,
-    #                                                NA),
+    # landsting_lkf = as.numeric(substr(a_pat_lkfdia, 1, 2)),
+    # landsting_lkf = ifelse(landsting_lkf %in% c(1, seq(3, 10), seq(12, 14), seq(17, 25)),
+    #   landsting_lkf,
+    #   NA
+    # ),
 
     # lkf region för att imputera om region för sjukhus saknas
     region_lkf = mapvalues(REGION_NAMN,
@@ -210,10 +211,8 @@ source("nkbc14.R", encoding = "utf8")
 source("nkbc15.R", encoding = "utf8")
 source("nkbc16.R", encoding = "utf8")
 source("nkbc17.R", encoding = "utf8")
-# source("nkbc18.R", encoding = "utf8") utgår pga 0 tider
 source("nkbc19.R", encoding = "utf8")
 source("nkbc20.R", encoding = "utf8")
-# source("nkbc21.R", encoding = "utf8") utgår pga 0 tider
 source("nkbc22.R", encoding = "utf8")
 source("nkbc23.R", encoding = "utf8")
 source("nkbc24.R", encoding = "utf8")
@@ -227,5 +226,3 @@ source("nkbc31.R", encoding = "utf8")
 source("nkbc32.R", encoding = "utf8")
 source("nkbc33.R", encoding = "utf8")
 source("nkbc35.R", encoding = "utf8")
-
-# detach("package:rccShiny", unload=TRUE)
