@@ -1,7 +1,5 @@
 NAME <- "nkbc13"
 
-# Täckningsgrad för rapportering av preoperativ onkologisk behandling ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Täckningsgrad för rapportering av preoperativ onkologisk behandling",
   POP = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",

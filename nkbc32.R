@@ -1,7 +1,5 @@
 NAME <- "nkbc32"
 
-# Antikroppsbehandling bland cytostatikabehandlade ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Antikroppsbehandling bland cytostatikabehandlade",
   POP = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos.",
