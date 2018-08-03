@@ -187,7 +187,6 @@ addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
   return(df)
 }
 
-
 source("beskTXT.R", encoding = "utf8")
 
 source("nkbc01.R", encoding = "utf8")

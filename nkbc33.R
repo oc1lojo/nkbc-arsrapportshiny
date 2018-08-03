@@ -14,7 +14,6 @@ dftemp <- data.frame(
   outcome = c(rep(rep(TRUE, dim(tack)[1]), tack$finns), rep(rep(FALSE, dim(tack)[1]), tack$ejfinns))
 )
 
-
 link <- rccShiny(
   data = dftemp,
   folder = NAME,

@@ -59,7 +59,6 @@ dftemp <- dftemp %>%
     er, Tstad, Nstad
   )
 
-
 link <- rccShiny(
   data = dftemp,
   folder = NAME,

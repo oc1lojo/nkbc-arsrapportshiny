@@ -23,7 +23,6 @@ dftemp <- dftemp %>%
   ) %>%
   select(landsting, region, period, outcome, a_pat_alder, invasiv, subtyp)
 
-
 link <- rccShiny(
   data = dftemp,
   folder = NAME,

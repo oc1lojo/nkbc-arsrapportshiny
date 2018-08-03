@@ -8,7 +8,6 @@ GLOBALS <- defGlobals(
   TARGET = c(90, 95)
 )
 
-
 dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
