@@ -1,0 +1,87 @@
+######################################################
+# Project: Årsrapport
+NAME <- "nkbc37"
+# Created by: Lina Benson 
+# Created date: 2018-05-31
+# Software: R x64 v 3.3.3
+# Status: Final
+# Updated: se git
+######################################################
+
+
+# Typ av onkologi ------------------------------------------------
+
+GLOBALS <- defGlobals(LAB = "Typ av onkologi",
+                      POP = "opererade fall utan fjärrmetastaser vid diagnos.",
+                      SJHKODUSE <- "op_inr_sjhkod"
+                      )
+
+dftemp <- addSjhData(dfmain)
+
+dftemp <- dftemp %>%
+  mutate(
+    # Prim op eller preop onk beh
+    outcome = factor(prim_op, 
+                     levels = c(1, 2), 
+                     labels = c("Primär operation",
+                                "Preoperativ onkologisk behandling")),
+    
+    # N
+    Nstad = factor(
+      mapvalues(a_tnm_nklass_Värde, 
+                from = c(0, 10, 20, 30, 40, NA), 
+                to = c(1, 2, 2, 2, 99, 99)
+      ),
+      levels = c(1, 2, 99),
+      labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")
+    )
+  ) %>%
+  filter(
+    # Endast opererade
+    !is.na(op_kir_dat),
+
+    # Ej fjärrmetastaser vid diagnos
+    !a_tnm_mklass_Värde %in% 10,
+
+    !is.na(region)
+  ) %>%
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv, Nstad, subtyp)
+
+
+link <- rccShiny(
+  data = dftemp,
+  folder = NAME,
+  path = OUTPUTPATH,
+  outcomeTitle = GLOBALS$LAB,
+  folderLinkText = GLOBALS$SHORTLAB,
+  geoUnitsPatient = FALSE,
+  textBeforeSubtitle = GLOBALS$SHORTPOP,
+  description = c(
+    paste0(
+      "Här behövs det text."
+    ),
+    paste0(
+      "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation. 
+      <p></p>",
+      descTolk
+    ),
+    descTekBes()
+  ),
+  varOther = list(
+    list(
+      var = "a_pat_alder",
+      label = c("Ålder vid diagnos")
+    ),
+    list(
+      var = "subtyp",
+      label = c("Biologisk subtyp")
+    ),
+    list(
+      var = "Nstad",
+      label = c("Spridning till lymfkörtlar")
+    )
+  )
+)
+
+cat(link)
+#runApp(paste0("Output/apps/sv/",NAME))
