@@ -1,7 +1,5 @@
 NAME <- "nkbc07"
 
-# Omedelbara rekonstruktioner vid mastektomi ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Omedelbara rekonstruktioner vid mastektomi",
   SHORTPOP = "mastektomerade fall utan fjärrmetastaser vid diagnos.",

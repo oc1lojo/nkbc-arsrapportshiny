@@ -1,7 +1,5 @@
 NAME <- "nkbc04"
 
-# Multidisciplinär konferens inför behandlingstart ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Multidisciplinär konferens inför behandlingstart",
   POP = "alla anmälda fall.",

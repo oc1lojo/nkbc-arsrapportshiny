@@ -1,7 +1,5 @@
 NAME <- "nkbc31"
 
-# Endokrin behandling ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Endokrinbehandling",
   POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",

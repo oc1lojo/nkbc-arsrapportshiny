@@ -1,7 +1,5 @@
 NAME <- "nkbc17"
 
-# Tid från välgrundad misstanke om cancer till första besök i specialiserad vård ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Välgrundad misstanke om cancer till första besök i specialiserad vård",
   POP = "alla anmälda fall.",

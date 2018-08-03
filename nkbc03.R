@@ -1,7 +1,5 @@
 NAME <- "nkbc03"
 
-# Min vårdplan ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Individuell vårdplan (Min Vårdplan) har upprättats i samråd med patienten",
   POP = "alla anmälda fall.",

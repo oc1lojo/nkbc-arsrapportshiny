@@ -1,7 +1,5 @@
 NAME <- "nkbc02"
 
-# Kontaktsjuksköterska ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Patienten har erbjudits, i journalen dokumenterad, kontaktsjuksköterska",
   POP = "alla anmälda fall.",

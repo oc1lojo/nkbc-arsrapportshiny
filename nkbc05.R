@@ -1,7 +1,5 @@
 NAME <- "nkbc05"
 
-# Multidisciplinär konferens efter operation ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Multidisciplinär konferens efter operation",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",

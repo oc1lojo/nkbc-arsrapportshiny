@@ -1,6 +1,5 @@
 NAME <- "nkbc08"
 
-# Enbart en operation (ingen omoperation pga tumördata) i bröst ------------------------------------------------
 GLOBALS <- defGlobals(
   LAB = "Enbart en operation (ingen omoperation pga tumördata) i bröst",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",

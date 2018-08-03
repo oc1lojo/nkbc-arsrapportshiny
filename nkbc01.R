@@ -1,7 +1,5 @@
 NAME <- "nkbc01"
 
-# Screeningupptäckt bröstcancer ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Screeningupptäckt bröstcancer",
   POP = "kvinnor i åldrarna 40-74 år vid diagnos.",

@@ -1,7 +1,5 @@
 NAME <- "nkbc16"
 
-# Tid från välgrundad misstanke om cancer till onkologisk behandling (cytostatika, strålning, endokrin) ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Välgrundad misstanke om cancer till preoperativ onkologisk behandling",
   POP = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",

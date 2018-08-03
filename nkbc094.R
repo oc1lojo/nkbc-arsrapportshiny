@@ -1,6 +1,5 @@
 NAME <- "nkbc094"
 
-# Population - Biologisk subtyp ------------------------------------------------
 GLOBALS <- defGlobals(
   LAB = "Biologisk subtyp vid diagnos",
   SHORTLAB = "Biologisk subtyp",

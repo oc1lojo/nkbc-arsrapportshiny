@@ -1,7 +1,5 @@
 NAME <- "nkbc19"
 
-# Tid från första behandlingsdiskussion till operation ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Första behandlingsdiskussion till operation",
   POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",

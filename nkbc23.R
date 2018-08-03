@@ -1,7 +1,5 @@
 NAME <- "nkbc23"
 
-# Tid från operation till strålbehandling ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Operation till strålbehandling",
   POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",

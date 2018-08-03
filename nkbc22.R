@@ -1,7 +1,5 @@
 NAME <- "nkbc22"
 
-# Tid från operation till cytostatikabehandling ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Operation till cytostatikabehandling",
   POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",

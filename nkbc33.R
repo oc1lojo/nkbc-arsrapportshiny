@@ -1,7 +1,5 @@
 NAME <- "nkbc33"
 
-# Täckningsgrad, anmälan till kvalitetsregistret ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Täckningsgrad mot cancerregistret",
   POP = "alla anmälda fall.",

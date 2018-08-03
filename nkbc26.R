@@ -1,7 +1,5 @@
 NAME <- "nkbc26"
 
-# Sentinel node operation ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Sentinel node operation",
   POP = "invasiva fall utan spridning till lymfkörtlar (klinisk diagnos) eller fjärrmetastaser vid diagnos.",

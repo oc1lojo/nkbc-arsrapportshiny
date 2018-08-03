@@ -1,7 +1,5 @@
 NAME <- "nkbc28"
 
-# Strålbehandling efter bröstbevarande operation ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Strålbehandling efter bröstbevarande operation",
   POP = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos.",

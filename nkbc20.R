@@ -1,7 +1,5 @@
 NAME <- "nkbc20"
 
-# Tid från första behandlingsdiskussion till preoperativ onkologisk behandling (cytostatika, strålning, endokrin) ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Första behandlingsdiskussion till preoperativ onkologisk behandling",
   POP = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",

@@ -1,6 +1,5 @@
 NAME <- "nkbc092"
 
-# Population - Ålder vid diagnos ------------------------------------------------
 GLOBALS <- defGlobals(
   LAB = "Ålder vid diagnos",
   SHORTLAB = "Ålder",

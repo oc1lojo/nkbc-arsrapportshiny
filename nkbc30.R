@@ -1,7 +1,5 @@
 NAME <- "nkbc30"
 
-# 5 års överlevnad ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Observerad 5 års överlevnad",
   POP = "alla anmälda fall.",

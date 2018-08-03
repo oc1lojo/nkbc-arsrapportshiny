@@ -1,6 +1,5 @@
 NAME <- "nkbc093"
 
-# Population - Invasivitet ------------------------------------------------
 GLOBALS <- defGlobals(
   LAB = "Invasivitet vid diagnos",
   SHORTLAB = "Invasivitet",

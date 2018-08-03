@@ -1,6 +1,5 @@
 NAME <- "nkbc096"
 
-# Population - Metastaser vid diagnos ------------------------------------------------
 GLOBALS <- defGlobals(
   LAB = "Fjärrmetastaser vid diagnos",
   SHORTLAB = "Fjärrmetastaser",

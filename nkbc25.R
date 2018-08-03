@@ -1,7 +1,5 @@
 NAME <- "nkbc25"
 
-# Patienten ingår i postoperativ studie ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Patienten ingår i postoperativ studie",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",

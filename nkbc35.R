@@ -1,7 +1,5 @@
 NAME <- "nkbc35"
 
-# Cytostatikabehandling ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Cytostatikabehandling",
   POP = "opererade, invasiva fall utan fjärrmetastaser vid diagnos.",

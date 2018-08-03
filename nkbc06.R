@@ -1,7 +1,5 @@
 NAME <- "nkbc06"
 
-# Fastställd diagnos innan operation ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Fastställd diagnos innan operation",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",

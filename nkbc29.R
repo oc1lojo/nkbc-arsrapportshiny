@@ -1,7 +1,5 @@
 NAME <- "nkbc29"
 
-# Strålbehandling efter mastektomi ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Strålbehandling efter mastektomi",
   POP = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos.",

@@ -1,7 +1,5 @@
 NAME <- "nkbc24"
 
-# Patienten ingår i preoperativ studie ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Patienten ingår i preoperativ studie",
   POP = "fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",

@@ -1,7 +1,5 @@
 NAME <- "nkbc11"
 
-# Bröstbevarande operation ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Bröstbevarande operation",
   POP = "primärt opererade fall med invasiv cancer <=30 mm eller ej invasiv cancer <=20 mm utan fjärrmetastaser vid diagnos.",

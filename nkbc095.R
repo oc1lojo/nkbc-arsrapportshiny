@@ -1,6 +1,5 @@
 NAME <- "nkbc095"
 
-# Population - Spridning till lymfkörtlarna (klinisk) ------------------------------------------------
 GLOBALS <- defGlobals(
   LAB = "Spridning till lymfkörtlarna (klinisk) vid diagnos",
   SHORTLAB = "Spridning till lymfkörtlarna",

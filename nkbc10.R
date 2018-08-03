@@ -1,6 +1,5 @@
 NAME <- "nkbc10"
 
-# Fullständig patologirapport (Grad, ER, PR, HER2, Ki67) ------------------------------------------------
 GLOBALS <- defGlobals(
   LAB = "Fullständig patologirapport (Grad, ER, PR, HER2, Ki67)",
   POP = "primärt opererade fall med invasiv cancer utan fjärrmetastaser vid diagnos.",

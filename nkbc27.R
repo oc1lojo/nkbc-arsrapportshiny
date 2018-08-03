@@ -1,7 +1,5 @@
 NAME <- "nkbc27"
 
-# Postoperativ cytostatikabehandling ------------------------------------------------
-
 GLOBALS <- defGlobals(
   LAB = "Postoperativ cytostatikabehandling",
   POP = "primärt opererade östrogenreceptornegativa invasiva fall med tumörstorlek > 10mm eller spridning till lymfkörtlar utan fjärrmetastaser vid diagnos.",
