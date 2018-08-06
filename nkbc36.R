@@ -1,15 +1,4 @@
-######################################################
-# Project: Årsrapport
 NAME <- "nkbc36"
-# Created by: Lina Benson 
-# Created date: 2018-05-31
-# Software: R x64 v 3.3.3
-# Status: Final
-# Updated: se git
-######################################################
-
-
-# Typ av kirurgi ------------------------------------------------
 
 GLOBALS <- defGlobals(LAB = "Typ av kirurgi",
                       POP = "opererade fall utan fjärrmetastaser vid diagnos.",
@@ -37,7 +26,6 @@ dftemp <- dftemp %>%
     !is.na(region)
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
-
 
 link <- rccShiny(
   data = dftemp,
