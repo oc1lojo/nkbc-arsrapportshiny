@@ -1,8 +1,8 @@
-# Kod för interaktiva rapporter från Nationellt kvalitetsregister för bröstcancer
+# Kod för interaktiva rapporter från nationellt kvalitetsregister för bröstcancer
 
 ## Syfte
 
-Att skapa webbapplikationer med paketet [rccShiny](https://bitbucket.org/cancercentrum/rccshiny) till interaktiva rapporter från Nationellt kvalitetsregister för bröstcancer (NKBC),  http://statistik.incanet.se/brostcancer/.
+Att skapa webbapplikationer med paketet [rccShiny](https://bitbucket.org/cancercentrum/rccshiny) till interaktiva rapporter från nationellt kvalitetsregister för bröstcancer (NKBC),  http://statistik.incanet.se/brostcancer/.
 
 ## Begränsningar
 
