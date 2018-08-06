@@ -1,20 +1,24 @@
 NAME <- "nkbc36"
 
-GLOBALS <- defGlobals(LAB = "Typ av kirurgi",
-                      POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-                      SJHKODUSE <- "op_inr_sjhkod"
-                      )
+GLOBALS <- defGlobals(
+  LAB = "Typ av kirurgi",
+  POP = "opererade fall utan fjärrmetastaser vid diagnos.",
+  SJHKODUSE <- "op_inr_sjhkod"
+)
 
 dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
-    outcome = factor(op_kir_brost_Värde, 
-                     levels = c(1, 2, 3, 4), 
-                     labels = c("Ej bröstoperation",
-                                "Mastektomi", 
-                                "Partiell mastektomi", 
-                                "Subkutan mastektomi"))
+    outcome = factor(op_kir_brost_Värde,
+      levels = c(1, 2, 3, 4),
+      labels = c(
+        "Ej bröstoperation",
+        "Mastektomi",
+        "Partiell mastektomi",
+        "Subkutan mastektomi"
+      )
+    )
   ) %>%
   filter(
     # Endast opererade
@@ -56,4 +60,4 @@ link <- rccShiny(
 )
 
 cat(link)
-#runApp(paste0("Output/apps/sv/",NAME))
+# runApp(paste0("Output/apps/sv/",NAME))
