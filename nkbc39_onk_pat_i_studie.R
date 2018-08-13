@@ -16,7 +16,10 @@ dftemp <- dftemp %>%
     # Beräkna indikator
     outcome = ifelse(
       prim_op %in% 2, 
-      as.logical(pmax(as.numeric(pre_beh_studie), as.numeric(post_beh_studie), na.rm = TRUE)), # jfr nkbc35
+      case_when(
+        pre_beh_studie | post_beh_studie ~ TRUE,
+        !pre_beh_studie | !post_beh_studie ~ FALSE
+      ),
       post_beh_studie
     )
   ) %>%
