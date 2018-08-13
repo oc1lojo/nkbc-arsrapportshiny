@@ -11,17 +11,15 @@ dftemp <- addSjhData(dfmain)
 dftemp <- dftemp %>%
   mutate(
     # Hantera missing
+    a_beh_studie = as.logical(ifelse(a_beh_studie_Värde %in% c(0, 1), a_beh_studie_Värde, NA)),
     pre_beh_studie = as.logical(ifelse(pre_beh_studie_Värde %in% c(0, 1), pre_beh_studie_Värde, NA)),
     post_beh_studie = as.logical(ifelse(post_beh_studie_Värde %in% c(0, 1), post_beh_studie_Värde, NA)),
     # Beräkna indikator
-    outcome = ifelse(
-      prim_op %in% 2, 
+    outcome =
       case_when(
-        pre_beh_studie | post_beh_studie ~ TRUE,
-        !pre_beh_studie | !post_beh_studie ~ FALSE
-      ),
-      post_beh_studie
-    )
+        a_beh_studie | pre_beh_studie | post_beh_studie ~ TRUE,
+        !a_beh_studie | !pre_beh_studie | !post_beh_studie ~ FALSE
+      )
   ) %>%
   filter(
     # Reg av given onkologisk behandling
