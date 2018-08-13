@@ -13,13 +13,11 @@ dftemp <- dftemp %>%
     # Hantera missing
     pre_beh_studie = as.logical(ifelse(pre_beh_studie_Värde %in% c(0, 1), pre_beh_studie_Värde, NA)),
     post_beh_studie = as.logical(ifelse(post_beh_studie_Värde %in% c(0, 1), post_beh_studie_Värde, NA)),
-    # Beräkna
+    # Beräkna indikator
     outcome = ifelse(
-      prim_op == 1, post_beh_studie, 
-      ifelse(
-        !is.na(pre_inr_dat) & !is.na(post_inr_dat), pre_beh_studie | post_beh_studie, 
-        NA
-      )
+      prim_op %in% 2, 
+      as.logical(pmax(as.numeric(pre_beh_studie), as.numeric(post_beh_studie), na.rm = TRUE)), # jfr nkbc35
+      post_beh_studie
     )
   ) %>%
   filter(
