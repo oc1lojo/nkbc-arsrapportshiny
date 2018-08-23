@@ -49,8 +49,11 @@ link <- rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
-      "Här behövs det text."
+    paste(
+      "Preoperativ (neoadjuvant) onkologisk behandling är aktuell när reduktion av primärtumören är aktuell inför kirurgi.", 
+      "Preoperativ onkologisk behandling möjliggör även en utvärdering av behandlingseffekten.",
+      "För ett antal patienter med icke optimal behandlingseffekt av den preoperativ onkologisk behandlingen kan det bli aktuellt även med postoperativ cytostatikabehandling.",
+      "Biologisk subtyp påverkar valet av primär behandling (operation eller preoperativ onkologisk behandling)."
     ),
     paste0(
       "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation. 
