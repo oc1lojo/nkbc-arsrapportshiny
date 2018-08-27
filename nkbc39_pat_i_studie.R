@@ -3,7 +3,7 @@ NAME <- "nkbc39"
 GLOBALS <- defGlobals(
   LAB = "Patienten ingår i studie",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "post_inr_sjhkod"
+  SJHKODUSE = "post_inr_sjhkod"
 )
 
 dftemp <- addSjhData(dfmain)
