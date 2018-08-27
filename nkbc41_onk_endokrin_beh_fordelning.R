@@ -1,7 +1,7 @@
-NAME <- "nkbc31test2"
+NAME <- "nkbc41"
 
 GLOBALS <- defGlobals(
-  LAB = "Endokrinbehandling",
+  LAB = "Endokrin behandling, fördelning",
   POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
   SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
   SJHKODUSE <- "d_onk_sjhkod"
@@ -11,9 +11,6 @@ dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
-    # Går på det som finns, pre eller postop. Om det ena saknas antas samma som finns för det andra.
-    # outcome = as.logical(pmax(post_endo_Värde, pre_endo_Värde, na.rm = TRUE)),
-
     # Pre eller postoperativ
     outcome = factor(
       case_when(
@@ -68,9 +65,7 @@ link <- rccShiny(
       descTarg()
     ),
     paste0(
-      "Både preoperativ och postoperativ endokrinbehandling är medtaget i beräkningen.
-      <p></p>
-      Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak pga biverkningar.
+      "Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak pga biverkningar.
       <p></p>",
       onkRed,
       "<p></p>",
