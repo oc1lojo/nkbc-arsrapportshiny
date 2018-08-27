@@ -1,4 +1,4 @@
-NAME <- "nkbc37"
+NAME <- "nkbc40"
 
 GLOBALS <- defGlobals(
   LAB = "Typ av primär behandling",
