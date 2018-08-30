@@ -9,4 +9,4 @@ Description:
 URL: https://bitbucket.org/cancercentrum/nkbc_arsrapportshiny
 Depends:
     R (>= 3.3.3)
-Encoding: UTF:-8
+Encoding: UTF-8
