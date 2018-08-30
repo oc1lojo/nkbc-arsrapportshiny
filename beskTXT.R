@@ -1,6 +1,6 @@
 MisstCa <- "Datum för välgrundad misstanke om cancer tillkom som variabel 2016 och innan detta har datum för 1:a kontakt använts."
 
-onkRed <- paste0("Uppgifter som rör given onkologisk behandling redovisas enbart tom ", YEAR - 1, " pga eftersläpning i rapporteringen.")
+onkRed <- paste0("Uppgifter som rör given onkologisk behandling redovisas enbart t.o.m. ", YEAR - 1, " p.g.a. eftersläpning i rapporteringen.")
 
 ettFallBrost <- "Ett fall per bröst kan rapporterats till det nationella kvalitetsregistret för bröstcancer. 
 Det innebär att samma person kan finnas med i statistiken upp till två gånger."
