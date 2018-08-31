@@ -3,7 +3,7 @@ NAME <- "nkbc29"
 GLOBALS <- defGlobals(
   LAB = "Strålbehandling efter mastektomi",
   POP = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "post_inr_sjhkod",
+  SJHKODUSE = "post_inr_sjhkod",
   TARGET = c(90, 95)
 )
 

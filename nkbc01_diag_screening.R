@@ -3,7 +3,7 @@ NAME <- "nkbc01"
 GLOBALS <- defGlobals(
   LAB = "Screeningupptäckt bröstcancer",
   POP = "kvinnor i åldrarna 40-74 år vid diagnos.",
-  SJHKODUSE <- "a_inr_sjhkod",
+  SJHKODUSE = "a_inr_sjhkod",
   TARGET = c(60, 70)
 )
 
@@ -41,8 +41,8 @@ link <- rccShiny(
       descTarg()
     ),
     paste0(
-      "Definitionen av \"screeningupptäckt fall\" kan enligt erfarenhet tolkas olika vilket kan påverka siffrorna. 
-      Enligt kvalitetsregistret avses enbart de fall som diagnostiserats i samband med en kallelse till den landstingsorganiserade screeningmammografin. 
+      "Definitionen av \"screeningupptäckt fall\" kan enligt erfarenhet tolkas olika vilket kan påverka siffrorna.
+      Enligt kvalitetsregistret avses enbart de fall som diagnostiserats i samband med en kallelse till den landstingsorganiserade screeningmammografin.
       <p></p>
       Det finns en osäkerhet avseende andel screeningupptäckta fall då det på vissa orter bara finns en mammografienhet som både utför screening och klinisk mammografi.
       <p></p>",

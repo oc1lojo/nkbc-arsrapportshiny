@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Täckningsgrad för rapportering av preoperativ onkologisk behandling",
   POP = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
   SHORTPOP = "fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
-  SJHKODUSE <- "d_onkpreans_sjhkod",
+  SJHKODUSE = "d_onkpreans_sjhkod",
   TARGET = c(70, 85)
 )
 

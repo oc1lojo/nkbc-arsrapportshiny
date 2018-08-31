@@ -3,7 +3,7 @@ NAME <- "nkbc22"
 GLOBALS <- defGlobals(
   LAB = "Operation till cytostatikabehandling",
   POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "post_inr_sjhkod",
+  SJHKODUSE = "post_inr_sjhkod",
   TARGET = c(75, 90)
 )
 
@@ -48,7 +48,7 @@ link <- rccShiny(
       descTarg()
     ),
     paste0(
-      "Operationsdatum är datum för första operation, det innebär att tiden från sista operation till start av cytostatikabehandling 
+      "Operationsdatum är datum för första operation, det innebär att tiden från sista operation till start av cytostatikabehandling
       kan vara kortare än det som redovisas.
       <p></p>",
       onkRed,

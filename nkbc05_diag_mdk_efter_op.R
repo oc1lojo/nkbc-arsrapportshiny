@@ -3,7 +3,7 @@ NAME <- "nkbc05"
 GLOBALS <- defGlobals(
   LAB = "Multidisciplinär konferens efter operation",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "op_inr_sjhkod",
+  SJHKODUSE = "op_inr_sjhkod",
   TARGET = c(90, 99)
 )
 

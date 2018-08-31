@@ -3,7 +3,7 @@ NAME <- "nkbc40"
 GLOBALS <- defGlobals(
   LAB = "Typ av primär behandling",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "op_inr_sjhkod"
+  SJHKODUSE = "op_inr_sjhkod"
 )
 
 dftemp <- addSjhData(dfmain)
@@ -56,7 +56,7 @@ link <- rccShiny(
       "Biologisk subtyp påverkar valet av preoperativ onkologisk behandling."
     ),
     paste0(
-      "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation. 
+      "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation.
       <p></p>",
       descTolk
     ),

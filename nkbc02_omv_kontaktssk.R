@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Patienten har erbjudits, i journalen dokumenterad, kontaktsjuksköterska",
   POP = "alla anmälda fall.",
   SHORTLAB = "Kontaktsjuksköterska",
-  SJHKODUSE <- "a_inr_sjhkod",
+  SJHKODUSE = "a_inr_sjhkod",
   TARGET = c(80, 95)
 )
 

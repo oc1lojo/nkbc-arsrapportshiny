@@ -3,7 +3,7 @@ NAME <- "nkbc30"
 GLOBALS <- defGlobals(
   LAB = "Observerad 5 års överlevnad",
   POP = "alla anmälda fall.",
-  SJHKODUSE <- "a_inr_sjhkod",
+  SJHKODUSE = "a_inr_sjhkod",
   TARGET = c(88)
 )
 

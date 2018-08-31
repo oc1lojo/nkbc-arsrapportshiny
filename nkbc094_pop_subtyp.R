@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Biologisk subtyp vid diagnos",
   SHORTLAB = "Biologisk subtyp",
   POP = "invasiva fall.",
-  SJHKODUSE <- "a_inr_sjhkod"
+  SJHKODUSE = "a_inr_sjhkod"
 )
 
 dftemp <- addSjhData(dfmain)
