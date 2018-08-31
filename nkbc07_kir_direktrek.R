@@ -13,7 +13,7 @@ dftemp <- addSjhData(dfmain)
 dftemp <- dftemp %>%
   mutate(
     # Hantera missing
-    outcome = as.logical(ifelse(op_kir_dirrek_Värde %in% c(0, 1), op_kir_dirrek_Värde, NA))
+    outcome = as.logical(ifelse(op_kir_onkoplastik_Värde %in% c(0, 1), op_kir_onkoplastik_Värde, NA))
   ) %>%
   filter(
     # Endast mastektomi och subkutan mastektomi

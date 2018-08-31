@@ -52,7 +52,7 @@ addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
 # Läs in data ------------------------------------------------------------------
 
 # Rottabell
-load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-05-02/nkbc_nat_id 2018-05-02 08-35-37.zip", exdir = tempdir()))
+load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-08-31/nkbc_nat_id 2018-08-31 09-22-09.zip", exdir = tempdir()))
 
 # Läs på namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
@@ -202,7 +202,7 @@ sjukhuskoder <- sjukhuskoder %>%
 # Skapa shiny-applikationer ----------------------------------------------------
 
 # Täckningsgrad
-source("nkbc33_tackning_mot_cancerreg.R", encoding = "utf8")
+# source("nkbc33_tackning_mot_cancerreg.R", encoding = "utf8")
 source("nkbc13_tackning_for_preop_beh.R", encoding = "utf8")
 source("nkbc14_tackning_for_postop_beh.R", encoding = "utf8")
 
