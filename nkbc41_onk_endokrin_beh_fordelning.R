@@ -1,7 +1,7 @@
 NAME <- "nkbc41"
 
 GLOBALS <- defGlobals(
-  LAB = "Endokrin behandling, fördelning",
+  LAB = "Endokrin behandling – fördelning",
   POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
   SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
   SJHKODUSE <- "d_onk_sjhkod"
@@ -61,7 +61,7 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste0(
-      "Endokrinbehandling bör erbjudas till alla patienter med östrogenreceptorpositiv (ER+) bröstcancer. I de fall där samsjuklighet föreligger får nyttan med endokrin behandling avvägas med hänsyn till övriga medicinska faktorer.",
+      "Den aktuella tabellen presenterar andelen fall som fått preoperativ respektive postoperativ endokrin behandling eller bägge.",
       descTarg()
     ),
     paste0(
