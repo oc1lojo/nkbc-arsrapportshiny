@@ -52,13 +52,13 @@ addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
 # Läs in data ------------------------------------------------------------------
 
 # Rottabell
-load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-05-02/nkbc_nat_id 2018-05-02 08-35-37.zip", exdir = tempdir()))
+load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-08-31/nkbc_nat_id 2018-08-31 09-22-09.zip", exdir = tempdir()))
 
 # Läs på namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
 
 # Läs in data för täckningsgrad mot cancerregistret
-tackning_tbl <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.1/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
+tackning_tbl <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.2/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
 
 # Bearbeta data ----------------------------------------------------------------
 
