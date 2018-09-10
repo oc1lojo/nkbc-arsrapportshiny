@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Välgrundad misstanke om cancer till operation",
   POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
   SJHKODUSE = "op_inr_sjhkod",
-  TARGET = c(75, 90)
+  TARGET = c(80)
 )
 
 dftemp <- addSjhData(dfmain)
