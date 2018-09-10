@@ -56,5 +56,5 @@ link <- rccShiny(
   )
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))
