@@ -47,7 +47,10 @@ link <- rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt. Detta gäller alla typer av studier (t.ex. kliniska, omvårdnad, fysioterapi).",
+    paste(
+      "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt.", 
+      "Indikatorn gäller alla typer av studier (t.ex. kliniska studier, omvårdnadsstudier, fysioterapi-studier).", 
+      "Indikatorn infördes 2017 och bör tolkas med försiktighet (regionala skillnader och underrapportering)."),
     paste0(
       onkRed,
       "<p></p>",
