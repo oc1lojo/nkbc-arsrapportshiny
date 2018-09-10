@@ -3,7 +3,7 @@ NAME <- "nkbc40"
 GLOBALS <- defGlobals(
   LAB = "Typ av primär behandling",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "op_inr_sjhkod"
+  SJHKODUSE = "op_inr_sjhkod"
 )
 
 dftemp <- addSjhData(dfmain)
@@ -11,7 +11,7 @@ dftemp <- addSjhData(dfmain)
 dftemp <- dftemp %>%
   mutate(
     # Prim op eller preop onk beh
-    outcome = factor(prim_op,
+    outcome = factor(prim_beh,
       levels = c(1, 2),
       labels = c(
         "Primär operation",
@@ -50,11 +50,11 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste(
-      "Preoperativ (neoadjuvant) onkologisk behandling är aktuellt när reduktion av primärtumören önskas inför kirurgi och/eller utvärdering av behandlingseffekten med tumören kvar är en fördel.", 
+      "Preoperativ (neoadjuvant) onkologisk behandling är aktuellt när reduktion av primärtumören önskas inför kirurgi och/eller utvärdering av behandlingseffekten med tumören kvar är en fördel.",
       "Tumörstorlek, spridning till lymfkörtlarna liksom biologisk subtyp påverkar val av preoperativ behandling eller ej, liksom typ av preoperativ behandling."
-    ),    
+    ),
     paste0(
-      "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation. 
+      "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation.
       <p></p>",
       descTolk
     ),
@@ -76,5 +76,5 @@ link <- rccShiny(
   )
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Individuell vårdplan (Min Vårdplan) har upprättats i samråd med patienten",
   POP = "alla anmälda fall.",
   SHORTLAB = "Min vårdplan",
-  SJHKODUSE <- "a_inr_sjhkod",
+  SJHKODUSE = "a_inr_sjhkod",
   TARGET = c(80, 95)
 )
 
@@ -52,5 +52,5 @@ link <- rccShiny(
   targetValues = GLOBALS$TARGET
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

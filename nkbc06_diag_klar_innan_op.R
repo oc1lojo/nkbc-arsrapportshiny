@@ -3,7 +3,7 @@ NAME <- "nkbc06"
 GLOBALS <- defGlobals(
   LAB = "Fastställd diagnos innan operation",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "a_inr_sjhkod",
+  SJHKODUSE = "a_inr_sjhkod",
   TARGET = c(80, 90)
 )
 
@@ -58,5 +58,5 @@ link <- rccShiny(
   targetValues = GLOBALS$TARGET
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

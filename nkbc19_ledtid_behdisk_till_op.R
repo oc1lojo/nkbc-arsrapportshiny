@@ -3,7 +3,7 @@ NAME <- "nkbc19"
 GLOBALS <- defGlobals(
   LAB = "Första behandlingsdiskussion till operation",
   POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "op_inr_sjhkod",
+  SJHKODUSE = "op_inr_sjhkod",
   TARGET = c(75, 90)
 )
 
@@ -20,7 +20,7 @@ dftemp <- dftemp %>%
     !is.na(op_kir_dat),
 
     # Endast primär opereration (planerad om utförd ej finns)
-    prim_op == 1,
+    prim_beh == 1,
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
@@ -59,5 +59,5 @@ link <- rccShiny(
   targetValues = GLOBALS$TARGET
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

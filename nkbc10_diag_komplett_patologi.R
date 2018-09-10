@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Fullständig patologirapport (Grad, ER, PR, HER2, Ki67)",
   POP = "primärt opererade fall med invasiv cancer utan fjärrmetastaser vid diagnos.",
   SHORTLAB = "Fullständig patologirapport",
-  SJHKODUSE <- "op_inr_sjhkod",
+  SJHKODUSE = "op_inr_sjhkod",
   TARGET = c(95, 98)
 )
 
@@ -26,7 +26,7 @@ dftemp <- dftemp %>%
     !is.na(op_kir_dat),
 
     # Endast primär opereration (planerad om utförd ej finns)
-    prim_op == 1,
+    prim_beh == 1,
 
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
@@ -67,5 +67,5 @@ link <- rccShiny(
   targetValues = GLOBALS$TARGET
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

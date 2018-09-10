@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Invasivitet vid diagnos",
   SHORTLAB = "Invasivitet",
   POP = "alla anmälda fall.",
-  SJHKODUSE <- "a_inr_sjhkod"
+  SJHKODUSE = "a_inr_sjhkod"
 )
 
 dftemp <- addSjhData(dfmain)
@@ -39,5 +39,5 @@ link <- rccShiny(
   )
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

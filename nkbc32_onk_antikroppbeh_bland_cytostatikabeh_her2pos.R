@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Antikroppsbehandling bland cytostatikabehandlade",
   POP = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos.",
   SHORTPOP = "opererade, cytostatikabehandlade HER2+ invasiva fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "d_onk_sjhkod",
+  SJHKODUSE = "d_onk_sjhkod",
   TARGET = c(90, 95)
 )
 
@@ -74,5 +74,5 @@ link <- rccShiny(
   targetValues = GLOBALS$TARGET
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

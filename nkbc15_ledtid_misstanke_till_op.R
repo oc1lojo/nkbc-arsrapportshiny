@@ -23,7 +23,7 @@ dftemp <- dftemp %>%
     !is.na(op_kir_dat),
 
     # Endast primär opereration (planerad om utförd ej finns)
-    prim_op == 1,
+    prim_beh == 1,
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
@@ -42,10 +42,10 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste(
-      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och start av behandling till patienter i rimlig tid.", 
-      "För bröstcancer är tiden från välgrundad misstanke till start av behandling 28 kalenderdagar.", 
-      "Av patienter som utreds för cancer bör 80% ha gjort det inom denna tidsperiod.", 
-      "För ett antal patienter krävs mer avancerade utredningsmetoder för att nå diagnos vilket kan förlänga tiden till behandlingsstart.", 
+      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och start av behandling till patienter i rimlig tid.",
+      "För bröstcancer är tiden från välgrundad misstanke till start av behandling 28 kalenderdagar.",
+      "Av patienter som utreds för cancer bör 80% ha gjort det inom denna tidsperiod.",
+      "För ett antal patienter krävs mer avancerade utredningsmetoder för att nå diagnos vilket kan förlänga tiden till behandlingsstart.",
       "Startpunkten för SVF har tolkats olika av vårdgivare vilket ger upphov till variation varför ledtiden skall tolkas med stor försiktighet",
       descTarg()
     ),
@@ -70,5 +70,5 @@ link <- rccShiny(
   targetValues = GLOBALS$TARGET
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

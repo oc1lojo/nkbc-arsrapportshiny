@@ -3,7 +3,7 @@ NAME <- "nkbc25"
 GLOBALS <- defGlobals(
   LAB = "Patienten ingår i postoperativ studie",
   POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "post_inr_sjhkod"
+  SJHKODUSE = "post_inr_sjhkod"
 )
 
 dftemp <- addSjhData(dfmain)
@@ -59,5 +59,5 @@ link <- rccShiny(
   )
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

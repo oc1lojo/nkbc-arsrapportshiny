@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Bröstbevarande operation",
   POP = "primärt opererade fall med invasiv cancer <=30 mm eller ej invasiv cancer <=20 mm utan fjärrmetastaser vid diagnos.",
   SHORTPOP = "primärt opererade fall med små tumörer utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "op_inr_sjhkod",
+  SJHKODUSE = "op_inr_sjhkod",
   TARGET = c(70, 80)
 )
 
@@ -20,7 +20,7 @@ dftemp <- dftemp %>%
     period >= 2015,
 
     # Endast primär opereration (planerad om utförd ej finns)
-    prim_op == 1,
+    prim_beh == 1,
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
@@ -65,5 +65,5 @@ link <- rccShiny(
   targetValues = GLOBALS$TARGET
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

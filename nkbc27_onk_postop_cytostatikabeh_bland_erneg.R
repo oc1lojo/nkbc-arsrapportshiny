@@ -4,7 +4,7 @@ GLOBALS <- defGlobals(
   LAB = "Postoperativ cytostatikabehandling",
   POP = "primärt opererade östrogenreceptornegativa invasiva fall med tumörstorlek > 10mm eller spridning till lymfkörtlar utan fjärrmetastaser vid diagnos.",
   SHORTPOP = "primärt opererade ER- invasiva fall med större tumörer utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE <- "post_inr_sjhkod",
+  SJHKODUSE = "post_inr_sjhkod",
   TARGET = c(80, 90)
 )
 
@@ -26,7 +26,7 @@ dftemp <- dftemp %>%
 
     # Endast primär opereration (planerad om utfärd ej finns)
     # (pga att info om tumörstorlek och spridning till N behövs)
-    prim_op == 1,
+    prim_beh == 1,
 
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
@@ -58,7 +58,7 @@ link <- rccShiny(
       descTarg()
     ),
     paste0(
-      "Enbart postoperativ cytostatikabehandling är medtaget i beräkningen, vilket innebär att andelen kan bli mindre för de sjukhus där cytostatika i större utsträckning ges preoperativt. 
+      "Enbart postoperativ cytostatikabehandling är medtaget i beräkningen, vilket innebär att andelen kan bli mindre för de sjukhus där cytostatika i större utsträckning ges preoperativt.
       <p></p>
       Tumörstorlek är storlek på den största invasiva tumören, det innebär att det kan finnas multifokala fall där den totala extenten är > 10 mm som inte finns medtagna i urvalet.
       <p></p>
@@ -79,5 +79,5 @@ link <- rccShiny(
   targetValues = GLOBALS$TARGET
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))

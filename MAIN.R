@@ -17,17 +17,17 @@ source("beskTXT.R", encoding = "utf8")
 
 addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
   names(df)[names(df) == SJHKODUSE] <- "sjhkod"
-  
+
   df[, "sjhkod"] <- as.numeric(df[, "sjhkod"])
-  
+
   df <- left_join(df,
-                  sjukhuskoder,
-                  by = c("sjhkod" = "sjukhuskod")
+    sjukhuskoder,
+    by = c("sjhkod" = "sjukhuskod")
   ) %>%
     mutate(
       region = mapvalues(region_sjh_txt,
-                         from = c("Sthlm/Gotland", "Uppsala/Örebro", "Sydöstra", "Syd", "Väst", "Norr"),
-                         to = c(1, 2, 3, 4, 5, 6)
+        from = c("Sthlm/Gotland", "Uppsala/Örebro", "Sydöstra", "Syd", "Väst", "Norr"),
+        to = c(1, 2, 3, 4, 5, 6)
       ),
       region = ifelse(is.na(region), region_lkf, region),
       landsting = substr(sjhkod, 1, 2),
@@ -83,12 +83,12 @@ dfmain <- df %>%
       to = c(1, 2, 3, 4, 5, 6)
     ),
 
-    # Derivering av primär operation
-    prim_op = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
+    # Derivering av primär behandling
+    prim_beh = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
 
     # Derivering av invasiv cancer
-    invasiv = ifelse(prim_op == 1, op_pad_invasiv_Värde,
-      ifelse(prim_op %in% c(2, 3) | is.na(prim_op), a_pad_invasiv_Värde,
+    invasiv = ifelse(prim_beh == 1, op_pad_invasiv_Värde,
+      ifelse(prim_beh %in% c(2, 3) | is.na(prim_beh), a_pad_invasiv_Värde,
         NA
       )
     ),
@@ -111,8 +111,8 @@ dfmain <- df %>%
       a_pad_erproc >= 10 | is.na(a_pad_erproc) & a_pad_er_Värde %in% 1 ~ 1
     ),
 
-    er = ifelse(prim_op == 1, er_op,
-      ifelse(prim_op %in% c(2, 3), er_a,
+    er = ifelse(prim_beh == 1, er_op,
+      ifelse(prim_beh %in% c(2, 3), er_a,
         NA
       )
     ),
@@ -128,8 +128,8 @@ dfmain <- df %>%
       a_pad_prproc >= 10 | is.na(a_pad_prproc) & a_pad_pr_Värde %in% 1 ~ 1
     ),
 
-    pr = ifelse(prim_op == 1, pr_op,
-      ifelse(prim_op %in% c(2, 3), pr_a,
+    pr = ifelse(prim_beh == 1, pr_op,
+      ifelse(prim_beh %in% c(2, 3), pr_a,
         NA
       )
     ),
@@ -145,8 +145,8 @@ dfmain <- df %>%
       a_pad_her2_Värde %in% c(1, 2) | a_pad_her2ish_Värde %in% 2 ~ 2
     ),
 
-    her2 = ifelse(prim_op == 1, her2_op,
-      ifelse(prim_op %in% c(2, 3), her2_a,
+    her2 = ifelse(prim_beh == 1, her2_op,
+      ifelse(prim_beh %in% c(2, 3), her2_a,
         NA
       )
     ),

@@ -48,9 +48,10 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste(
-      "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt.", 
-      "Indikatorn gäller alla typer av studier (t.ex. kliniska studier, omvårdnadsstudier, fysioterapi-studier).", 
-      "Indikatorn infördes 2017 och bör tolkas med försiktighet (regionala skillnader och underrapportering)."),
+      "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt.",
+      "Indikatorn gäller alla typer av studier (t.ex. kliniska studier, omvårdnadsstudier, fysioterapi-studier).",
+      "Indikatorn infördes 2017 och bör tolkas med försiktighet (regionala skillnader och underrapportering)."
+    ),
     paste0(
       onkRed,
       "<p></p>",
@@ -70,5 +71,5 @@ link <- rccShiny(
   )
 )
 
-cat(link)
+cat(link, fill = TRUE)
 # runApp(paste0("Output/apps/sv/",NAME))
