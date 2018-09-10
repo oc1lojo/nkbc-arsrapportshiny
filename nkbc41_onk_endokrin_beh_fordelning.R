@@ -1,7 +1,7 @@
 NAME <- "nkbc41"
 
 GLOBALS <- defGlobals(
-  LAB = "Endokrin behandling – fördelning",
+  LAB = "Endokrin behandling, pre- respektive postoperativt",
   POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
   SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
   SJHKODUSE <- "d_onk_sjhkod"
