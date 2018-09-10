@@ -5,7 +5,7 @@ GLOBALS <- defGlobals(
   POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
   SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
   SJHKODUSE = "d_onk_sjhkod",
-  TARGET = c(90, 95)
+  TARGET = c(85, 90)
 )
 
 dftemp <- addSjhData(dfmain)
