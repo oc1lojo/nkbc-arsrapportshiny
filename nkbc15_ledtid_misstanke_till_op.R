@@ -42,10 +42,10 @@ link <- rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste(
-      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och start av behandling till patienter i rimlig tid.", 
-      "För bröstcancer är tiden från välgrundad misstanke till start av behandling 28 kalenderdagar.", 
-      "Av patienter som utreds för cancer bör 80% ha gjort det inom denna tidsperiod.", 
-      "För ett antal patienter krävs mer avancerade utredningsmetoder för att nå diagnos vilket kan förlänga tiden till behandlingsstart.", 
+      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och start av behandling till patienter i rimlig tid.",
+      "För bröstcancer är tiden från välgrundad misstanke till start av behandling 28 kalenderdagar.",
+      "Av patienter som utreds för cancer bör 80% ha gjort det inom denna tidsperiod.",
+      "För ett antal patienter krävs mer avancerade utredningsmetoder för att nå diagnos vilket kan förlänga tiden till behandlingsstart.",
       "Startpunkten för SVF har tolkats olika av vårdgivare vilket ger upphov till variation varför ledtiden skall tolkas med stor försiktighet",
       descTarg()
     ),

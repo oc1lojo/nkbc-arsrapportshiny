@@ -87,9 +87,9 @@ link <- rccShiny(
       "Pre- eller postoperativ cytostatikabehandling rekommenderas i allmänhet vid bröstcancer med spridning till axillens lymfkörtlar, men även utan lymfkörtelengagemang om tumören har svag hormonell känslighet och/eller då det föreligger riskfaktorer."
     ),
     paste0(
-      "Tumörstorlek och spridning till lymfkörtlar är kliniskt diagnostiserat. 
+      "Tumörstorlek och spridning till lymfkörtlar är kliniskt diagnostiserat.
       <p></p>
-      För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation. 
+      För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation.
       <p></p>",
       onkRed,
       "<p></p>",

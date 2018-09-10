@@ -17,17 +17,17 @@ source("beskTXT.R", encoding = "utf8")
 
 addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
   names(df)[names(df) == SJHKODUSE] <- "sjhkod"
-  
+
   df[, "sjhkod"] <- as.numeric(df[, "sjhkod"])
-  
+
   df <- left_join(df,
-                  sjukhuskoder,
-                  by = c("sjhkod" = "sjukhuskod")
+    sjukhuskoder,
+    by = c("sjhkod" = "sjukhuskod")
   ) %>%
     mutate(
       region = mapvalues(region_sjh_txt,
-                         from = c("Sthlm/Gotland", "Uppsala/Örebro", "Sydöstra", "Syd", "Väst", "Norr"),
-                         to = c(1, 2, 3, 4, 5, 6)
+        from = c("Sthlm/Gotland", "Uppsala/Örebro", "Sydöstra", "Syd", "Väst", "Norr"),
+        to = c(1, 2, 3, 4, 5, 6)
       ),
       region = ifelse(is.na(region), region_lkf, region),
       landsting = substr(sjhkod, 1, 2),
