@@ -25,7 +25,7 @@ dftemp <- dftemp %>%
     !is.na(op_kir_dat),
 
     # Endast preoponk behandling (planerad om utförd ej finns)
-    prim_op == 2,
+    prim_beh == 2,
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,

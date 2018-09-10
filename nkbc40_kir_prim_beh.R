@@ -11,7 +11,7 @@ dftemp <- addSjhData(dfmain)
 dftemp <- dftemp %>%
   mutate(
     # Prim op eller preop onk beh
-    outcome = factor(prim_op,
+    outcome = factor(prim_beh,
       levels = c(1, 2),
       labels = c(
         "Primär operation",

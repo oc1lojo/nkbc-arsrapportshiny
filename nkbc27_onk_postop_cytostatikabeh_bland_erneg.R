@@ -26,7 +26,7 @@ dftemp <- dftemp %>%
 
     # Endast primär opereration (planerad om utfärd ej finns)
     # (pga att info om tumörstorlek och spridning till N behövs)
-    prim_op == 1,
+    prim_beh == 1,
 
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",

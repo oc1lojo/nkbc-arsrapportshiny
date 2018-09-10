@@ -26,7 +26,7 @@ dftemp <- dftemp %>%
     !is.na(op_kir_dat),
 
     # Endast primär opereration (planerad om utförd ej finns)
-    prim_op == 1,
+    prim_beh == 1,
 
     # Endast invasiv cancer
     invasiv == "Invasiv cancer",
