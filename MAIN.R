@@ -58,7 +58,7 @@ load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-08-31/nkbc_
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
 
 # Läs in data för täckningsgrad mot cancerregistret
-tackning_tbl <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.1/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
+tackning_tbl <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.2/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
 
 # Bearbeta data ----------------------------------------------------------------
 
@@ -202,7 +202,7 @@ sjukhuskoder <- sjukhuskoder %>%
 # Skapa shiny-applikationer ----------------------------------------------------
 
 # Täckningsgrad
-# source("nkbc33_tackning_mot_cancerreg.R", encoding = "utf8")
+source("nkbc33_tackning_mot_cancerreg.R", encoding = "utf8")
 source("nkbc13_tackning_for_preop_beh.R", encoding = "utf8")
 source("nkbc14_tackning_for_postop_beh.R", encoding = "utf8")
 
