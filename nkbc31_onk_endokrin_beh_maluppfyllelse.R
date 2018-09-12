@@ -5,7 +5,7 @@ GLOBALS <- defGlobals(
   POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
   SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
   SJHKODUSE = "d_onk_sjhkod",
-  TARGET = c(90, 95)
+  TARGET = c(85, 90)
 )
 
 dftemp <- addSjhData(dfmain)
@@ -52,9 +52,9 @@ link <- rccShiny(
       descTarg()
     ),
     paste0(
-      "Både preoperativ och postoperativ endokrinbehandling är medtaget i beräkningen.
+      "Både preoperativ och postoperativ endokrin behandling är medtaget i beräkningen.
       <p></p>
-      Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak pga biverkningar.
+      Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak p.g.a. biverkningar.
       <p></p>",
       onkRed,
       "<p></p>",

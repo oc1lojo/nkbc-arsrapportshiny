@@ -65,7 +65,7 @@ link <- rccShiny(
       descTarg()
     ),
     paste0(
-      "Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak pga biverkningar.
+      "Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak p.g.a. biverkningar.
       <p></p>",
       onkRed,
       "<p></p>",
