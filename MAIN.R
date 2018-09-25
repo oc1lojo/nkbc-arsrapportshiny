@@ -249,8 +249,6 @@ source("nkbc29_onk_stralbeh_efter_mastektomi.R", encoding = "utf8")
 source("nkbc31_onk_endokrin_beh_maluppfyllelse.R", encoding = "utf8")
 source("nkbc41_onk_endokrin_beh_fordelning.R", encoding = "utf8")
 source("nkbc32_onk_antikroppbeh_bland_cytostatikabeh_her2pos.R", encoding = "utf8")
-# source("nkbc24_onk_pat_i_preop_studie.R", encoding = "utf8")
-# source("nkbc25_onk_pat_i_postop_studie.R", encoding = "utf8")
 
 # Studier
 source("nkbc39_pat_i_studie.R", encoding = "utf8")
