@@ -1,12 +1,12 @@
 Title: Interaktiva rapporter från NKBC
-Version: 2017.1
+Version: 2017.2
 Author:
     Lina Enqvist Benson [aut, cre],
     John Lövrot [ctb]
 Description:
     Kod för interaktiva rapporter från Nationellt kvalitetsregister för
     bröstcancer (NKBC)
-URL: https://bitbucket.org/cancercentrum/nkbc_arsrapportshiny
+URL: https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny
 Depends:
     R (>= 3.3.3)
 Encoding: UTF-8
