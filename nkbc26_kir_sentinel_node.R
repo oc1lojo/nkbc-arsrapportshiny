@@ -11,13 +11,13 @@ dftemp <- addSjhData(dfmain)
 dftemp <- dftemp %>%
   mutate(
     outcome = case_when(
-        op_kir_axilltyp_Värde == 1 ~ 1L,
-        op_kir_axilltyp_Värde == 2 ~ 0L,
-        op_kir_axilltyp_Värde == 3 ~ 1L,
-        op_kir_axilltyp_Värde == 4  ~ 0L,
-        op_kir_axilltyp_Värde == 98 ~ NA_integer_,
-        TRUE ~ NA_integer_
-      ),
+      op_kir_axilltyp_Värde == 1 ~ 1L,
+      op_kir_axilltyp_Värde == 2 ~ 0L,
+      op_kir_axilltyp_Värde == 3 ~ 1L,
+      op_kir_axilltyp_Värde == 4 ~ 0L,
+      op_kir_axilltyp_Värde == 98 ~ NA_integer_,
+      TRUE ~ NA_integer_
+    ),
     outcome = as.logical(ifelse(op_kir_axill_Värde %in% 0, 0, outcome))
   ) %>%
   filter(
