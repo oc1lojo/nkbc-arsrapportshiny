@@ -1,5 +1,3 @@
-NAME <- "nkbc33"
-
 GLOBALS <- defGlobals(
   LAB = "Täckningsgrad mot cancerregistret",
   POP = "alla anmälda fall.",
@@ -22,9 +20,9 @@ dftemp <- data.frame(
   )
 )
 
-link <- rccShiny(
+rccShiny(
   data = dftemp,
-  folder = NAME,
+  folder = "nkbc33",
   path = OUTPUTPATH,
   outcomeTitle = GLOBALS$LAB,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
@@ -42,6 +40,3 @@ link <- rccShiny(
   ),
   targetValues = GLOBALS$TARGET
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))

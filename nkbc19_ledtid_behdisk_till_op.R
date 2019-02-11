@@ -1,5 +1,3 @@
-NAME <- "nkbc19"
-
 GLOBALS <- defGlobals(
   LAB = "Första behandlingsdiskussion till operation",
   POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
@@ -29,9 +27,9 @@ dftemp <- dftemp %>%
   ) %>%
   select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
 
-link <- rccShiny(
+rccShiny(
   data = dftemp,
-  folder = NAME,
+  folder = "nkbc19",
   path = OUTPUTPATH,
   outcomeTitle = GLOBALS$LAB,
   folderLinkText = GLOBALS$SHORTLAB,
@@ -58,6 +56,3 @@ link <- rccShiny(
   propWithinValue = 14,
   targetValues = GLOBALS$TARGET
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))
