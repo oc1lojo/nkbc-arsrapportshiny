@@ -51,8 +51,14 @@ addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
 
 # Läs in data ------------------------------------------------------------------
 
-# Rottabell
-load(unzip("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Data/2018-08-31/nkbc_nat_id 2018-08-31 09-22-09.zip", exdir = tempdir()))
+# Ögonblickskopia av NKBC exporterad från INCA
+nkbc_data_dir <- Sys.getenv("NKBC_DATA_DIR")
+load(
+  unzip(
+    file.path(nkbc_data_dir, "2018-08-31", "nkbc_nat_id 2018-08-31 09-22-09.zip"),
+    exdir = tempdir()
+  )
+)
 
 # Läs på namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
