@@ -16,9 +16,8 @@ source("beskTXT.R", encoding = "utf8")
 addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
   names(df)[names(df) == SJHKODUSE] <- "sjhkod"
 
-  df[, "sjhkod"] <- as.numeric(df[, "sjhkod"])
-
   df <- df %>%
+    mutate(sjhkod = as.numeric(sjhkod)) %>%
     left_join(sjukhuskoder, by = c("sjhkod" = "sjukhuskod")) %>%
     mutate(
       region = case_when(
