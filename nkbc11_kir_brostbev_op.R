@@ -18,7 +18,7 @@ dftemp <- dftemp %>%
     period >= 2015,
 
     # Endast primär opereration (planerad om utförd ej finns)
-    prim_beh == 1,
+    d_prim_beh_Värde == 1,
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
@@ -27,12 +27,12 @@ dftemp <- dftemp %>%
     op_kir_brost_Värde %in% c(1, 2, 4),
 
     # Extent <= 30mm (invasiv) resp 20mm (in situ)
-    (max_extent <= 30 & invasiv == "Invasiv cancer" |
-      max_extent <= 20 & invasiv == "Enbart cancer in situ"),
+    (max_extent <= 30 & d_invasiv == "Invasiv cancer" |
+      max_extent <= 20 & d_invasiv == "Enbart cancer in situ"),
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_invasiv)
 
 rccShiny(
   data = dftemp,
@@ -56,7 +56,7 @@ rccShiny(
       label = c("Ålder vid diagnos")
     ),
     list(
-      var = "invasiv",
+      var = "d_invasiv",
       label = c("Invasivitet vid diagnos")
     )
   ),

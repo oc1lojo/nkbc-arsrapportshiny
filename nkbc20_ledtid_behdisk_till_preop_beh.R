@@ -29,14 +29,14 @@ dftemp <- dftemp %>%
     !is.na(op_kir_dat),
 
     # Endast preop onk behandling (planerad om utförd ej finns)
-    prim_beh == 2,
+    d_prim_beh_Värde == 2,
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_invasiv)
 
 rccShiny(
   data = dftemp,
@@ -66,7 +66,7 @@ rccShiny(
       label = c("Ålder vid diagnos")
     ),
     list(
-      var = "invasiv",
+      var = "d_invasiv",
       label = c("Invasivitet vid diagnos")
     )
   ),

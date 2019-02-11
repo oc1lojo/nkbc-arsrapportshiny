@@ -11,7 +11,7 @@ dftemp <- dftemp %>%
   mutate(
     outcome = as.logical(post_rt_Värde),
 
-    pN = cut(op_pad_lglmetant, c(1, 4, 100),
+    d_pn = cut(op_pad_lglmetant, c(1, 4, 100),
       include.lowest = TRUE,
       right = FALSE,
       labels = c("1-3 metastaser", "=> 4 metastaser")
@@ -25,7 +25,7 @@ dftemp <- dftemp %>%
     period <= YEAR - 1,
 
     # Endast invasiv cancer
-    invasiv == "Invasiv cancer",
+    d_invasiv == "Invasiv cancer",
 
     # Endast mastektomi och subkutan mastektomi
     op_kir_brost_Värde %in% c(2, 4),
@@ -38,7 +38,7 @@ dftemp <- dftemp %>%
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv, pN)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_pn)
 
 rccShiny(
   data = dftemp,
@@ -68,7 +68,7 @@ rccShiny(
       label = c("Ålder vid diagnos")
     ),
     list(
-      var = "pN",
+      var = "d_pn",
       label = c("Spridning till lymfkörtlar")
     )
   ),

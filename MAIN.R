@@ -56,85 +56,85 @@ dfmain <- df %>%
     ),
 
     # Derivering av primär behandling
-    prim_beh = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
+    d_prim_beh_Värde = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
 
     # Derivering av invasiv cancer
-    invasiv = ifelse(prim_beh == 1, op_pad_invasiv_Värde,
-      ifelse(prim_beh %in% c(2, 3) | is.na(prim_beh), a_pad_invasiv_Värde,
+    d_invasiv_Värde = ifelse(d_prim_beh_Värde == 1, op_pad_invasiv_Värde,
+      ifelse(d_prim_beh_Värde %in% c(2, 3) | is.na(d_prim_beh_Värde), a_pad_invasiv_Värde,
         NA
       )
     ),
 
-    invasiv = ifelse(invasiv == 98, NA, invasiv), ## added 2017-11-09
-    invasiv = factor(invasiv, c(1, 2, NA),
+    d_invasiv_Värde = ifelse(d_invasiv_Värde == 98, NA, d_invasiv_Värde), ## added 2017-11-09
+    d_invasiv = factor(d_invasiv_Värde, c(1, 2, NA),
       c("Invasiv cancer", "Enbart cancer in situ", "Uppgift saknas"),
       exclude = NULL
     ),
 
     # Biologisk subtyp
     # ER, 1 = pos, 2 = neg
-    er_op = case_when(
+    d_er_op_Värde = case_when(
       op_pad_erproc < 10 | is.na(op_pad_erproc) & op_pad_er_Värde %in% 2 ~ 2,
       op_pad_erproc >= 10 | is.na(op_pad_erproc) & op_pad_er_Värde %in% 1 ~ 1
     ),
 
-    er_a = case_when(
+    d_er_a_Värde = case_when(
       a_pad_erproc < 10 | is.na(a_pad_erproc) & a_pad_er_Värde %in% 2 ~ 2,
       a_pad_erproc >= 10 | is.na(a_pad_erproc) & a_pad_er_Värde %in% 1 ~ 1
     ),
 
-    er = ifelse(prim_beh == 1, er_op,
-      ifelse(prim_beh %in% c(2, 3), er_a,
+    d_er_Värde = ifelse(d_prim_beh_Värde == 1, d_er_op_Värde,
+      ifelse(d_prim_beh_Värde %in% c(2, 3), d_er_a_Värde,
         NA
       )
     ),
 
     # PR, 1 = pos, 2 = neg
-    pr_op = case_when(
+    d_pr_op_Värde = case_when(
       op_pad_prproc < 10 | is.na(op_pad_prproc) & op_pad_pr_Värde %in% 2 ~ 2,
       op_pad_prproc >= 10 | is.na(op_pad_prproc) & op_pad_pr_Värde %in% 1 ~ 1
     ),
 
-    pr_a = case_when(
+    d_pr_a_Värde = case_when(
       a_pad_prproc < 10 | is.na(a_pad_prproc) & a_pad_pr_Värde %in% 2 ~ 2,
       a_pad_prproc >= 10 | is.na(a_pad_prproc) & a_pad_pr_Värde %in% 1 ~ 1
     ),
 
-    pr = ifelse(prim_beh == 1, pr_op,
-      ifelse(prim_beh %in% c(2, 3), pr_a,
+    d_pr_Värde = ifelse(d_prim_beh_Värde == 1, d_pr_op_Värde,
+      ifelse(d_prim_beh_Värde %in% c(2, 3), d_pr_a_Värde,
         NA
       )
     ),
 
     # HER2, 1 = pos, 2 = neg
-    her2_op = case_when(
+    d_her2_op_Värde = case_when(
       op_pad_her2_Värde %in% 3 | op_pad_her2ish_Värde %in% 1 ~ 1,
       op_pad_her2_Värde %in% c(1, 2) | op_pad_her2ish_Värde %in% 2 ~ 2
     ),
 
-    her2_a = case_when(
+    d_her2_a_Värde = case_when(
       a_pad_her2_Värde %in% 3 | a_pad_her2ish_Värde %in% 1 ~ 1,
       a_pad_her2_Värde %in% c(1, 2) | a_pad_her2ish_Värde %in% 2 ~ 2
     ),
 
-    her2 = ifelse(prim_beh == 1, her2_op,
-      ifelse(prim_beh %in% c(2, 3), her2_a,
+    d_her2_Värde = ifelse(d_prim_beh_Värde == 1, d_her2_op_Värde,
+      ifelse(d_prim_beh_Värde %in% c(2, 3), d_her2_a_Värde,
         NA
       )
     ),
 
-    subtyp = factor(case_when(
-      er %in% 2 & pr %in% 2 & her2 %in% 2 ~ 1,
-      is.na(er) | is.na(pr) | is.na(her2) ~ 99,
-      her2 %in% 1 ~ 2,
-      er %in% 1 | pr %in% 1 ~ 3,
+    d_subtyp = factor(case_when(
+      d_er_Värde %in% 2 & d_pr_Värde %in% 2 & d_her2_Värde %in% 2 ~ 1,
+      is.na(d_er_Värde) | is.na(d_pr_Värde) | is.na(d_her2_Värde) ~ 99,
+      d_her2_Värde %in% 1 ~ 2,
+      d_er_Värde %in% 1 | d_pr_Värde %in% 1 ~ 3,
       TRUE ~ 99
     ),
     labels = c("Trippel negativ", "HER2 positiv", "Luminal", "Uppgift saknas")
     ),
 
     # T
-    Tstad = factor(
+    d_tstad = factor(
       case_when(
         a_tnm_tklass_Värde == 0 ~ 1,
         a_tnm_tklass_Värde == 5 ~ 1,
@@ -154,7 +154,7 @@ dfmain <- df %>%
     ),
 
     # N
-    Nstad = factor(
+    d_nstad = factor(
       case_when(
         a_tnm_nklass_Värde == 0 ~ 1,
         a_tnm_nklass_Värde == 10 ~ 2,

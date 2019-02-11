@@ -9,7 +9,7 @@ dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
-    outcome = Nstad
+    outcome = d_nstad
   ) %>%
   filter(
     # Endast invasiv cancer
@@ -19,7 +19,7 @@ dftemp <- dftemp %>%
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder)
 
 rccShiny(
   data = dftemp,

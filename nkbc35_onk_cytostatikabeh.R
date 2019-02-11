@@ -26,8 +26,11 @@ dftemp <- dftemp %>%
     ),
 
     # ER
-    er = ifelse(is.na(er), 99, er),
-    er = factor(er, c(1, 2, 99), c("Positiv", "Negativ", "Uppgift saknas"))
+    d_er = factor(
+      ifelse(is.na(d_er_Värde), 99, d_er_Värde),
+      c(1, 2, 99),
+      c("Positiv", "Negativ", "Uppgift saknas")
+    )
   ) %>%
   filter(
     # Reg av given onkologisk behandling
@@ -40,7 +43,7 @@ dftemp <- dftemp %>%
     !is.na(op_kir_dat),
 
     # Endast invasiv cancer
-    invasiv == "Invasiv cancer",
+    d_invasiv == "Invasiv cancer",
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
@@ -48,8 +51,8 @@ dftemp <- dftemp %>%
     !is.na(region)
   ) %>%
   select(
-    landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv,
-    er, Tstad, Nstad
+    landsting, region, sjukhus, period, outcome, a_pat_alder,
+    d_er, d_tstad, d_nstad
   )
 
 rccShiny(
@@ -81,15 +84,15 @@ rccShiny(
       label = c("Ålder vid diagnos")
     ),
     list(
-      var = "Tstad",
+      var = "d_tstad",
       label = c("Tumörstorlek")
     ),
     list(
-      var = "Nstad",
+      var = "d_nstad",
       label = c("Spridning till lymfkörtlar")
     ),
     list(
-      var = "er",
+      var = "d_er",
       label = c("Östrogenreceptor (ER)")
     )
   )

@@ -22,7 +22,7 @@ dftemp <- dftemp %>%
   ) %>%
   filter(
     # Endast invasiv cancer
-    invasiv == "Invasiv cancer",
+    d_invasiv == "Invasiv cancer",
 
     # Klinisk N0
     a_tnm_nklass_Värde == 0,
@@ -32,7 +32,7 @@ dftemp <- dftemp %>%
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder)
 
 rccShiny(
   data = dftemp,

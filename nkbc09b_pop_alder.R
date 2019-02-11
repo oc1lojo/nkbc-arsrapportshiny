@@ -14,7 +14,7 @@ dftemp <- dftemp %>%
   filter(
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, invasiv)
+  select(landsting, region, sjukhus, period, outcome, d_invasiv)
 
 rccShiny(
   data = dftemp,
@@ -31,7 +31,7 @@ rccShiny(
   ),
   varOther = list(
     list(
-      var = "invasiv",
+      var = "d_invasiv",
       label = c("Invasivitet vid diagnos")
     )
   ),

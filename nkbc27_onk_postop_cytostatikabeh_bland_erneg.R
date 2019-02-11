@@ -24,13 +24,13 @@ dftemp <- dftemp %>%
 
     # Endast primär opereration (planerad om utfärd ej finns)
     # (pga att info om tumörstorlek och spridning till N behövs)
-    prim_beh == 1,
+    d_prim_beh_Värde == 1,
 
     # Endast invasiv cancer
-    invasiv == "Invasiv cancer",
+    d_invasiv == "Invasiv cancer",
 
     # ER-
-    er == 2,
+    d_er_Värde == 2,
 
     # Tumörstorlek > 10 mm eller spridning till lymfkörtlar
     (op_pad_invstl > 10 | op_pad_lglmetant > 0),
@@ -40,7 +40,7 @@ dftemp <- dftemp %>%
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder)
 
 rccShiny(
   data = dftemp,

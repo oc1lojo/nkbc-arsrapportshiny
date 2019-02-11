@@ -9,7 +9,7 @@ dftemp <- addSjhData(dfmain)
 dftemp <- dftemp %>%
   mutate(
     # Prim op eller preop onk beh
-    outcome = factor(prim_beh,
+    outcome = factor(d_prim_beh_Värde,
       levels = c(1, 2),
       labels = c(
         "Primär operation",
@@ -26,7 +26,7 @@ dftemp <- dftemp %>%
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv, Nstad, subtyp)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_nstad, d_subtyp)
 
 rccShiny(
   data = dftemp,
@@ -54,11 +54,11 @@ rccShiny(
       label = c("Ålder vid diagnos")
     ),
     list(
-      var = "subtyp",
+      var = "d_subtyp",
       label = c("Biologisk subtyp")
     ),
     list(
-      var = "Nstad",
+      var = "d_nstad",
       label = c("Spridning till lymfkörtlar")
     )
   )
