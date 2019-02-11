@@ -1,6 +1,5 @@
-# Ladda paket ------------------------------------------------------------------
+# Läs in R-paket ------------------------------------------------------------------
 
-# devtools::install_bitbucket("cancercentrum/rccShiny")
 library(dplyr)
 library(lubridate)
 library(shiny)
