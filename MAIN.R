@@ -5,7 +5,6 @@ library(dplyr)
 library(lubridate)
 library(shiny)
 library(rccShiny)
-library(Hmisc)
 
 # Läs in/Definera "konstanter" och hjälpfunktioner -----------------------------
 
