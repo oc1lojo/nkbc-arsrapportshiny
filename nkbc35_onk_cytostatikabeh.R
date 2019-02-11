@@ -25,41 +25,6 @@ dftemp <- dftemp %>%
       )
     ),
 
-    # T
-    Tstad = factor(
-      case_when(
-        a_tnm_tklass_Värde == 0 ~ 1,
-        a_tnm_tklass_Värde == 5 ~ 1,
-        a_tnm_tklass_Värde == 10 ~ 1,
-        a_tnm_tklass_Värde == 20 ~ 2,
-        a_tnm_tklass_Värde == 30 ~ 2,
-        a_tnm_tklass_Värde == 42 ~ 2,
-        a_tnm_tklass_Värde == 44 ~ 2,
-        a_tnm_tklass_Värde == 45 ~ 2,
-        a_tnm_tklass_Värde == 46 ~ 2,
-        a_tnm_tklass_Värde == 50 ~ 99,
-        is.na(a_tnm_tklass_Värde) ~ 99,
-        TRUE ~ NA_real_
-      ),
-      levels = c(1, 2, 99),
-      labels = c("<=20mm (T0/T1)", ">20mm (T2-T4)", "Uppgift saknas")
-    ),
-
-    # N
-    Nstad = factor(
-      case_when(
-        a_tnm_nklass_Värde == 0 ~ 1,
-        a_tnm_nklass_Värde == 10 ~ 2,
-        a_tnm_nklass_Värde == 20 ~ 2,
-        a_tnm_nklass_Värde == 30 ~ 2,
-        a_tnm_nklass_Värde == 40 ~ 99,
-        is.na(a_tnm_nklass_Värde) ~ 99,
-        TRUE ~ NA_real_
-      ),
-      levels = c(1, 2, 99),
-      labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")
-    ),
-
     # ER
     er = ifelse(is.na(er), 99, er),
     er = factor(er, c(1, 2, 99), c("Positiv", "Negativ", "Uppgift saknas"))

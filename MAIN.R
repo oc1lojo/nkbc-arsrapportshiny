@@ -173,6 +173,41 @@ dfmain <- df %>%
     labels = c("Trippel negativ", "HER2 positiv", "Luminal", "Uppgift saknas")
     ),
 
+    # T
+    Tstad = factor(
+      case_when(
+        a_tnm_tklass_Värde == 0 ~ 1,
+        a_tnm_tklass_Värde == 5 ~ 1,
+        a_tnm_tklass_Värde == 10 ~ 1,
+        a_tnm_tklass_Värde == 20 ~ 2,
+        a_tnm_tklass_Värde == 30 ~ 2,
+        a_tnm_tklass_Värde == 42 ~ 2,
+        a_tnm_tklass_Värde == 44 ~ 2,
+        a_tnm_tklass_Värde == 45 ~ 2,
+        a_tnm_tklass_Värde == 46 ~ 2,
+        a_tnm_tklass_Värde == 50 ~ 99,
+        is.na(a_tnm_tklass_Värde) ~ 99,
+        TRUE ~ NA_real_
+      ),
+      levels = c(1, 2, 99),
+      labels = c("<=20mm (T0/T1)", ">20mm (T2-T4)", "Uppgift saknas")
+    ),
+
+    # N
+    Nstad = factor(
+      case_when(
+        a_tnm_nklass_Värde == 0 ~ 1,
+        a_tnm_nklass_Värde == 10 ~ 2,
+        a_tnm_nklass_Värde == 20 ~ 2,
+        a_tnm_nklass_Värde == 30 ~ 2,
+        a_tnm_nklass_Värde == 40 ~ 99,
+        is.na(a_tnm_nklass_Värde) ~ 99,
+        TRUE ~ NA_real_
+      ),
+      levels = c(1, 2, 99),
+      labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")
+    ),
+
     # fix 1.sjukhus ansvarigt för rapportering av onkologisk behandling/2.onkologiskt sjukhus/3.anmälande sjukhus
     d_onkpostans_sjhkod = coalesce(
       as.numeric(post_inr_sjhkod),
