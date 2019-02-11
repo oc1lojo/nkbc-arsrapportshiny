@@ -19,9 +19,14 @@ dftemp <- dftemp %>%
 
     # N
     Nstad = factor(
-      mapvalues(a_tnm_nklass_Värde,
-        from = c(0, 10, 20, 30, 40, NA),
-        to = c(1, 2, 2, 2, 99, 99)
+      case_when(
+        a_tnm_nklass_Värde == 0 ~ 1,
+        a_tnm_nklass_Värde == 10 ~ 2,
+        a_tnm_nklass_Värde == 20 ~ 2,
+        a_tnm_nklass_Värde == 30 ~ 2,
+        a_tnm_nklass_Värde == 40 ~ 99,
+        is.na(a_tnm_nklass_Värde) ~ 99,
+        TRUE ~ NA_real_
       ),
       levels = c(1, 2, 99),
       labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")

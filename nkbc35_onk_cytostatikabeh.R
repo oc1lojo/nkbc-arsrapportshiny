@@ -27,9 +27,19 @@ dftemp <- dftemp %>%
 
     # T
     Tstad = factor(
-      mapvalues(a_tnm_tklass_Värde,
-        from = c(0, 5, 10, 20, 30, 42, 44, 45, 46, 50, NA),
-        to = c(1, 1, 1, 2, 2, 2, 2, 2, 2, 99, 99)
+      case_when(
+        a_tnm_tklass_Värde == 0 ~ 1,
+        a_tnm_tklass_Värde == 5 ~ 1,
+        a_tnm_tklass_Värde == 10 ~ 1,
+        a_tnm_tklass_Värde == 20 ~ 2,
+        a_tnm_tklass_Värde == 30 ~ 2,
+        a_tnm_tklass_Värde == 42 ~ 2,
+        a_tnm_tklass_Värde == 44 ~ 2,
+        a_tnm_tklass_Värde == 45 ~ 2,
+        a_tnm_tklass_Värde == 46 ~ 2,
+        a_tnm_tklass_Värde == 50 ~ 99,
+        is.na(a_tnm_tklass_Värde) ~ 99,
+        TRUE ~ NA_real_
       ),
       levels = c(1, 2, 99),
       labels = c("<=20mm (T0/T1)", ">20mm (T2-T4)", "Uppgift saknas")
@@ -37,9 +47,14 @@ dftemp <- dftemp %>%
 
     # N
     Nstad = factor(
-      mapvalues(a_tnm_nklass_Värde,
-        from = c(0, 10, 20, 30, 40, NA),
-        to = c(1, 2, 2, 2, 99, 99)
+      case_when(
+        a_tnm_nklass_Värde == 0 ~ 1,
+        a_tnm_nklass_Värde == 10 ~ 2,
+        a_tnm_nklass_Värde == 20 ~ 2,
+        a_tnm_nklass_Värde == 30 ~ 2,
+        a_tnm_nklass_Värde == 40 ~ 99,
+        is.na(a_tnm_nklass_Värde) ~ 99,
+        TRUE ~ NA_real_
       ),
       levels = c(1, 2, 99),
       labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")

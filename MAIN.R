@@ -1,7 +1,6 @@
 # Ladda paket ------------------------------------------------------------------
 
 # devtools::install_bitbucket("cancercentrum/rccShiny")
-library(plyr)
 library(dplyr)
 library(lubridate)
 library(shiny)
@@ -25,10 +24,15 @@ addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
     by = c("sjhkod" = "sjukhuskod")
   ) %>%
     mutate(
-      region = mapvalues(region_sjh_txt,
-        from = c("Sthlm/Gotland", "Uppsala/Örebro", "Sydöstra", "Syd", "Väst", "Norr"),
-        to = c(1, 2, 3, 4, 5, 6)
-      ) %>% as.integer(),
+      region = case_when(
+        region_sjh_txt == "Sthlm/Gotland" ~ 1L,
+        region_sjh_txt == "Uppsala/Örebro" ~ 2L,
+        region_sjh_txt == "Sydöstra" ~ 3L,
+        region_sjh_txt == "Syd" ~ 4L,
+        region_sjh_txt == "Väst" ~ 5L,
+        region_sjh_txt == "Norr" ~ 6L,
+        TRUE ~ NA_integer_
+      ),
       region = ifelse(is.na(region), region_lkf, region),
       landsting = substr(sjhkod, 1, 2) %>% as.integer(),
       # Fulfix Bröstmottagningen, Christinakliniken Sh & Stockholms bröstklinik så hamnar i Stockholm
@@ -81,13 +85,15 @@ dfmain <- df %>%
     # ),
 
     # lkf region för att imputera om region för sjukhus saknas
-    region_lkf = mapvalues(REGION_NAMN,
-      from = c(
-        "Region Sthlm/Gotland", "Region Uppsala/Örebro", "Region Sydöstra",
-        "Region Syd", "Region Väst", "Region Norr"
-      ),
-      to = c(1, 2, 3, 4, 5, 6)
-    ) %>% as.integer(),
+    region_lkf = case_when(
+      REGION_NAMN == "Region Sthlm/Gotland" ~ 1L,
+      REGION_NAMN == "Region Uppsala/Örebro" ~ 2L,
+      REGION_NAMN == "Region Sydöstra" ~ 3L,
+      REGION_NAMN == "Region Syd" ~ 4L,
+      REGION_NAMN == "Region Väst" ~ 5L,
+      REGION_NAMN == "Region Norr" ~ 6L,
+      TRUE ~ NA_integer_
+    ),
 
     # Derivering av primär behandling
     prim_beh = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
