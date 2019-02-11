@@ -1,6 +1,6 @@
 GLOBALS <- defGlobals(
-  LAB = "Kön vid diagnos",
-  SHORTLAB = "Kön",
+  LAB = "Ålder vid diagnos",
+  SHORTLAB = "Ålder",
   POP = "alla anmälda fall.",
   SJHKODUSE = "a_inr_sjhkod"
 )
@@ -9,37 +9,32 @@ dftemp <- addSjhData(dfmain)
 
 dftemp <- dftemp %>%
   mutate(
-    outcome = factor(KON_VALUE,
-      levels = c(1, 2),
-      labels = c("Män", "Kvinnor")
-    )
+    outcome = a_pat_alder
   ) %>%
   filter(
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, invasiv)
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc091",
+  folder = "nkbc09b",
   path = OUTPUTPATH,
   outcomeTitle = GLOBALS$LAB,
   folderLinkText = GLOBALS$SHORTLAB,
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    "Bröstcancer drabbar både män och kvinnor.",
+    "Det är ovanligt med bröstcancer i unga år.",
     descTolk,
     descTekBes()
   ),
   varOther = list(
     list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
       var = "invasiv",
       label = c("Invasivitet vid diagnos")
     )
-  )
+  ),
+  propWithinUnit = "år",
+  propWithinValue = 65
 )

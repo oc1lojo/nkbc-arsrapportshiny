@@ -18,7 +18,7 @@ dftemp <- dftemp %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc093",
+  folder = "nkbc09c",
   path = OUTPUTPATH,
   outcomeTitle = GLOBALS$LAB,
   folderLinkText = GLOBALS$SHORTLAB,
