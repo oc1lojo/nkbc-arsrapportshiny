@@ -18,10 +18,8 @@ addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
 
   df[, "sjhkod"] <- as.numeric(df[, "sjhkod"])
 
-  df <- left_join(df,
-    sjukhuskoder,
-    by = c("sjhkod" = "sjukhuskod")
-  ) %>%
+  df <- df %>%
+    left_join(sjukhuskoder, by = c("sjhkod" = "sjukhuskod")) %>%
     mutate(
       region = case_when(
         region_sjh_txt == "Sthlm/Gotland" ~ 1L,
