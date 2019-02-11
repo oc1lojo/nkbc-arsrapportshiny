@@ -28,9 +28,9 @@ addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
       region = mapvalues(region_sjh_txt,
         from = c("Sthlm/Gotland", "Uppsala/Örebro", "Sydöstra", "Syd", "Väst", "Norr"),
         to = c(1, 2, 3, 4, 5, 6)
-      ),
+      ) %>% as.integer(),
       region = ifelse(is.na(region), region_lkf, region),
-      landsting = substr(sjhkod, 1, 2),
+      landsting = substr(sjhkod, 1, 2) %>% as.integer(),
       # Fulfix Bröstmottagningen, Christinakliniken Sh & Stockholms bröstklinik så hamnar i Stockholm
       landsting = ifelse(sjhkod %in% c(97333, 97563), 10, landsting),
       landsting = ifelse(landsting %in% c(
@@ -81,7 +81,7 @@ dfmain <- df %>%
         "Region Syd", "Region Väst", "Region Norr"
       ),
       to = c(1, 2, 3, 4, 5, 6)
-    ),
+    ) %>% as.integer(),
 
     # Derivering av primär behandling
     prim_beh = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
