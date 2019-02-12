@@ -29,8 +29,14 @@ rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     "Bröstcancer drabbar både män och kvinnor.",
-    descTolk,
-    descTekBes()
+    paste(
+      descTolk,
+      sep = str_sep_description
+    ),
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

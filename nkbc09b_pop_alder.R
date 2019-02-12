@@ -26,8 +26,14 @@ rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     "Det är ovanligt med bröstcancer i unga år.",
-    descTolk,
-    descTekBes()
+    paste(
+      descTolk,
+      sep = str_sep_description
+    ),
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

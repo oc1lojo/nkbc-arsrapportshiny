@@ -42,12 +42,18 @@ rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     "Fall med fjärrmetastaser definieras som upptäckta inom 3 månader från provtagningsdatum (diagnosdatum).",
-    paste0(
-      "T.o.m. 2012 var det möjligt att registrera en tumör som att fjärrmetastaser ej kan bedömas (MX) i NKBC. Dessa har grupperats ihop med Uppgift saknas.
-      <p></p>",
-      descTolk
+    paste(
+      paste(
+        "T.o.m. 2012 var det möjligt att registrera en tumör som att fjärrmetastaser ej kan bedömas (MX) i NKBC.",
+        "Dessa har grupperats ihop med Uppgift saknas."
+      ),
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

@@ -32,16 +32,23 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "En fastställd diagnos innan behandlingsstart är viktigt för planering och genomförande av behandling och undvikande av omoperationer.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
-      "Det kan ibland vara nödvändigt att operera patienten innan diagnosen är fastställd för att undvika alltför långa utredningstider. Fastställd diagnos måste vägas mot tidsåtgång.
-      <p></p>",
-      descTolk
+    paste(
+      paste(
+        "Det kan ibland vara nödvändigt att operera patienten innan diagnosen är fastställd för att undvika alltför långa utredningstider.",
+        "Fastställd diagnos måste vägas mot tidsåtgång."
+      ),
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

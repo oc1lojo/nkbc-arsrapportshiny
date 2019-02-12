@@ -1,9 +1,16 @@
+str_sep_description <- "</br>\n</br>\n"
+
 MisstCa <- "Datum för välgrundad misstanke om cancer tillkom som variabel 2016 och innan detta har datum för 1:a kontakt använts."
 
-onkRed <- paste0("Uppgifter som rör given onkologisk behandling redovisas enbart t.o.m. ", YEAR - 1, " p.g.a. eftersläpning i rapporteringen.")
+onkRed <- paste(
+  "Uppgifter som rör given onkologisk behandling redovisas enbart t.o.m.",
+  YEAR - 1, "p.g.a. eftersläpning i rapporteringen."
+)
 
-ettFallBrost <- "Ett fall per bröst kan rapporterats till det nationella kvalitetsregistret för bröstcancer. 
-Det innebär att samma person kan finnas med i statistiken upp till två gånger."
+ettFallBrost <- paste(
+  "Ett fall per bröst kan rapporterats till det nationella kvalitetsregistret för bröstcancer.",
+  "Det innebär att samma person kan finnas med i statistiken upp till två gånger."
+)
 
 SKAS <- "Skövde och Lidköpings sjukhus presenteras tillsammans som Skaraborg."
 
@@ -29,25 +36,23 @@ sjhTXT <- function(SJHKODUSE = GLOBALS$SJHKODUSE) {
 
 # Default beskrivning
 descTekBes <- function() {
-  paste0(
-    "Population: ", GLOBALS$POP,
-    "<p></p>",
-    sjhRed()
+  paste(
+    paste("Population:", GLOBALS$POP),
+    sjhRed(),
+    sep = str_sep_description
   )
 }
 
-descTolk <- paste0(
+descTolk <- paste(
   ettFallBrost,
-  "<p></p>",
-  SKAS
+  SKAS,
+  sep = str_sep_description
 )
 
 descTarg <- function() {
-  paste0(
-    "<p></p>",
-    if (length(GLOBALS$TARGET) == 1) paste0("Målnivå: ", GLOBALS$TARGET[1], "%"),
-    if (length(GLOBALS$TARGET) == 2) paste0("Målnivåer: ", GLOBALS$TARGET[1], "% (låg) ", GLOBALS$TARGET[2], "% (hög)")
-  )
+  if (length(GLOBALS$TARGET) == 1) {
+    paste0("Målnivå: ", GLOBALS$TARGET[1], "%")
+  } else if (length(GLOBALS$TARGET) == 2) paste0("Målnivåer: ", GLOBALS$TARGET[1], "% (låg) ", GLOBALS$TARGET[2], "% (hög)")
 }
 
 # define lab and pop

@@ -41,19 +41,21 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
-      "Operationsdatum är datum för första operation, det innebär att tiden från sista operation till start av cytostatikabehandling
-      kan vara kortare än det som redovisas.
-      <p></p>",
+    paste(
+      "Operationsdatum är datum för första operation, det innebär att tiden från sista operation till start av cytostatikabehandling kan vara kortare än det som redovisas.",
       onkRed,
-      "<p></p>",
-      descTolk
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

@@ -45,16 +45,20 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Patologirapporten grundas i mikroskopiska vävnadsanalyser. Biomarkörerna etablerar grunden till den onkologiska behandlingen av bröstcancer (endokrin-, cytostatika-  eller antikroppsbehandling).",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
-      "Ki67 tillkom som nationell variabel 2014 och ingår ej i beräkning innan detta datum.
-      <p></p>",
-      descTolk
+    paste(
+      "Ki67 tillkom som nationell variabel 2014 och ingår ej i beräkning innan detta datum.",
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

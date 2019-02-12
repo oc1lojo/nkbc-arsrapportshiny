@@ -49,18 +49,24 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
-      "Då hela bröstet opererats bort (mastektomi) behövs oftast inte strålbehandling, lokoregional strålbehandling för patienter med endast mikrometastas rekommenderas inte. Vid spridning till lymfkörtlar bör strålbehandling ges både mot bröstkorgsväggen och lymfkörtlar.",
-      descTarg()
+    paste(
+      paste(
+        "Då hela bröstet opererats bort (mastektomi) behövs oftast inte strålbehandling, lokoregional strålbehandling för patienter med endast mikrometastas rekommenderas inte.",
+        "Vid spridning till lymfkörtlar bör strålbehandling ges både mot bröstkorgsväggen och lymfkörtlar."
+      ),
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
-      "Spridning till lymfkörtlar är definerat som metastas > 0.2 mm i axillen.
-      <p></p>",
+    paste(
+      "Spridning till lymfkörtlar är definerat som metastas > 0.2 mm i axillen.",
       onkRed,
-      "<p></p>",
-      descTolk
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

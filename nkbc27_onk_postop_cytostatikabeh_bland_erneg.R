@@ -51,22 +51,23 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Cytostatikabehandling rekommenderas i allmänhet vid bröstcancer med spridning till axillens lymfkörtlar, men även utan lymfkörtelengagemang om tumören har svag hormonell känslighet och/eller då det föreligger riskfaktorer.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
-      "Enbart postoperativ cytostatikabehandling är medtaget i beräkningen, vilket innebär att andelen kan bli mindre för de sjukhus där cytostatika i större utsträckning ges preoperativt.
-      <p></p>
-      Tumörstorlek är storlek på den största invasiva tumören, det innebär att det kan finnas multifokala fall där den totala extenten är > 10 mm som inte finns medtagna i urvalet.
-      <p></p>
-      Spridning till lymfkörtlar är definerat som metastas > 0.2 mm i axillen.
-      <p></p>",
+    paste(
+      "Enbart postoperativ cytostatikabehandling är medtaget i beräkningen, vilket innebär att andelen kan bli mindre för de sjukhus där cytostatika i större utsträckning ges preoperativt.",
+      "Tumörstorlek är storlek på den största invasiva tumören, det innebär att det kan finnas multifokala fall där den totala extenten är > 10 mm som inte finns medtagna i urvalet.",
+      "Spridning till lymfkörtlar är definerat som metastas > 0.2 mm i axillen.",
       onkRed,
-      "<p></p>",
-      descTolk
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

@@ -32,12 +32,19 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Om det vid analys av den bortopererade vävnaden visar sig att tumörvävnad kan ha kvarlämnats blir patienten ofta rekommenderad en omoperation.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    descTolk,
-    descTekBes()
+    paste(
+      descTolk,
+      sep = str_sep_description
+    ),
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

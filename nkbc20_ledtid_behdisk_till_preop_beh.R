@@ -47,18 +47,25 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
-      "I preoperativ onkologisk behandling ingår cytostatika, strålning eller endokrin behandling.
-      <p></p>
-      Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
-      descTarg()
+    paste(
+      "I preoperativ onkologisk behandling ingår cytostatika, strålning eller endokrin behandling.",
+      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
-      "Andelen preoperativt behandlade patienter varierar i landet och före start av behandling görs flera undersökningar som kan förlänga tiden till start. Många patienter som startar preoperativ onkologisk behandling ingår i behandlingsstudier där vissa undersökningar är obligatoriska som annars hade gjorts senare. Siffrorna skall därför tolkas med viss försiktighet.
-      <p></p>",
-      descTolk
+    paste(
+      paste(
+        "Andelen preoperativt behandlade patienter varierar i landet och före start av behandling görs flera undersökningar som kan förlänga tiden till start.",
+        "Många patienter som startar preoperativ onkologisk behandling ingår i behandlingsstudier där vissa undersökningar är obligatoriska som annars hade gjorts senare.",
+        "Siffrorna skall därför tolkas med viss försiktighet."
+      ),
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

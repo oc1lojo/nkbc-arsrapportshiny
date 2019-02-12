@@ -37,16 +37,20 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Rapportering av given onkologisk behandling sker på ett eget formulär till kvalitetsregistret, separat från anmälan. Rapporteringen sker cirka 1 - 1,5 år efter anmälan.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
+    paste(
       onkRed,
-      "<p></p>",
-      descTolk
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   targetValues = GLOBALS$TARGET
 )

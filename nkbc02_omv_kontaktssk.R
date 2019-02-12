@@ -30,12 +30,19 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Enligt den Nationella  Cancerstrategin (SOU 2009:11) ska alla cancerpatienter erbjudas en kontaktsjuksköterska.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    descTolk,
-    descTekBes()
+    paste(
+      descTolk,
+      sep = str_sep_description
+    ),
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

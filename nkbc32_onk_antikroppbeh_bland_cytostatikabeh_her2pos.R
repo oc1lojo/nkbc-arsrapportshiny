@@ -50,18 +50,21 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
-      "Både preoperativ och postoperativ antikropps- och cytostatikabehandling är medtaget i beräkningen.
-      <p></p>",
+    paste(
+      "Både preoperativ och postoperativ antikropps- och cytostatikabehandling är medtaget i beräkningen.",
       onkRed,
-      "<p></p>",
-      descTolk
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

@@ -27,15 +27,19 @@ rccShiny(
   outcomeTitle = GLOBALS$LAB,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Anmälan till cancerregistret och anmälan till kvalitetsregistret är kombinerade och därmed undviks dubbelarbete.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    ettFallBrost,
-    paste0(
-      "Population: ", GLOBALS$POP,
-      "<p></p>
-      Uppgifterna redovisas uppdelat på den region personen var bosatt i vid diagnos."
+    paste(
+      ettFallBrost,
+      sep = str_sep_description
+    ),
+    paste(
+      paste("Population:", GLOBALS$POP),
+      "Uppgifterna redovisas uppdelat på den region personen var bosatt i vid diagnos.",
+      sep = str_sep_description
     )
   ),
   targetValues = GLOBALS$TARGET

@@ -34,19 +34,24 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Mammografiscreening erbjuds alla kvinnor mellan 40–74 år.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
-      "Definitionen av \"screeningupptäckt fall\" kan enligt erfarenhet tolkas olika vilket kan påverka siffrorna.
-      Enligt kvalitetsregistret avses enbart de fall som diagnostiserats i samband med en kallelse till den landstingsorganiserade screeningmammografin.
-      <p></p>
-      Det finns en osäkerhet avseende andel screeningupptäckta fall då det på vissa orter bara finns en mammografienhet som både utför screening och klinisk mammografi.
-      <p></p>",
-      descTolk
+    paste(
+      paste(
+        "Definitionen av \"screeningupptäckt fall\" kan enligt erfarenhet tolkas olika vilket kan påverka siffrorna.",
+        "Enligt kvalitetsregistret avses enbart de fall som diagnostiserats i samband med en kallelse till den landstingsorganiserade screeningmammografin."
+      ),
+      "Det finns en osäkerhet avseende andel screeningupptäckta fall då det på vissa orter bara finns en mammografienhet som både utför screening och klinisk mammografi.",
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

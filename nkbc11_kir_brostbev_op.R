@@ -43,12 +43,19 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
+    paste(
       "Ett bröstbevarande ingrepp och  strålbehandling är  standradingrepp  för majoriten av tidigt upptäckta bröstcancrar . Tumörens egenskaper, form och storlek på bröstet spelar roll för av av kirurgisk operationsmetod.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    descTolk,
-    descTekBes()
+    paste(
+      descTolk,
+      sep = str_sep_description
+    ),
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

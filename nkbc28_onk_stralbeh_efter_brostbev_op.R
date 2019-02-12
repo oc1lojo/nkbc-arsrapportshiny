@@ -43,16 +43,23 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
-      "Strålbehandling efter bröstbevarande operation minskar risk för återfall. I de fall där samsjuklighet föreligger får nyttan med strålbehandling avvägas med hänsyn till övriga medicinska faktorer.",
-      descTarg()
+    paste(
+      paste(
+        "Strålbehandling efter bröstbevarande operation minskar risk för återfall.",
+        "I de fall där samsjuklighet föreligger får nyttan med strålbehandling avvägas med hänsyn till övriga medicinska faktorer."
+      ),
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
+    paste(
       onkRed,
-      "<p></p>",
-      descTolk
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

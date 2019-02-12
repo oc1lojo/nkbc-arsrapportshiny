@@ -46,16 +46,22 @@ rccShiny(
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
     paste(
-      "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt.",
-      "Indikatorn gäller alla typer av studier (t.ex. kliniska studier, omvårdnadsstudier, fysioterapi-studier).",
-      "Indikatorn infördes 2017 och bör tolkas med försiktighet (regionala skillnader och underrapportering)."
+      paste(
+        "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt.",
+        "Indikatorn gäller alla typer av studier (t.ex. kliniska studier, omvårdnadsstudier, fysioterapi-studier).",
+        "Indikatorn infördes 2017 och bör tolkas med försiktighet (regionala skillnader och underrapportering)."
+      ),
+      sep = str_sep_description
     ),
-    paste0(
+    paste(
       onkRed,
-      "<p></p>",
-      descTolk
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

@@ -38,10 +38,17 @@ rccShiny(
   description = c(
     paste0(
       "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
-      descTarg()
+      descTarg(),
+      sep = str_sep_description
     ),
-    descTolk,
-    descTekBes()
+    paste(
+      descTolk,
+      sep = str_sep_description
+    ),
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

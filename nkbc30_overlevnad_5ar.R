@@ -30,16 +30,24 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
-      "Total överlevnad betraktas som det viktigaste utfallsmåttet. Observerad överlevnad anger de bröstcancerfall som överlevt 5 år efter diagnos. Dödsorsakerna kan vara andra än bröstcancer.",
-      descTarg()
+    paste(
+      paste(
+        "Total överlevnad betraktas som det viktigaste utfallsmåttet.",
+        "Observerad överlevnad anger de bröstcancerfall som överlevt 5 år efter diagnos.",
+        "Dödsorsakerna kan vara andra än bröstcancer."
+      ),
+      descTarg(),
+      sep = str_sep_description
     ),
-    paste0(
-      "Uppgifter som rör 5 års överlevnad redovisas enbart tom ", YEAR - 5, ".
-      <p></p>",
-      descTolk
+    paste(
+      paste0("Uppgifter som rör 5 års överlevnad redovisas enbart t.o.m. ", YEAR - 5, "."),
+      descTolk,
+      sep = str_sep_description
     ),
-    descTekBes()
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(

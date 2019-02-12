@@ -43,12 +43,22 @@ rccShiny(
   geoUnitsPatient = FALSE,
   textBeforeSubtitle = GLOBALS$SHORTPOP,
   description = c(
-    paste0(
-      "Kännedom om tumörspridning till axillens lymfkörtlar vägleder behandlingsrekommendationer. Sentinelnodetekniken minskar risken för armbesvär då endast ett fåtal (1–4) körtlar tas bort.",
-      descTarg()
+    paste(
+      paste(
+        "Kännedom om tumörspridning till axillens lymfkörtlar vägleder behandlingsrekommendationer.",
+        "Sentinelnodetekniken minskar risken för armbesvär då endast ett fåtal (1–4) körtlar tas bort."
+      ),
+      descTarg(),
+      sep = str_sep_description
     ),
-    descTolk,
-    descTekBes()
+    paste(
+      descTolk,
+      sep = str_sep_description
+    ),
+    paste(
+      descTekBes(),
+      sep = str_sep_description
+    )
   ),
   varOther = list(
     list(
