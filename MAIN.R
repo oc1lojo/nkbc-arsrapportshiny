@@ -15,6 +15,9 @@ source("beskTXT.R", encoding = "utf8")
 
 # Läs in data ------------------------------------------------------------------
 
+# Läs in namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
+load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
+
 # Läs in ögonblickskopia av NKBC exporterad från INCA
 nkbc_data_dir <- Sys.getenv("NKBC_DATA_DIR")
 load(
@@ -24,13 +27,22 @@ load(
   )
 )
 
-# Läs in namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
-load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
-
 # Läs in data för täckningsgrad mot cancerregistret
 tackning_tbl <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.2/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
 
 # Bearbeta data ----------------------------------------------------------------
+
+# Bearbeta dataram med sjukhuskoder
+sjukhuskoder <- sjukhuskoder %>%
+  rename(
+    sjukhus = sjukhusnamn,
+    region_sjh_txt = region
+  ) %>%
+  # Samredovisning av landsting SKAS
+  mutate(
+    sjukhus = ifelse(sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus),
+    sjukhus = ifelse(sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA, sjukhus)
+  )
 
 # Bearbeta huvud-dataram
 dfmain <- df %>%
@@ -59,18 +71,6 @@ dfmain <- df %>%
   filter( # default vilka år som ska visas
     period >= 2009,
     period <= YEAR
-  )
-
-# Bearbeta dataram med sjukhuskoder
-sjukhuskoder <- sjukhuskoder %>%
-  rename(
-    sjukhus = sjukhusnamn,
-    region_sjh_txt = region
-  ) %>%
-  # Samredovisning av landsting SKAS
-  mutate(
-    sjukhus = ifelse(sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus),
-    sjukhus = ifelse(sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA, sjukhus)
   )
 
 # Skapa shiny-applikationer ----------------------------------------------------
