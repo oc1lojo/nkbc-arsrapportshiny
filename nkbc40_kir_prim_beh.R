@@ -48,7 +48,6 @@ rccShiny(
       "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation.",
       descTolk,
       sep = str_sep_description
-
     ),
     paste(
       descTekBes(),
