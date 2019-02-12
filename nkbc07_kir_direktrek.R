@@ -1,13 +1,18 @@
-GLOBALS <- defGlobals(
-  LAB = "Omedelbara rekonstruktioner vid mastektomi",
-  SHORTPOP = "mastektomerade fall utan fjärrmetastaser vid diagnos.",
-  POP = "fall med mastektomi eller subkutan mastektomi utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "op_inr_sjhkod",
-  TARGET = c(15, 20)
+nkbc07_def <- list(
+  code = "nkbc07",
+  lab = "Omedelbara rekonstruktioner vid mastektomi",
+  pop = "fall med mastektomi eller subkutan mastektomi utan fjärrmetastaser vid diagnos",
+  pop_short = "mastektomerade fall utan fjärrmetastaser vid diagnos",
+  target_values = c(15, 20),
+  sjhkod_var = "op_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_invasiv"),
+  om_indikatorn = "Omedelbar rekonstruktion innebär att en bröstform återskapas i samband med att ett helt bröst opereras bort. Bröstrekonstruktion kan göras senare efter avslutad onkologisk behandling.",
+  vid_tolkning = NULL,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc07_def$sjhkod_var) %>%
   mutate(
     # Hantera missing
     outcome = as.logical(ifelse(op_kir_onkoplastik_Värde %in% c(0, 1), op_kir_onkoplastik_Värde, NA))
@@ -25,36 +30,12 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc07",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      "Omedelbar rekonstruktion innebär att en bröstform återskapas i samband med att ett helt bröst opereras bort. Bröstrekonstruktion kan göras senare efter avslutad onkologisk behandling.",
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste(
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "d_invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc07_def$code,
+  path = output_path,
+  outcomeTitle = nkbc07_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc07_def),
+  description = compile_description(nkbc07_def, report_end_year),
+  varOther = compile_varOther(nkbc07_def),
+  targetValues = nkbc07_def$target_values
 )
+

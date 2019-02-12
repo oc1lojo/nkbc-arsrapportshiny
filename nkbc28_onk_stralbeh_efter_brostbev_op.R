@@ -1,12 +1,22 @@
-GLOBALS <- defGlobals(
-  LAB = "Strålbehandling efter bröstbevarande operation",
-  POP = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "post_inr_sjhkod",
-  TARGET = c(90, 95)
+nkbc28_def <- list(
+  code = "nkbc28",
+  lab = "Strålbehandling efter bröstbevarande operation",
+  pop = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos",
+  target_values = c(90, 95),
+  sjhkod_var = "post_inr_sjhkod",
+  other_vars = "a_pat_alder",
+  om_indikatorn =
+    paste(
+      "Strålbehandling efter bröstbevarande operation minskar risk för återfall.",
+      "I de fall där samsjuklighet föreligger får nyttan med strålbehandling avvägas med hänsyn till övriga medicinska faktorer."
+    ),
+  vid_tolkning = NULL,
+  inkl_beskr_onk_beh = TRUE,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc28_def$sjhkod_var) %>%
   mutate(
     outcome = as.logical(post_rt_Värde)
   ) %>%
@@ -15,7 +25,7 @@ dftemp <- dfmain %>%
     period >= 2012,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast opererade
     !is.na(op_kir_dat),
@@ -35,36 +45,11 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc28",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      paste(
-        "Strålbehandling efter bröstbevarande operation minskar risk för återfall.",
-        "I de fall där samsjuklighet föreligger får nyttan med strålbehandling avvägas med hänsyn till övriga medicinska faktorer."
-      ),
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste(
-      onkRed,
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc28_def$code,
+  path = output_path,
+  outcomeTitle = nkbc28_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc28_def),
+  description = compile_description(nkbc28_def, report_end_year),
+  varOther = compile_varOther(nkbc28_def),
+  targetValues = nkbc28_def$target_values
 )

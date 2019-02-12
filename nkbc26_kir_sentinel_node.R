@@ -1,13 +1,22 @@
-GLOBALS <- defGlobals(
-  LAB = "Sentinel node operation",
-  POP = "invasiva fall utan spridning till lymfkörtlar (klinisk diagnos) eller fjärrmetastaser vid diagnos.",
-  SHORTPOP = "invasiva fall utan spridning till lymfkörtlar eller fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "op_inr_sjhkod",
-  TARGET = c(90, 95)
+nkbc26_def <- list(
+  code = "nkbc26",
+  lab = "Sentinel node operation",
+  pop = "invasiva fall utan spridning till lymfkörtlar (klinisk diagnos) eller fjärrmetastaser vid diagnos",
+  pop_short = "invasiva fall utan spridning till lymfkörtlar eller fjärrmetastaser vid diagnos",
+  target_values = c(90, 95),
+  sjhkod_var = "op_inr_sjhkod",
+  other_vars = "a_pat_alder",
+  om_indikatorn =
+    paste(
+      "Kännedom om tumörspridning till axillens lymfkörtlar vägleder behandlingsrekommendationer.",
+      "Sentinelnodetekniken minskar risken för armbesvär då endast ett fåtal (1–4) körtlar tas bort."
+    ),
+  vid_tolkning = NULL,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc26_def$sjhkod_var) %>%
   mutate(
     outcome = case_when(
       op_kir_axilltyp_Värde == 1 ~ 1L,
@@ -35,35 +44,11 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc26",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      paste(
-        "Kännedom om tumörspridning till axillens lymfkörtlar vägleder behandlingsrekommendationer.",
-        "Sentinelnodetekniken minskar risken för armbesvär då endast ett fåtal (1–4) körtlar tas bort."
-      ),
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste(
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc26_def$code,
+  path = output_path,
+  outcomeTitle = nkbc26_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc26_def),
+  description = compile_description(nkbc26_def, report_end_year),
+  varOther = compile_varOther(nkbc26_def),
+  targetValues = nkbc26_def$target_values
 )

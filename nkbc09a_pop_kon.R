@@ -1,12 +1,17 @@
-GLOBALS <- defGlobals(
-  LAB = "Kön vid diagnos",
-  SHORTLAB = "Kön",
-  POP = "alla anmälda fall.",
-  SJHKODUSE = "a_inr_sjhkod"
+nkbc09a_def <- list(
+  code = "nkbc09a",
+  lab = "Kön vid diagnos",
+  lab_short = "Kön",
+  pop = "alla anmälda fall",
+  sjhkod_var = "a_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_invasiv"),
+  om_indikatorn = "Bröstcancer drabbar både män och kvinnor.",
+  vid_tolkning = NULL,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc09a_def$sjhkod_var) %>%
   mutate(
     outcome = factor(KON_VALUE,
       levels = c(1, 2),
@@ -20,31 +25,11 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc09a",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    "Bröstcancer drabbar både män och kvinnor.",
-    paste(
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "d_invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  )
+  folder = nkbc09a_def$code,
+  path = output_path,
+  outcomeTitle = nkbc09a_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc09a_def),
+  description = compile_description(nkbc09a_def, report_end_year),
+  varOther = compile_varOther(nkbc09a_def),
+  targetValues = nkbc09a_def$target_values
 )

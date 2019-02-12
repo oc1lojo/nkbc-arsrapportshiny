@@ -1,25 +1,23 @@
-GLOBALS <- defGlobals(
-  LAB = "Fjärrmetastaser vid diagnos",
-  SHORTLAB = "Fjärrmetastaser",
-  POP = "alla anmälda fall.",
-  SJHKODUSE = "a_inr_sjhkod"
+nkbc09f_def <- list(
+  code = "nkbc09f",
+  lab = "Fjärrmetastaser vid diagnos",
+  lab_short = "Fjärrmetastaser",
+  pop = "alla anmälda fall",
+  sjhkod_var = "a_inr_sjhkod",
+  other_vars = "a_pat_alder",
+  om_indikatorn = "Fall med fjärrmetastaser definieras som upptäckta inom 3 månader från provtagningsdatum (diagnosdatum).",
+  vid_tolkning =
+    paste(
+      "T.o.m. 2012 var det möjligt att registrera en tumör som att fjärrmetastaser ej kan bedömas (MX) i NKBC.",
+      "Dessa har grupperats ihop med Uppgift saknas."
+    ),
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc09f_def$sjhkod_var) %>%
   mutate(
-    # M
-    outcome = factor(
-      case_when(
-        a_tnm_mklass_Värde == 0 ~ 1,
-        a_tnm_mklass_Värde == 10 ~ 2,
-        a_tnm_mklass_Värde == 20 ~ 99,
-        is.na(a_tnm_mklass_Värde) ~ 99,
-        TRUE ~ NA_real_
-      ),
-      levels = c(1, 2, 99),
-      labels = c("Nej (M0)", "Ja (M1)", "Uppgift saknas")
-    )
+    outcome = d_mstad
   ) %>%
   filter(
     # Endast invasiv cancer
@@ -33,31 +31,11 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc09f",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    "Fall med fjärrmetastaser definieras som upptäckta inom 3 månader från provtagningsdatum (diagnosdatum).",
-    paste(
-      paste(
-        "T.o.m. 2012 var det möjligt att registrera en tumör som att fjärrmetastaser ej kan bedömas (MX) i NKBC.",
-        "Dessa har grupperats ihop med Uppgift saknas."
-      ),
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    )
-  )
+  folder = nkbc09f_def$code,
+  path = output_path,
+  outcomeTitle = nkbc09f_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc09f_def),
+  description = compile_description(nkbc09f_def, report_end_year),
+  varOther = compile_varOther(nkbc09f_def),
+  targetValues = nkbc09f_def$target_values
 )

@@ -1,12 +1,19 @@
-GLOBALS <- defGlobals(
-  LAB = "Operation till cytostatikabehandling",
-  POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "post_inr_sjhkod",
-  TARGET = c(75, 90)
+nkbc22_def <- list(
+  code = "nkbc22",
+  lab = "Operation till cytostatikabehandling",
+  pop = "primärt opererade fall utan fjärrmetastaser vid diagnos",
+  prop_within_value = 24,
+  target_values = c(75, 90),
+  sjhkod_var = "post_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_invasiv"),
+  om_indikatorn = "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
+  vid_tolkning = "Operationsdatum är datum för första operation, det innebär att tiden från sista operation till start av cytostatikabehandling kan vara kortare än det som redovisas.",
+  inkl_beskr_onk_beh = TRUE,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc22_def$sjhkod_var) %>%
   mutate(
     outcome = as.numeric(ymd(post_kemo_dat) - ymd(op_kir_dat)),
     outcome = ifelse(outcome < 0, 0, outcome)
@@ -16,7 +23,7 @@ dftemp <- dfmain %>%
     period >= 2012,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast opererade
     !is.na(op_kir_dat),
@@ -33,39 +40,12 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc22",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste(
-      "Operationsdatum är datum för första operation, det innebär att tiden från sista operation till start av cytostatikabehandling kan vara kortare än det som redovisas.",
-      onkRed,
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "d_invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  ),
-  propWithinValue = 24,
-  targetValues = GLOBALS$TARGET
+  folder = nkbc22_def$code,
+  path = output_path,
+  outcomeTitle = nkbc22_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc22_def),
+  description = compile_description(nkbc22_def, report_end_year),
+  varOther = compile_varOther(nkbc22_def),
+  propWithinValue = nkbc22_def$prop_within_value,
+  targetValues = nkbc22_def$target_values
 )

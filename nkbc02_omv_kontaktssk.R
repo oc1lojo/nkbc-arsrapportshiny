@@ -1,13 +1,18 @@
-GLOBALS <- defGlobals(
-  LAB = "Patienten har erbjudits, i journalen dokumenterad, kontaktsjuksköterska",
-  POP = "alla anmälda fall.",
-  SHORTLAB = "Kontaktsjuksköterska",
-  SJHKODUSE = "a_inr_sjhkod",
-  TARGET = c(80, 95)
+nkbc02_def <- list(
+  code = "nkbc02",
+  lab = "Patienten har erbjudits, i journalen dokumenterad, kontaktsjuksköterska",
+  lab_short = "Kontaktsjuksköterska",
+  pop = "alla anmälda fall",
+  target_values = c(80, 95),
+  sjhkod_var = "a_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_invasiv"),
+  om_indikatorn = "Enligt den Nationella  Cancerstrategin (SOU 2009:11) ska alla cancerpatienter erbjudas en kontaktsjuksköterska.",
+  vid_tolkning = NULL,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc02_def$sjhkod_var) %>%
   mutate(
     # Hantera missing
     outcome = as.logical(ifelse(a_omv_kssk_Värde %in% c(0, 1), a_omv_kssk_Värde, NA))
@@ -22,36 +27,11 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc02",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      "Enligt den Nationella  Cancerstrategin (SOU 2009:11) ska alla cancerpatienter erbjudas en kontaktsjuksköterska.",
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste(
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "d_invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc02_def$code,
+  path = output_path,
+  outcomeTitle = nkbc02_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc02_def),
+  description = compile_description(nkbc02_def, report_end_year),
+  varOther = compile_varOther(nkbc02_def),
+  targetValues = nkbc02_def$target_values
 )
