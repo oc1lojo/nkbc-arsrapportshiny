@@ -15,7 +15,7 @@ source("beskTXT.R", encoding = "utf8")
 
 # Läs in data ------------------------------------------------------------------
 
-# Ögonblickskopia av NKBC exporterad från INCA
+# Läs in ögonblickskopia av NKBC exporterad från INCA
 nkbc_data_dir <- Sys.getenv("NKBC_DATA_DIR")
 load(
   unzip(
@@ -24,7 +24,7 @@ load(
   )
 )
 
-# Läs på namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
+# Läs in namn på sjukhus (hämta från organisationsenhetsregistret i framtiden)
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
 
 # Läs in data för täckningsgrad mot cancerregistret
