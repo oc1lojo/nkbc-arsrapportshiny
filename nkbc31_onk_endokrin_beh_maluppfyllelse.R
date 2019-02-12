@@ -6,9 +6,8 @@ GLOBALS <- defGlobals(
   TARGET = c(85, 90)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     # Går på det som finns, pre eller postop. Om det ena saknas antas samma som finns för det andra.
     outcome = as.logical(pmax(post_endo_Värde, pre_endo_Värde, na.rm = TRUE))

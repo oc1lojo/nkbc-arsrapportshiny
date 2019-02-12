@@ -5,9 +5,8 @@ GLOBALS <- defGlobals(
   TARGET = c(90, 99)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     # Hantera missing
     outcome = as.logical(ifelse(a_mdk_Värde %in% c(0, 1), a_mdk_Värde, NA))

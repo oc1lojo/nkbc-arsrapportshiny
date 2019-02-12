@@ -5,9 +5,8 @@ GLOBALS <- defGlobals(
   TARGET = c(70, 85)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     outcome = ifelse(!is.na(post_inr_dat) | !is.na(post_inr_enh) | !is.na(post_inr_initav), TRUE, FALSE)
   ) %>%

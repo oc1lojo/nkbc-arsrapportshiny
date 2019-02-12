@@ -5,9 +5,8 @@ GLOBALS <- defGlobals(
   SJHKODUSE = "d_onk_sjhkod"
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     # Pre eller postoperativ
     outcome = factor(

@@ -5,9 +5,8 @@ GLOBALS <- defGlobals(
   TARGET = c(88)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     lastdate = ymd(paste0(YEAR, "-12-31")),
     surv_time = ymd(VITALSTATUSDATUM_ESTIMAT) - ymd(a_diag_dat),

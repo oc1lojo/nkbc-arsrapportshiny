@@ -6,9 +6,8 @@ GLOBALS <- defGlobals(
   TARGET = c(95, 98)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     d_op_nhgok = op_pad_nhg_Värde %in% c(1, 2, 3),
     d_op_erok = op_pad_er_Värde %in% c(1, 2) | !is.na(op_pad_erproc),

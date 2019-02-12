@@ -1,7 +1,7 @@
-addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
-  names(df)[names(df) == SJHKODUSE] <- "sjhkod"
+add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var = GLOBALS$SJHKODUSE) {
+  names(x)[names(x) == sjhkod_var] <- "sjhkod"
 
-  df <- df %>%
+  x %>%
     mutate(sjhkod = as.numeric(sjhkod)) %>%
     left_join(sjukhuskoder, by = c("sjhkod" = "sjukhuskod")) %>%
     mutate(
@@ -18,20 +18,20 @@ addSjhData <- function(df = dfmain, SJHKODUSE = GLOBALS$SJHKODUSE) {
       landsting = substr(sjhkod, 1, 2) %>% as.integer(),
       # Fulfix Bröstmottagningen, Christinakliniken Sh & Stockholms bröstklinik så hamnar i Stockholm
       landsting = ifelse(sjhkod %in% c(97333, 97563), 10, landsting),
-      landsting = ifelse(landsting %in% c(
-        seq(10, 13),
-        seq(21, 28),
-        30,
-        seq(41, 42),
-        seq(50, 57),
-        seq(61, 65)
-        # seq(91,96)
-      ),
-      landsting,
-      NA
+      landsting = ifelse(
+        landsting %in% c(
+          seq(10, 13),
+          seq(21, 28),
+          30,
+          seq(41, 42),
+          seq(50, 57),
+          seq(61, 65)
+          # seq(91,96)
+        ),
+        landsting,
+        NA
       )
     )
-  return(df)
 }
 
 derive_nkbc_d_vars <- function(x, ...) {

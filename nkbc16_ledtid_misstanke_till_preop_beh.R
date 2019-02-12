@@ -5,9 +5,8 @@ GLOBALS <- defGlobals(
   TARGET = c(75, 90)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     d_a_diag_misscadat = ymd(coalesce(a_diag_misscadat, a_diag_kontdat)),
     d_pre_onk_dat = pmin(ymd(pre_kemo_dat),

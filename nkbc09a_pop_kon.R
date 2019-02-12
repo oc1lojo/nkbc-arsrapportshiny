@@ -5,9 +5,8 @@ GLOBALS <- defGlobals(
   SJHKODUSE = "a_inr_sjhkod"
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     outcome = factor(KON_VALUE,
       levels = c(1, 2),

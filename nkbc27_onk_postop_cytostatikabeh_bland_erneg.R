@@ -6,9 +6,8 @@ GLOBALS <- defGlobals(
   TARGET = c(80, 90)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     outcome = as.logical(post_kemo_Värde)
   ) %>%

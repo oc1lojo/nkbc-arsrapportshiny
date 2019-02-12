@@ -5,9 +5,8 @@ GLOBALS <- defGlobals(
   TARGET = c(60, 70)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     a_pat_alder = as.numeric(a_pat_alder),
 

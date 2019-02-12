@@ -6,9 +6,8 @@ GLOBALS <- defGlobals(
   TARGET = c(70, 80)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     max_extent = pmax(op_pad_extentx, op_pad_extenty, na.rm = TRUE),
     outcome = ifelse(op_kir_brost_Värde == 1, TRUE, FALSE)

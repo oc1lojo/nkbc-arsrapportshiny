@@ -4,9 +4,8 @@ GLOBALS <- defGlobals(
   SJHKODUSE = "op_inr_sjhkod"
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     # Prim op eller preop onk beh
     outcome = factor(d_prim_beh_Värde,

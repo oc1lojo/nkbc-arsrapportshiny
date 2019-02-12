@@ -6,9 +6,8 @@ GLOBALS <- defGlobals(
   TARGET = c(90, 95)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     outcome = case_when(
       op_kir_axilltyp_Värde == 1 ~ 1L,

@@ -5,9 +5,8 @@ GLOBALS <- defGlobals(
   TARGET = c(75, 90)
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
   mutate(
     outcome = as.numeric(ymd(op_kir_dat) - ymd(a_planbeh_infopatdat)),
 
