@@ -1,11 +1,21 @@
-GLOBALS <- defGlobals(
-  LAB = "Cytostatikabehandling",
-  POP = "opererade, invasiva fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "d_onk_sjhkod"
+nkbc35_def <- list(
+  code = "nkbc35",
+  lab = "Cytostatikabehandling",
+  pop = "opererade, invasiva fall utan fjärrmetastaser vid diagnos",
+  sjhkod_var = "d_onk_sjhkod",
+  other_vars = c("a_pat_alder", "d_tstad", "d_nstad", "d_er"),
+  om_indikatorn = "Pre- eller postoperativ cytostatikabehandling rekommenderas i allmänhet vid bröstcancer med spridning till axillens lymfkörtlar, men även utan lymfkörtelengagemang om tumören har svag hormonell känslighet och/eller då det föreligger riskfaktorer.",
+  vid_tolkning =
+    c(
+      "Tumörstorlek och spridning till lymfkörtlar är kliniskt diagnostiserat.",
+      "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation."
+    ),
+  inkl_beskr_onk_beh = TRUE,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc35_def$sjhkod_var) %>%
   mutate(
     # Pre eller postoperativ
     outcome = factor(
@@ -22,13 +32,6 @@ dftemp <- dfmain %>%
         "Enbart postoperativ",
         "Ingen"
       )
-    ),
-
-    # ER
-    d_er = factor(
-      ifelse(is.na(d_er_Värde), 99, d_er_Värde),
-      c(1, 2, 99),
-      c("Positiv", "Negativ", "Uppgift saknas")
     )
   ) %>%
   filter(
@@ -36,7 +39,7 @@ dftemp <- dfmain %>%
     period >= 2012,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast opererade
     !is.na(op_kir_dat),
@@ -56,45 +59,11 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc35",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      "Pre- eller postoperativ cytostatikabehandling rekommenderas i allmänhet vid bröstcancer med spridning till axillens lymfkörtlar, men även utan lymfkörtelengagemang om tumören har svag hormonell känslighet och/eller då det föreligger riskfaktorer.",
-      sep = str_sep_description
-    ),
-    paste(
-      "Tumörstorlek och spridning till lymfkörtlar är kliniskt diagnostiserat.",
-      "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation.",
-      onkRed,
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "d_tstad",
-      label = c("Tumörstorlek")
-    ),
-    list(
-      var = "d_nstad",
-      label = c("Spridning till lymfkörtlar")
-    ),
-    list(
-      var = "d_er",
-      label = c("Östrogenreceptor (ER)")
-    )
-  )
+  folder = nkbc35_def$code,
+  path = output_path,
+  outcomeTitle = nkbc35_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc35_def),
+  description = compile_description(nkbc35_def, report_end_year),
+  varOther = compile_varOther(nkbc35_def),
+  targetValues = nkbc35_def$target_values
 )

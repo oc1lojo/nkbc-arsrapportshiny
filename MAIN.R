@@ -7,11 +7,11 @@ library(rccShiny)
 
 # Läs in/Definera "konstanter" och verktygsfunktioner -----------------------------
 
-YEAR <- 2017
-OUTPUTPATH <- "Output"
+report_end_year <- 2017
+output_path <- "Output"
 
 source("nkbc-general.R", encoding = "utf8")
-source("beskTXT.R", encoding = "utf8")
+source("nkbcind-rccshiny-tools.R", encoding = "utf8")
 
 # Läs in data ------------------------------------------------------------------
 
@@ -70,7 +70,7 @@ dfmain <- df %>%
   ) %>%
   filter( # default vilka år som ska visas
     period >= 2009,
-    period <= YEAR
+    period <= report_end_year
   )
 
 # Skapa shiny-applikationer ----------------------------------------------------

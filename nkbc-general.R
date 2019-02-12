@@ -70,6 +70,12 @@ derive_nkbc_d_vars <- function(x, ...) {
         )
       ),
 
+      d_er = factor(
+        ifelse(is.na(d_er_Värde), 99, d_er_Värde),
+        c(1, 2, 99),
+        c("Positiv", "Negativ", "Uppgift saknas")
+      ),
+
       # PR, 1 = pos, 2 = neg
       d_pr_op_Värde = case_when(
         op_pad_prproc < 10 | is.na(op_pad_prproc) & op_pad_pr_Värde %in% 2 ~ 2,
@@ -147,6 +153,26 @@ derive_nkbc_d_vars <- function(x, ...) {
         ),
         levels = c(1, 2, 99),
         labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")
+      ),
+
+      # M
+      d_mstad = factor(
+        case_when(
+          a_tnm_mklass_Värde == 0 ~ 1,
+          a_tnm_mklass_Värde == 10 ~ 2,
+          a_tnm_mklass_Värde == 20 ~ 99,
+          is.na(a_tnm_mklass_Värde) ~ 99,
+          TRUE ~ NA_real_
+        ),
+        levels = c(1, 2, 99),
+        labels = c("Nej (M0)", "Ja (M1)", "Uppgift saknas")
+      ),
+
+      # pN
+      d_pn = cut(op_pad_lglmetant, c(1, 4, 100),
+        include.lowest = TRUE,
+        right = FALSE,
+        labels = c("1-3 metastaser", "=> 4 metastaser")
       ),
 
       # fix 1.sjukhus ansvarigt för rapportering av onkologisk behandling/2.onkologiskt sjukhus/3.anmälande sjukhus

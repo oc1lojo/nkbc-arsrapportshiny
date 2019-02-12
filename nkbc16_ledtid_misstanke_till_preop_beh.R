@@ -1,12 +1,31 @@
-GLOBALS <- defGlobals(
-  LAB = "Välgrundad misstanke om cancer till preoperativ onkologisk behandling",
-  POP = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
-  SJHKODUSE = "pre_inr_sjhkod",
-  TARGET = c(75, 90)
+nkbc16_def <- list(
+  code = "nkbc16",
+  lab = "Välgrundad misstanke om cancer till preoperativ onkologisk behandling",
+  pop = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
+  prop_within_value = 28,
+  target_values = c(75, 90),
+  sjhkod_var = "pre_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_invasiv"),
+  om_indikatorn =
+    c(
+      "I preoperativ onkologisk behandling ingår cytostatika, strålning eller endokrin behandling.",
+      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid."
+    ),
+  vid_tolkning =
+    c(
+      "Startpunkten för SVF har tolkats olika av vårdgivare vilket ger upphov till variation varför ledtiden skall tolkas med försiktighet.",
+      paste(
+        "Andelen preoperativt behandlade patienter varierar i landet och före start av behandling görs flera undersökningar som kan förlänga tiden till start.",
+        "Många patienter som startar preoperativ onkologisk behandling ingår i behandlingsstudier där vissa undersökningar är obligatoriska som annars hade gjorts senare.",
+        "Siffrorna skall därför tolkas med viss försiktighet."
+      )
+    ),
+  inkl_beskr_missca = TRUE,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc16_def$sjhkod_var) %>%
   mutate(
     d_a_diag_misscadat = ymd(coalesce(a_diag_misscadat, a_diag_kontdat)),
     d_pre_onk_dat = pmin(ymd(pre_kemo_dat),
@@ -24,7 +43,7 @@ dftemp <- dfmain %>%
     period >= 2013,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast opererade
     !is.na(op_kir_dat),
@@ -41,45 +60,13 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc16",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "I preoperativ onkologisk behandling ingår cytostatika, strålning eller endokrin behandling.",
-      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste0(
-      "Startpunkten för SVF har tolkats olika av vårdgivare vilket ger upphov till variation varför ledtiden skall tolkas med försiktighet.",
-      p(
-        "Andelen preoperativt behandlade patienter varierar i landet och före start av behandling görs flera undersökningar som kan förlänga tiden till start.",
-        "Många patienter som startar preoperativ onkologisk behandling ingår i behandlingsstudier där vissa undersökningar är obligatoriska som annars hade gjorts senare.",
-        "Siffrorna skall därför tolkas med viss försiktighet."
-      ),
-      MisstCa,
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "d_invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  ),
-  propWithinValue = 28,
-  targetValues = GLOBALS$TARGET
+  folder = nkbc16_def$code,
+  path = output_path,
+  outcomeTitle = nkbc16_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc16_def),
+  description = compile_description(nkbc16_def, report_end_year),
+  varOther = compile_varOther(nkbc16_def),
+  propWithinValue = nkbc16_def$prop_within_value,
+  targetValues = nkbc16_def$target_values
 )
+

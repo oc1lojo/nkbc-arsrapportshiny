@@ -1,13 +1,19 @@
-GLOBALS <- defGlobals(
-  LAB = "Antikroppsbehandling bland cytostatikabehandlade",
-  POP = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos.",
-  SHORTPOP = "opererade, cytostatikabehandlade HER2+ invasiva fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "d_onk_sjhkod",
-  TARGET = c(90, 95)
+nkbc32_def <- list(
+  code = "nkbc32",
+  lab = "Antikroppsbehandling bland cytostatikabehandlade",
+  pop = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos",
+  pop_short = "opererade, cytostatikabehandlade HER2+ invasiva fall utan fjärrmetastaser vid diagnos",
+  target_values = c(90, 95),
+  sjhkod_var = "d_onk_sjhkod",
+  other_vars = "a_pat_alder",
+  om_indikatorn ="Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.",
+  vid_tolkning = "Både preoperativ och postoperativ antikropps- och cytostatikabehandling är medtaget i beräkningen.",
+  inkl_beskr_onk_beh = TRUE,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc32_def$sjhkod_var) %>%
   mutate(
     # Går på det som finns, pre eller postop. Om det ena saknas antas samma som finns för det andra.
     outcome = as.logical(pmax(post_antikropp_Värde, pre_antikropp_Värde, na.rm = TRUE)),
@@ -19,7 +25,7 @@ dftemp <- dfmain %>%
     period >= 2012,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast opererade
     !is.na(op_kir_dat),
@@ -42,34 +48,11 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc32",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      "Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.",
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste(
-      "Både preoperativ och postoperativ antikropps- och cytostatikabehandling är medtaget i beräkningen.",
-      onkRed,
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc32_def$code,
+  path = output_path,
+  outcomeTitle = nkbc32_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc32_def),
+  description = compile_description(nkbc32_def, report_end_year),
+  varOther = compile_varOther(nkbc32_def),
+  targetValues = nkbc32_def$target_values
 )

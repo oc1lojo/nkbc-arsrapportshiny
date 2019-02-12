@@ -1,8 +1,14 @@
-GLOBALS <- defGlobals(
-  LAB = "Täckningsgrad mot cancerregistret",
-  POP = "alla anmälda fall.",
-  SJHKODUSE = "a_inr_sjhkod",
-  TARGET = c(95, 99)
+nkbc33_def <- list(
+  code = "nkbc33",
+  lab = "Täckningsgrad mot cancerregistret",
+  pop = "alla anmälda fall",
+  target_values = c(95, 99),
+  sjhkod_var = "a_inr_sjhkod",
+  om_indikatorn = "Anmälan till cancerregistret och anmälan till kvalitetsregistret är kombinerade och därmed undviks dubbelarbete.",
+  vid_tolkning = NULL,
+  exkl_beskr_skas = TRUE,
+  teknisk_beskrivning = NULL,
+  inkl_alt_beskr_red = "Uppgifterna redovisas uppdelat på den region personen var bosatt i vid diagnos."
 )
 
 dftemp <- data.frame(
@@ -22,25 +28,11 @@ dftemp <- data.frame(
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc33",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      "Anmälan till cancerregistret och anmälan till kvalitetsregistret är kombinerade och därmed undviks dubbelarbete.",
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste(
-      ettFallBrost,
-      sep = str_sep_description
-    ),
-    paste(
-      paste("Population:", GLOBALS$POP),
-      "Uppgifterna redovisas uppdelat på den region personen var bosatt i vid diagnos.",
-      sep = str_sep_description
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc33_def$code,
+  path = output_path,
+  outcomeTitle = nkbc33_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc33_def),
+  description = compile_description(nkbc33_def, report_end_year),
+  varOther = compile_varOther(nkbc33_def),
+  targetValues = nkbc33_def$target_values
 )

@@ -1,12 +1,18 @@
-GLOBALS <- defGlobals(
-  LAB = "Endokrin behandling, pre- respektive postoperativt",
-  POP = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos.",
-  SHORTPOP = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "d_onk_sjhkod"
+nkbc41_def <- list(
+  code = "nkbc41",
+  lab = "Endokrin behandling, pre- respektive postoperativt",
+  pop = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos",
+  pop_short = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos",
+  sjhkod_var = "d_onk_sjhkod",
+  other_vars = "a_pat_alder",
+  om_indikatorn = "Den aktuella tabellen presenterar andelen fall som fått preoperativ respektive postoperativ endokrin behandling eller bägge.",
+  vid_tolkning = "Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak p.g.a. biverkningar.",
+  inkl_beskr_onk_beh = TRUE,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc41_def$sjhkod_var) %>%
   mutate(
     # Pre eller postoperativ
     outcome = factor(
@@ -30,7 +36,7 @@ dftemp <- dfmain %>%
     period >= 2012,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast opererade
     !is.na(op_kir_dat),
@@ -50,34 +56,11 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc41",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      "Den aktuella tabellen presenterar andelen fall som fått preoperativ respektive postoperativ endokrin behandling eller bägge.",
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste(
-      "Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak p.g.a. biverkningar.",
-      onkRed,
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc41_def$code,
+  path = output_path,
+  outcomeTitle = nkbc41_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc41_def),
+  description = compile_description(nkbc41_def, report_end_year),
+  varOther = compile_varOther(nkbc41_def),
+  targetValues = nkbc41_def$target_values
 )

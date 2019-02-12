@@ -1,27 +1,31 @@
-GLOBALS <- defGlobals(
-  LAB = "Strålbehandling efter mastektomi",
-  POP = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "post_inr_sjhkod",
-  TARGET = c(90, 95)
+nkbc29_def <- list(
+  code = "nkbc29",
+  lab = "Strålbehandling efter mastektomi",
+  pop = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos",
+  target_values = c(90, 95),
+  sjhkod_var = "post_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_pn"),
+  om_indikatorn =
+    paste(
+      "Då hela bröstet opererats bort (mastektomi) behövs oftast inte strålbehandling, lokoregional strålbehandling för patienter med endast mikrometastas rekommenderas inte.",
+      "Vid spridning till lymfkörtlar bör strålbehandling ges både mot bröstkorgsväggen och lymfkörtlar."
+    ),
+  vid_tolkning = "Spridning till lymfkörtlar är definerat som metastas > 0.2 mm i axillen.",
+  inkl_beskr_onk_beh = TRUE,
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, GLOBALS$SJHKODUSE) %>%
+  add_sjhdata(sjukhuskoder, nkbc29_def$sjhkod_var) %>%
   mutate(
-    outcome = as.logical(post_rt_Värde),
-
-    d_pn = cut(op_pad_lglmetant, c(1, 4, 100),
-      include.lowest = TRUE,
-      right = FALSE,
-      labels = c("1-3 metastaser", "=> 4 metastaser")
-    )
+    outcome = as.logical(post_rt_Värde)
   ) %>%
   filter(
     # Reg av given onkologisk behandling
     period >= 2012,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast invasiv cancer
     d_invasiv == "Invasiv cancer",
@@ -41,41 +45,11 @@ dftemp <- dfmain %>%
 
 rccShiny(
   data = dftemp,
-  folder = "nkbc29",
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      paste(
-        "Då hela bröstet opererats bort (mastektomi) behövs oftast inte strålbehandling, lokoregional strålbehandling för patienter med endast mikrometastas rekommenderas inte.",
-        "Vid spridning till lymfkörtlar bör strålbehandling ges både mot bröstkorgsväggen och lymfkörtlar."
-      ),
-      descTarg(),
-      sep = str_sep_description
-    ),
-    paste(
-      "Spridning till lymfkörtlar är definerat som metastas > 0.2 mm i axillen.",
-      onkRed,
-      descTolk,
-      sep = str_sep_description
-    ),
-    paste(
-      descTekBes(),
-      sep = str_sep_description
-    )
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "d_pn",
-      label = c("Spridning till lymfkörtlar")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc29_def$code,
+  path = output_path,
+  outcomeTitle = nkbc29_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc29_def),
+  description = compile_description(nkbc29_def, report_end_year),
+  varOther = compile_varOther(nkbc29_def),
+  targetValues = nkbc29_def$target_values
 )
