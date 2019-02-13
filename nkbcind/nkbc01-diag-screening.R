@@ -3,10 +3,23 @@ nkbc01_def <- list(
   lab = "Screeningupptäckt bröstcancer",
   pop = "kvinnor i åldrarna 40-74 år vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(
+      x,
+      # Ålder 40-74 år vid diagnos
+      a_pat_alder <= 74,
+      a_pat_alder >= 40,
+
+      # Enbart kvinnor
+      KON_VALUE == 2
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      a_pat_alder = as.numeric(a_pat_alder),
+
+      # Hantera missing
+      outcome = as.logical(ifelse(a_diag_screening_Värde %in% c(0, 1), a_diag_screening_Värde, NA))
+    )
   },
   target_values = c(60, 70),
   sjhkod_var = "a_inr_sjhkod",
