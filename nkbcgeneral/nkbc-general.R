@@ -34,7 +34,7 @@ add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var = GLOBALS$SJH
     )
 }
 
-derive_nkbc_d_vars <- function(x, ...) {
+mutate_nkbc_d_vars <- function(x, ...) {
   x %>%
     mutate(
       # Beräkna variabel för primär behandling

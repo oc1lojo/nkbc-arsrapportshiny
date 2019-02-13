@@ -51,7 +51,7 @@ sjukhuskoder <- sjukhuskoder %>%
 # Bearbeta huvud-dataram
 dfmain <- df %>%
   mutate_if(is.factor, as.character) %>%
-  derive_nkbc_d_vars() %>%
+  mutate_nkbc_d_vars() %>%
   mutate(
     period = year(a_diag_dat), # Den period som appar visas för
     opyear = year(op_kir_dat),
