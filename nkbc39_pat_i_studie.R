@@ -1,14 +1,22 @@
-NAME <- "nkbc39"
-
-GLOBALS <- defGlobals(
-  LAB = "Patienten ingår i studie",
-  POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "post_inr_sjhkod"
+nkbc39_def <- list(
+  code = "nkbc39",
+  lab = "Patienten ingår i studie",
+  pop = "opererade fall utan fjärrmetastaser vid diagnos",
+  sjhkod_var = "post_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_invasiv"),
+  om_indikatorn =
+    paste(
+      "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt.",
+      "Indikatorn gäller alla typer av studier (t.ex. kliniska studier, omvårdnadsstudier, fysioterapi-studier).",
+      "Indikatorn infördes 2017 och bör tolkas med försiktighet (regionala skillnader och underrapportering)."
+    ),
+  vid_tolkning = NULL,
+  inkl_beskr_onk_beh = TRUE,
+  teknisk_beskrivning = NULL
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, nkbc39_def$sjhkod_var) %>%
   mutate(
     # Hantera missing
     a_beh_studie = as.logical(ifelse(a_beh_studie_Värde %in% c(0, 1), a_beh_studie_Värde, NA)),
@@ -26,7 +34,7 @@ dftemp <- dftemp %>%
     period >= 2012,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast opererade
     !is.na(op_kir_dat),
@@ -36,40 +44,15 @@ dftemp <- dftemp %>%
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_invasiv)
 
-link <- rccShiny(
+rccShiny(
   data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste(
-      "Ett övergripande mål är att erbjuda alla bröstcancerpatienter medverkan i studier för att utveckla nya behandlingar och arbetssätt.",
-      "Indikatorn gäller alla typer av studier (t.ex. kliniska studier, omvårdnadsstudier, fysioterapi-studier).",
-      "Indikatorn infördes 2017 och bör tolkas med försiktighet (regionala skillnader och underrapportering)."
-    ),
-    paste0(
-      onkRed,
-      "<p></p>",
-      descTolk
-    ),
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  )
+  folder = nkbc39_def$code,
+  path = output_path,
+  outcomeTitle = nkbc39_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc39_def),
+  description = compile_description(nkbc39_def, report_end_year),
+  varOther = compile_varOther(nkbc39_def),
+  targetValues = nkbc39_def$target_values
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))

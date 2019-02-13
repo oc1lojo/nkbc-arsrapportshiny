@@ -1,15 +1,24 @@
-NAME <- "nkbc01"
-
-GLOBALS <- defGlobals(
-  LAB = "Screeningupptäckt bröstcancer",
-  POP = "kvinnor i åldrarna 40-74 år vid diagnos.",
-  SJHKODUSE = "a_inr_sjhkod",
-  TARGET = c(60, 70)
+nkbc01_def <- list(
+  code = "nkbc01",
+  lab = "Screeningupptäckt bröstcancer",
+  pop = "kvinnor i åldrarna 40-74 år vid diagnos",
+  target_values = c(60, 70),
+  sjhkod_var = "a_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_invasiv"),
+  om_indikatorn = "Mammografiscreening erbjuds alla kvinnor mellan 40–74 år.",
+  vid_tolkning =
+    c(
+      paste(
+        "Definitionen av \"screeningupptäckt fall\" kan enligt erfarenhet tolkas olika vilket kan påverka siffrorna.",
+        "Enligt kvalitetsregistret avses enbart de fall som diagnostiserats i samband med en kallelse till den landstingsorganiserade screeningmammografin."
+      ),
+      "Det finns en osäkerhet avseende andel screeningupptäckta fall då det på vissa orter bara finns en mammografienhet som både utför screening och klinisk mammografi."
+    ),
+  teknisk_beskrivning = NULL
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, nkbc01_def$sjhkod_var) %>%
   mutate(
     a_pat_alder = as.numeric(a_pat_alder),
 
@@ -26,42 +35,15 @@ dftemp <- dftemp %>%
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_invasiv)
 
-link <- rccShiny(
+rccShiny(
   data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "Mammografiscreening erbjuds alla kvinnor mellan 40–74 år.",
-      descTarg()
-    ),
-    paste0(
-      "Definitionen av \"screeningupptäckt fall\" kan enligt erfarenhet tolkas olika vilket kan påverka siffrorna.
-      Enligt kvalitetsregistret avses enbart de fall som diagnostiserats i samband med en kallelse till den landstingsorganiserade screeningmammografin.
-      <p></p>
-      Det finns en osäkerhet avseende andel screeningupptäckta fall då det på vissa orter bara finns en mammografienhet som både utför screening och klinisk mammografi.
-      <p></p>",
-      descTolk
-    ),
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc01_def$code,
+  path = output_path,
+  outcomeTitle = nkbc01_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc01_def),
+  description = compile_description(nkbc01_def, report_end_year),
+  varOther = compile_varOther(nkbc01_def),
+  targetValues = nkbc01_def$target_values
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))

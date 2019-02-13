@@ -1,16 +1,19 @@
-NAME <- "nkbc32"
-
-GLOBALS <- defGlobals(
-  LAB = "Antikroppsbehandling bland cytostatikabehandlade",
-  POP = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos.",
-  SHORTPOP = "opererade, cytostatikabehandlade HER2+ invasiva fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "d_onk_sjhkod",
-  TARGET = c(90, 95)
+nkbc32_def <- list(
+  code = "nkbc32",
+  lab = "Antikroppsbehandling bland cytostatikabehandlade",
+  pop = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos",
+  pop_short = "opererade, cytostatikabehandlade HER2+ invasiva fall utan fjärrmetastaser vid diagnos",
+  target_values = c(90, 95),
+  sjhkod_var = "d_onk_sjhkod",
+  other_vars = "a_pat_alder",
+  om_indikatorn = "Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.",
+  vid_tolkning = "Både preoperativ och postoperativ antikropps- och cytostatikabehandling är medtaget i beräkningen.",
+  inkl_beskr_onk_beh = TRUE,
+  teknisk_beskrivning = NULL
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, nkbc32_def$sjhkod_var) %>%
   mutate(
     # Går på det som finns, pre eller postop. Om det ena saknas antas samma som finns för det andra.
     outcome = as.logical(pmax(post_antikropp_Värde, pre_antikropp_Värde, na.rm = TRUE)),
@@ -22,57 +25,34 @@ dftemp <- dftemp %>%
     period >= 2012,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast opererade
     !is.na(op_kir_dat),
 
     # Endast invasiv cancer
-    invasiv == "Invasiv cancer",
+    d_invasiv == "Invasiv cancer",
 
     # Endast cytostatikabehandlade
     d_kemo == TRUE,
 
     # HER2+ (amplifiering eller 3+).
-    her2 == 1,
+    d_her2_Värde == 1,
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder)
 
-link <- rccShiny(
+rccShiny(
   data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.",
-      descTarg()
-    ),
-    paste0(
-      "Både preoperativ och postoperativ antikropps- och cytostatikabehandling är medtaget i beräkningen.
-      <p></p>",
-      onkRed,
-      "<p></p>",
-      descTolk
-    ),
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc32_def$code,
+  path = output_path,
+  outcomeTitle = nkbc32_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc32_def),
+  description = compile_description(nkbc32_def, report_end_year),
+  varOther = compile_varOther(nkbc32_def),
+  targetValues = nkbc32_def$target_values
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))

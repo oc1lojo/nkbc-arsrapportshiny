@@ -1,16 +1,18 @@
-NAME <- "nkbc08"
-
-GLOBALS <- defGlobals(
-  LAB = "Enbart en operation (ingen omoperation p.g.a. tumördata) i bröst",
-  POP = "opererade fall utan fjärrmetastaser vid diagnos.",
-  SHORTLAB = "Enbart en operation",
-  SJHKODUSE = "op_inr_sjhkod",
-  TARGET = c(80, 90)
+nkbc08_def <- list(
+  code = "nkbc08",
+  lab = "Enbart en operation (ingen omoperation p.g.a. tumördata) i bröst",
+  lab_short = "Enbart en operation",
+  pop = "opererade fall utan fjärrmetastaser vid diagnos",
+  target_values = c(80, 90),
+  sjhkod_var = "op_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_invasiv"),
+  om_indikatorn = "Om det vid analys av den bortopererade vävnaden visar sig att tumörvävnad kan ha kvarlämnats blir patienten ofta rekommenderad en omoperation.",
+  vid_tolkning = NULL,
+  teknisk_beskrivning = NULL
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, nkbc08_def$sjhkod_var) %>%
   mutate(
     # Hantera missing
     outcome = ifelse(op_kir_sekbrost_Värde %in% c(0, 1), op_kir_sekbrost_Värde, NA),
@@ -23,36 +25,15 @@ dftemp <- dftemp %>%
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_invasiv)
 
-link <- rccShiny(
+rccShiny(
   data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "Om det vid analys av den bortopererade vävnaden visar sig att tumörvävnad kan ha kvarlämnats blir patienten ofta rekommenderad en omoperation.",
-      descTarg()
-    ),
-    descTolk,
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc08_def$code,
+  path = output_path,
+  outcomeTitle = nkbc08_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc08_def),
+  description = compile_description(nkbc08_def, report_end_year),
+  varOther = compile_varOther(nkbc08_def),
+  targetValues = nkbc08_def$target_values
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))

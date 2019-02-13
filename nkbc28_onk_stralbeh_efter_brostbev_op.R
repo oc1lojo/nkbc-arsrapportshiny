@@ -1,15 +1,22 @@
-NAME <- "nkbc28"
-
-GLOBALS <- defGlobals(
-  LAB = "Strålbehandling efter bröstbevarande operation",
-  POP = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "post_inr_sjhkod",
-  TARGET = c(90, 95)
+nkbc28_def <- list(
+  code = "nkbc28",
+  lab = "Strålbehandling efter bröstbevarande operation",
+  pop = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos",
+  target_values = c(90, 95),
+  sjhkod_var = "post_inr_sjhkod",
+  other_vars = "a_pat_alder",
+  om_indikatorn =
+    paste(
+      "Strålbehandling efter bröstbevarande operation minskar risk för återfall.",
+      "I de fall där samsjuklighet föreligger får nyttan med strålbehandling avvägas med hänsyn till övriga medicinska faktorer."
+    ),
+  vid_tolkning = NULL,
+  inkl_beskr_onk_beh = TRUE,
+  teknisk_beskrivning = NULL
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, nkbc28_def$sjhkod_var) %>%
   mutate(
     outcome = as.logical(post_rt_Värde)
   ) %>%
@@ -18,13 +25,13 @@ dftemp <- dftemp %>%
     period >= 2012,
 
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
+    period <= report_end_year - 1,
 
     # Endast opererade
     !is.na(op_kir_dat),
 
     # Endast invasiv cancer
-    invasiv == "Invasiv cancer",
+    d_invasiv == "Invasiv cancer",
 
     # Endast bröstbevarande operation
     op_kir_brost_Värde == 1,
@@ -34,36 +41,15 @@ dftemp <- dftemp %>%
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder)
 
-link <- rccShiny(
+rccShiny(
   data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "Strålbehandling efter bröstbevarande operation minskar risk för återfall. I de fall där samsjuklighet föreligger får nyttan med strålbehandling avvägas med hänsyn till övriga medicinska faktorer.",
-      descTarg()
-    ),
-    paste0(
-      onkRed,
-      "<p></p>",
-      descTolk
-    ),
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc28_def$code,
+  path = output_path,
+  outcomeTitle = nkbc28_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc28_def),
+  description = compile_description(nkbc28_def, report_end_year),
+  varOther = compile_varOther(nkbc28_def),
+  targetValues = nkbc28_def$target_values
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))

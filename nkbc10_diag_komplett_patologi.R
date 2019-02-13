@@ -1,16 +1,18 @@
-NAME <- "nkbc10"
-
-GLOBALS <- defGlobals(
-  LAB = "Fullständig patologirapport (Grad, ER, PR, HER2, Ki67)",
-  POP = "primärt opererade fall med invasiv cancer utan fjärrmetastaser vid diagnos.",
-  SHORTLAB = "Fullständig patologirapport",
-  SJHKODUSE = "op_inr_sjhkod",
-  TARGET = c(95, 98)
+nkbc10_def <- list(
+  code = "nkbc10",
+  lab = "Fullständig patologirapport (Grad, ER, PR, HER2, Ki67)",
+  lab_short = "Fullständig patologirapport",
+  pop = "primärt opererade fall med invasiv cancer utan fjärrmetastaser vid diagnos",
+  target_values = c(95, 98),
+  sjhkod_var = "op_inr_sjhkod",
+  other_vars = "a_pat_alder",
+  om_indikatorn = "Patologirapporten grundas i mikroskopiska vävnadsanalyser. Biomarkörerna etablerar grunden till den onkologiska behandlingen av bröstcancer (endokrin-, cytostatika-  eller antikroppsbehandling).",
+  vid_tolkning = "Ki67 tillkom som nationell variabel 2014 och ingår ej i beräkning innan detta datum.",
+  teknisk_beskrivning = NULL
 )
 
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
+dftemp <- dfmain %>%
+  add_sjhdata(sjukhuskoder, nkbc10_def$sjhkod_var) %>%
   mutate(
     d_op_nhgok = op_pad_nhg_Värde %in% c(1, 2, 3),
     d_op_erok = op_pad_er_Värde %in% c(1, 2) | !is.na(op_pad_erproc),
@@ -26,46 +28,25 @@ dftemp <- dftemp %>%
     !is.na(op_kir_dat),
 
     # Endast primär opereration (planerad om utförd ej finns)
-    prim_beh == 1,
+    d_prim_beh_Värde == 1,
 
     # Endast invasiv cancer
-    invasiv == "Invasiv cancer",
+    d_invasiv == "Invasiv cancer",
 
     # Ej fjärrmetastaser vid diagnos
     !a_tnm_mklass_Värde %in% 10,
 
     !is.na(region)
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(landsting, region, sjukhus, period, outcome, a_pat_alder)
 
-link <- rccShiny(
+rccShiny(
   data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "Patologirapporten grundas i mikroskopiska vävnadsanalyser. Biomarkörerna etablerar grunden till den onkologiska behandlingen av bröstcancer (endokrin-, cytostatika-  eller antikroppsbehandling).",
-      descTarg()
-    ),
-    paste0(
-      "Ki67 tillkom som nationell variabel 2014 och ingår ej i beräkning innan detta datum.
-      <p></p>",
-      descTolk
-    ),
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+  folder = nkbc10_def$code,
+  path = output_path,
+  outcomeTitle = nkbc10_def$lab,
+  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc10_def),
+  description = compile_description(nkbc10_def, report_end_year),
+  varOther = compile_varOther(nkbc10_def),
+  targetValues = nkbc10_def$target_values
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))
