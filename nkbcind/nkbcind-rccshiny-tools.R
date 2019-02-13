@@ -15,9 +15,9 @@ compile_description <- function(x, report_end_year = report_end_year, ...) {
         if (!is.null(x$target_values)) {
           case_when(
             length(x$target_values) == 1 ~
-              paste0("Målnivå: ", x$target_values[1], "%"),
+            paste0("Målnivå: ", x$target_values[1], "%"),
             length(x$target_values) == 2 ~
-              paste0("Målnivåer: ", x$target_values[1], "% (låg) ", x$target_values[2], "% (hög)")
+            paste0("Målnivåer: ", x$target_values[1], "% (låg) ", x$target_values[2], "% (hög)")
           )
         }
       ),
@@ -53,13 +53,13 @@ compile_description <- function(x, report_end_year = report_end_year, ...) {
           "Uppgifterna redovisas uppdelat på ",
           case_when(
             x$sjhkod_var %in% "a_inr_sjhkod" ~
-              "anmälande sjukhus",
+            "anmälande sjukhus",
             x$sjhkod_var %in% c("post_inr_sjhkod", "pre_inr_sjhkod", "d_onk_sjhkod") ~
-              "onkologiskt sjukhus",
+            "onkologiskt sjukhus",
             x$sjhkod_var %in% "op_inr_sjhkod" ~
-              "opererande sjukhus",
+            "opererande sjukhus",
             x$sjhkod_var %in% c("d_onkpreans_sjhkod", "d_onkpostans_sjhkod") ~
-              "rapporterande onkologiskt sjukhus och om detta saknas sjukhus ansvarigt för rapportering av onkologisk behandling, onkologiskt sjukhus, anmälande sjukhus"
+            "rapporterande onkologiskt sjukhus och om detta saknas sjukhus ansvarigt för rapportering av onkologisk behandling, onkologiskt sjukhus, anmälande sjukhus"
           ),
           "."
         )
@@ -79,9 +79,9 @@ compile_description_nkbc33 <- function(x, ...) {
         if (!is.null(x$target_values)) {
           case_when(
             length(x$target_values) == 1 ~
-              paste0("Målnivå: ", x$target_values[1], "%"),
+            paste0("Målnivå: ", x$target_values[1], "%"),
             length(x$target_values) == 2 ~
-              paste0("Målnivåer: ", x$target_values[1], "% (låg) ", x$target_values[2], "% (hög)")
+            paste0("Målnivåer: ", x$target_values[1], "% (låg) ", x$target_values[2], "% (hög)")
           )
         }
       ),

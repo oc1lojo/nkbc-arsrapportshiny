@@ -6,7 +6,7 @@ nkbc32_def <- list(
   target_values = c(90, 95),
   sjhkod_var = "d_onk_sjhkod",
   other_vars = "a_pat_alder",
-  om_indikatorn ="Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.",
+  om_indikatorn = "Vid HER2-positiv invasiv bröstcancer rekommenderas behandling med antikroppsbehandling i kombination efter eller med cytostatika, under förutsättning att patienten kan tolerera det sistnämnda.",
   vid_tolkning = "Både preoperativ och postoperativ antikropps- och cytostatikabehandling är medtaget i beräkningen.",
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL

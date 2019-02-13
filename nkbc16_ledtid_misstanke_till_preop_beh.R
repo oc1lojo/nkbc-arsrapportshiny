@@ -69,4 +69,3 @@ rccShiny(
   propWithinValue = nkbc16_def$prop_within_value,
   targetValues = nkbc16_def$target_values
 )
-

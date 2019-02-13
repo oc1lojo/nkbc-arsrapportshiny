@@ -38,4 +38,3 @@ rccShiny(
   varOther = compile_varOther(nkbc07_def),
   targetValues = nkbc07_def$target_values
 )
-
