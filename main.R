@@ -1,14 +1,9 @@
-# Läs in R-paket ------------------------------------------------------------------
+# Läs in R-paket och verktygsfunktioner ----------------------------------------
 
 library(dplyr)
 library(lubridate)
 library(shiny)
 library(rccShiny)
-
-# Läs in/Definera "konstanter" och verktygsfunktioner -----------------------------
-
-report_end_year <- 2017
-output_path <- "Output"
 
 for (file_name in list.files("nkbcgeneral", pattern = "*.R")) {
   source(file.path("nkbcgeneral", file_name), encoding = "UTF-8")
@@ -16,6 +11,11 @@ for (file_name in list.files("nkbcgeneral", pattern = "*.R")) {
 for (file_name in list.files("nkbcind", pattern = "*.R")) {
   source(file.path("nkbcind", file_name), encoding = "UTF-8")
 }
+
+# Definera globala variabler ---------------------------------------------------
+
+report_end_year <- 2017
+output_path <- "Output"
 
 # Läs in data ------------------------------------------------------------------
 
