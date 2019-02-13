@@ -1,15 +1,3 @@
-nkbc14_def <- list(
-  code = "nkbc14",
-  lab = "Täckningsgrad för rapportering av postoperativ onkologisk behandling",
-  pop = "opererade fall utan fjärrmetastaser vid diagnos",
-  target_values = c(70, 85),
-  sjhkod_var = "d_onkpostans_sjhkod",
-  om_indikatorn = "Rapportering av given onkologisk behandling sker på ett eget formulär till kvalitetsregistret, separat från anmälan. Rapporteringen sker cirka 1 - 1,5 år efter anmälan.",
-  vid_tolkning = NULL,
-  inkl_beskr_onk_beh = TRUE,
-  teknisk_beskrivning = NULL
-)
-
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc14_def$sjhkod_var) %>%
   mutate(

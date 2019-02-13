@@ -1,0 +1,27 @@
+nkbc01_def <- list(
+  code = "nkbc01",
+  lab = "Screeningupptäckt bröstcancer",
+  pop = "kvinnor i åldrarna 40-74 år vid diagnos",
+  filter_pop = function(x, ...) {
+    filter(x)
+  },
+  mutate_outcome = function(x, ...) {
+    mutate(x)
+  },
+  target_values = c(60, 70),
+  sjhkod_var = "a_inr_sjhkod",
+  other_vars = c("a_pat_alder", "d_invasiv"),
+  om_indikatorn = "Mammografiscreening erbjuds alla kvinnor mellan 40–74 år.",
+  vid_tolkning =
+    c(
+      paste(
+        "Definitionen av \"screeningupptäckt fall\" kan enligt erfarenhet tolkas olika vilket kan påverka siffrorna.",
+        "Enligt kvalitetsregistret avses enbart de fall som diagnostiserats i samband med en kallelse till den landstingsorganiserade screeningmammografin."
+      ),
+      "Det finns en osäkerhet avseende andel screeningupptäckta fall då det på vissa orter bara finns en mammografienhet som både utför screening och klinisk mammografi."
+    ),
+  teknisk_beskrivning = NULL
+)
+
+filter_nkbc01_pop <- nkbc01_def$filter_pop
+mutate_nkbc01_outcome <- nkbc01_def$mutate_outcome

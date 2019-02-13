@@ -1,17 +1,3 @@
-nkbc09b_def <- list(
-  code = "nkbc09b",
-  lab = "Ålder vid diagnos",
-  lab_short = "Ålder",
-  pop = "alla anmälda fall",
-  prop_within_unit = "år",
-  prop_within_value = 65,
-  sjhkod_var = "a_inr_sjhkod",
-  other_vars = "d_invasiv",
-  om_indikatorn = "Det är ovanligt med bröstcancer i unga år.",
-  vid_tolkning = NULL,
-  teknisk_beskrivning = NULL
-)
-
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc09b_def$sjhkod_var) %>%
   mutate(

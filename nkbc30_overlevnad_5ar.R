@@ -1,20 +1,3 @@
-nkbc30_def <- list(
-  code = "nkbc30",
-  lab = "Observerad 5 års överlevnad",
-  pop = "alla anmälda fall",
-  target_values = 88,
-  sjhkod_var = "a_inr_sjhkod",
-  other_vars = c("a_pat_alder", "d_invasiv", "d_subtyp"),
-  om_indikatorn =
-    paste(
-      "Total överlevnad betraktas som det viktigaste utfallsmåttet.",
-      "Observerad överlevnad anger de bröstcancerfall som överlevt 5 år efter diagnos.",
-      "Dödsorsakerna kan vara andra än bröstcancer."
-    ),
-  inkl_beskr_overlevnad_5ar = TRUE,
-  teknisk_beskrivning = NULL
-)
-
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc30_def$sjhkod_var) %>%
   mutate(

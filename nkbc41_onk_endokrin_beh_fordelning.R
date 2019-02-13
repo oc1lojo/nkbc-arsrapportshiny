@@ -1,16 +1,3 @@
-nkbc41_def <- list(
-  code = "nkbc41",
-  lab = "Endokrin behandling, pre- respektive postoperativt",
-  pop = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos",
-  pop_short = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos",
-  sjhkod_var = "d_onk_sjhkod",
-  other_vars = "a_pat_alder",
-  om_indikatorn = "Den aktuella tabellen presenterar andelen fall som fått preoperativ respektive postoperativ endokrin behandling eller bägge.",
-  vid_tolkning = "Här presenteras data för påbörjad behandling. Det finns studier som visar att ca 70% av patienterna stoppar eller gör längre avbrott i sin endokrinabehandling i huvudsak p.g.a. biverkningar.",
-  inkl_beskr_onk_beh = TRUE,
-  teknisk_beskrivning = NULL
-)
-
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc41_def$sjhkod_var) %>%
   mutate(

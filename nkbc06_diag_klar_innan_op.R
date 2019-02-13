@@ -1,19 +1,3 @@
-nkbc06_def <- list(
-  code = "nkbc06",
-  lab = "Fastställd diagnos innan operation",
-  pop = "opererade fall utan fjärrmetastaser vid diagnos",
-  target_values = c(80, 90),
-  sjhkod_var = "a_inr_sjhkod",
-  other_vars = c("a_pat_alder", "d_invasiv"),
-  om_indikatorn = "En fastställd diagnos innan behandlingsstart är viktigt för planering och genomförande av behandling och undvikande av omoperationer.",
-  vid_tolkning =
-    paste(
-      "Det kan ibland vara nödvändigt att operera patienten innan diagnosen är fastställd för att undvika alltför långa utredningstider.",
-      "Fastställd diagnos måste vägas mot tidsåtgång."
-    ),
-  teknisk_beskrivning = NULL
-)
-
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc06_def$sjhkod_var) %>%
   mutate(
