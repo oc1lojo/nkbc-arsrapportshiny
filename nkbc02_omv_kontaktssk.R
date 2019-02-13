@@ -1,16 +1,12 @@
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc02_def$sjhkod_var) %>%
-  mutate(
-    # Hantera missing
-    outcome = as.logical(ifelse(a_omv_kssk_Värde %in% c(0, 1), a_omv_kssk_Värde, NA))
-  ) %>%
-  filter(
-    # kontaktsjuksköterska tillkom mitten av 2014
-    period >= 2015,
-
-    !is.na(region)
-  ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_invasiv)
+  filter(!is.na(region)) %>%
+  filter_nkbc02_pop() %>%
+  mutate_nkbc02_outcome() %>%
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc02_def$other_vars)
+  )
 
 rccShiny(
   data = dftemp,

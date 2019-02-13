@@ -4,10 +4,16 @@ nkbc02_def <- list(
   lab_short = "Kontaktsjuksköterska",
   pop = "alla anmälda fall",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # kontaktsjuksköterska tillkom mitten av 2014
+      year(a_diag_dat) >= 2015
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      # Hantera missing
+      outcome = as.logical(ifelse(a_omv_kssk_Värde %in% c(0, 1), a_omv_kssk_Värde, NA))
+    )
   },
   target_values = c(80, 95),
   sjhkod_var = "a_inr_sjhkod",
