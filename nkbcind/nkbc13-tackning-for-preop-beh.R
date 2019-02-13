@@ -4,7 +4,8 @@ nkbc13_def <- list(
   pop = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling",
   pop_short = "fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Reg av given onkologisk behandling
       year(a_diag_dat) >= 2012,
 

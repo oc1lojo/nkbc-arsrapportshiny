@@ -3,7 +3,8 @@ nkbc16_def <- list(
   lab = "Välgrundad misstanke om cancer till preoperativ onkologisk behandling",
   pop = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Endast fall med år från 2013 (1:a kontakt tillkom 2013)
       year(a_diag_dat) >= 2013,
 

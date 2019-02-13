@@ -4,7 +4,8 @@ nkbc03_def <- list(
   lab_short = "Min vårdplan",
   pop = "alla anmälda fall",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # min vp tillkom mitten av 2014
       year(a_diag_dat) >= 2015
     )

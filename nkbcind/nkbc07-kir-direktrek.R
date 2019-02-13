@@ -4,7 +4,8 @@ nkbc07_def <- list(
   pop = "fall med mastektomi eller subkutan mastektomi utan fjärrmetastaser vid diagnos",
   pop_short = "mastektomerade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Endast mastektomi och subkutan mastektomi
       op_kir_brost_Värde %in% c(2, 4),
 

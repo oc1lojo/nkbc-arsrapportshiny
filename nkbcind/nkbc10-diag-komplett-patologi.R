@@ -4,7 +4,8 @@ nkbc10_def <- list(
   lab_short = "Fullständig patologirapport",
   pop = "primärt opererade fall med invasiv cancer utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Endast opererade
       !is.na(op_kir_dat),
 

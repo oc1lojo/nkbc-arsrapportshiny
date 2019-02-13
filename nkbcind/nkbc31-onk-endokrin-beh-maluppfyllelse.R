@@ -4,7 +4,8 @@ nkbc31_def <- list(
   pop = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos",
   pop_short = "opererade ER+ invasiva fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Reg av given onkologisk behandling
       period >= 2012,
 

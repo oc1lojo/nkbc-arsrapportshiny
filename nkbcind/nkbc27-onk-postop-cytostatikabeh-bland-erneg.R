@@ -4,7 +4,8 @@ nkbc27_def <- list(
   pop = "primärt opererade östrogenreceptornegativa invasiva fall med tumörstorlek > 10mm eller spridning till lymfkörtlar utan fjärrmetastaser vid diagnos",
   pop_short = "primärt opererade ER- invasiva fall med större tumörer utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Reg av given onkologisk behandling
       period >= 2012,
 
@@ -26,7 +27,7 @@ nkbc27_def <- list(
 
       # Ej fjärrmetastaser vid diagnos
       !a_tnm_mklass_Värde %in% 10
-      )
+    )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,

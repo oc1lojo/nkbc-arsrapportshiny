@@ -3,7 +3,8 @@ nkbc35_def <- list(
   lab = "Cytostatikabehandling",
   pop = "opererade, invasiva fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Reg av given onkologisk behandling
       period >= 2012,
 

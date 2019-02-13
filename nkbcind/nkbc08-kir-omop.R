@@ -4,7 +4,8 @@ nkbc08_def <- list(
   lab_short = "Enbart en operation",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Ej fjärrmetastaser vid diagnos
       !a_tnm_mklass_Värde %in% 10
     )

@@ -3,7 +3,8 @@ nkbc40_def <- list(
   lab = "Typ av primär behandling",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Endast opererade
       !is.na(op_kir_dat),
 

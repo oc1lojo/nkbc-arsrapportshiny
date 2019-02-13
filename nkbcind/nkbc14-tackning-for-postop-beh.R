@@ -3,7 +3,8 @@ nkbc14_def <- list(
   lab = "Täckningsgrad för rapportering av postoperativ onkologisk behandling",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Reg av given onkologisk behandling
       year(a_diag_dat) >= 2012,
 

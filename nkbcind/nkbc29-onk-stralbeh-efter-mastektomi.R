@@ -3,7 +3,8 @@ nkbc29_def <- list(
   lab = "Strålbehandling efter mastektomi",
   pop = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Reg av given onkologisk behandling
       year(a_diag_dat) >= 2012,
 

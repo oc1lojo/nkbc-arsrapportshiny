@@ -3,7 +3,8 @@ nkbc19_def <- list(
   lab = "Första behandlingsdiskussion till operation",
   pop = "primärt opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Endast opererade
       !is.na(op_kir_dat),
 

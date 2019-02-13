@@ -3,7 +3,8 @@ nkbc28_def <- list(
   lab = "Strålbehandling efter bröstbevarande operation",
   pop = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Reg av given onkologisk behandling
       year(a_diag_dat) >= 2012,
 

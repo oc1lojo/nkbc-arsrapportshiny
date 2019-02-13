@@ -3,7 +3,8 @@ nkbc22_def <- list(
   lab = "Operation till cytostatikabehandling",
   pop = "primärt opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Reg av given onkologisk behandling
       period >= 2012,
 
@@ -14,7 +15,8 @@ nkbc22_def <- list(
       d_prim_beh_Värde == 1,
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10)
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,

@@ -4,7 +4,8 @@ nkbc02_def <- list(
   lab_short = "Kontaktsjuksköterska",
   pop = "alla anmälda fall",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # kontaktsjuksköterska tillkom mitten av 2014
       year(a_diag_dat) >= 2015
     )

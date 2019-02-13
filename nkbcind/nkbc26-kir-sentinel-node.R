@@ -4,7 +4,8 @@ nkbc26_def <- list(
   pop = "invasiva fall utan spridning till lymfkörtlar (klinisk diagnos) eller fjärrmetastaser vid diagnos",
   pop_short = "invasiva fall utan spridning till lymfkörtlar eller fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x,
+    filter(
+      x,
       # Endast invasiv cancer
       d_invasiv == "Invasiv cancer",
 
