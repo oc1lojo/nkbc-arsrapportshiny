@@ -33,12 +33,6 @@ mutate_nkbc_d_vars <- function(x, ...) {
       )
     ),
 
-    d_er = factor(
-      ifelse(is.na(d_er_Värde), 99, d_er_Värde),
-      c(1, 2, 99),
-      c("Positiv", "Negativ", "Uppgift saknas")
-    ),
-
     # PR, 1 = pos, 2 = neg
     d_pr_op_Värde = case_when(
       op_pad_prproc < 10 | is.na(op_pad_prproc) & op_pad_pr_Värde %in% 2 ~ 2,
@@ -73,69 +67,13 @@ mutate_nkbc_d_vars <- function(x, ...) {
       )
     ),
 
-    d_subtyp = factor(case_when(
+    # Biologisk subtyp, 1 = TNBC, 2 = HER2, 3 = Luminal, 99 = Uppgift saknas
+    d_subtyp_Värde = case_when(
       d_er_Värde %in% 2 & d_pr_Värde %in% 2 & d_her2_Värde %in% 2 ~ 1,
       is.na(d_er_Värde) | is.na(d_pr_Värde) | is.na(d_her2_Värde) ~ 99,
       d_her2_Värde %in% 1 ~ 2,
       d_er_Värde %in% 1 | d_pr_Värde %in% 1 ~ 3,
       TRUE ~ 99
-    ),
-    labels = c("Trippel negativ", "HER2 positiv", "Luminal", "Uppgift saknas")
-    ),
-
-    # T
-    d_tstad = factor(
-      case_when(
-        a_tnm_tklass_Värde == 0 ~ 1,
-        a_tnm_tklass_Värde == 5 ~ 1,
-        a_tnm_tklass_Värde == 10 ~ 1,
-        a_tnm_tklass_Värde == 20 ~ 2,
-        a_tnm_tklass_Värde == 30 ~ 2,
-        a_tnm_tklass_Värde == 42 ~ 2,
-        a_tnm_tklass_Värde == 44 ~ 2,
-        a_tnm_tklass_Värde == 45 ~ 2,
-        a_tnm_tklass_Värde == 46 ~ 2,
-        a_tnm_tklass_Värde == 50 ~ 99,
-        is.na(a_tnm_tklass_Värde) ~ 99,
-        TRUE ~ NA_real_
-      ),
-      levels = c(1, 2, 99),
-      labels = c("<=20mm (T0/T1)", ">20mm (T2-T4)", "Uppgift saknas")
-    ),
-
-    # N
-    d_nstad = factor(
-      case_when(
-        a_tnm_nklass_Värde == 0 ~ 1,
-        a_tnm_nklass_Värde == 10 ~ 2,
-        a_tnm_nklass_Värde == 20 ~ 2,
-        a_tnm_nklass_Värde == 30 ~ 2,
-        a_tnm_nklass_Värde == 40 ~ 99,
-        is.na(a_tnm_nklass_Värde) ~ 99,
-        TRUE ~ NA_real_
-      ),
-      levels = c(1, 2, 99),
-      labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")
-    ),
-
-    # M
-    d_mstad = factor(
-      case_when(
-        a_tnm_mklass_Värde == 0 ~ 1,
-        a_tnm_mklass_Värde == 10 ~ 2,
-        a_tnm_mklass_Värde == 20 ~ 99,
-        is.na(a_tnm_mklass_Värde) ~ 99,
-        TRUE ~ NA_real_
-      ),
-      levels = c(1, 2, 99),
-      labels = c("Nej (M0)", "Ja (M1)", "Uppgift saknas")
-    ),
-
-    # pN
-    d_pn = cut(op_pad_lglmetant, c(1, 4, 100),
-      include.lowest = TRUE,
-      right = FALSE,
-      labels = c("1-3 metastaser", "=> 4 metastaser")
     ),
 
     # fix 1.sjukhus ansvarigt för rapportering av onkologisk behandling/2.onkologiskt sjukhus/3.anmälande sjukhus
