@@ -4,10 +4,34 @@ nkbc27_def <- list(
   pop = "primärt opererade östrogenreceptornegativa invasiva fall med tumörstorlek > 10mm eller spridning till lymfkörtlar utan fjärrmetastaser vid diagnos",
   pop_short = "primärt opererade ER- invasiva fall med större tumörer utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Reg av given onkologisk behandling
+      period >= 2012,
+
+      # Endast opererade
+      !is.na(op_kir_dat),
+
+      # Endast primär opereration (planerad om utfärd ej finns)
+      # (pga att info om tumörstorlek och spridning till N behövs)
+      d_prim_beh_Värde == 1,
+
+      # Endast invasiv cancer
+      d_invasiv == "Invasiv cancer",
+
+      # ER-
+      d_er_Värde == 2,
+
+      # Tumörstorlek > 10 mm eller spridning till lymfkörtlar
+      (op_pad_invstl > 10 | op_pad_lglmetant > 0),
+
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+      )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = as.logical(post_kemo_Värde)
+    )
   },
   target_values = c(80, 90),
   sjhkod_var = "post_inr_sjhkod",

@@ -3,10 +3,25 @@ nkbc40_def <- list(
   lab = "Typ av primär behandling",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Endast opererade
+      !is.na(op_kir_dat),
+
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      # Prim op eller preop onk beh
+      outcome = factor(d_prim_beh_Värde,
+        levels = c(1, 2),
+        labels = c(
+          "Primär operation",
+          "Preoperativ onkologisk behandling"
+        )
+      )
+    )
   },
   sjhkod_var = "op_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_subtyp", "d_nstad"),

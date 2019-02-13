@@ -3,10 +3,21 @@ nkbc14_def <- list(
   lab = "Täckningsgrad för rapportering av postoperativ onkologisk behandling",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Reg av given onkologisk behandling
+      year(a_diag_dat) >= 2012,
+
+      # Endast opererade
+      !is.na(op_kir_dat),
+
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = ifelse(!is.na(post_inr_dat) | !is.na(post_inr_enh) | !is.na(post_inr_initav), TRUE, FALSE)
+    )
   },
   target_values = c(70, 85),
   sjhkod_var = "d_onkpostans_sjhkod",

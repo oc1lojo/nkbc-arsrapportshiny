@@ -6,7 +6,11 @@ nkbc30_def <- list(
     filter(x)
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      lastdate = ymd(paste0(report_end_year, "-12-31")),
+      surv_time = ymd(VITALSTATUSDATUM_ESTIMAT) - ymd(a_diag_dat),
+      outcome = surv_time >= 365.25 * 5
+    )
   },
   target_values = 88,
   sjhkod_var = "a_inr_sjhkod",

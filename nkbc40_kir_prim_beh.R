@@ -1,25 +1,12 @@
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc40_def$sjhkod_var) %>%
-  mutate(
-    # Prim op eller preop onk beh
-    outcome = factor(d_prim_beh_Värde,
-      levels = c(1, 2),
-      labels = c(
-        "Primär operation",
-        "Preoperativ onkologisk behandling"
-      )
-    )
-  ) %>%
-  filter(
-    # Endast opererade
-    !is.na(op_kir_dat),
-
-    # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% 10,
-
-    !is.na(region)
-  ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_nstad, d_subtyp)
+  filter(!is.na(region)) %>%
+  filter_nkbc40_pop() %>%
+  mutate_nkbc40_outcome() %>%
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc40_def$other_vars)
+  )
 
 rccShiny(
   data = dftemp,

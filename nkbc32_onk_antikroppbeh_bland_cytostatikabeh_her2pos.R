@@ -1,36 +1,16 @@
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc32_def$sjhkod_var) %>%
-  mutate(
-    # Går på det som finns, pre eller postop. Om det ena saknas antas samma som finns för det andra.
-    outcome = as.logical(pmax(post_antikropp_Värde, pre_antikropp_Värde, na.rm = TRUE)),
-
-    d_kemo = as.logical(pmax(post_kemo_Värde, pre_kemo_Värde, na.rm = TRUE))
-  ) %>%
+  filter(!is.na(region)) %>%
+  filter_nkbc32_pop() %>%
+  mutate_nkbc32_outcome() %>%
   filter(
-    # Reg av given onkologisk behandling
-    period >= 2012,
-
     # ett år bakåt då info från onk behandling blanketter
-    period <= report_end_year - 1,
-
-    # Endast opererade
-    !is.na(op_kir_dat),
-
-    # Endast invasiv cancer
-    d_invasiv == "Invasiv cancer",
-
-    # Endast cytostatikabehandlade
-    d_kemo == TRUE,
-
-    # HER2+ (amplifiering eller 3+).
-    d_her2_Värde == 1,
-
-    # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% 10,
-
-    !is.na(region)
+    period <= report_end_year - 1
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder)
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc32_def$other_vars)
+  )
 
 rccShiny(
   data = dftemp,

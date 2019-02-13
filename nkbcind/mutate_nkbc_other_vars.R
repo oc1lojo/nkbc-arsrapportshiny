@@ -69,6 +69,8 @@ mutate_nkbc_other_vars <- function(x, ...) {
       labels = c("1-3 metastaser", "=> 4 metastaser")
     ),
 
-    d_max_extent = pmax(op_pad_extentx, op_pad_extenty, na.rm = TRUE)
+    d_max_extent = pmax(op_pad_extentx, op_pad_extenty, na.rm = TRUE),
+
+    d_kemo = as.logical(pmax(post_kemo_Värde, pre_kemo_Värde, na.rm = TRUE))
   )
 }

@@ -3,10 +3,27 @@ nkbc29_def <- list(
   lab = "Strålbehandling efter mastektomi",
   pop = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Reg av given onkologisk behandling
+      year(a_diag_dat) >= 2012,
+
+      # Endast invasiv cancer
+      d_invasiv == "Invasiv cancer",
+
+      # Endast mastektomi och subkutan mastektomi
+      op_kir_brost_Värde %in% c(2, 4),
+
+      # Spridning till lymfkörtlar
+      op_pad_lglmetant > 0,
+
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = as.logical(post_rt_Värde)
+    )
   },
   target_values = c(90, 95),
   sjhkod_var = "post_inr_sjhkod",

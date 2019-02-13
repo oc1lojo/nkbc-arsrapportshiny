@@ -1,30 +1,17 @@
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc29_def$sjhkod_var) %>%
-  mutate(
-    outcome = as.logical(post_rt_Värde)
-  ) %>%
+  filter(!is.na(region)) %>%
+  filter_nkbc29_pop() %>%
+  mutate_nkbc29_outcome() %>%
   filter(
-    # Reg av given onkologisk behandling
-    period >= 2012,
-
     # ett år bakåt då info från onk behandling blanketter
-    period <= report_end_year - 1,
-
-    # Endast invasiv cancer
-    d_invasiv == "Invasiv cancer",
-
-    # Endast mastektomi och subkutan mastektomi
-    op_kir_brost_Värde %in% c(2, 4),
-
-    # Spridning till lymfkörtlar
-    op_pad_lglmetant > 0,
-
-    # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% 10,
-
-    !is.na(region)
+    period <= report_end_year - 1
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_pn)
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc29_def$other_vars)
+  )
+
 
 rccShiny(
   data = dftemp,

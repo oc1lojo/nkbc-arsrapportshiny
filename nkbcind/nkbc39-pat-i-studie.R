@@ -3,10 +3,30 @@ nkbc39_def <- list(
   lab = "Patienten ingår i studie",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Reg av given onkologisk behandling
+      period >= 2012,
+
+      # Endast opererade
+      !is.na(op_kir_dat),
+
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      # Hantera missing
+      a_beh_studie = as.logical(ifelse(a_beh_studie_Värde %in% c(0, 1), a_beh_studie_Värde, NA)),
+      pre_beh_studie = as.logical(ifelse(pre_beh_studie_Värde %in% c(0, 1), pre_beh_studie_Värde, NA)),
+      post_beh_studie = as.logical(ifelse(post_beh_studie_Värde %in% c(0, 1), post_beh_studie_Värde, NA)),
+      # Beräkna indikator
+      outcome =
+        case_when(
+          a_beh_studie | pre_beh_studie | post_beh_studie ~ TRUE,
+          !a_beh_studie | !pre_beh_studie | !post_beh_studie ~ FALSE
+        )
+    )
   },
   sjhkod_var = "post_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv"),

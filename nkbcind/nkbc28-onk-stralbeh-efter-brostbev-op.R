@@ -3,10 +3,27 @@ nkbc28_def <- list(
   lab = "Strålbehandling efter bröstbevarande operation",
   pop = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Reg av given onkologisk behandling
+      year(a_diag_dat) >= 2012,
+
+      # Endast opererade
+      !is.na(op_kir_dat),
+
+      # Endast invasiv cancer
+      d_invasiv == "Invasiv cancer",
+
+      # Endast bröstbevarande operation
+      op_kir_brost_Värde == 1,
+
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = as.logical(post_rt_Värde)
+    )
   },
   target_values = c(90, 95),
   sjhkod_var = "post_inr_sjhkod",

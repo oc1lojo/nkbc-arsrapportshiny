@@ -4,10 +4,29 @@ nkbc26_def <- list(
   pop = "invasiva fall utan spridning till lymfkörtlar (klinisk diagnos) eller fjärrmetastaser vid diagnos",
   pop_short = "invasiva fall utan spridning till lymfkörtlar eller fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Endast invasiv cancer
+      d_invasiv == "Invasiv cancer",
+
+      # Klinisk N0
+      a_tnm_nklass_Värde == 0,
+
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = case_when(
+        op_kir_axilltyp_Värde == 1 ~ 1L,
+        op_kir_axilltyp_Värde == 2 ~ 0L,
+        op_kir_axilltyp_Värde == 3 ~ 1L,
+        op_kir_axilltyp_Värde == 4 ~ 0L,
+        op_kir_axilltyp_Värde == 98 ~ NA_integer_,
+        TRUE ~ NA_integer_
+      ),
+      outcome = as.logical(ifelse(op_kir_axill_Värde %in% 0, 0, outcome))
+    )
   },
   target_values = c(90, 95),
   sjhkod_var = "op_inr_sjhkod",

@@ -3,10 +3,33 @@ nkbc16_def <- list(
   lab = "Välgrundad misstanke om cancer till preoperativ onkologisk behandling",
   pop = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Endast fall med år från 2013 (1:a kontakt tillkom 2013)
+      year(a_diag_dat) >= 2013,
+
+      # Endast opererade
+      !is.na(op_kir_dat),
+
+      # Endast preop onk behandling (planerad om utförd ej finns)
+      d_prim_beh_Värde == 2,
+
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      d_a_diag_misscadat = ymd(coalesce(a_diag_misscadat, a_diag_kontdat)),
+      d_pre_onk_dat = pmin(ymd(pre_kemo_dat),
+        ymd(pre_rt_dat),
+        ymd(pre_endo_dat),
+        na.rm = TRUE
+      ),
+
+      outcome = as.numeric(ymd(d_pre_onk_dat) - d_a_diag_misscadat),
+
+      outcome = ifelse(outcome < 0, 0, outcome)
+    )
   },
   prop_within_value = 28,
   target_values = c(75, 90),

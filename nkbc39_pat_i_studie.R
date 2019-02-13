@@ -1,33 +1,16 @@
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc39_def$sjhkod_var) %>%
-  mutate(
-    # Hantera missing
-    a_beh_studie = as.logical(ifelse(a_beh_studie_Värde %in% c(0, 1), a_beh_studie_Värde, NA)),
-    pre_beh_studie = as.logical(ifelse(pre_beh_studie_Värde %in% c(0, 1), pre_beh_studie_Värde, NA)),
-    post_beh_studie = as.logical(ifelse(post_beh_studie_Värde %in% c(0, 1), post_beh_studie_Värde, NA)),
-    # Beräkna indikator
-    outcome =
-      case_when(
-        a_beh_studie | pre_beh_studie | post_beh_studie ~ TRUE,
-        !a_beh_studie | !pre_beh_studie | !post_beh_studie ~ FALSE
-      )
-  ) %>%
+  filter(!is.na(region)) %>%
+  filter_nkbc39_pop() %>%
+  mutate_nkbc39_outcome() %>%
   filter(
-    # Reg av given onkologisk behandling
-    period >= 2012,
-
     # ett år bakåt då info från onk behandling blanketter
-    period <= report_end_year - 1,
-
-    # Endast opererade
-    !is.na(op_kir_dat),
-
-    # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% 10,
-
-    !is.na(region)
+    period <= report_end_year - 1
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_invasiv)
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc39_def$other_vars)
+  )
 
 rccShiny(
   data = dftemp,
