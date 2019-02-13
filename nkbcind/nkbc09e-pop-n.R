@@ -4,10 +4,17 @@ nkbc09e_def <- list(
   lab_short = "Spridning till lymfkörtlarna",
   pop = "alla anmälda fall",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x
+      # Endast invasiv cancer
+      # invasiv == "Invasiv cancer", Bortselekterat pga om väljer enbart invasiv
+      # cancer så tas alla med uppgift saknas på invasiv bort. Dock några fel? reg
+      # in situ och N1 men men...
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = d_nstad
+    )
   },
   sjhkod_var = "a_inr_sjhkod",
   other_vars = "a_pat_alder",

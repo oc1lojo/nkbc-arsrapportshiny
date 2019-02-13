@@ -4,10 +4,15 @@ nkbc09d_def <- list(
   lab_short = "Biologisk subtyp",
   pop = "invasiva fall",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Endast invasiv cancer
+      d_invasiv == "Invasiv cancer"
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = d_subtyp
+    )
   },
   sjhkod_var = "a_inr_sjhkod",
   other_vars = "a_pat_alder",

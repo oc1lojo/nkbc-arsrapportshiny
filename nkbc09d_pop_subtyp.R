@@ -1,15 +1,12 @@
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc09d_def$sjhkod_var) %>%
-  mutate(
-    outcome = d_subtyp
-  ) %>%
-  filter(
-    # Endast invasiv cancer
-    d_invasiv == "Invasiv cancer",
-
-    !is.na(region)
-  ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder)
+  filter(!is.na(region)) %>%
+  filter_nkbc09d_pop() %>%
+  mutate_nkbc09d_outcome() %>%
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc09d_def$other_vars)
+  )
 
 rccShiny(
   data = dftemp,

@@ -7,7 +7,9 @@ nkbc09b_def <- list(
     filter(x)
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = a_pat_alder
+    )
   },
   prop_within_unit = "år",
   prop_within_value = 65,

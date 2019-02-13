@@ -4,10 +4,18 @@ nkbc08_def <- list(
   lab_short = "Enbart en operation",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      # Hantera missing
+      outcome = ifelse(op_kir_sekbrost_Värde %in% c(0, 1), op_kir_sekbrost_Värde, NA),
+
+      outcome = as.logical(!outcome)
+    )
   },
   target_values = c(80, 90),
   sjhkod_var = "op_inr_sjhkod",

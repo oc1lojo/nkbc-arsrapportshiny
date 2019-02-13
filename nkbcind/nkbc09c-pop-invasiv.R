@@ -7,7 +7,9 @@ nkbc09c_def <- list(
     filter(x)
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = d_invasiv
+    )
   },
   sjhkod_var = "a_inr_sjhkod",
   other_vars = "a_pat_alder",

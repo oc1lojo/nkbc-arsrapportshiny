@@ -4,10 +4,15 @@ nkbc09a_def <- list(
   lab_short = "Kön",
   pop = "alla anmälda fall",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x) # ingen filtrering
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      outcome = factor(KON_VALUE,
+        levels = c(1, 2),
+        labels = c("Män", "Kvinnor")
+      )
+    )
   },
   sjhkod_var = "a_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv"),
