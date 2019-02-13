@@ -2,7 +2,7 @@ Title: Interaktiva rapporter från NKBC
 Version: 2017.2
 Author:
     Lina Enqvist Benson [aut, cre],
-    John Lövrot [ctb]
+    John Lövrot [aut]
 Description:
     Kod för interaktiva rapporter från Nationellt kvalitetsregister för
     bröstcancer (NKBC)
