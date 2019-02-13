@@ -15,7 +15,7 @@ for (file_name in list.files("nkbcind", pattern = "*.R")) {
 # Definera globala variabler ---------------------------------------------------
 
 report_end_year <- 2017
-output_path <- "Output"
+output_path <- "output"
 
 # Läs in data ------------------------------------------------------------------
 
