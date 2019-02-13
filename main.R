@@ -10,8 +10,12 @@ library(rccShiny)
 report_end_year <- 2017
 output_path <- "Output"
 
-source("nkbc-general.R", encoding = "utf8")
-source("nkbcind-rccshiny-tools.R", encoding = "utf8")
+for (file_name in list.files("nkbcgeneral", pattern = "*.R")) {
+  source(file.path("nkbcgeneral", file_name), encoding = "UTF-8")
+}
+for (file_name in list.files("nkbcind", pattern = "*.R")) {
+  source(file.path("nkbcind", file_name), encoding = "UTF-8")
+}
 
 # Läs in data ------------------------------------------------------------------
 
