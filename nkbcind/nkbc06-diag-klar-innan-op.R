@@ -3,10 +3,19 @@ nkbc06_def <- list(
   lab = "Fastställd diagnos innan operation",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x,
+      # Endast opererade
+      !is.na(op_kir_dat),
+
+      # Ej fjärrmetastaser vid diagnos
+      !a_tnm_mklass_Värde %in% 10
+    )
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      # Hantera missing
+      outcome = as.logical(ifelse(a_diag_preopmorf_Värde %in% c(0, 1), a_diag_preopmorf_Värde, NA))
+    )
   },
   target_values = c(80, 90),
   sjhkod_var = "a_inr_sjhkod",

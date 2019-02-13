@@ -4,10 +4,13 @@ nkbc04_def <- list(
   lab_short = "Kontaktsjuksköterska",
   pop = "alla anmälda fall",
   filter_pop = function(x, ...) {
-    filter(x)
+    filter(x) # ingen filtrering
   },
   mutate_outcome = function(x, ...) {
-    mutate(x)
+    mutate(x,
+      # Hantera missing
+      outcome = as.logical(ifelse(a_mdk_Värde %in% c(0, 1), a_mdk_Värde, NA))
+    )
   },
   target_values = c(90, 99),
   sjhkod_var = "a_inr_sjhkod",

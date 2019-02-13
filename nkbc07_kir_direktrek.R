@@ -1,20 +1,12 @@
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc07_def$sjhkod_var) %>%
-  mutate(
-    # Hantera missing
-    outcome = as.logical(ifelse(op_kir_onkoplastik_Värde %in% c(0, 1), op_kir_onkoplastik_Värde, NA))
-  ) %>%
-  filter(
-    # Endast mastektomi och subkutan mastektomi
-    op_kir_brost_Värde %in% c(2, 4),
-
-    # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% 10,
-
-    !is.na(region)
-  ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_invasiv)
-
+  filter(!is.na(region)) %>%
+  filter_nkbc07_pop() %>%
+  mutate_nkbc07_outcome() %>%
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc07_def$other_vars)
+  )
 rccShiny(
   data = dftemp,
   folder = nkbc07_def$code,
