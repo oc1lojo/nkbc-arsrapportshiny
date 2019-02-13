@@ -6,9 +6,7 @@ nkbc33_def <- list(
   sjhkod_var = "a_inr_sjhkod",
   om_indikatorn = "Anmälan till cancerregistret och anmälan till kvalitetsregistret är kombinerade och därmed undviks dubbelarbete.",
   vid_tolkning = NULL,
-  exkl_beskr_skas = TRUE,
-  teknisk_beskrivning = NULL,
-  inkl_alt_beskr_red = "Uppgifterna redovisas uppdelat på den region personen var bosatt i vid diagnos."
+  teknisk_beskrivning = NULL
 )
 
 dftemp <- data.frame(
@@ -32,7 +30,7 @@ rccShiny(
   path = output_path,
   outcomeTitle = nkbc33_def$lab,
   textBeforeSubtitle = compile_textBeforeSubtitle(nkbc33_def),
-  description = compile_description(nkbc33_def, report_end_year),
+  description = compile_description_nkbc33(nkbc33_def, report_end_year), # OBS: Specialfunktion
   varOther = compile_varOther(nkbc33_def),
   targetValues = nkbc33_def$target_values
 )

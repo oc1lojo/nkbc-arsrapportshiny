@@ -40,11 +40,7 @@ compile_description <- function(x, report_end_year = report_end_year, ...) {
           "Ett fall per bröst kan rapporterats till det nationella kvalitetsregistret för bröstcancer.",
           "Det innebär att samma person kan finnas med i statistiken upp till två gånger."
         ),
-        if (!is.null(x$exkl_beskr_skas) && x$exkl_beskr_skas == TRUE) {
-          NULL
-        } else {
-          "Skövde och Lidköpings sjukhus presenteras tillsammans som Skaraborg."
-        }
+        "Skövde och Lidköpings sjukhus presenteras tillsammans som Skaraborg."
       ),
       collapse = "</br>\n</br>\n"
     ),
@@ -53,24 +49,61 @@ compile_description <- function(x, report_end_year = report_end_year, ...) {
       c(
         x$teknisk_beskrivning,
         paste0("Population: ", x$pop, "."),
-        if (!is.null(x$inkl_alt_beskr_red)) {
-          x$inkl_alt_beskr_red
-        } else {
-          paste0(
-            "Uppgifterna redovisas uppdelat på ",
-            case_when(
-              x$sjhkod_var %in% "a_inr_sjhkod" ~
-                "anmälande sjukhus",
-              x$sjhkod_var %in% c("post_inr_sjhkod", "pre_inr_sjhkod", "d_onk_sjhkod") ~
-                "onkologiskt sjukhus",
-              x$sjhkod_var %in% "op_inr_sjhkod" ~
-                "opererande sjukhus",
-              x$sjhkod_var %in% c("d_onkpreans_sjhkod", "d_onkpostans_sjhkod") ~
-                "rapporterande onkologiskt sjukhus och om detta saknas sjukhus ansvarigt för rapportering av onkologisk behandling, onkologiskt sjukhus, anmälande sjukhus"
-            ),
-            "."
+        paste0(
+          "Uppgifterna redovisas uppdelat på ",
+          case_when(
+            x$sjhkod_var %in% "a_inr_sjhkod" ~
+              "anmälande sjukhus",
+            x$sjhkod_var %in% c("post_inr_sjhkod", "pre_inr_sjhkod", "d_onk_sjhkod") ~
+              "onkologiskt sjukhus",
+            x$sjhkod_var %in% "op_inr_sjhkod" ~
+              "opererande sjukhus",
+            x$sjhkod_var %in% c("d_onkpreans_sjhkod", "d_onkpostans_sjhkod") ~
+              "rapporterande onkologiskt sjukhus och om detta saknas sjukhus ansvarigt för rapportering av onkologisk behandling, onkologiskt sjukhus, anmälande sjukhus"
+          ),
+          "."
+        )
+      ),
+      collapse = "</br>\n</br>\n"
+    )
+  )
+}
+
+compile_description_nkbc33 <- function(x, ...) {
+  # Anpassad för rapporteringa av täckningsgrad mot cancerregistret (nkbc33)
+  varOther <- c(
+    # Om indikatorn
+    paste(
+      c(
+        x$om_indikatorn,
+        if (!is.null(x$target_values)) {
+          case_when(
+            length(x$target_values) == 1 ~
+              paste0("Målnivå: ", x$target_values[1], "%"),
+            length(x$target_values) == 2 ~
+              paste0("Målnivåer: ", x$target_values[1], "% (låg) ", x$target_values[2], "% (hög)")
           )
         }
+      ),
+      collapse = "</br>\n</br>\n"
+    ),
+    # Vid tolkning
+    paste(
+      c(
+        x$vid_tolkning,
+        paste(
+          "Ett fall per bröst kan rapporterats till det nationella kvalitetsregistret för bröstcancer.",
+          "Det innebär att samma person kan finnas med i statistiken upp till två gånger."
+        )
+      ),
+      collapse = "</br>\n</br>\n"
+    ),
+    # Teknisk beskrivning
+    paste(
+      c(
+        x$teknisk_beskrivning,
+        paste0("Population: ", x$pop, "."),
+        "Uppgifterna redovisas uppdelat på den region personen var bosatt i vid diagnos."
       ),
       collapse = "</br>\n</br>\n"
     )
