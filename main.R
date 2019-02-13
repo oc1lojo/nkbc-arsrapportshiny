@@ -12,6 +12,9 @@ for (file_name in list.files("nkbcind", pattern = "*.R")) {
   source(file.path("nkbcind", file_name), encoding = "UTF-8")
 }
 
+# Temporär work-around för att hantera NULL. TODO Bättre lösning
+one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
+
 # Definera globala variabler ---------------------------------------------------
 
 report_end_year <- 2017

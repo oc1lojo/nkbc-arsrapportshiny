@@ -1,34 +1,16 @@
-nkbc30_def <- list(
-  code = "nkbc30",
-  lab = "Observerad 5 års överlevnad",
-  pop = "alla anmälda fall",
-  target_values = 88,
-  sjhkod_var = "a_inr_sjhkod",
-  other_vars = c("a_pat_alder", "d_invasiv", "d_subtyp"),
-  om_indikatorn =
-    paste(
-      "Total överlevnad betraktas som det viktigaste utfallsmåttet.",
-      "Observerad överlevnad anger de bröstcancerfall som överlevt 5 år efter diagnos.",
-      "Dödsorsakerna kan vara andra än bröstcancer."
-    ),
-  vid_tolkning = paste0("Uppgifter som rör 5 års överlevnad redovisas enbart t.o.m. ", report_end_year - 5, "."),
-  teknisk_beskrivning = NULL
-)
-
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc30_def$sjhkod_var) %>%
-  mutate(
-    lastdate = ymd(paste0(report_end_year, "-12-31")),
-    surv_time = ymd(VITALSTATUSDATUM_ESTIMAT) - ymd(a_diag_dat),
-    outcome = surv_time >= 365.25 * 5
-  ) %>%
+  filter(!is.na(region)) %>%
+  filter_nkbc30_pop() %>%
+  mutate_nkbc30_outcome() %>%
   filter(
     # 5 års överlevnad så krävs 5 års uppföljning
-    period <= report_end_year - 5,
-
-    !is.na(region)
+    period <= report_end_year - 5
   ) %>%
-  select(landsting, region, period, outcome, a_pat_alder, d_invasiv, d_subtyp)
+  select(
+    landsting, region, period, outcome, # OBS Ej sjukhus
+    one_of(nkbc30_def$other_vars)
+  )
 
 rccShiny(
   data = dftemp,

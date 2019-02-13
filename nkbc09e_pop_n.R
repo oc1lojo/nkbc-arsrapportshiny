@@ -1,29 +1,12 @@
-nkbc09e_def <- list(
-  code = "nkbc09e",
-  lab = "Spridning till lymfkörtlarna (klinisk) vid diagnos",
-  lab_short = "Spridning till lymfkörtlarna",
-  pop = "alla anmälda fall",
-  sjhkod_var = "a_inr_sjhkod",
-  other_vars = "a_pat_alder",
-  om_indikatorn = "Kännedom om tumörspridning till axillens lymfkörtlar ger vägledning för behandling och information om prognos. Grundas på bilddiagnostik och klinisk undersökning.",
-  vid_tolkning = NULL,
-  teknisk_beskrivning = NULL
-)
-
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc09e_def$sjhkod_var) %>%
-  mutate(
-    outcome = d_nstad
-  ) %>%
-  filter(
-    # Endast invasiv cancer
-    # invasiv == "Invasiv cancer", Bortselekterat pga om väljer enbart invasiv
-    # cancer så tas alla med uppgift saknas på invasiv bort. Dock några fel? reg
-    # in situ och N1 men men...
-
-    !is.na(region)
-  ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder)
+  filter(!is.na(region)) %>%
+  filter_nkbc09e_pop() %>%
+  mutate_nkbc09e_outcome() %>%
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc09e_def$other_vars)
+  )
 
 rccShiny(
   data = dftemp,

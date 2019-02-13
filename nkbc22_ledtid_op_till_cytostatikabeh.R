@@ -1,42 +1,16 @@
-nkbc22_def <- list(
-  code = "nkbc22",
-  lab = "Operation till cytostatikabehandling",
-  pop = "primärt opererade fall utan fjärrmetastaser vid diagnos",
-  prop_within_value = 24,
-  target_values = c(75, 90),
-  sjhkod_var = "post_inr_sjhkod",
-  other_vars = c("a_pat_alder", "d_invasiv"),
-  om_indikatorn = "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
-  vid_tolkning = "Operationsdatum är datum för första operation, det innebär att tiden från sista operation till start av cytostatikabehandling kan vara kortare än det som redovisas.",
-  inkl_beskr_onk_beh = TRUE,
-  teknisk_beskrivning = NULL
-)
-
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc22_def$sjhkod_var) %>%
-  mutate(
-    outcome = as.numeric(ymd(post_kemo_dat) - ymd(op_kir_dat)),
-    outcome = ifelse(outcome < 0, 0, outcome)
-  ) %>%
+  filter(!is.na(region)) %>%
+  filter_nkbc22_pop() %>%
+  mutate_nkbc22_outcome() %>%
   filter(
-    # Reg av given onkologisk behandling
-    period >= 2012,
-
     # ett år bakåt då info från onk behandling blanketter
-    period <= report_end_year - 1,
-
-    # Endast opererade
-    !is.na(op_kir_dat),
-
-    # Endast primär opereration (planerad om utförd ej finns)
-    d_prim_beh_Värde == 1,
-
-    # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% 10,
-
-    !is.na(region)
+    period <= report_end_year - 1
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, d_invasiv)
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc22_def$other_vars)
+  )
 
 rccShiny(
   data = dftemp,

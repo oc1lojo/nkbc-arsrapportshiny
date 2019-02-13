@@ -36,6 +36,9 @@ compile_description <- function(x, report_end_year = report_end_year, ...) {
             report_end_year - 1, "p.g.a. eftersläpning i rapporteringen."
           )
         },
+        if (!is.null(x$inkl_beskr_overlevnad_5ar) && x$inkl_beskr_overlevnad_5ar == TRUE) {
+          paste0("Uppgifter som rör 5 års överlevnad redovisas enbart t.o.m. ", report_end_year - 5, ".")
+        },
         paste(
           "Ett fall per bröst kan rapporterats till det nationella kvalitetsregistret för bröstcancer.",
           "Det innebär att samma person kan finnas med i statistiken upp till två gånger."

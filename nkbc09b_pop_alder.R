@@ -1,26 +1,12 @@
-nkbc09b_def <- list(
-  code = "nkbc09b",
-  lab = "Ålder vid diagnos",
-  lab_short = "Ålder",
-  pop = "alla anmälda fall",
-  prop_within_unit = "år",
-  prop_within_value = 65,
-  sjhkod_var = "a_inr_sjhkod",
-  other_vars = "d_invasiv",
-  om_indikatorn = "Det är ovanligt med bröstcancer i unga år.",
-  vid_tolkning = NULL,
-  teknisk_beskrivning = NULL
-)
-
 dftemp <- dfmain %>%
   add_sjhdata(sjukhuskoder, nkbc09b_def$sjhkod_var) %>%
-  mutate(
-    outcome = a_pat_alder
-  ) %>%
-  filter(
-    !is.na(region)
-  ) %>%
-  select(landsting, region, sjukhus, period, outcome, d_invasiv)
+  filter(!is.na(region)) %>%
+  filter_nkbc09b_pop() %>%
+  mutate_nkbc09b_outcome() %>%
+  select(
+    landsting, region, sjukhus, period, outcome,
+    one_of(nkbc09b_def$other_vars)
+  )
 
 rccShiny(
   data = dftemp,
