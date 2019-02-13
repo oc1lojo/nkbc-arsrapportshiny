@@ -11,7 +11,7 @@ nkbc30_def <- list(
       "Observerad överlevnad anger de bröstcancerfall som överlevt 5 år efter diagnos.",
       "Dödsorsakerna kan vara andra än bröstcancer."
     ),
-  vid_tolkning = paste0("Uppgifter som rör 5 års överlevnad redovisas enbart t.o.m. ", report_end_year - 5, "."),
+  inkl_beskr_overlevnad_5ar = TRUE,
   teknisk_beskrivning = NULL
 )
 
