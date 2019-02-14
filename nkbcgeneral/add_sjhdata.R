@@ -2,7 +2,7 @@ add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var = GLOBALS$SJH
   names(x)[names(x) == sjhkod_var] <- "sjhkod"
 
   x %>%
-    mutate(sjhkod = as.numeric(sjhkod)) %>%
+    mutate(sjhkod = as.integer(sjhkod)) %>%
     left_join(sjukhuskoder, by = c("sjhkod" = "sjukhuskod")) %>%
     mutate(
       region = case_when(
@@ -17,8 +17,10 @@ add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var = GLOBALS$SJH
       region = ifelse(is.na(region), d_region_lkf, region),
       landsting = substr(sjhkod, 1, 2) %>% as.integer(),
       # Fulfix Bröstmottagningen, Christinakliniken Sh & Stockholms bröstklinik så hamnar i Stockholm
-      landsting = ifelse(sjhkod %in% c(97333, 97563), 10, landsting),
-      landsting = ifelse(
+      landsting = if_else(
+        sjhkod %in% c(97333, 97563), 10L, landsting
+      ),
+      landsting = if_else(
         landsting %in% c(
           seq(10, 13),
           seq(21, 28),
@@ -29,7 +31,7 @@ add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var = GLOBALS$SJH
           # seq(91,96)
         ),
         landsting,
-        NA
+        NA_integer_
       )
     )
 }

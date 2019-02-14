@@ -78,23 +78,23 @@ mutate_nkbc_d_vars <- function(x, ...) {
 
     # fix 1.sjukhus ansvarigt för rapportering av onkologisk behandling/2.onkologiskt sjukhus/3.anmälande sjukhus
     d_onkpostans_sjhkod = coalesce(
-      as.numeric(post_inr_sjhkod),
-      as.numeric(op_onk_sjhkod),
-      as.numeric(a_onk_rappsjhkod),
-      as.numeric(a_onk_sjhkod),
-      as.numeric(a_inr_sjhkod)
+      post_inr_sjhkod,
+      op_onk_sjhkod,
+      a_onk_rappsjhkod,
+      a_onk_sjhkod,
+      a_inr_sjhkod
     ),
     d_onkpreans_sjhkod = coalesce(
-      as.numeric(pre_inr_sjhkod),
-      as.numeric(op_onk_sjhkod),
-      as.numeric(a_onk_rappsjhkod),
-      as.numeric(a_onk_sjhkod),
-      as.numeric(a_inr_sjhkod)
+      pre_inr_sjhkod,
+      op_onk_sjhkod,
+      a_onk_rappsjhkod,
+      a_onk_sjhkod,
+      a_inr_sjhkod
     ),
     # fix 1) post onk sjukhus 2) pre onk sjukhus
     d_onk_sjhkod = coalesce(
-      as.numeric(post_inr_sjhkod),
-      as.numeric(pre_inr_sjhkod)
+      post_inr_sjhkod,
+      pre_inr_sjhkod
     ),
 
     # LKF-region för att imputera om region för sjukhus saknas
