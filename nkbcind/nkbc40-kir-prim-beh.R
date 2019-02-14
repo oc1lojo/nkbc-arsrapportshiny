@@ -34,7 +34,7 @@ nkbc40 <- list(
   vid_tolkning = "För fall med preoperativ onkologisk behandling är östrogenreceptoruttryck hämtat från nålsbiopsi innan behandling, i övriga fall från operation.",
   teknisk_beskrivning = NULL
 )
-class(nkbc40) = "nkbcind"
+class(nkbc40) <- "nkbcind"
 
 filter_nkbc40_pop <- nkbc40$filter_pop
 mutate_nkbc40_outcome <- nkbc40$mutate_outcome

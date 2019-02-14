@@ -38,7 +38,7 @@ nkbc10 <- list(
   vid_tolkning = "Ki67 tillkom som nationell variabel 2014 och ingår ej i beräkning innan detta datum.",
   teknisk_beskrivning = NULL
 )
-class(nkbc10) = "nkbcind"
+class(nkbc10) <- "nkbcind"
 
 filter_nkbc10_pop <- nkbc10$filter_pop
 mutate_nkbc10_outcome <- nkbc10$mutate_outcome

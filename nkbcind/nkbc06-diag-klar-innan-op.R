@@ -29,7 +29,7 @@ nkbc06 <- list(
     ),
   teknisk_beskrivning = NULL
 )
-class(nkbc06) = "nkbcind"
+class(nkbc06) <- "nkbcind"
 
 filter_nkbc06_pop <- nkbc06$filter_pop
 mutate_nkbc06_outcome <- nkbc06$mutate_outcome

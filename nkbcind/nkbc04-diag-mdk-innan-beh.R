@@ -19,7 +19,7 @@ nkbc04 <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
-class(nkbc04) = "nkbcind"
+class(nkbc04) <- "nkbcind"
 
 filter_nkbc04_pop <- nkbc04$filter_pop
 mutate_nkbc04_outcome <- nkbc04$mutate_outcome

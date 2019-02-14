@@ -25,7 +25,7 @@ nkbc30 <- list(
   inkl_beskr_overlevnad_5ar = TRUE,
   teknisk_beskrivning = NULL
 )
-class(nkbc30) = "nkbcind"
+class(nkbc30) <- "nkbcind"
 
 filter_nkbc30_pop <- nkbc30$filter_pop
 mutate_nkbc30_outcome <- nkbc30$mutate_outcome

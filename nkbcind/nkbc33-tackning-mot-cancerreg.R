@@ -8,4 +8,4 @@ nkbc33 <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
-class(nkbc33) = c("nkbc33", "nkbcind")
+class(nkbc33) <- c("nkbc33", "nkbcind")

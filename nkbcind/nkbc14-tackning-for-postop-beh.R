@@ -27,7 +27,7 @@ nkbc14 <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
-class(nkbc14) = "nkbcind"
+class(nkbc14) <- "nkbcind"
 
 filter_nkbc14_pop <- nkbc14$filter_pop
 mutate_nkbc14_outcome <- nkbc14$mutate_outcome

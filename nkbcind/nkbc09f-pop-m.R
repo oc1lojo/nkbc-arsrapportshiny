@@ -27,7 +27,7 @@ nkbc09f <- list(
     ),
   teknisk_beskrivning = NULL
 )
-class(nkbc09f) = "nkbcind"
+class(nkbc09f) <- "nkbcind"
 
 filter_nkbc09f_pop <- nkbc09f$filter_pop
 mutate_nkbc09f_outcome <- nkbc09f$mutate_outcome

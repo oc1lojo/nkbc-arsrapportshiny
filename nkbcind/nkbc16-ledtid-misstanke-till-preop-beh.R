@@ -53,7 +53,7 @@ nkbc16 <- list(
   inkl_beskr_missca = TRUE,
   teknisk_beskrivning = NULL
 )
-class(nkbc16) = "nkbcind"
+class(nkbc16) <- "nkbcind"
 
 filter_nkbc16_pop <- nkbc16$filter_pop
 mutate_nkbc16_outcome <- nkbc16$mutate_outcome
