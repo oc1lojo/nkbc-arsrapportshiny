@@ -103,7 +103,8 @@ source("nkbc03_omv_vardplan.R", encoding = "utf8")
 
 # Kirurgi
 source("nkbc40_kir_prim_beh.R", encoding = "utf8")
-source("nkbc11_kir_brostbev_op.R", encoding = "utf8")
+source("nkbc42_kir_brostbev_op.R", encoding = "utf8")
+source("nkbc11_kir_brostbev_op_sma_tum.R", encoding = "utf8")
 source("nkbc07_kir_direktrek.R", encoding = "utf8")
 source("nkbc08_kir_omop.R", encoding = "utf8")
 source("nkbc26_kir_sentinel_node.R", encoding = "utf8")
