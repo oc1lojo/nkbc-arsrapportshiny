@@ -47,8 +47,12 @@ sjukhuskoder <- sjukhuskoder %>%
   ) %>%
   # Samredovisning av landsting SKAS
   mutate(
-    sjukhus = ifelse(sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus),
-    sjukhus = ifelse(sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA, sjukhus)
+    sjukhus = if_else(
+      sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus
+    ),
+    sjukhus = if_else(
+      sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA_character_, sjukhus
+    )
   )
 
 # Bearbeta huvud-dataram
