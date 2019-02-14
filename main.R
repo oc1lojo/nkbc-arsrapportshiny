@@ -78,8 +78,8 @@ source("nkbc09a_pop_kon.R", encoding = "utf8")
 source("nkbc09b_pop_alder.R", encoding = "utf8")
 source("nkbc09c_pop_invasiv.R", encoding = "utf8")
 source("nkbc09d_pop_subtyp.R", encoding = "utf8")
-source("nkbc09e_pop_n.R", encoding = "utf8")
-source("nkbc09f_pop_m.R", encoding = "utf8")
+source("nkbc09e_pop_tnm_n.R", encoding = "utf8")
+source("nkbc09f_pop_tnm_m.R", encoding = "utf8")
 
 # Ledtider
 source("nkbc15_ledtid_misstanke_till_op.R", encoding = "utf8")
