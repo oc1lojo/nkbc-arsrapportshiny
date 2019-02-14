@@ -69,6 +69,16 @@ mutate_nkbc_other_vars <- function(x, ...) {
       labels = c("1-3 metastaser", "=> 4 metastaser")
     ),
 
+    d_pnstat =
+      factor(
+        case_when(
+          op_pad_lglmetant == 0 ~ "Nej (pN-)",
+          op_pad_lglmetant > 0 ~ "Ja (pN+)",
+          TRUE ~ "Uppgift saknas"
+        ),
+        levels = c("Nej (pN-)", "Ja (pN+)", "Uppgift saknas")
+      ),
+
     d_max_extent = pmax(op_pad_extentx, op_pad_extenty, na.rm = TRUE),
 
     d_kemo = as.logical(pmax(post_kemo_Värde, pre_kemo_Värde, na.rm = TRUE))
