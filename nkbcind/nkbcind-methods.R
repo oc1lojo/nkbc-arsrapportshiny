@@ -135,25 +135,10 @@ description.nkbc33 <- function(x, report_end_year = report_end_year, ...) {
   )
 }
 
-varOther.nkbcind <- function(x, varbesk = NULL, ...) {
+varOther.nkbcind <- function(x, varbesk = varbesk_other_vars, ...) {
   if (is.null(x$other_vars)) {
     return(NULL)
   } else {
-    if (is.null(varbesk)) {
-      varbesk <- tibble::enframe(
-        c(
-          a_pat_alder = "Ålder vid diagnos",
-          d_tstad = "Tumörstorlek",
-          d_nstad = "Spridning till lymfkörtlar",
-          d_invasiv = "Invasivitet vid diagnos",
-          d_pn = "Spridning till lymfkörtlar",
-          d_er = "Östrogenreceptor (ER)",
-          d_subtyp = "Biologisk subtyp"
-        ),
-        name = "var",
-        value = "label"
-      )
-    }
     df <- left_join(tibble(var = x$other_vars), varbesk, by = "var")
     out <- list() # initialisera
     for (i in 1:nrow(df)) {
