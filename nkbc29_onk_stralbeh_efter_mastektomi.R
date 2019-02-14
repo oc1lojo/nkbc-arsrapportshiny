@@ -12,7 +12,6 @@ df_tmp <- df_main %>%
     one_of(other_vars(nkbc29))
   )
 
-
 rccShiny(
   data = df_tmp,
   folder = code(nkbc29),
