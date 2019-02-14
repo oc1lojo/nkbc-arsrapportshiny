@@ -20,6 +20,6 @@ rccShiny(
   textBeforeSubtitle = textBeforeSubtitle(nkbc22),
   description = description(nkbc22, report_end_year),
   varOther = varOther(nkbc22),
-  propWithinValue = nkbc22$prop_within_value,
+  propWithinValue = prop_within_value(nkbc22),
   targetValues = target_values(nkbc22)
 )

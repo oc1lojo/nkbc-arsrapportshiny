@@ -6,6 +6,7 @@ lab <- function(x) UseMethod("lab")
 lab_short <- function(x) UseMethod("lab_short")
 pop <- function(x) UseMethod("pop")
 pop_short <- function(x) UseMethod("pop_short")
+prop_within_value <- function(x) UseMethod("prop_within_value")
 target_values <- function(x) UseMethod("target_values")
 sjhkod_var <- function(x) UseMethod("sjhkod_var")
 other_vars <- function(x) UseMethod("other_vars")
@@ -21,6 +22,7 @@ lab_short.nkbcind <- function(x) ifelse(!is.null(x$lab_short), x$lab_short, x$la
 pop.nkbcind <- function(x) x$pop
 pop_short.nkbcind <- function(x) ifelse(!is.null(x$pop_short), x$pop_short, x$pop)
 sjhkod_var.nkbcind <- function(x) x$sjhkod_var
+prop_within_value.nkbcind <- function(x) x$prop_within_value
 target_values.nkbcind <- function(x) x$target_values
 other_vars.nkbcind <- function(x) x$other_vars
 
