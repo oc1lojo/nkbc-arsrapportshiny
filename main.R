@@ -33,7 +33,9 @@ load(
 )
 
 # Läs in data för täckningsgrad mot cancerregistret
-tackning_tbl <- readxl::read_excel("G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.2/Täckningsgrader/Tackningsrader_alla_regioner.xlsx")
+tackning_tbl <- readxl::read_excel(
+  "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.2/Täckningsgrader/Tackningsrader_alla_regioner.xlsx"
+)
 
 # Bearbeta data ----------------------------------------------------------------
 
@@ -55,14 +57,16 @@ dfmain <- df %>%
   mutate_nkbc_d_vars() %>%
   mutate_nkbc_other_vars() %>%
   mutate(
-    period = year(a_diag_dat) # Den period som appar visas för
+    # Beräkna variabel för tidsperioder
+    period = year(a_diag_dat)
   ) %>%
-  filter( # default vilka år som ska visas
+  filter(
+    # Standardinklusion av tidsperioder för de interaktiva rapporterna
     period >= 2009,
     period <= report_end_year
   )
 
-# Skapa shiny-applikationer ----------------------------------------------------
+# Skapa interaktiva rapporter --------------------------------------------------
 
 # Täckningsgrad
 source("nkbc33_tackning_mot_cancerreg.R", encoding = "utf8")
