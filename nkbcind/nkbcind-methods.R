@@ -43,7 +43,7 @@ description.nkbcind <- function(x, report_end_year = report_end_year, ...) {
           )
         }
       ),
-      collapse = "</br>\n</br>\n"
+      collapse = "\n<p></p>\n"
     ),
     # Vid tolkning
     paste(
@@ -67,7 +67,7 @@ description.nkbcind <- function(x, report_end_year = report_end_year, ...) {
         ),
         "Skövde och Lidköpings sjukhus presenteras tillsammans som Skaraborg."
       ),
-      collapse = "</br>\n</br>\n"
+      collapse = "\n<p></p>\n"
     ),
     # Teknisk beskrivning
     paste(
@@ -89,7 +89,7 @@ description.nkbcind <- function(x, report_end_year = report_end_year, ...) {
           "."
         )
       ),
-      collapse = "</br>\n</br>\n"
+      collapse = "\n<p></p>\n"
     )
   )
 }
@@ -110,7 +110,7 @@ description.nkbc33 <- function(x, report_end_year = report_end_year, ...) {
           )
         }
       ),
-      collapse = "</br>\n</br>\n"
+      collapse = "\n<p></p>\n"
     ),
     # Vid tolkning
     paste(
@@ -121,7 +121,7 @@ description.nkbc33 <- function(x, report_end_year = report_end_year, ...) {
           "Det innebär att samma person kan finnas med i statistiken upp till två gånger."
         )
       ),
-      collapse = "</br>\n</br>\n"
+      collapse = "\n<p></p>\n"
     ),
     # Teknisk beskrivning
     paste(
@@ -130,7 +130,7 @@ description.nkbc33 <- function(x, report_end_year = report_end_year, ...) {
         paste0("Population: ", x$pop, "."),
         "Uppgifterna redovisas uppdelat på den region personen var bosatt i vid diagnos."
       ),
-      collapse = "</br>\n</br>\n"
+      collapse = "\n<p></p>\n"
     )
   )
 }
