@@ -1,5 +1,4 @@
 # Läs in R-paket och verktygsfunktioner ----------------------------------------
-
 library(dplyr)
 library(lubridate)
 library(shiny)
@@ -16,7 +15,6 @@ for (file_name in list.files("nkbcind", pattern = "*.R")) {
 one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
 
 # Definera globala variabler ---------------------------------------------------
-
 report_end_year <- 2017
 output_path <- "output"
 
@@ -58,11 +56,6 @@ dfmain <- df %>%
   mutate_nkbc_other_vars() %>%
   mutate(
     period = year(a_diag_dat), # Den period som appar visas för
-    # landsting_lkf = as.numeric(substr(a_pat_lkfdia, 1, 2)),
-    # landsting_lkf = ifelse(landsting_lkf %in% c(1, seq(3, 10), seq(12, 14), seq(17, 25)),
-    #   landsting_lkf,
-    #   NA
-    # ),
 
     # lkf region för att imputera om region för sjukhus saknas
     region_lkf = case_when(
