@@ -79,6 +79,7 @@ source("nkbc09b_pop_alder.R", encoding = "utf8")
 source("nkbc09c_pop_invasiv.R", encoding = "utf8")
 source("nkbc09d_pop_subtyp.R", encoding = "utf8")
 source("nkbc09e_pop_tnm_n.R", encoding = "utf8")
+source("nkbc09g_pop_n.R", encoding = "utf8")
 source("nkbc09f_pop_tnm_m.R", encoding = "utf8")
 
 # Ledtider
