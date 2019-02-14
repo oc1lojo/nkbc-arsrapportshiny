@@ -1,4 +1,4 @@
-nkbc31_def <- list(
+nkbc31 <- list(
   code = "nkbc31",
   lab = "Endokrin behandling, måluppfyllelse",
   pop = "opererade östrogenreceptorpositiva invasiva fall utan fjärrmetastaser vid diagnos",
@@ -48,6 +48,7 @@ nkbc31_def <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc31) <- "nkbcind"
 
-filter_nkbc31_pop <- nkbc31_def$filter_pop
-mutate_nkbc31_outcome <- nkbc31_def$mutate_outcome
+filter_nkbc31_pop <- nkbc31$filter_pop
+mutate_nkbc31_outcome <- nkbc31$mutate_outcome

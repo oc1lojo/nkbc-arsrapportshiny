@@ -1,12 +1,34 @@
-compile_textBeforeSubtitle <- function(x, ...) {
-  paste0(
-    "Bland ",
-    if_else(is.null(x$pop_short), x$pop, x$pop_short),
-    "."
-  )
+# Se t.ex. http://adv-r.had.co.nz/OO-essentials.html#s3
+
+# Definiera generiska funktioner ----
+code <- function(x) UseMethod("code")
+lab <- function(x) UseMethod("lab")
+lab_short <- function(x) UseMethod("lab_short")
+pop <- function(x) UseMethod("pop")
+pop_short <- function(x) UseMethod("pop_short")
+target_values <- function(x) UseMethod("target_values")
+sjhkod_var <- function(x) UseMethod("sjhkod_var")
+other_vars <- function(x) UseMethod("other_vars")
+
+textBeforeSubtitle <- function(x) UseMethod("textBeforeSubtitle")
+description <- function(x, report_end_year = report_end_year) UseMethod("description")
+varOther <- function(x) UseMethod("varOther")
+
+# Definiera metoder för klasserna nkbcind och nkbc33 ----
+code.nkbcind <- function(x) x$code
+lab.nkbcind <- function(x) x$lab
+lab_short.nkbcind <- function(x) ifelse(!is.null(x$lab_short), x$lab_short, x$lab)
+pop.nkbcind <- function(x) x$pop
+pop_short.nkbcind <- function(x) ifelse(!is.null(x$pop_short), x$pop_short, x$pop)
+sjhkod_var.nkbcind <- function(x) x$sjhkod_var
+target_values.nkbcind <- function(x) x$target_values
+other_vars.nkbcind <- function(x) x$other_vars
+
+textBeforeSubtitle.nkbcind <- function(x, ...) {
+  paste0("Bland ", pop_short(x), ".")
 }
 
-compile_description <- function(x, report_end_year = report_end_year, ...) {
+description.nkbcind <- function(x, report_end_year = report_end_year, ...) {
   c(
     # Om indikatorn
     paste(
@@ -72,7 +94,7 @@ compile_description <- function(x, report_end_year = report_end_year, ...) {
   )
 }
 
-compile_description_nkbc33 <- function(x, ...) {
+description.nkbc33 <- function(x, report_end_year = report_end_year, ...) {
   # Anpassad för rapporteringa av täckningsgrad mot cancerregistret (nkbc33)
   varOther <- c(
     # Om indikatorn
@@ -113,25 +135,10 @@ compile_description_nkbc33 <- function(x, ...) {
   )
 }
 
-compile_varOther <- function(x, varbesk = NULL, ...) {
+varOther.nkbcind <- function(x, varbesk = varbesk_other_vars, ...) {
   if (is.null(x$other_vars)) {
     return(NULL)
   } else {
-    if (is.null(varbesk)) {
-      varbesk <- tibble::enframe(
-        c(
-          a_pat_alder = "Ålder vid diagnos",
-          d_tstad = "Tumörstorlek",
-          d_nstad = "Spridning till lymfkörtlar",
-          d_invasiv = "Invasivitet vid diagnos",
-          d_pn = "Spridning till lymfkörtlar",
-          d_er = "Östrogenreceptor (ER)",
-          d_subtyp = "Biologisk subtyp"
-        ),
-        name = "var",
-        value = "label"
-      )
-    }
     df <- left_join(tibble(var = x$other_vars), varbesk, by = "var")
     out <- list() # initialisera
     for (i in 1:nrow(df)) {

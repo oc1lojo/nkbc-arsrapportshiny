@@ -1,4 +1,4 @@
-nkbc07_def <- list(
+nkbc07 <- list(
   code = "nkbc07",
   lab = "Omedelbara rekonstruktioner vid mastektomi",
   pop = "fall med mastektomi eller subkutan mastektomi utan fjärrmetastaser vid diagnos",
@@ -26,6 +26,7 @@ nkbc07_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc07) <- "nkbcind"
 
-filter_nkbc07_pop <- nkbc07_def$filter_pop
-mutate_nkbc07_outcome <- nkbc07_def$mutate_outcome
+filter_nkbc07_pop <- nkbc07$filter_pop
+mutate_nkbc07_outcome <- nkbc07$mutate_outcome

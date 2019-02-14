@@ -1,4 +1,4 @@
-nkbc15_def <- list(
+nkbc15 <- list(
   code = "nkbc15",
   lab = "Välgrundad misstanke om cancer till operation",
   pop = "primärt opererade fall utan fjärrmetastaser vid diagnos",
@@ -41,6 +41,7 @@ nkbc15_def <- list(
   inkl_beskr_missca = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc15) <- "nkbcind"
 
-filter_nkbc15_pop <- nkbc15_def$filter_pop
-mutate_nkbc15_outcome <- nkbc15_def$mutate_outcome
+filter_nkbc15_pop <- nkbc15$filter_pop
+mutate_nkbc15_outcome <- nkbc15$mutate_outcome

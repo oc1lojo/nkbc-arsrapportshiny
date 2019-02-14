@@ -1,4 +1,4 @@
-nkbc20_def <- list(
+nkbc20 <- list(
   code = "nkbc20",
   lab = "Första behandlingsdiskussion till preoperativ onkologisk behandling",
   pop = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling",
@@ -47,6 +47,7 @@ nkbc20_def <- list(
     ),
   teknisk_beskrivning = NULL
 )
+class(nkbc20) <- "nkbcind"
 
-filter_nkbc20_pop <- nkbc20_def$filter_pop
-mutate_nkbc20_outcome <- nkbc20_def$mutate_outcome
+filter_nkbc20_pop <- nkbc20$filter_pop
+mutate_nkbc20_outcome <- nkbc20$mutate_outcome

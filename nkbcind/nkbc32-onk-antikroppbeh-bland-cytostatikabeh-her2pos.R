@@ -1,4 +1,4 @@
-nkbc32_def <- list(
+nkbc32 <- list(
   code = "nkbc32",
   lab = "Antikroppsbehandling bland cytostatikabehandlade",
   pop = "opererade, cytostatikabehandlade HER2 positiva invasiva fall utan fjärrmetastaser vid diagnos",
@@ -39,6 +39,7 @@ nkbc32_def <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc32) <- "nkbcind"
 
-filter_nkbc32_pop <- nkbc32_def$filter_pop
-mutate_nkbc32_outcome <- nkbc32_def$mutate_outcome
+filter_nkbc32_pop <- nkbc32$filter_pop
+mutate_nkbc32_outcome <- nkbc32$mutate_outcome

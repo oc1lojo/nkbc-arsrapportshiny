@@ -1,5 +1,5 @@
 dftemp <- dfmain %>%
-  add_sjhdata(sjukhuskoder, nkbc22_def$sjhkod_var) %>%
+  add_sjhdata(sjukhuskoder, sjhkod_var(nkbc22)) %>%
   filter(!is.na(region)) %>%
   filter_nkbc22_pop() %>%
   mutate_nkbc22_outcome() %>%
@@ -9,17 +9,17 @@ dftemp <- dfmain %>%
   ) %>%
   select(
     landsting, region, sjukhus, period, outcome,
-    one_of(nkbc22_def$other_vars)
+    one_of(other_vars(nkbc22))
   )
 
 rccShiny(
   data = dftemp,
-  folder = nkbc22_def$code,
+  folder = code(nkbc22),
   path = output_path,
-  outcomeTitle = nkbc22_def$lab,
-  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc22_def),
-  description = compile_description(nkbc22_def, report_end_year),
-  varOther = compile_varOther(nkbc22_def),
-  propWithinValue = nkbc22_def$prop_within_value,
-  targetValues = nkbc22_def$target_values
+  outcomeTitle = lab(nkbc22),
+  textBeforeSubtitle = textBeforeSubtitle(nkbc22),
+  description = description(nkbc22, report_end_year),
+  varOther = varOther(nkbc22),
+  propWithinValue = nkbc22$prop_within_value,
+  targetValues = target_values(nkbc22)
 )

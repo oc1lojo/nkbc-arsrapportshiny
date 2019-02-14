@@ -1,4 +1,4 @@
-nkbc11_def <- list(
+nkbc11 <- list(
   code = "nkbc11",
   lab = "Bröstbevarande operation",
   pop = "primärt opererade fall med invasiv cancer <=30 mm eller ej invasiv cancer <=20 mm utan fjärrmetastaser vid diagnos",
@@ -35,6 +35,7 @@ nkbc11_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc11) <- "nkbcind"
 
-filter_nkbc11_pop <- nkbc11_def$filter_pop
-mutate_nkbc11_outcome <- nkbc11_def$mutate_outcome
+filter_nkbc11_pop <- nkbc11$filter_pop
+mutate_nkbc11_outcome <- nkbc11$mutate_outcome

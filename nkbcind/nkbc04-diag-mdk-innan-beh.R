@@ -1,4 +1,4 @@
-nkbc04_def <- list(
+nkbc04 <- list(
   code = "nkbc04",
   lab = "Multidisciplinär konferens inför behandlingstart",
   lab_short = "Kontaktsjuksköterska",
@@ -19,6 +19,7 @@ nkbc04_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc04) <- "nkbcind"
 
-filter_nkbc04_pop <- nkbc04_def$filter_pop
-mutate_nkbc04_outcome <- nkbc04_def$mutate_outcome
+filter_nkbc04_pop <- nkbc04$filter_pop
+mutate_nkbc04_outcome <- nkbc04$mutate_outcome

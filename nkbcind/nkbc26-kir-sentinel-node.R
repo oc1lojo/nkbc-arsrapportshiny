@@ -1,4 +1,4 @@
-nkbc26_def <- list(
+nkbc26 <- list(
   code = "nkbc26",
   lab = "Sentinel node operation",
   pop = "invasiva fall utan spridning till lymfkörtlar (klinisk diagnos) eller fjärrmetastaser vid diagnos",
@@ -40,6 +40,7 @@ nkbc26_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc26) <- "nkbcind"
 
-filter_nkbc26_pop <- nkbc26_def$filter_pop
-mutate_nkbc26_outcome <- nkbc26_def$mutate_outcome
+filter_nkbc26_pop <- nkbc26$filter_pop
+mutate_nkbc26_outcome <- nkbc26$mutate_outcome

@@ -1,4 +1,4 @@
-nkbc16_def <- list(
+nkbc16 <- list(
   code = "nkbc16",
   lab = "Välgrundad misstanke om cancer till preoperativ onkologisk behandling",
   pop = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
@@ -53,6 +53,7 @@ nkbc16_def <- list(
   inkl_beskr_missca = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc16) <- "nkbcind"
 
-filter_nkbc16_pop <- nkbc16_def$filter_pop
-mutate_nkbc16_outcome <- nkbc16_def$mutate_outcome
+filter_nkbc16_pop <- nkbc16$filter_pop
+mutate_nkbc16_outcome <- nkbc16$mutate_outcome

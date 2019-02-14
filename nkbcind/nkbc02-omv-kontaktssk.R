@@ -1,4 +1,4 @@
-nkbc02_def <- list(
+nkbc02 <- list(
   code = "nkbc02",
   lab = "Patienten har erbjudits, i journalen dokumenterad, kontaktsjuksköterska",
   lab_short = "Kontaktsjuksköterska",
@@ -23,6 +23,7 @@ nkbc02_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc02) <- "nkbcind"
 
-filter_nkbc02_pop <- nkbc02_def$filter_pop
-mutate_nkbc02_outcome <- nkbc02_def$mutate_outcome
+filter_nkbc02_pop <- nkbc02$filter_pop
+mutate_nkbc02_outcome <- nkbc02$mutate_outcome

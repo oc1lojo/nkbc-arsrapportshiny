@@ -1,4 +1,4 @@
-nkbc39_def <- list(
+nkbc39 <- list(
   code = "nkbc39",
   lab = "Patienten ingår i studie",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
@@ -41,6 +41,7 @@ nkbc39_def <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc39) <- "nkbcind"
 
-filter_nkbc39_pop <- nkbc39_def$filter_pop
-mutate_nkbc39_outcome <- nkbc39_def$mutate_outcome
+filter_nkbc39_pop <- nkbc39$filter_pop
+mutate_nkbc39_outcome <- nkbc39$mutate_outcome

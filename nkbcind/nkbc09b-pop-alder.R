@@ -1,4 +1,4 @@
-nkbc09b_def <- list(
+nkbc09b <- list(
   code = "nkbc09b",
   lab = "Ålder vid diagnos",
   lab_short = "Ålder",
@@ -19,6 +19,7 @@ nkbc09b_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc09b) <- "nkbcind"
 
-filter_nkbc09b_pop <- nkbc09b_def$filter_pop
-mutate_nkbc09b_outcome <- nkbc09b_def$mutate_outcome
+filter_nkbc09b_pop <- nkbc09b$filter_pop
+mutate_nkbc09b_outcome <- nkbc09b$mutate_outcome

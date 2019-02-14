@@ -1,4 +1,4 @@
-nkbc30_def <- list(
+nkbc30 <- list(
   code = "nkbc30",
   lab = "Observerad 5 års överlevnad",
   pop = "alla anmälda fall",
@@ -25,6 +25,7 @@ nkbc30_def <- list(
   inkl_beskr_overlevnad_5ar = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc30) <- "nkbcind"
 
-filter_nkbc30_pop <- nkbc30_def$filter_pop
-mutate_nkbc30_outcome <- nkbc30_def$mutate_outcome
+filter_nkbc30_pop <- nkbc30$filter_pop
+mutate_nkbc30_outcome <- nkbc30$mutate_outcome
