@@ -15,11 +15,11 @@ dftemp <- data.frame(
 
 rccShiny(
   data = dftemp,
-  folder = nkbc33_def$code,
+  folder = code(nkbc33),
   path = output_path,
-  outcomeTitle = nkbc33_def$lab,
-  textBeforeSubtitle = compile_textBeforeSubtitle(nkbc33_def),
-  description = compile_description_nkbc33(nkbc33_def, report_end_year), # OBS: Specialfunktion
-  varOther = compile_varOther(nkbc33_def),
-  targetValues = nkbc33_def$target_values
+  outcomeTitle = lab(nkbc33),
+  textBeforeSubtitle = textBeforeSubtitle(nkbc33),
+  description = description(nkbc33, report_end_year),
+  varOther = varOther(nkbc33),
+  targetValues = target_values(nkbc33)
 )

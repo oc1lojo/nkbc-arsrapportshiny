@@ -1,4 +1,4 @@
-nkbc09f_def <- list(
+nkbc09f <- list(
   code = "nkbc09f",
   lab = "Fjärrmetastaser vid diagnos",
   lab_short = "Fjärrmetastaser",
@@ -27,6 +27,7 @@ nkbc09f_def <- list(
     ),
   teknisk_beskrivning = NULL
 )
+class(nkbc09f) = "nkbcind"
 
-filter_nkbc09f_pop <- nkbc09f_def$filter_pop
-mutate_nkbc09f_outcome <- nkbc09f_def$mutate_outcome
+filter_nkbc09f_pop <- nkbc09f$filter_pop
+mutate_nkbc09f_outcome <- nkbc09f$mutate_outcome

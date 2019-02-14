@@ -1,4 +1,4 @@
-nkbc17_def <- list(
+nkbc17 <- list(
   code = "nkbc17",
   lab = "Välgrundad misstanke om cancer till första besök i specialiserad vård",
   pop = "alla anmälda fall",
@@ -26,6 +26,7 @@ nkbc17_def <- list(
   inkl_beskr_missca = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc17) = "nkbcind"
 
-filter_nkbc17_pop <- nkbc17_def$filter_pop
-mutate_nkbc17_outcome <- nkbc17_def$mutate_outcome
+filter_nkbc17_pop <- nkbc17$filter_pop
+mutate_nkbc17_outcome <- nkbc17$mutate_outcome

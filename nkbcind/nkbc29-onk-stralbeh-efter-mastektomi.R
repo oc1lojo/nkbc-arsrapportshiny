@@ -1,4 +1,4 @@
-nkbc29_def <- list(
+nkbc29 <- list(
   code = "nkbc29",
   lab = "Strålbehandling efter mastektomi",
   pop = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos",
@@ -38,6 +38,7 @@ nkbc29_def <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc29) = "nkbcind"
 
-filter_nkbc29_pop <- nkbc29_def$filter_pop
-mutate_nkbc29_outcome <- nkbc29_def$mutate_outcome
+filter_nkbc29_pop <- nkbc29$filter_pop
+mutate_nkbc29_outcome <- nkbc29$mutate_outcome

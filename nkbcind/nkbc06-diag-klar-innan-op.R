@@ -1,4 +1,4 @@
-nkbc06_def <- list(
+nkbc06 <- list(
   code = "nkbc06",
   lab = "Fastställd diagnos innan operation",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
@@ -29,6 +29,7 @@ nkbc06_def <- list(
     ),
   teknisk_beskrivning = NULL
 )
+class(nkbc06) = "nkbcind"
 
-filter_nkbc06_pop <- nkbc06_def$filter_pop
-mutate_nkbc06_outcome <- nkbc06_def$mutate_outcome
+filter_nkbc06_pop <- nkbc06$filter_pop
+mutate_nkbc06_outcome <- nkbc06$mutate_outcome

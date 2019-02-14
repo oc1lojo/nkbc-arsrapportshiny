@@ -1,4 +1,4 @@
-nkbc09e_def <- list(
+nkbc09e <- list(
   code = "nkbc09e",
   lab = "Spridning till lymfkörtlarna (klinisk) vid diagnos",
   lab_short = "Spridning till lymfkörtlarna",
@@ -23,6 +23,7 @@ nkbc09e_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc09e) = "nkbcind"
 
-filter_nkbc09e_pop <- nkbc09e_def$filter_pop
-mutate_nkbc09e_outcome <- nkbc09e_def$mutate_outcome
+filter_nkbc09e_pop <- nkbc09e$filter_pop
+mutate_nkbc09e_outcome <- nkbc09e$mutate_outcome

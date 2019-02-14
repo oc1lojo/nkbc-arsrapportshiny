@@ -1,4 +1,4 @@
-nkbc35_def <- list(
+nkbc35 <- list(
   code = "nkbc35",
   lab = "Cytostatikabehandling",
   pop = "opererade, invasiva fall utan fjärrmetastaser vid diagnos",
@@ -49,6 +49,7 @@ nkbc35_def <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc35) = "nkbcind"
 
-filter_nkbc35_pop <- nkbc35_def$filter_pop
-mutate_nkbc35_outcome <- nkbc35_def$mutate_outcome
+filter_nkbc35_pop <- nkbc35$filter_pop
+mutate_nkbc35_outcome <- nkbc35$mutate_outcome

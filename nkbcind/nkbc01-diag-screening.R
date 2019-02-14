@@ -1,4 +1,4 @@
-nkbc01_def <- list(
+nkbc01 <- list(
   code = "nkbc01",
   lab = "Screeningupptäckt bröstcancer",
   pop = "kvinnor i åldrarna 40-74 år vid diagnos",
@@ -33,6 +33,7 @@ nkbc01_def <- list(
     ),
   teknisk_beskrivning = NULL
 )
+class(nkbc01) = "nkbcind"
 
-filter_nkbc01_pop <- nkbc01_def$filter_pop
-mutate_nkbc01_outcome <- nkbc01_def$mutate_outcome
+filter_nkbc01_pop <- nkbc01$filter_pop
+mutate_nkbc01_outcome <- nkbc01$mutate_outcome

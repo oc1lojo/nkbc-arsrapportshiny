@@ -1,4 +1,4 @@
-nkbc13_def <- list(
+nkbc13 <- list(
   code = "nkbc13",
   lab = "Täckningsgrad för rapportering av preoperativ onkologisk behandling",
   pop = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling",
@@ -31,6 +31,7 @@ nkbc13_def <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc13) = "nkbcind"
 
-filter_nkbc13_pop <- nkbc13_def$filter_pop
-mutate_nkbc13_outcome <- nkbc13_def$mutate_outcome
+filter_nkbc13_pop <- nkbc13$filter_pop
+mutate_nkbc13_outcome <- nkbc13$mutate_outcome

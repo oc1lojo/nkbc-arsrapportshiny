@@ -1,4 +1,4 @@
-nkbc33_def <- list(
+nkbc33 <- list(
   code = "nkbc33",
   lab = "Täckningsgrad mot cancerregistret",
   pop = "alla anmälda fall",
@@ -8,3 +8,4 @@ nkbc33_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc33) = c("nkbc33", "nkbcind")

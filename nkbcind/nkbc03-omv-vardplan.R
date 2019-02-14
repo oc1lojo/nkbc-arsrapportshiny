@@ -1,4 +1,4 @@
-nkbc03_def <- list(
+nkbc03 <- list(
   code = "nkbc03",
   lab = "Individuell vårdplan (Min Vårdplan) har upprättats i samråd med patienten",
   lab_short = "Min vårdplan",
@@ -23,6 +23,7 @@ nkbc03_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc03) = "nkbcind"
 
-filter_nkbc03_pop <- nkbc03_def$filter_pop
-mutate_nkbc03_outcome <- nkbc03_def$mutate_outcome
+filter_nkbc03_pop <- nkbc03$filter_pop
+mutate_nkbc03_outcome <- nkbc03$mutate_outcome

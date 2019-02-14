@@ -1,4 +1,4 @@
-nkbc05_def <- list(
+nkbc05 <- list(
   code = "nkbc05",
   lab = "Multidisciplinär konferens efter operation",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
@@ -25,6 +25,7 @@ nkbc05_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc05) = "nkbcind"
 
-filter_nkbc05_pop <- nkbc05_def$filter_pop
-mutate_nkbc05_outcome <- nkbc05_def$mutate_outcome
+filter_nkbc05_pop <- nkbc05$filter_pop
+mutate_nkbc05_outcome <- nkbc05$mutate_outcome

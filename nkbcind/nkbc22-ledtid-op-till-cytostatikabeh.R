@@ -1,4 +1,4 @@
-nkbc22_def <- list(
+nkbc22 <- list(
   code = "nkbc22",
   lab = "Operation till cytostatikabehandling",
   pop = "primärt opererade fall utan fjärrmetastaser vid diagnos",
@@ -33,6 +33,7 @@ nkbc22_def <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc22) = "nkbcind"
 
-filter_nkbc22_pop <- nkbc22_def$filter_pop
-mutate_nkbc22_outcome <- nkbc22_def$mutate_outcome
+filter_nkbc22_pop <- nkbc22$filter_pop
+mutate_nkbc22_outcome <- nkbc22$mutate_outcome

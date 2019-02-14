@@ -1,4 +1,4 @@
-nkbc27_def <- list(
+nkbc27 <- list(
   code = "nkbc27",
   lab = "Postoperativ cytostatikabehandling",
   pop = "primärt opererade östrogenreceptornegativa invasiva fall med tumörstorlek > 10mm eller spridning till lymfkörtlar utan fjärrmetastaser vid diagnos",
@@ -47,6 +47,7 @@ nkbc27_def <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc27) = "nkbcind"
 
-filter_nkbc27_pop <- nkbc27_def$filter_pop
-mutate_nkbc27_outcome <- nkbc27_def$mutate_outcome
+filter_nkbc27_pop <- nkbc27$filter_pop
+mutate_nkbc27_outcome <- nkbc27$mutate_outcome

@@ -1,4 +1,4 @@
-nkbc28_def <- list(
+nkbc28 <- list(
   code = "nkbc28",
   lab = "Strålbehandling efter bröstbevarande operation",
   pop = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos",
@@ -38,6 +38,7 @@ nkbc28_def <- list(
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
+class(nkbc28) = "nkbcind"
 
-filter_nkbc28_pop <- nkbc28_def$filter_pop
-mutate_nkbc28_outcome <- nkbc28_def$mutate_outcome
+filter_nkbc28_pop <- nkbc28$filter_pop
+mutate_nkbc28_outcome <- nkbc28$mutate_outcome

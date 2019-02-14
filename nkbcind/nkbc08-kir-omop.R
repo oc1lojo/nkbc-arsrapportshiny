@@ -1,4 +1,4 @@
-nkbc08_def <- list(
+nkbc08 <- list(
   code = "nkbc08",
   lab = "Enbart en operation (ingen omoperation p.g.a. tumördata) i bröst",
   lab_short = "Enbart en operation",
@@ -25,6 +25,7 @@ nkbc08_def <- list(
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
+class(nkbc08) = "nkbcind"
 
-filter_nkbc08_pop <- nkbc08_def$filter_pop
-mutate_nkbc08_outcome <- nkbc08_def$mutate_outcome
+filter_nkbc08_pop <- nkbc08$filter_pop
+mutate_nkbc08_outcome <- nkbc08$mutate_outcome
