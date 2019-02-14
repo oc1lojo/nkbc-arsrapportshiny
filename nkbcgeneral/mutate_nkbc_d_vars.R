@@ -95,6 +95,17 @@ mutate_nkbc_d_vars <- function(x, ...) {
     d_onk_sjhkod = coalesce(
       as.numeric(post_inr_sjhkod),
       as.numeric(pre_inr_sjhkod)
+    ),
+
+    # LKF-region för att imputera om region för sjukhus saknas
+    d_region_lkf = case_when(
+      REGION_NAMN == "Region Sthlm/Gotland" ~ 1L,
+      REGION_NAMN == "Region Uppsala/Örebro" ~ 2L,
+      REGION_NAMN == "Region Sydöstra" ~ 3L,
+      REGION_NAMN == "Region Syd" ~ 4L,
+      REGION_NAMN == "Region Väst" ~ 5L,
+      REGION_NAMN == "Region Norr" ~ 6L,
+      TRUE ~ NA_integer_
     )
   )
 }

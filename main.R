@@ -55,18 +55,7 @@ dfmain <- df %>%
   mutate_nkbc_d_vars() %>%
   mutate_nkbc_other_vars() %>%
   mutate(
-    period = year(a_diag_dat), # Den period som appar visas för
-
-    # lkf region för att imputera om region för sjukhus saknas
-    region_lkf = case_when(
-      REGION_NAMN == "Region Sthlm/Gotland" ~ 1L,
-      REGION_NAMN == "Region Uppsala/Örebro" ~ 2L,
-      REGION_NAMN == "Region Sydöstra" ~ 3L,
-      REGION_NAMN == "Region Syd" ~ 4L,
-      REGION_NAMN == "Region Väst" ~ 5L,
-      REGION_NAMN == "Region Norr" ~ 6L,
-      TRUE ~ NA_integer_
-    )
+    period = year(a_diag_dat) # Den period som appar visas för
   ) %>%
   filter( # default vilka år som ska visas
     period >= 2009,
