@@ -1,4 +1,4 @@
-dftemp <- dfmain %>%
+df_tmp <- df_main %>%
   add_sjhdata(sjukhuskoder, sjhkod_var(nkbc09f)) %>%
   filter(!is.na(region)) %>%
   filter_nkbc09f_pop() %>%
@@ -8,7 +8,7 @@ dftemp <- dfmain %>%
     one_of(other_vars(nkbc09f))
   )
 rccShiny(
-  data = dftemp,
+  data = df_tmp,
   folder = code(nkbc09f),
   path = output_path,
   outcomeTitle = lab(nkbc09f),

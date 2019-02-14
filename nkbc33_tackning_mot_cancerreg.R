@@ -1,4 +1,4 @@
-dftemp <- data.frame(
+df_tmp <- data.frame(
   region = c(
     rep(tackning_tbl$region, tackning_tbl$finns),
     rep(tackning_tbl$region, tackning_tbl$ejfinns)
@@ -14,7 +14,7 @@ dftemp <- data.frame(
 )
 
 rccShiny(
-  data = dftemp,
+  data = df_tmp,
   folder = code(nkbc33),
   path = output_path,
   outcomeTitle = lab(nkbc33),
