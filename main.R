@@ -45,15 +45,21 @@ sjukhuskoder <- sjukhuskoder %>%
     sjukhus = sjukhusnamn,
     region_sjh_txt = region
   ) %>%
-  # Samredovisning av landsting SKAS
   mutate(
-    sjukhus = ifelse(sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus),
-    sjukhus = ifelse(sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA, sjukhus)
+    sjukhus = if_else(
+      sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA_character_, sjukhus
+    ),
+    # Samredovisning av landsting SKAS
+    sjukhus = if_else(
+      sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus
+    )
   )
 
 # Bearbeta huvud-dataram
 df_main <- df %>%
   mutate_if(is.factor, as.character) %>%
+  mutate_at(vars(ends_with("_Värde")), as.integer) %>%
+  mutate_at(vars(ends_with("sjhkod")), as.integer) %>%
   mutate_nkbc_d_vars() %>%
   mutate_nkbc_other_vars() %>%
   mutate(
