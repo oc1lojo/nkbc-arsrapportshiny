@@ -45,13 +45,13 @@ sjukhuskoder <- sjukhuskoder %>%
     sjukhus = sjukhusnamn,
     region_sjh_txt = region
   ) %>%
-  # Samredovisning av landsting SKAS
   mutate(
     sjukhus = if_else(
-      sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus
-    ),
-    sjukhus = if_else(
       sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA_character_, sjukhus
+    ),
+    # Samredovisning av landsting SKAS
+    sjukhus = if_else(
+      sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus
     )
   )
 
