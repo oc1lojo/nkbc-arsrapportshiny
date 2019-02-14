@@ -1,7 +1,8 @@
 nkbc29 <- list(
   code = "nkbc29",
   lab = "Strålbehandling efter mastektomi",
-  pop = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos",
+  pop = "invasiva fall med spridning till lymfkörtlarna (fall med enbart mikrometastas exkluderade) och utan fjärrmetastaser vid diagnos, opererade med mastektomi",
+  pop_short = "invasiva fall med mastektomi, spridning till lymfkörtlarna och utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
     filter(
       x,
@@ -17,6 +18,9 @@ nkbc29 <- list(
       # Spridning till lymfkörtlar
       op_pad_lglmetant > 0,
 
+      # Ej fall med endast mikrometastas
+      !((op_pad_snmakrometant == 0 & op_pad_snmikrometant > 0 & op_pad_lglmetant == op_pad_snmikrometant) %in% TRUE),
+
       # Ej fjärrmetastaser vid diagnos
       !a_tnm_mklass_Värde %in% 10
     )
@@ -31,10 +35,12 @@ nkbc29 <- list(
   other_vars = c("a_pat_alder", "d_pn"),
   om_indikatorn =
     paste(
-      "Då hela bröstet opererats bort (mastektomi) behövs oftast inte strålbehandling, lokoregional strålbehandling för patienter med endast mikrometastas rekommenderas inte.",
-      "Vid spridning till lymfkörtlar bör strålbehandling ges både mot bröstkorgsväggen och lymfkörtlar."
+      "Då hela bröstet opereras bort (mastektomi) behövs ofta inte strålbehandling.",
+      "Vid spridning till lymfkörtlarna (makrometastas) bör dock strålbehandling ges både mot bröstkorgsvägg och lymfkörtlar.",
+      "Lokoregional strålbehandling rekommenderas inte vid endast mikrometastas."
     ),
-  vid_tolkning = "Spridning till lymfkörtlar är definerat som metastas > 0.2 mm i axillen.",
+  vid_tolkning =
+    "Spridning till lymfkörtlar är definerat som metastas > 0.2 mm i axillen (fall med enbart mikrometastas är exkluderade).",
   inkl_beskr_onk_beh = TRUE,
   teknisk_beskrivning = NULL
 )
