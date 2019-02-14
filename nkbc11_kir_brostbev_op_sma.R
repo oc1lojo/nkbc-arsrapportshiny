@@ -7,6 +7,7 @@ df_tmp <- df_main %>%
     landsting, region, sjukhus, period, outcome,
     one_of(other_vars(nkbc11))
   )
+
 rccShiny(
   data = df_tmp,
   folder = code(nkbc11),

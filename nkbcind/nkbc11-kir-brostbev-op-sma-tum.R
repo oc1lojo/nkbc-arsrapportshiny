@@ -1,6 +1,6 @@
 nkbc11 <- list(
   code = "nkbc11",
-  lab = "Bröstbevarande operation",
+  lab = "Bröstbevarande operation vid små tumörer",
   pop = "primärt opererade fall med invasiv cancer <=30 mm eller ej invasiv cancer <=20 mm utan fjärrmetastaser vid diagnos",
   pop_short = "primärt opererade fall med små tumörer utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
@@ -31,7 +31,11 @@ nkbc11 <- list(
   target_values = c(70, 80),
   sjhkod_var = "op_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv"),
-  om_indikatorn = "Ett bröstbevarande ingrepp och  strålbehandling är  standradingrepp  för majoriten av tidigt upptäckta bröstcancrar . Tumörens egenskaper, form och storlek på bröstet spelar roll för av av kirurgisk operationsmetod.",
+  om_indikatorn =
+    paste(
+      "Ett bröstbevarande ingrepp och  strålbehandling är  standradingrepp  för majoriten av tidigt upptäckta bröstcancrar.",
+      "Tumörens egenskaper, form och storlek på bröstet spelar roll för av av kirurgisk operationsmetod."
+    ),
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
