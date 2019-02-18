@@ -58,8 +58,7 @@ sjukhuskoder <- sjukhuskoder %>%
 # Bearbeta huvud-dataram
 df_main <- df %>%
   mutate_if(is.factor, as.character) %>%
-  mutate_at(vars(ends_with("_Värde")), as.integer) %>%
-  mutate_at(vars(ends_with("sjhkod")), as.integer) %>%
+  clean_nkbc_data() %>%
   mutate_nkbc_d_vars() %>%
   mutate_nkbc_other_vars() %>%
   mutate(
