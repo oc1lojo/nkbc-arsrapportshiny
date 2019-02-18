@@ -1,5 +1,7 @@
 # Se t.ex. http://adv-r.had.co.nz/OO-essentials.html#s3
 
+# TODO Designa om detta rudimentära S3-system för kvalitetsindikatorer i NKBC
+
 # Definiera generiska funktioner ----
 code <- function(x) UseMethod("code")
 lab <- function(x) UseMethod("lab")
