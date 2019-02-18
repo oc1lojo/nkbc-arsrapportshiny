@@ -1,4 +1,4 @@
-add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var = GLOBALS$SJHKODUSE) {
+add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var) {
   names(x)[names(x) == sjhkod_var] <- "sjhkod"
 
   x %>%
