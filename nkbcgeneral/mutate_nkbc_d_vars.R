@@ -4,14 +4,11 @@ mutate_nkbc_d_vars <- function(x, ...) {
     d_prim_beh_Värde = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
 
     # Beräkna variabel för invasiv cancer
-    d_invasiv_Värde = if_else(d_prim_beh_Värde == 1,
-      op_pad_invasiv_Värde,
-      if_else(d_prim_beh_Värde %in% c(2, 3) | is.na(d_prim_beh_Värde),
-        a_pad_invasiv_Värde,
-        NA_integer_
-      )
+    d_invasiv_Värde = case_when(
+      a_pad_invasiv_Värde %in% 1 | op_pad_invasiv_Värde %in% 1 ~ 1L,
+      a_pad_invasiv_Värde %in% 2 | op_pad_invasiv_Värde %in% 2 ~ 2L,
+      TRUE ~ NA_integer_
     ),
-    d_invasiv_Värde = if_else(d_invasiv_Värde == 98, NA_integer_, d_invasiv_Värde), ## added 2017-11-09
 
     # ER, 1 = pos, 2 = neg
     d_er_op_Värde = case_when(
