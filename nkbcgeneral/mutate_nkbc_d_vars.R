@@ -11,12 +11,7 @@ mutate_nkbc_d_vars <- function(x, ...) {
         NA_integer_
       )
     ),
-
     d_invasiv_Värde = if_else(d_invasiv_Värde == 98, NA_integer_, d_invasiv_Värde), ## added 2017-11-09
-    d_invasiv = factor(d_invasiv_Värde, c(1, 2, NA),
-      c("Invasiv cancer", "Enbart cancer in situ", "Uppgift saknas"),
-      exclude = NULL
-    ),
 
     # ER, 1 = pos, 2 = neg
     d_er_op_Värde = case_when(

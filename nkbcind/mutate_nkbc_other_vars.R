@@ -1,5 +1,13 @@
 mutate_nkbc_other_vars <- function(x, ...) {
   mutate(x,
+
+    # Invasivitet
+    d_invasiv = factor(
+      replace_na(d_invasiv_Värde, 99),
+      levels = c(1, 2, 99),
+      labesl = c("Invasiv cancer", "Enbart cancer in situ", "Uppgift saknas")
+    ),
+
     # ER
     d_er = factor(
       replace_na(d_er_Värde, 99),
