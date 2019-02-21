@@ -5,10 +5,10 @@ library(lubridate)
 library(shiny)
 library(rccShiny)
 
-for (file_name in list.files("nkbcgeneral", pattern = "*.R")) {
+for (file_name in list.files("nkbcgeneral", pattern = "*.R$")) {
   source(file.path("nkbcgeneral", file_name), encoding = "UTF-8")
 }
-for (file_name in list.files("nkbcind", pattern = "*.R")) {
+for (file_name in list.files("nkbcind", pattern = "*.R$")) {
   source(file.path("nkbcind", file_name), encoding = "UTF-8")
 }
 

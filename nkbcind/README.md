@@ -1,0 +1,52 @@
+
+<!-- README.md är genererad från README.Rmd. Vänligen redigera den filen. -->
+
+# nkbcind
+
+Planen är att lägga material för beräkning av kvalitetsindikatorer för
+NKBC här.
+
+Den långsiktiga planen är att skapa ett R-paket.
+
+## Installation
+
+``` r
+# install.packages("devtools")
+# devtools::install_bitbucket("cancercentrum/nkbcind") # inte implementerad än
+```
+
+## Användning
+
+``` r
+library(dplyr)
+library(tidyr)
+library(lubridate)
+
+# library(nkbcgeneral) # inte implementerat än
+for (file_name in list.files(file.path("..", "nkbcgeneral"), pattern = "*.R$")) {
+  source(file.path("..", "nkbcgeneral", file_name), encoding = "UTF-8")
+}
+
+# library(nkbcind) # inte implementerat än
+for (file_name in list.files(pattern = "*.R$")) {
+  source(file_name, encoding = "UTF-8")
+}
+```
+
+TODO Lägg till exempel.
+
+Tills vidare:
+
+  - För att skapa en Shiny-rapport så börjar jag alltså med allmän
+    bearbetning av
+    NKBC-data:  
+    <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/main.R#lines-59>
+  - …och sedan skapa själva Shiny-rapporterna (här nkbc01 som
+    exempel)  
+    <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/nkbc01_diag_screening.R>
+  - …som använder
+    definitionen  
+    <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/nkbcind/nkbc01-diag-screening.R>
+  - …och
+    metoderna  
+    <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/nkbcind/nkbcind-methods.R>
