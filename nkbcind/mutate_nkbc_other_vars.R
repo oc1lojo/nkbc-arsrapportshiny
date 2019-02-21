@@ -2,9 +2,9 @@ mutate_nkbc_other_vars <- function(x, ...) {
   mutate(x,
     # ER
     d_er = factor(
-      ifelse(is.na(d_er_Värde), 99, d_er_Värde),
-      c(1, 2, 99),
-      c("Positiv", "Negativ", "Uppgift saknas")
+      replace_na(d_er_Värde, 99),
+      levels = c(1, 2, 99),
+      labels = c("Positiv", "Negativ", "Uppgift saknas")
     ),
 
     # Biologisk subtyp

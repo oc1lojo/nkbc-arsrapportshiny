@@ -1,5 +1,6 @@
 # Läs in R-paket och verktygsfunktioner ----------------------------------------
 library(dplyr)
+library(tidyr)
 library(lubridate)
 library(shiny)
 library(rccShiny)
