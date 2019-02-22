@@ -8,6 +8,26 @@ NKBC här.
 
 Den långsiktiga planen är att skapa ett R-paket.
 
+Visionen är att detta R-paket kommer vara en **central** plats för
+definition, implementering och dokumentation av beräkning av
+kvalitetsindikatorer för NKBC i **alla** utdata-kanaler.
+
+  - Planerad använding på INCA
+      - NKBC Koll på läget (KPL), med R-paketet
+        [rccKPL](https://bitbucket.org/cancercentrum/rcckpl)
+      - NKBC Vården i siffror, med R-paketet
+        [incavis](https://bitbucket.org/cancercentrum/incavis)
+      - NKBC onlinerapporter innanför inloggning på INCA (snart med
+        R-paketet
+        [rccShiny](https://bitbucket.org/cancercentrum/rccshiny))
+  - Planerad använding lokalt på RCC Stockholm-Gotland
+      - Framtagande av NKBC Interaktiv Årsrapport med R-paketet
+        [rccShiny](https://bitbucket.org/cancercentrum/rccshiny)
+          - <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny>
+
+Jfr
+<https://www.cancercentrum.se/samverkan/vara-uppdrag/statistik/kvalitetsregisterstatistik/>
+
 ## Installation
 
 ``` r
