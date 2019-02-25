@@ -4,7 +4,7 @@ df_tmp <- df_main %>%
   filter_nkbc09f_pop() %>%
   mutate_nkbc09f_outcome() %>%
   select(
-    landsting, region, sjukhus, period, outcome,
+    outcome, period, region, landsting, sjukhus,
     one_of(other_vars(nkbc09f))
   )
 rccShiny(

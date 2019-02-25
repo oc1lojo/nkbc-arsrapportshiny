@@ -8,7 +8,7 @@ df_tmp <- df_main %>%
     period <= report_end_year - 5
   ) %>%
   select(
-    landsting, region, period, outcome, # OBS Ej sjukhus
+    outcome, period, region, landsting, # OBS Ej sjukhus
     one_of(other_vars(nkbc30))
   )
 

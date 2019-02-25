@@ -4,7 +4,7 @@ df_tmp <- df_main %>%
   filter_nkbc05_pop() %>%
   mutate_nkbc05_outcome() %>%
   select(
-    landsting, region, sjukhus, period, outcome,
+    outcome, period, region, landsting, sjukhus,
     one_of(other_vars(nkbc05))
   )
 
