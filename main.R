@@ -33,9 +33,10 @@ load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskode
 
 # Läs in ögonblickskopia av NKBC exporterad från INCA
 nkbc_data_dir <- Sys.getenv("NKBC_DATA_DIR")
+nkbc_data_date <- "2018-08-31"
 load(
   unzip(
-    file.path(nkbc_data_dir, "2018-08-31", "nkbc_nat_id 2018-08-31 09-22-09.zip"),
+    file.path(nkbc_data_dir, nkbc_data_date, "nkbc_nat_id 2018-08-31 09-22-09.zip"),
     exdir = tempdir()
   )
 )
