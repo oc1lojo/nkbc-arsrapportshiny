@@ -1,63 +1,21 @@
-NAME <- "nkbc19"
+df_tmp <- df_main %>%
+  add_sjhdata(sjukhuskoder, sjhkod_var(nkbc19)) %>%
+  filter(!is.na(region)) %>%
+  filter_nkbc19_pop() %>%
+  mutate_nkbc19_outcome() %>%
+  select(
+    outcome, period, region, landsting, sjukhus,
+    one_of(other_vars(nkbc19))
+  )
 
-GLOBALS <- defGlobals(
-  LAB = "Första behandlingsdiskussion till operation",
-  POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "op_inr_sjhkod",
-  TARGET = c(75, 90)
+rccShiny(
+  data = df_tmp,
+  folder = code(nkbc19),
+  path = output_path,
+  outcomeTitle = lab(nkbc19),
+  textBeforeSubtitle = textBeforeSubtitle(nkbc19),
+  description = description(nkbc19, report_end_year),
+  varOther = varOther(nkbc19),
+  propWithinValue = prop_within_value(nkbc19),
+  targetValues = target_values(nkbc19)
 )
-
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
-  mutate(
-    outcome = as.numeric(ymd(op_kir_dat) - ymd(a_planbeh_infopatdat)),
-
-    outcome = ifelse(outcome < 0, 0, outcome)
-  ) %>%
-  filter(
-    # Endast opererade
-    !is.na(op_kir_dat),
-
-    # Endast primär opereration (planerad om utförd ej finns)
-    prim_beh == 1,
-
-    # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% 10,
-
-    !is.na(region)
-  ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
-
-link <- rccShiny(
-  data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
-      descTarg()
-    ),
-    descTolk,
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  ),
-  propWithinValue = 14,
-  targetValues = GLOBALS$TARGET
-)
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))

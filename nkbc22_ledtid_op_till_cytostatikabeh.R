@@ -1,75 +1,25 @@
-NAME <- "nkbc22"
-
-GLOBALS <- defGlobals(
-  LAB = "Operation till cytostatikabehandling",
-  POP = "primärt opererade fall utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "post_inr_sjhkod",
-  TARGET = c(75, 90)
-)
-
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
-  mutate(
-    outcome = as.numeric(ymd(post_kemo_dat) - ymd(op_kir_dat)),
-    outcome = ifelse(outcome < 0, 0, outcome)
-  ) %>%
+df_tmp <- df_main %>%
+  add_sjhdata(sjukhuskoder, sjhkod_var(nkbc22)) %>%
+  filter(!is.na(region)) %>%
+  filter_nkbc22_pop() %>%
+  mutate_nkbc22_outcome() %>%
   filter(
-    # Reg av given onkologisk behandling
-    period >= 2012,
-
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
-
-    # Endast opererade
-    !is.na(op_kir_dat),
-
-    # Endast primär opereration (planerad om utförd ej finns)
-    prim_beh == 1,
-
-    # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% 10,
-
-    !is.na(region)
+    period <= report_end_year - 1
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(
+    outcome, period, region, landsting, sjukhus,
+    one_of(other_vars(nkbc22))
+  )
 
-link <- rccShiny(
-  data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
-      descTarg()
-    ),
-    paste0(
-      "Operationsdatum är datum för första operation, det innebär att tiden från sista operation till start av cytostatikabehandling
-      kan vara kortare än det som redovisas.
-      <p></p>",
-      onkRed,
-      "<p></p>",
-      descTolk
-    ),
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  ),
-  propWithinValue = 24,
-  targetValues = GLOBALS$TARGET
+rccShiny(
+  data = df_tmp,
+  folder = code(nkbc22),
+  path = output_path,
+  outcomeTitle = lab(nkbc22),
+  textBeforeSubtitle = textBeforeSubtitle(nkbc22),
+  description = description(nkbc22, report_end_year),
+  varOther = varOther(nkbc22),
+  propWithinValue = prop_within_value(nkbc22),
+  targetValues = target_values(nkbc22)
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))

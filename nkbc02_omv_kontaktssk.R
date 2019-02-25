@@ -1,56 +1,20 @@
-NAME <- "nkbc02"
+df_tmp <- df_main %>%
+  add_sjhdata(sjukhuskoder, sjhkod_var(nkbc02)) %>%
+  filter(!is.na(region)) %>%
+  filter_nkbc02_pop() %>%
+  mutate_nkbc02_outcome() %>%
+  select(
+    outcome, period, region, landsting, sjukhus,
+    one_of(other_vars(nkbc02))
+  )
 
-GLOBALS <- defGlobals(
-  LAB = "Patienten har erbjudits, i journalen dokumenterad, kontaktsjuksköterska",
-  POP = "alla anmälda fall.",
-  SHORTLAB = "Kontaktsjuksköterska",
-  SJHKODUSE = "a_inr_sjhkod",
-  TARGET = c(80, 95)
+rccShiny(
+  data = df_tmp,
+  folder = code(nkbc02),
+  path = output_path,
+  outcomeTitle = lab(nkbc02),
+  textBeforeSubtitle = textBeforeSubtitle(nkbc02),
+  description = description(nkbc02, report_end_year),
+  varOther = varOther(nkbc02),
+  targetValues = target_values(nkbc02)
 )
-
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
-  mutate(
-    # Hantera missing
-    outcome = as.logical(ifelse(a_omv_kssk_Värde %in% c(0, 1), a_omv_kssk_Värde, NA))
-  ) %>%
-  filter(
-    # kontaktsjuksköterska tillkom mitten av 2014
-    period >= 2015,
-
-    !is.na(region)
-  ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
-
-link <- rccShiny(
-  data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "Enligt den Nationella  Cancerstrategin (SOU 2009:11) ska alla cancerpatienter erbjudas en kontaktsjuksköterska.",
-      descTarg()
-    ),
-    descTolk,
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    ),
-    list(
-      var = "invasiv",
-      label = c("Invasivitet vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
-)
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))

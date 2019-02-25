@@ -1,69 +1,25 @@
-NAME <- "nkbc28"
-
-GLOBALS <- defGlobals(
-  LAB = "Strålbehandling efter bröstbevarande operation",
-  POP = "invasiva fall med bröstbevarande operation utan fjärrmetastaser vid diagnos.",
-  SJHKODUSE = "post_inr_sjhkod",
-  TARGET = c(90, 95)
-)
-
-dftemp <- addSjhData(dfmain)
-
-dftemp <- dftemp %>%
-  mutate(
-    outcome = as.logical(post_rt_Värde)
-  ) %>%
+df_tmp <- df_main %>%
+  add_sjhdata(sjukhuskoder, sjhkod_var(nkbc28)) %>%
+  filter(!is.na(region)) %>%
+  filter_nkbc28_pop() %>%
+  mutate_nkbc28_outcome() %>%
   filter(
-    # Reg av given onkologisk behandling
-    period >= 2012,
-
     # ett år bakåt då info från onk behandling blanketter
-    period <= YEAR - 1,
-
-    # Endast opererade
-    !is.na(op_kir_dat),
-
-    # Endast invasiv cancer
-    invasiv == "Invasiv cancer",
-
-    # Endast bröstbevarande operation
-    op_kir_brost_Värde == 1,
-
-    # Ej fjärrmetastaser vid diagnos
-    !a_tnm_mklass_Värde %in% 10,
-
-    !is.na(region)
+    period <= report_end_year - 1
   ) %>%
-  select(landsting, region, sjukhus, period, outcome, a_pat_alder, invasiv)
+  select(
+    outcome, period, region, landsting, sjukhus,
+    one_of(other_vars(nkbc28))
+  )
 
-link <- rccShiny(
-  data = dftemp,
-  folder = NAME,
-  path = OUTPUTPATH,
-  outcomeTitle = GLOBALS$LAB,
-  folderLinkText = GLOBALS$SHORTLAB,
-  geoUnitsPatient = FALSE,
-  textBeforeSubtitle = GLOBALS$SHORTPOP,
-  description = c(
-    paste0(
-      "Strålbehandling efter bröstbevarande operation minskar risk för återfall. I de fall där samsjuklighet föreligger får nyttan med strålbehandling avvägas med hänsyn till övriga medicinska faktorer.",
-      descTarg()
-    ),
-    paste0(
-      onkRed,
-      "<p></p>",
-      descTolk
-    ),
-    descTekBes()
-  ),
-  varOther = list(
-    list(
-      var = "a_pat_alder",
-      label = c("Ålder vid diagnos")
-    )
-  ),
-  targetValues = GLOBALS$TARGET
+
+rccShiny(
+  data = df_tmp,
+  folder = code(nkbc28),
+  path = output_path,
+  outcomeTitle = lab(nkbc28),
+  textBeforeSubtitle = textBeforeSubtitle(nkbc28),
+  description = description(nkbc28, report_end_year),
+  varOther = varOther(nkbc28),
+  targetValues = target_values(nkbc28)
 )
-
-cat(link, fill = TRUE)
-# runApp(paste0("Output/apps/sv/",NAME))
