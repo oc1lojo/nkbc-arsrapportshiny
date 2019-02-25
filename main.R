@@ -5,9 +5,16 @@ library(lubridate)
 library(shiny)
 library(rccShiny)
 
+# install.packages("devtools")
+# devtools::install_bitbucket("cancercentrum/nkbcgeneral") # inte implementerad än
+# devtools::install_bitbucket("cancercentrum/nkbcind") # inte implementerad än
+
+# library(nkbcgeneral) # inte implementerat än
 for (file_name in list.files("nkbcgeneral", pattern = "*.R$")) {
   source(file.path("nkbcgeneral", file_name), encoding = "UTF-8")
 }
+
+# library(nkbcind) # inte implementerat än
 for (file_name in list.files("nkbcind", pattern = "*.R$")) {
   source(file.path("nkbcind", file_name), encoding = "UTF-8")
 }
