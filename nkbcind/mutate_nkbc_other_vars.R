@@ -18,7 +18,7 @@ mutate_nkbc_other_vars <- function(x, ...) {
     # Biologisk subtyp
     d_subtyp = factor(
       d_subtyp_Värde,
-      levels = c(1, 2, 3, 99),
+      levels = c(3, 2, 1, 99),
       labels = c("Trippel negativ", "HER2 positiv", "Luminal", "Uppgift saknas")
     ),
 
