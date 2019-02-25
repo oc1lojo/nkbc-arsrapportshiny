@@ -62,7 +62,7 @@ mutate_nkbc_d_vars <- function(x, ...) {
     ),
 
     # Biologisk subtyp, 1 = Luminal, 2 = HER2, 3 = TNBC, 99 = Uppgift saknas
-    d_subtyp_Värde = case_when(
+    d_trigrp_Värde = case_when(
       d_er_Värde %in% 2 & d_pr_Värde %in% 2 & d_her2_Värde %in% 2 ~ 3L,
       is.na(d_er_Värde) | is.na(d_pr_Värde) | is.na(d_her2_Värde) ~ 99L,
       d_her2_Värde %in% 1 ~ 2L,

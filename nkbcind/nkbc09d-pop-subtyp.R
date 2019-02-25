@@ -12,7 +12,7 @@ nkbc09d <- list(
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
-      outcome = d_subtyp
+      outcome = d_trigrp
     )
   },
   sjhkod_var = "a_inr_sjhkod",

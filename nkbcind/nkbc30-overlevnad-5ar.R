@@ -14,7 +14,7 @@ nkbc30 <- list(
   },
   target_values = 88,
   sjhkod_var = "a_inr_sjhkod",
-  other_vars = c("a_pat_alder", "d_invasiv", "d_subtyp"),
+  other_vars = c("a_pat_alder", "d_invasiv", "d_trigrp"),
   om_indikatorn =
     paste(
       "Total överlevnad betraktas som det viktigaste utfallsmåttet.",

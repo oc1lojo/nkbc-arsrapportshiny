@@ -6,7 +6,7 @@ varbesk_other_vars <- tibble::enframe(
     d_invasiv = "Invasivitet vid diagnos",
     d_pn = "Spridning till lymfkörtlar",
     d_er = "Östrogenreceptor (ER)",
-    d_subtyp = "Biologisk subtyp"
+    d_trigrp = "Biologisk subtyp"
   ),
   name = "var",
   value = "label"
