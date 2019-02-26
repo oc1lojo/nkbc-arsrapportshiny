@@ -10,11 +10,13 @@ library(rccShiny)
 # devtools::install_bitbucket("cancercentrum/nkbcind") # inte implementerad än
 
 # library(nkbcgeneral) # inte implementerat än
+# Se https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/nkbcgeneral/README.md
 for (file_name in list.files("nkbcgeneral", pattern = "*.R$")) {
   source(file.path("nkbcgeneral", file_name), encoding = "UTF-8")
 }
 
 # library(nkbcind) # inte implementerat än
+# Se https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/nkbcind/README.md
 for (file_name in list.files("nkbcind", pattern = "*.R$")) {
   source(file.path("nkbcind", file_name), encoding = "UTF-8")
 }
