@@ -1,6 +1,17 @@
 mutate_nkbc_other_vars <- function(x, ...) {
   mutate(x,
 
+    # Primär behandling
+    d_prim_beh_op = factor(
+      replace_na(d_prim_beh_Värde, 99),
+      levels = c(1, 2, 99),
+      labels = c(
+        "Primär operation",
+        "Preoperativ onkologisk behandling",
+        "Uppgift saknas"
+      )
+    ),
+
     # Invasivitet
     d_invasiv = factor(
       replace_na(d_invasiv_Värde, 99),
