@@ -89,6 +89,8 @@ description.nkbcind <- function(x, report_end_year = report_end_year, ...) {
             "onkologiskt sjukhus",
             x$sjhkod_var %in% "op_inr_sjhkod" ~
             "opererande sjukhus",
+            x$sjhkod_var %in% "d_prim_beh_sjhkod" ~
+            "sjukhus ansvarig för primär behandling",
             x$sjhkod_var %in% c("d_onkpreans_sjhkod", "d_onkpostans_sjhkod") ~
             "rapporterande onkologiskt sjukhus och om detta saknas sjukhus ansvarigt för rapportering av onkologisk behandling, onkologiskt sjukhus, anmälande sjukhus"
           ),

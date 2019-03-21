@@ -99,6 +99,7 @@ nkbcind_nams <- c(
   "nkbc09f", # pop_tnm_m
 
   # Ledtider
+  "nkbc43", # ledtid_misstanke_till_prim_beh
   "nkbc15", # ledtid_misstanke_till_op
   "nkbc16", # ledtid_misstanke_till_preop_beh
   "nkbc17", # ledtid_misstanke_till_besok_spec
