@@ -118,8 +118,10 @@ nkbcind_nams <- c(
   "nkbc02", # omv_kontaktssk
   "nkbc03", # omv_vardplan
 
-  # Kirurgi
+  # Primär behandling
   "nkbc40", # kir_prim_beh
+
+  # Kirurgi
   "nkbc42", # kir_brostbev_op
   "nkbc11", # kir_brostbev_op_sma_tum
   "nkbc07", # kir_direktrek
