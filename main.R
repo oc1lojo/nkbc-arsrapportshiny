@@ -103,6 +103,7 @@ nkbcind_nams <- c(
   "nkbc15", # ledtid_misstanke_till_op
   "nkbc16", # ledtid_misstanke_till_preop_beh
   "nkbc17", # ledtid_misstanke_till_besok_spec
+  "nkbc44", # ledtid_provtagn_till_prim_beh
   "nkbc19", # ledtid_behdisk_till_op
   "nkbc20", # ledtid_behdisk_till_preop_beh
   "nkbc22", # ledtid_op_till_cytostatikabeh
