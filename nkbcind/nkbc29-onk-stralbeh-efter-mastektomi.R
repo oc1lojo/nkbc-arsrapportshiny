@@ -30,7 +30,7 @@ nkbc29 <- list(
       outcome = as.logical(post_rt_Värde)
     )
   },
-  target_values = c(90, 95),
+  target_values = c(70, 85),
   sjhkod_var = "post_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_pn"),
   om_indikatorn =
