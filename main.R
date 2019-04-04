@@ -84,7 +84,7 @@ df_main <- df %>%
 
 nkbcind_nams <- c(
   # Täckningsgrad
-  "nkbc33", # tackning_mot_cancerreg
+  # "nkbc33", # tackning_mot_cancerreg -- skapas separat sist
   "nkbc13", # tackning_for_preop_beh
   "nkbc14", # tackning_for_postop_beh
 
@@ -146,43 +146,19 @@ for (i in seq(along = nkbcind_nams)) {
   nkbcind <- get(nkbcind_nam)
 
   # Förbearbeta data
-  if (!(nkbcind_nam %in% c("nkbc30", "nkbc33"))) {
-    df_tmp <- df_main %>%
-      add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
-      filter(!is.na(region)) %>%
-      nkbcind$filter_pop() %>%
-      nkbcind$mutate_outcome() %>%
-      select(
-        landsting, region, sjukhus, period, outcome,
-        one_of(other_vars(nkbcind))
-      )
-  } else if (nkbcind_nam == "nkbc30") {
-    # Data för indikator nkbc30
-    df_tmp <- df_main %>%
-      add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
-      filter(!is.na(region)) %>%
-      nkbcind$filter_pop() %>%
-      nkbcind$mutate_outcome() %>%
-      select(
-        outcome, period, region, landsting, # OBS Ej sjukhus
-        one_of(other_vars(nkbcind))
-      )
-  } else if (nkbcind_nam == "nkbc33") {
-    # Data för indikator nkbc33
-    df_tmp <- data.frame(
-      region = c(
-        rep(tackning_tbl$region, tackning_tbl$finns),
-        rep(tackning_tbl$region, tackning_tbl$ejfinns)
-      ),
-      period = c(
-        rep(tackning_tbl$ar, tackning_tbl$finns),
-        rep(tackning_tbl$ar, tackning_tbl$ejfinns)
-      ),
-      outcome = c(
-        rep(rep(TRUE, dim(tackning_tbl)[1]), tackning_tbl$finns),
-        rep(rep(FALSE, dim(tackning_tbl)[1]), tackning_tbl$ejfinns)
-      )
+  df_tmp <- df_main %>%
+    add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
+    filter(!is.na(region)) %>%
+    nkbcind$filter_pop() %>%
+    nkbcind$mutate_outcome() %>%
+    select(
+      landsting, region, sjukhus, period, outcome,
+      one_of(other_vars(nkbcind))
     )
+
+  if (nkbcind_nam == "nkbc30") {
+    # Överlevand redovisas inte på sjukhusnivå
+    df_tmp <- select(df_tmp, -sjukhus)
   }
 
   if (!is.null(nkbcind$inkl_beskr_onk_beh) && nkbcind$inkl_beskr_onk_beh |
@@ -211,3 +187,32 @@ for (i in seq(along = nkbcind_nams)) {
     targetValues = target_values(nkbcind)
   )
 }
+
+# Indikator nkbc33 - tackning_mot_cancerreg
+nkbcind <- nkbc33
+df_tmp <- data.frame(
+  region = c(
+    rep(tackning_tbl$region, tackning_tbl$finns),
+    rep(tackning_tbl$region, tackning_tbl$ejfinns)
+  ),
+  period = c(
+    rep(tackning_tbl$ar, tackning_tbl$finns),
+    rep(tackning_tbl$ar, tackning_tbl$ejfinns)
+  ),
+  outcome = c(
+    rep(rep(TRUE, dim(tackning_tbl)[1]), tackning_tbl$finns),
+    rep(rep(FALSE, dim(tackning_tbl)[1]), tackning_tbl$ejfinns)
+  )
+)
+rccShiny(
+  data = df_tmp,
+  folder = code(nkbcind),
+  path = output_path,
+  outcomeTitle = lab(nkbcind),
+  textBeforeSubtitle = textBeforeSubtitle(nkbcind),
+  description = description(nkbcind, report_end_year),
+  varOther = varOther(nkbcind),
+  propWithinUnit = ifelse(!is.null(prop_within_unit(nkbcind)), prop_within_unit(nkbcind), "dagar"), # work-around, använd standardvärde
+  propWithinValue = ifelse(!is.null(prop_within_value(nkbcind)), prop_within_value(nkbcind), 30), # work-around, använd standardvärde
+  targetValues = target_values(nkbcind)
+)
