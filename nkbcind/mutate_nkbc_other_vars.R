@@ -65,7 +65,7 @@ mutate_nkbc_other_vars <- function(x, ...) {
         TRUE ~ NA_real_
       ),
       levels = c(1, 2, 99),
-      labels = c("Nej (N0)", "Ja (N1-N3)", "Uppgift saknas")
+      labels = c("Nej (cN-)", "Ja (cN+)", "Uppgift saknas")
     ),
 
     # M
