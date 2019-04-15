@@ -128,6 +128,7 @@ nkbcind_nams <- c(
   "nkbc11", # kir_brostbev_op_sma_tum
   "nkbc07", # kir_direktrek
   "nkbc08", # kir_omop
+  "nkbc45", # kir_axillkir
   "nkbc26", # kir_sentinel_node
 
   # Onkologisk behandling
