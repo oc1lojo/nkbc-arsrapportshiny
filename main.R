@@ -93,6 +93,7 @@ nkbcind_nams <- c(
   "nkbc09b", # pop_alder
   "nkbc09c", # pop_invasiv
   "nkbc09d", # pop_subtyp
+  "nkbc09i", # pop_tnm_t
   "nkbc09h", # pop_t
   "nkbc09e", # pop_tnm_n
   "nkbc09g", # pop_n
