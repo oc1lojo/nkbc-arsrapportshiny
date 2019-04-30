@@ -20,8 +20,8 @@ nkbc45 <- list(
     mutate(x,
       outcome = factor(
         if_else(op_kir_axilltyp_Värde %in% c(1, 2, 3), op_kir_axilltyp_Värde, 98L),
-        levels = c(1, 2, 3, 98),
-        labels = c("Enbart SN", "Enbart utrymning", "SN och utrymning", "Uppgift saknas")
+        levels = c(1, 3, 2, 98),
+        labels = c("Enbart SN", "SN och utrymning", "Enbart utrymning", "Uppgift saknas")
       )
     )
   },
