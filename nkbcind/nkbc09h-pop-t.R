@@ -1,12 +1,13 @@
 nkbc09h <- list(
   code = "nkbc09h",
   lab = "Tumörstorlek",
-  pop = "opererade invasiva fall utan fjärrmetastaser vid diagnos",
+  pop = "primärt opererade invasiva fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
     filter(
       x,
-      # Enbart opererade
+      # Enbart primärt opererade
       !is.na(op_kir_dat),
+      d_prim_beh_Värde %in% 1,
 
       # Enbart invasiv cancer
       d_invasiv == "Invasiv cancer",
@@ -23,12 +24,9 @@ nkbc09h <- list(
   prop_within_unit = "mm",
   prop_within_value = 20,
   sjhkod_var = "op_inr_sjhkod",
-  other_vars = c("a_pat_alder", "d_prim_beh_op"),
-  om_indikatorn = "<mark>TBA</mark>",
-  vid_tolkning =
-    c(
-      "<mark>I populationen ingår både primärt opererade och opererade efter påbörjad/genomförd preoperativ onkologisk behandling.</mark>"
-    ),
+  other_vars = "a_pat_alder",
+  om_indikatorn = '<mark>TBA. [Denna rapport baseras på variabeln op_pad_invstl, se variabelbeskrivningen på <a href="https://www.cancercentrum.se/stockholm-gotland/cancerdiagnoser/brost/kvalitetsregister/dokument/">https://www.cancercentrum.se/stockholm-gotland/cancerdiagnoser/brost/kvalitetsregister/dokument/</a>]</mark>',
+  vid_tolkning = "<mark>TBA</mark>",
   teknisk_beskrivning = NULL
 )
 class(nkbc09h) <- "nkbcind"
