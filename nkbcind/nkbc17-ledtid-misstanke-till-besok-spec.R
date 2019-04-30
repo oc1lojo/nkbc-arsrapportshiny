@@ -21,8 +21,12 @@ nkbc17 <- list(
   target_values = c(75, 90),
   sjhkod_var = "a_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv"),
-  om_indikatorn = "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
-  vid_tolkning = "Startpunkten för SVF har tolkats olika av vårdgivare vilket ger upphov till variation varför ledtiden skall tolkas med försiktighet.",
+  om_indikatorn =
+    c(
+      "Standardiserat vårdförlopp infördes 2016 för att säkra utredning och vård till patienter i rimlig och säker tid.",
+      "Startpunkten för SVF har tolkats olika av vårdgivare vilket ger upphov till variation varför ledtiden skall tolkas med försiktighet."
+    ),
+  vid_tolkning = NULL,
   inkl_beskr_missca = TRUE,
   teknisk_beskrivning = NULL
 )
