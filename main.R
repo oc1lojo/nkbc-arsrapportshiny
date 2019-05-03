@@ -23,7 +23,7 @@ for (file_name in list.files("nkbcind", pattern = "*.R$")) {
 one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
 
 # Definera globala variabler ---------------------------------------------------
-report_end_year <- 2017
+report_end_year <- 2018
 output_path <- "output"
 
 # Läs in data ------------------------------------------------------------------
@@ -32,11 +32,9 @@ output_path <- "output"
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
 
 # Läs in ögonblickskopia av NKBC exporterad från INCA
-nkbc_data_dir <- Sys.getenv("NKBC_DATA_DIR")
-nkbc_data_date <- "2018-08-31"
 load(
   unzip(
-    file.path(nkbc_data_dir, nkbc_data_date, "nkbc_nat_id 2018-08-31 09-22-09.zip"),
+    file.path(Sys.getenv("BRCA_DATA_DIR"), "2019-05-03", "nkbc_nat_id 2019-05-03 08-58-36.zip"),
     exdir = tempdir()
   )
 )
