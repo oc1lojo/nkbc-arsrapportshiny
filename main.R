@@ -2,6 +2,7 @@
 library(dplyr)
 library(tidyr)
 library(lubridate)
+library(readr)
 library(shiny)
 library(rccShiny)
 
@@ -40,9 +41,32 @@ load(
 )
 
 # Läs in data för täckningsgrad mot cancerregistret
-tackning_tbl <- readxl::read_excel(
-  "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.2/Täckningsgrader/Tackningsrader_alla_regioner.xlsx"
-)
+df_list <- list() # initialisera
+for (i in 1:6) {
+  df_list[[i]] <-
+    read_delim(
+      file.path(
+        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2018.1/Täckningsgrader",
+        paste0("nkbc_tg_oc", i, ".txt")
+      ),
+      delim = " ",
+      col_types = cols(
+        period = col_integer(),
+        finns = col_integer(),
+        finns_proc = col_double(),
+        saknas = col_integer(),
+        totalt = col_integer()
+      )
+    ) %>%
+    mutate(region = i) %>%
+    select(region, period, finns, saknas)
+}
+df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
+  filter(
+    # Standardinklusion av tidsperioder för de interaktiva rapporterna
+    period >= 2009,
+    period <= report_end_year
+  )
 
 # Bearbeta data ----------------------------------------------------------------
 
@@ -176,16 +200,16 @@ for (i in seq(along = nkbcind_nams)) {
     # Data för indikator nkbc33
     df_tmp <- data.frame(
       region = c(
-        rep(tackning_tbl$region, tackning_tbl$finns),
-        rep(tackning_tbl$region, tackning_tbl$ejfinns)
+        rep(df_tg$region, df_tg$finns),
+        rep(df_tg$region, df_tg$saknas)
       ),
       period = c(
-        rep(tackning_tbl$ar, tackning_tbl$finns),
-        rep(tackning_tbl$ar, tackning_tbl$ejfinns)
+        rep(df_tg$period, df_tg$finns),
+        rep(df_tg$period, df_tg$saknas)
       ),
       outcome = c(
-        rep(rep(TRUE, dim(tackning_tbl)[1]), tackning_tbl$finns),
-        rep(rep(FALSE, dim(tackning_tbl)[1]), tackning_tbl$ejfinns)
+        rep(rep(TRUE, dim(df_tg)[1]), df_tg$finns),
+        rep(rep(FALSE, dim(df_tg)[1]), df_tg$saknas)
       )
     )
   }
