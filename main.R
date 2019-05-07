@@ -227,7 +227,7 @@ for (i in seq(along = nkbcind_nams)) {
 
   # Skapa webbapplikation
   rccShiny(
-    data = df_tmp,
+    data = as.data.frame(df_tmp),
     folder = code(nkbcind),
     outcomeTitle = lab(nkbcind),
     textBeforeSubtitle = textBeforeSubtitle(nkbcind),
