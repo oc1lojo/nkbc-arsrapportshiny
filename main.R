@@ -24,7 +24,6 @@ one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
 
 # Definera globala variabler ---------------------------------------------------
 report_end_year <- 2017
-output_path <- "output"
 
 # Läs in data ------------------------------------------------------------------
 
@@ -177,7 +176,6 @@ for (i in seq(along = nkbcind_nams)) {
   rccShiny(
     data = df_tmp,
     folder = code(nkbcind),
-    path = output_path,
     outcomeTitle = lab(nkbcind),
     textBeforeSubtitle = textBeforeSubtitle(nkbcind),
     description = description(nkbcind, report_end_year),
@@ -207,7 +205,6 @@ df_tmp <- data.frame(
 rccShiny(
   data = df_tmp,
   folder = code(nkbcind),
-  path = output_path,
   outcomeTitle = lab(nkbcind),
   textBeforeSubtitle = textBeforeSubtitle(nkbcind),
   description = description(nkbcind, report_end_year),
