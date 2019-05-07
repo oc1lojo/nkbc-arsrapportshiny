@@ -27,7 +27,7 @@ nkbc45 <- list(
   },
   sjhkod_var = "op_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv", "d_nstad"),
-  om_indikatorn = "<mark>TBA</mark>",
+  om_indikatorn = NULL,
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
