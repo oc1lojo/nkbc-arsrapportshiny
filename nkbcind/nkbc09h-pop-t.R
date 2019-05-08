@@ -25,8 +25,8 @@ nkbc09h <- list(
   prop_within_value = 20,
   sjhkod_var = "op_inr_sjhkod",
   other_vars = "a_pat_alder",
-  om_indikatorn = '<mark>TBA. [Denna rapport baseras på variabeln op_pad_invstl, se variabelbeskrivningen på <a href="https://www.cancercentrum.se/stockholm-gotland/cancerdiagnoser/brost/kvalitetsregister/dokument/">https://www.cancercentrum.se/stockholm-gotland/cancerdiagnoser/brost/kvalitetsregister/dokument/</a>]</mark>',
-  vid_tolkning = "<mark>TBA</mark>",
+  om_indikatorn = "Tumörstorlek baserad på mikroskopisk analys av preparat från primär operation, dvs operation utan föregående onkologisk behandling. Uppgiften om tumörstorlek ger prognostisk information inför val av postoperativ onkologisk behandling",
+  vid_tolkning = NULL",
   teknisk_beskrivning = NULL
 )
 class(nkbc09h) <- "nkbcind"
