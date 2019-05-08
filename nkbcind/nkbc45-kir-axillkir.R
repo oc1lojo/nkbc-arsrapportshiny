@@ -27,7 +27,10 @@ nkbc45 <- list(
   },
   sjhkod_var = "op_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv", "d_nstad"),
-  om_indikatorn = NULL,
+  om_indikatorn = c(
+    "Axillkirurgi utförs för att klarlägga om spridning finns till armhålans lymfkörtlar.",
+    "Förenklat utförs sentinel node biopsi vid kliniskt nodnegativ sjukdom, axillarutrymning vid kliniskt nodpositiv sjukdom och SN och utrymning vid kliniskt nodnegativ sjukdom där sentinel node inte hittas eller innehåller metastas."
+  ),
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
