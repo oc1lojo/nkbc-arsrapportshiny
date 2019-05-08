@@ -19,7 +19,7 @@ nkbc09f <- list(
   },
   sjhkod_var = "a_inr_sjhkod",
   other_vars = "a_pat_alder",
-  om_indikatorn = "Fall med fjärrmetastaser definieras som upptäckta inom 3 månader från provtagningsdatum (diagnosdatum).",
+  om_indikatorn = "Som fjärrmetastaser vid diagnos definieras fjärrmetastaserande sjukdom diagnosticerad inom 3 månader från bröstcancerdiagnos (cytdatum).",
   vid_tolkning =
     paste(
       "T.o.m. 2012 var det möjligt att registrera en tumör som att fjärrmetastaser ej kan bedömas (MX) i NKBC.",
