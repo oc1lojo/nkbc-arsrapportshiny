@@ -26,7 +26,7 @@ nkbc09h <- list(
   sjhkod_var = "op_inr_sjhkod",
   other_vars = "a_pat_alder",
   om_indikatorn = "Tumörstorlek baserad på mikroskopisk analys av preparat från primär operation, dvs operation utan föregående onkologisk behandling. Uppgiften om tumörstorlek ger prognostisk information inför val av postoperativ onkologisk behandling",
-  vid_tolkning = NULL",
+  vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )
 class(nkbc09h) <- "nkbcind"
