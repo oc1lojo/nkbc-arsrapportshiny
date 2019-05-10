@@ -58,15 +58,11 @@ TODO Lägg till exempel.
 Tills vidare:
 
   - För att skapa en Shiny-rapport så börjar jag alltså med allmän
-    bearbetning av
-    NKBC-data:  
+    bearbetning av NKBC-data:  
     <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/main.R#lines-59>
-  - …och sedan skapa själva Shiny-rapporterna (här nkbc01 som
-    exempel)  
-    <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/nkbc01_diag_screening.R>
-  - …som använder
-    definitionen  
+  - …och sedan skapa själva Shiny-rapporterna
+    <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/main.R#lines-83>
+  - …som använder definitionen (här nkbc01 som exempel)
     <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/nkbcind/nkbc01-diag-screening.R>
-  - …och
-    metoderna  
+  - …och metoderna  
     <https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny/src/develop/nkbcind/nkbcind-methods.R>

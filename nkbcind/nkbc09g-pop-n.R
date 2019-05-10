@@ -1,7 +1,7 @@
 NAME <- "nkbc09g2"
 nkbc09g <- list(
   code = "nkbc09g",
-  lab = "Spridning till lymfkörtlarna",
+  lab = "Spridning till lymfkörtlarna vid operation",
   pop = "opererade fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
     filter(
@@ -22,8 +22,8 @@ nkbc09g <- list(
   other_vars = c("a_pat_alder", "d_invasiv"),
   om_indikatorn =
     paste(
-      "Kännedom om tumörspridning till axillens lymfkörtlar ger vägledning för behandling och information om prognos.",
-      "Tumörspridning till axillens lymfkörtlar fastställs genom cytologi eller kirurgi (analys av sentinel node och/eller övriga lymfkörtlar i axillen)</mark>."
+      "Kännedom om tumörspridning till axillens lymfkörtlar ger prognostisk information inför val av postoperativ onkologisk behandling.",
+      "Bedömning av tumörspridning till axillens lymfkörtlar görs baserad på mikroskopisk analys av sentinel node och/eller övriga lymfkörtlar i axillen."
     ),
   vid_tolkning =
     c(

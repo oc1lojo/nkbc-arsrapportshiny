@@ -1,6 +1,6 @@
 nkbc09e <- list(
   code = "nkbc09e",
-  lab = "Spridning till lymfkörtlarna (klinisk) vid diagnos",
+  lab = "Spridning till lymfkörtlarna vid diagnos",
   lab_short = "Spridning till lymfkörtlarna",
   pop = "alla anmälda fall",
   filter_pop = function(x, ...) {
@@ -19,7 +19,7 @@ nkbc09e <- list(
   },
   sjhkod_var = "a_inr_sjhkod",
   other_vars = "a_pat_alder",
-  om_indikatorn = "Kännedom om tumörspridning till axillens lymfkörtlar ger vägledning för behandling och information om prognos. Grundas på bilddiagnostik och klinisk undersökning.",
+  om_indikatorn = "Kännedom om tumörspridning till axillens lymfkörtlar ger vägledning för behandling och information om prognos. Före kirurgi grundas bedömningen på bilddiagnostik och klinisk undersökning.",
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
 )

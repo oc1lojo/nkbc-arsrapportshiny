@@ -90,6 +90,12 @@ mutate_nkbc_d_vars <- function(x, ...) {
       post_inr_sjhkod,
       pre_inr_sjhkod
     ),
+    # Sjukhus ansvarig för primär behandling
+    d_prim_beh_sjhkod = case_when(
+      d_prim_beh_Värde == 1 ~ op_inr_sjhkod,
+      d_prim_beh_Värde == 2 ~ pre_inr_sjhkod,
+      TRUE ~ NA_integer_
+    ),
 
     # LKF-region för att imputera om region för sjukhus saknas
     d_region_lkf = case_when(
