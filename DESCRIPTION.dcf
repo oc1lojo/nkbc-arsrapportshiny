@@ -1,8 +1,8 @@
 Title: Interaktiva rapporter från NKBC
-Version: 2017.2-revB.1
+Version: 2018.1
 Authors@R: c(
-    person("Lina", "Benson", , , c("aut"), c(ORCID = "0000-0002-5393-0055")),
     person("John", "Lövrot", , "john.lovrot@sll.se", c("aut", "cre"), c(ORCID = "0000-0002-9339-8059")),
+    person("Lina", "Benson", , , c("aut"), c(ORCID = "0000-0002-5393-0055")),
     person("RCC", role = c("cph", "fnd"))
     )
 Description:
