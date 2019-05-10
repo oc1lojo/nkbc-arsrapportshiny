@@ -2,6 +2,7 @@
 library(dplyr)
 library(tidyr)
 library(lubridate)
+library(readr)
 library(shiny)
 library(rccShiny)
 
@@ -23,7 +24,7 @@ for (file_name in list.files("nkbcind", pattern = "*.R$")) {
 one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
 
 # Definera globala variabler ---------------------------------------------------
-report_end_year <- 2017
+report_end_year <- 2018
 
 # Läs in data ------------------------------------------------------------------
 
@@ -31,19 +32,40 @@ report_end_year <- 2017
 load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskoder.RData")
 
 # Läs in ögonblickskopia av NKBC exporterad från INCA
-nkbc_data_dir <- Sys.getenv("NKBC_DATA_DIR")
-nkbc_data_date <- "2018-08-31"
 load(
   unzip(
-    file.path(nkbc_data_dir, nkbc_data_date, "nkbc_nat_id 2018-08-31 09-22-09.zip"),
+    file.path(Sys.getenv("BRCA_DATA_DIR"), "2019-05-03", "nkbc_nat_id 2019-05-03 08-58-36.zip"),
     exdir = tempdir()
   )
 )
 
 # Läs in data för täckningsgrad mot cancerregistret
-tackning_tbl <- readxl::read_excel(
-  "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2017.2/Täckningsgrader/Tackningsrader_alla_regioner.xlsx"
-)
+df_list <- list() # initialisera
+for (i in 1:6) {
+  df_list[[i]] <-
+    read_delim(
+      file.path(
+        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2018.1/Täckningsgrader",
+        paste0("nkbc_tg_oc", i, ".txt")
+      ),
+      delim = " ",
+      col_types = cols(
+        period = col_integer(),
+        finns = col_integer(),
+        finns_proc = col_double(),
+        saknas = col_integer(),
+        totalt = col_integer()
+      )
+    ) %>%
+    mutate(region = i) %>%
+    select(region, period, finns, saknas)
+}
+df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
+  filter(
+    # Standardinklusion av tidsperioder för de interaktiva rapporterna
+    period >= 2009,
+    period <= report_end_year
+  )
 
 # Bearbeta data ----------------------------------------------------------------
 
@@ -83,7 +105,7 @@ df_main <- df %>%
 
 nkbcind_nams <- c(
   # Täckningsgrad
-  # "nkbc33", # tackning_mot_cancerreg -- skapas separat sist
+  "nkbc33", # tackning_mot_cancerreg
   "nkbc13", # tackning_for_preop_beh
   "nkbc14", # tackning_for_postop_beh
 
@@ -92,14 +114,18 @@ nkbcind_nams <- c(
   "nkbc09b", # pop_alder
   "nkbc09c", # pop_invasiv
   "nkbc09d", # pop_subtyp
+  "nkbc09i", # pop_tnm_t
+  "nkbc09h", # pop_t
   "nkbc09e", # pop_tnm_n
   "nkbc09g", # pop_n
   "nkbc09f", # pop_tnm_m
 
   # Ledtider
+  "nkbc43", # ledtid_misstanke_till_prim_beh
   "nkbc15", # ledtid_misstanke_till_op
   "nkbc16", # ledtid_misstanke_till_preop_beh
   "nkbc17", # ledtid_misstanke_till_besok_spec
+  "nkbc44", # ledtid_provtagn_till_prim_beh
   "nkbc19", # ledtid_behdisk_till_op
   "nkbc20", # ledtid_behdisk_till_preop_beh
   "nkbc22", # ledtid_op_till_cytostatikabeh
@@ -116,12 +142,15 @@ nkbcind_nams <- c(
   "nkbc02", # omv_kontaktssk
   "nkbc03", # omv_vardplan
 
-  # Kirurgi
+  # Primär behandling
   "nkbc40", # kir_prim_beh
+
+  # Kirurgi
   "nkbc42", # kir_brostbev_op
   "nkbc11", # kir_brostbev_op_sma_tum
   "nkbc07", # kir_direktrek
   "nkbc08", # kir_omop
+  "nkbc45", # kir_axillkir
   "nkbc26", # kir_sentinel_node
 
   # Onkologisk behandling
@@ -145,19 +174,43 @@ for (i in seq(along = nkbcind_nams)) {
   nkbcind <- get(nkbcind_nam)
 
   # Förbearbeta data
-  df_tmp <- df_main %>%
-    add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
-    filter(!is.na(region)) %>%
-    nkbcind$filter_pop() %>%
-    nkbcind$mutate_outcome() %>%
-    select(
-      landsting, region, sjukhus, period, outcome,
-      one_of(other_vars(nkbcind))
+  if (!(nkbcind_nam %in% c("nkbc30", "nkbc33"))) {
+    df_tmp <- df_main %>%
+      add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
+      filter(!is.na(region)) %>%
+      nkbcind$filter_pop() %>%
+      nkbcind$mutate_outcome() %>%
+      select(
+        landsting, region, sjukhus, period, outcome,
+        one_of(other_vars(nkbcind))
+      )
+  } else if (nkbcind_nam == "nkbc30") {
+    # Data för indikator nkbc30
+    df_tmp <- df_main %>%
+      add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
+      filter(!is.na(region)) %>%
+      nkbcind$filter_pop() %>%
+      nkbcind$mutate_outcome() %>%
+      select(
+        outcome, period, region, landsting, # OBS Ej sjukhus
+        one_of(other_vars(nkbcind))
+      )
+  } else if (nkbcind_nam == "nkbc33") {
+    # Data för indikator nkbc33
+    df_tmp <- data.frame(
+      region = c(
+        rep(df_tg$region, df_tg$finns),
+        rep(df_tg$region, df_tg$saknas)
+      ),
+      period = c(
+        rep(df_tg$period, df_tg$finns),
+        rep(df_tg$period, df_tg$saknas)
+      ),
+      outcome = c(
+        rep(rep(TRUE, dim(df_tg)[1]), df_tg$finns),
+        rep(rep(FALSE, dim(df_tg)[1]), df_tg$saknas)
+      )
     )
-
-  if (nkbcind_nam == "nkbc30") {
-    # Överlevand redovisas inte på sjukhusnivå
-    df_tmp <- select(df_tmp, -sjukhus)
   }
 
   if (!is.null(nkbcind$inkl_beskr_onk_beh) && nkbcind$inkl_beskr_onk_beh |
@@ -174,7 +227,7 @@ for (i in seq(along = nkbcind_nams)) {
 
   # Skapa webbapplikation
   rccShiny(
-    data = df_tmp,
+    data = as.data.frame(df_tmp),
     folder = code(nkbcind),
     outcomeTitle = lab(nkbcind),
     textBeforeSubtitle = textBeforeSubtitle(nkbcind),
@@ -185,31 +238,3 @@ for (i in seq(along = nkbcind_nams)) {
     targetValues = target_values(nkbcind)
   )
 }
-
-# Indikator nkbc33 - tackning_mot_cancerreg
-nkbcind <- nkbc33
-df_tmp <- data.frame(
-  region = c(
-    rep(tackning_tbl$region, tackning_tbl$finns),
-    rep(tackning_tbl$region, tackning_tbl$ejfinns)
-  ),
-  period = c(
-    rep(tackning_tbl$ar, tackning_tbl$finns),
-    rep(tackning_tbl$ar, tackning_tbl$ejfinns)
-  ),
-  outcome = c(
-    rep(rep(TRUE, dim(tackning_tbl)[1]), tackning_tbl$finns),
-    rep(rep(FALSE, dim(tackning_tbl)[1]), tackning_tbl$ejfinns)
-  )
-)
-rccShiny(
-  data = df_tmp,
-  folder = code(nkbcind),
-  outcomeTitle = lab(nkbcind),
-  textBeforeSubtitle = textBeforeSubtitle(nkbcind),
-  description = description(nkbcind, report_end_year),
-  varOther = varOther(nkbcind),
-  propWithinUnit = ifelse(!is.null(prop_within_unit(nkbcind)), prop_within_unit(nkbcind), "dagar"), # work-around, använd standardvärde
-  propWithinValue = ifelse(!is.null(prop_within_value(nkbcind)), prop_within_value(nkbcind), 30), # work-around, använd standardvärde
-  targetValues = target_values(nkbcind)
-)
