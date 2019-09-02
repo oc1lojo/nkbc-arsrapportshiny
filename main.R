@@ -34,38 +34,38 @@ load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskode
 # Läs in ögonblickskopia av NKBC exporterad från INCA
 load(
   unzip(
-    file.path(Sys.getenv("BRCA_DATA_DIR"), "2019-05-03", "nkbc_nat_id 2019-05-03 08-58-36.zip"),
+    file.path(Sys.getenv("BRCA_DATA_DIR"), "2019-09-02", "nkbc_nat_id 2019-09-02 09-02-35.zip"),
     exdir = tempdir()
   )
 )
 
-# Läs in data för täckningsgrad mot cancerregistret
-df_list <- list() # initialisera
-for (i in 1:6) {
-  df_list[[i]] <-
-    read_delim(
-      file.path(
-        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2018.1/Täckningsgrader",
-        paste0("nkbc_tg_oc", i, ".txt")
-      ),
-      delim = " ",
-      col_types = cols(
-        period = col_integer(),
-        finns = col_integer(),
-        finns_proc = col_double(),
-        saknas = col_integer(),
-        totalt = col_integer()
-      )
-    ) %>%
-    mutate(region = i) %>%
-    select(region, period, finns, saknas)
-}
-df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
-  filter(
-    # Standardinklusion av tidsperioder för de interaktiva rapporterna
-    period >= 2009,
-    period <= report_end_year
-  )
+# # Läs in data för täckningsgrad mot cancerregistret
+# df_list <- list() # initialisera
+# for (i in 1:6) {
+#   df_list[[i]] <-
+#     read_delim(
+#       file.path(
+#         "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2018.2/Täckningsgrader",
+#         paste0("nkbc_tg_oc", i, ".txt")
+#       ),
+#       delim = " ",
+#       col_types = cols(
+#         period = col_integer(),
+#         finns = col_integer(),
+#         finns_proc = col_double(),
+#         saknas = col_integer(),
+#         totalt = col_integer()
+#       )
+#     ) %>%
+#     mutate(region = i) %>%
+#     select(region, period, finns, saknas)
+# }
+# df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
+#   filter(
+#     # Standardinklusion av tidsperioder för de interaktiva rapporterna
+#     period >= 2009,
+#     period <= report_end_year
+#   )
 
 # Bearbeta data ----------------------------------------------------------------
 
@@ -105,7 +105,7 @@ df_main <- df %>%
 
 nkbcind_nams <- c(
   # Täckningsgrad
-  "nkbc33", # tackning_mot_cancerreg
+  # "nkbc33", # tackning_mot_cancerreg
   "nkbc13", # tackning_for_preop_beh
   "nkbc14", # tackning_for_postop_beh
 
