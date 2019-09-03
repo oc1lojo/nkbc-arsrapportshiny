@@ -12,7 +12,6 @@ nkbc30 <- list(
       outcome = surv_time >= 365.25 * 5
     )
   },
-  target_values = 88,
   sjhkod_var = "a_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv", "d_trigrp"),
   om_indikatorn =
