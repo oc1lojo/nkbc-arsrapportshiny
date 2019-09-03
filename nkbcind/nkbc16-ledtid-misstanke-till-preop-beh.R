@@ -1,7 +1,7 @@
 nkbc16 <- list(
   code = "nkbc16",
   lab = "Välgrundad misstanke om cancer till preoperativ onkologisk behandling",
-  pop = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling.",
+  pop = "opererade fall utan fjärrmetastaser vid diagnos med preoperativ onkologisk behandling",
   filter_pop = function(x, ...) {
     filter(
       x,
