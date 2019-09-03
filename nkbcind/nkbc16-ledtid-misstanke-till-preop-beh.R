@@ -45,7 +45,7 @@ nkbc16 <- list(
         "Av patienter som utreds för cancer bör 80% ha gjort det inom denna tidsperiod.",
         "För ett antal patienter krävs mer avancerade utredningsmetoder för att nå diagnos vilket kan förlänga tiden till behandlingsstart.",
         "Startpunkten för SVF har tolkats olika av vårdgivare vilket ger upphov till variation varför ledtiden skall tolkas med stor försiktighet."
-      ),
+      )
     ),
   vid_tolkning =
     paste(
