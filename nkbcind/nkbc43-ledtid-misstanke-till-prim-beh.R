@@ -27,7 +27,7 @@ nkbc43 <- list(
         d_prim_beh_Värde == 1 ~ ymd(op_kir_dat),
         d_prim_beh_Värde == 2 ~ d_pre_onk_dat,
         TRUE ~ ymd(NA_character_)
-        ),
+      ),
       outcome = as.numeric(d_prim_beh_dat - d_a_diag_misscadat),
       outcome = ifelse(outcome < 0, 0, outcome)
     )
