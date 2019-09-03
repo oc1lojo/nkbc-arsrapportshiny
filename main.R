@@ -105,68 +105,68 @@ df_main <- df %>%
 
 nkbcind_nams <- c(
   # Täckningsgrad
-  # "nkbc33", # tackning_mot_cancerreg
-  "nkbc13", # tackning_for_preop_beh
-  "nkbc14", # tackning_for_postop_beh
+  # "nkbc33", # Täckningsgrad mot cancerregistret
+  "nkbc13", # Täckningsgrad för rapportering av preoperativ onkologisk behandling
+  "nkbc14", # Täckningsgrad för rapportering av postoperativ onkologisk behandling
 
   # Population
-  "nkbc09a", # pop_kon
-  "nkbc09b", # pop_alder
-  "nkbc09c", # pop_invasiv
-  "nkbc09d", # pop_subtyp
-  "nkbc09i", # pop_tnm_t
-  "nkbc09h", # pop_t
-  "nkbc09e", # pop_tnm_n
-  "nkbc09g", # pop_n
-  "nkbc09f", # pop_tnm_m
+  "nkbc09a", # Kön
+  "nkbc09b", # Ålder
+  "nkbc09c", # Invasivitet
+  "nkbc09d", # Biologisk subtyp
+  "nkbc09i", # Tumörstorlek (klinisk) vid diagnos
+  "nkbc09h", # Tumörstorlek vid operation
+  "nkbc09e", # Spridning till lymfkörtlarna vid diagnos
+  "nkbc09g", # Spridning till lymfkörtlarna vid operation
+  "nkbc09f", # Fjärrmetastaser
 
   # Ledtider
-  "nkbc43", # ledtid_misstanke_till_prim_beh
-  "nkbc15", # ledtid_misstanke_till_op
-  "nkbc16", # ledtid_misstanke_till_preop_beh
-  "nkbc17", # ledtid_misstanke_till_besok_spec
-  "nkbc44", # ledtid_provtagn_till_prim_beh
-  "nkbc19", # ledtid_behdisk_till_op
-  "nkbc20", # ledtid_behdisk_till_preop_beh
-  "nkbc22", # ledtid_op_till_cytostatikabeh
-  "nkbc23", # ledtid_op_till_stralbeh
+  "nkbc17", # Välgrundad misstanke om cancer till första besök i specialiserad vård
+  "nkbc43", # Välgrundad misstanke om cancer till primär behandling
+  "nkbc15", # Välgrundad misstanke om cancer till operation
+  "nkbc16", # Välgrundad misstanke om cancer till preoperativ onkologisk behandling
+  "nkbc44", # Provtagningsdatum till primär behandling
+  "nkbc19", # Första behandlingsdiskussion till operation
+  "nkbc20", # Första behandlingsdiskussion till preoperativ onkologisk behandling
+  "nkbc22", # Operation till cytostatikabehandling
+  "nkbc23", # Operation till strålbehandling
 
   # Diagnostik
-  "nkbc01", # diag_screening
-  "nkbc04", # diag_mdk_innan_beh
-  "nkbc05", # diag_mdk_efter_op
-  "nkbc06", # diag_klar_innan_op
-  "nkbc10", # diag_komplett_patologi
+  "nkbc01", # Screeningupptäckt bröstcancer
+  "nkbc04", # Multidisciplinär konferens inför behandlingstart
+  "nkbc05", # Multidisciplinär konferens efter operation
+  "nkbc06", # Fastställd diagnos innan operation
+  "nkbc10", # Fullständig patologirapport
 
   # Omvårdnad
-  "nkbc02", # omv_kontaktssk
-  "nkbc03", # omv_vardplan
+  "nkbc02", # Kontaktsjuksköterska
+  "nkbc03", # Min vårdplan
 
   # Primär behandling
-  "nkbc40", # kir_prim_beh
+  "nkbc40", # Typ av primär behandling
 
   # Kirurgi
-  "nkbc42", # kir_brostbev_op
-  "nkbc11", # kir_brostbev_op_sma_tum
-  "nkbc07", # kir_direktrek
-  "nkbc08", # kir_omop
-  "nkbc45", # kir_axillkir
-  "nkbc26", # kir_sentinel_node
+  "nkbc42", # Bröstbevarande operation
+  "nkbc11", # >Bröstbevarande operation vid små tumörer
+  "nkbc07", # Omedelbara rekonstruktioner vid mastektomi
+  "nkbc08", # Enbart en operation
+  "nkbc45", # Axillkirurgi
+  "nkbc26", # Sentinel node operation
 
   # Onkologisk behandling
-  "nkbc35", # onk_cytostatikabeh
-  "nkbc27", # onk_postop_cytostatikabeh_bland_erneg
-  "nkbc28", # onk_stralbeh_efter_brostbev_op
-  "nkbc29", # onk_stralbeh_efter_mastektomi
-  "nkbc31", # onk_endokrin_beh_maluppfyllelse
-  "nkbc41", # onk_endokrin_beh_fordelning
-  "nkbc32", # onk_antikroppbeh_bland_cytostatikabeh_her2pos
+  "nkbc35", # Cytostatikabehandling
+  "nkbc27", # Postoperativ cytostatikabehandling
+  "nkbc28", # Strålbehandling efter bröstbevarande operation
+  "nkbc29", # Strålbehandling efter mastektomi
+  "nkbc31", # Endokrin behandling, måluppfyllelse
+  "nkbc41", # Endokrin behandling, pre- respektive postoperativt
+  "nkbc32", # Antikroppsbehandling bland cytostatikabehandlade
 
   # Studier
-  "nkbc39", # pat_i_studie
+  "nkbc39", # Patienten ingår i studie
 
   # Överlevnad
-  "nkbc30" # overlevnad_5ar
+  "nkbc30" # Observerad 5 års överlevnad
 )
 
 for (i in seq(along = nkbcind_nams)) {
