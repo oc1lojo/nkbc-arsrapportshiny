@@ -18,7 +18,7 @@ nkbc09h <- list(
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
-      outcome = op_pad_invstl
+      outcome = as.numeric(op_pad_invstl)
     )
   },
   prop_within_unit = "mm",

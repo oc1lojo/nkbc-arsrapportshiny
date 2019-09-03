@@ -8,7 +8,7 @@ nkbc09b <- list(
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
-      outcome = a_pat_alder
+      outcome = as.numeric(a_pat_alder)
     )
   },
   prop_within_unit = "år",
