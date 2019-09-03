@@ -31,7 +31,7 @@ nkbc44 <- list(
   },
   prop_within_value = 28,
   sjhkod_var = "d_prim_beh_sjhkod",
-  other_vars = c("a_pat_alder", "d_invasiv", "d_prim_beh_op"),
+  other_vars = c("a_pat_alder", "d_invasiv", "d_prim_beh"),
   om_indikatorn = NULL,
   vid_tolkning = NULL,
   inkl_beskr_missca = TRUE,

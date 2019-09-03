@@ -2,7 +2,7 @@ mutate_nkbc_other_vars <- function(x, ...) {
   mutate(x,
 
     # Primär behandling
-    d_prim_beh_op = factor(
+    d_prim_beh = factor(
       replace_na(d_prim_beh_Värde, 99),
       levels = c(1, 2, 99),
       labels = c(
