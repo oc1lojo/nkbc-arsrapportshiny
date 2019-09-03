@@ -17,8 +17,9 @@ nkbc30 <- list(
   om_indikatorn =
     paste(
       "Total överlevnad betraktas som det viktigaste utfallsmåttet.",
+      "Dödsorsakerna kan vara andra än bröstcancer.",
       "Observerad överlevnad anger de bröstcancerfall som överlevt 5 år efter diagnos.",
-      "Dödsorsakerna kan vara andra än bröstcancer."
+      "Observera att analysen inte är justerad för skillnader i population."
     ),
   vid_tolkning = NULL,
   inkl_beskr_overlevnad_5ar = TRUE,
