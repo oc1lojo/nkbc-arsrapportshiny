@@ -39,33 +39,33 @@ load(
   )
 )
 
-# # Läs in data för täckningsgrad mot cancerregistret
-# df_list <- list() # initialisera
-# for (i in 1:6) {
-#   df_list[[i]] <-
-#     read_delim(
-#       file.path(
-#         "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2018.2/Täckningsgrader",
-#         paste0("nkbc_tg_oc", i, ".txt")
-#       ),
-#       delim = " ",
-#       col_types = cols(
-#         period = col_integer(),
-#         finns = col_integer(),
-#         finns_proc = col_double(),
-#         saknas = col_integer(),
-#         totalt = col_integer()
-#       )
-#     ) %>%
-#     mutate(region = i) %>%
-#     select(region, period, finns, saknas)
-# }
-# df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
-#   filter(
-#     # Standardinklusion av tidsperioder för de interaktiva rapporterna
-#     period >= 2009,
-#     period <= report_end_year
-#   )
+# Läs in data för täckningsgrad mot cancerregistret
+df_list <- list() # initialisera
+for (i in 1:6) {
+  df_list[[i]] <-
+    read_delim(
+      file.path(
+        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2018.2/Täckningsgrader",
+        paste0("nkbc_tg_oc", i, ".txt")
+      ),
+      delim = " ",
+      col_types = cols(
+        period = col_integer(),
+        finns = col_integer(),
+        finns_proc = col_double(),
+        saknas = col_integer(),
+        totalt = col_integer()
+      )
+    ) %>%
+    mutate(region = i) %>%
+    select(region, period, finns, saknas)
+}
+df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
+  filter(
+    # Standardinklusion av tidsperioder för de interaktiva rapporterna
+    period >= 2009,
+    period <= report_end_year
+  )
 
 # Bearbeta data ----------------------------------------------------------------
 
@@ -105,7 +105,7 @@ df_main <- df %>%
 
 nkbcind_nams <- c(
   # Täckningsgrad
-  # "nkbc33", # Täckningsgrad mot cancerregistret
+  "nkbc33", # Täckningsgrad mot cancerregistret
   "nkbc13", # Täckningsgrad för rapportering av preoperativ onkologisk behandling
   "nkbc14", # Täckningsgrad för rapportering av postoperativ onkologisk behandling
 
