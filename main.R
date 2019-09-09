@@ -78,10 +78,6 @@ sjukhuskoder <- sjukhuskoder %>%
   mutate(
     sjukhus = if_else(
       sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA_character_, sjukhus
-    ),
-    # Samredovisning av landsting SKAS
-    sjukhus = if_else(
-      sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus
     )
   )
 
