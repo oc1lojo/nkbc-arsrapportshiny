@@ -33,7 +33,7 @@ nkbc43 <- list(
     )
   },
   prop_within_value = 28,
-  target_values = c(80),
+  target_values = 80,
   sjhkod_var = "d_prim_beh_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv", "d_prim_beh"),
   om_indikatorn =
