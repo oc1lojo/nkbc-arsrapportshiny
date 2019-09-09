@@ -154,7 +154,7 @@ nkbcind_nams <- c(
   "nkbc26", # Sentinel node operation
 
   # Onkologisk behandling
-  "nkbc35", # Cytostatikabehandling
+  "nkbc35", # Cytostatikabehandling, pre- respektive postoperativt
   "nkbc46", # Cytostatikabehandling, måluppfyllelse
   "nkbc27", # Postoperativ cytostatikabehandling
   "nkbc28", # Strålbehandling efter bröstbevarande operation
