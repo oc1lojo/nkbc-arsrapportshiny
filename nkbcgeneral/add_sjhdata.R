@@ -36,6 +36,12 @@ add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var) {
       # Samredovisning av landsting SKAS
       sjukhus = if_else(
         sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus
+      ),
+      # Samredovisning av Lund och Malmö avseende onkologisk behandling
+      sjukhus = if_else(
+        sjukhus %in% c("Malmö", "Lund") &
+          sjhkod_var %in% c("post_inr_sjhkod", "pre_inr_sjhkod", "d_onk_sjhkod", "d_onkpreans_sjhkod", "d_onkpostans_sjhkod", "d_prim_beh_sjhkod"),
+        "Lund/Malmö", sjukhus
       )
     )
 }
