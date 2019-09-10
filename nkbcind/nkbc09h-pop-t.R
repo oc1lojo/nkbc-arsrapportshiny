@@ -30,7 +30,7 @@ nkbc09h <- list(
   prop_within_unit = "mm",
   prop_within_value = 20,
   sjhkod_var = "op_inr_sjhkod",
-  other_vars = "a_pat_alder",
+  other_vars = c("a_pat_alder", "d_trigrp"),
   om_indikatorn = "Tumörstorlek baserad på mikroskopisk analys av preparat från primär operation, dvs operation utan föregående onkologisk behandling. Uppgiften om tumörstorlek ger prognostisk information inför val av postoperativ onkologisk behandling",
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL
