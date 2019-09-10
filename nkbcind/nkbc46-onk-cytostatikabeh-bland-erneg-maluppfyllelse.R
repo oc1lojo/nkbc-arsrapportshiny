@@ -26,7 +26,7 @@ nkbc46 <- list(
       (
         # Om operation efter påbörjad/genomförd preop onk beh: T2-T4 (>20mm) eller cN+
         d_prim_beh_Värde == 2 &
-          (a_tnm_tklass_Värde %in% c(30, 42, 44, 45, 46) | a_tnm_nklass_Värde %in% c(10, 20, 30))
+          (a_tnm_tklass_Värde %in% c(20, 30, 42, 44, 45, 46) | a_tnm_nklass_Värde %in% c(10, 20, 30))
       ) | (
         # Om primär operation: tumörstorlek > 10 mm eller pN+
         d_prim_beh_Värde == 1 &
