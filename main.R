@@ -225,7 +225,7 @@ for (i in seq(along = nkbcind_nams)) {
   }
 
   # Skapa webbapplikation
-  rccShiny(
+  rccShiny2(
     data = as.data.frame(df_tmp),
     folder = code(nkbcind),
     outcome = names(df_tmp)[grep("^outcome", names(df_tmp))],
