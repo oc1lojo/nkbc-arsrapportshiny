@@ -13,6 +13,7 @@ nkbc30 <- list(
     )
   },
   sjhkod_var = "a_inr_sjhkod",
+  geo_units_vars = c("region", "landsting"), # OBS Inte redovisning på sjukhusnivå
   other_vars = c("a_pat_alder", "d_invasiv", "d_trigrp"),
   om_indikatorn =
     paste(

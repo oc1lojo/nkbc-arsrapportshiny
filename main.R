@@ -143,30 +143,16 @@ for (i in seq(along = nkbcind_nams)) {
   nkbcind <- get(nkbcind_nam)
 
   # Förbearbeta data
-  if (!(nkbcind_nam %in% c("nkbc30"))) {
-    df_tmp <- df_main %>%
-      add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
-      filter(!is.na(region)) %>%
-      nkbcind$filter_pop() %>%
-      nkbcind$mutate_outcome() %>%
-      select(
-        landsting, region, sjukhus,
-        period, one_of(outcome(nkbcind)),
-        one_of(other_vars(nkbcind))
-      )
-  } else if (nkbcind_nam == "nkbc30") {
-    # Data för indikator nkbc30
-    df_tmp <- df_main %>%
-      add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
-      filter(!is.na(region)) %>%
-      nkbcind$filter_pop() %>%
-      nkbcind$mutate_outcome() %>%
-      select(
-        region, landsting, # OBS Ej sjukhus
-        period, one_of(outcome(nkbcind)),
-        one_of(other_vars(nkbcind))
-      )
-  }
+  df_tmp <- df_main %>%
+    add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
+    filter(!is.na(region)) %>%
+    nkbcind$filter_pop() %>%
+    nkbcind$mutate_outcome() %>%
+    select(
+      one_of(geo_units_vars(nkbcind)),
+      period, one_of(outcome(nkbcind)),
+      one_of(other_vars(nkbcind))
+    )
 
   if (!is.null(nkbcind$inkl_beskr_onk_beh) && nkbcind$inkl_beskr_onk_beh |
     nkbcind_nam %in% c("nkbc16", "nkbc20") # TODO skall inte dessa också ha kommentar i beskrivning?

@@ -15,6 +15,7 @@ prop_within_value <- function(x) UseMethod("prop_within_value")
 target_values <- function(x) UseMethod("target_values")
 sjhkod_var <- function(x) UseMethod("sjhkod_var")
 other_vars <- function(x) UseMethod("other_vars")
+geo_units_vars <- function(x) UseMethod("geo_units_vars")
 
 textBeforeSubtitle <- function(x) UseMethod("textBeforeSubtitle")
 description <- function(x, report_end_year = report_end_year) UseMethod("description")
@@ -32,6 +33,13 @@ sjhkod_var.nkbcind <- function(x) x$sjhkod_var
 prop_within_unit.nkbcind <- function(x) x$prop_within_unit
 prop_within_value.nkbcind <- function(x) x$prop_within_value
 target_values.nkbcind <- function(x) x$target_values
+geo_units_vars.nkbcind <- function(x) {
+  if (!is.null(x$geo_units_vars)) {
+    x$geo_units_vars
+  } else {
+    c("region", "landsting", "sjukhus")
+  }
+}
 other_vars.nkbcind <- function(x) x$other_vars
 
 textBeforeSubtitle.nkbcind <- function(x, ...) {
