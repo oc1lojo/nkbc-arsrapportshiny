@@ -115,7 +115,7 @@ nkbcind_nams <- c(
 
   # Kirurgi
   "nkbc42", # Bröstbevarande operation
-  "nkbc11", # >Bröstbevarande operation vid små tumörer
+  "nkbc11", # Bröstbevarande operation vid små tumörer
   "nkbc07", # Omedelbara rekonstruktioner vid mastektomi
   "nkbc08", # Enbart en operation
   "nkbc45", # Axillkirurgi
