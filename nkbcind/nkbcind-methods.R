@@ -6,6 +6,7 @@
 code <- function(x) UseMethod("code")
 lab <- function(x) UseMethod("lab")
 lab_short <- function(x) UseMethod("lab_short")
+outcome <- function(x) UseMethod("outcome")
 outcome_title <- function(x) UseMethod("outcome_title")
 pop <- function(x) UseMethod("pop")
 pop_short <- function(x) UseMethod("pop_short")
@@ -23,6 +24,7 @@ varOther <- function(x) UseMethod("varOther")
 code.nkbcind <- function(x) x$code
 lab.nkbcind <- function(x) x$lab
 lab_short.nkbcind <- function(x) ifelse(!is.null(x$lab_short), x$lab_short, x$lab)
+outcome.nkbcind <- function(x) if (!is.null(x$outcome)) x$outcome else "outcome"
 outcome_title.nkbcind <- function(x) if (!is.null(x$outcome_title)) x$outcome_title else x$lab
 pop.nkbcind <- function(x) x$pop
 pop_short.nkbcind <- function(x) ifelse(!is.null(x$pop_short), x$pop_short, x$pop)

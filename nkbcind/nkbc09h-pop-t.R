@@ -26,6 +26,7 @@ nkbc09h <- list(
       )
     )
   },
+  outcome = c("outcome1", "outcome2"),
   outcome_title = c("Tumörstorlek", "Tumörstorlek, kategorier"),
   prop_within_unit = "mm",
   prop_within_value = 20,

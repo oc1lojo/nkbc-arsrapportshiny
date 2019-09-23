@@ -151,7 +151,7 @@ for (i in seq(along = nkbcind_nams)) {
       nkbcind$mutate_outcome() %>%
       select(
         landsting, region, sjukhus,
-        period, starts_with("outcome"),
+        period, one_of(outcome(nkbcind)),
         one_of(other_vars(nkbcind))
       )
   } else if (nkbcind_nam == "nkbc30") {
@@ -163,7 +163,7 @@ for (i in seq(along = nkbcind_nams)) {
       nkbcind$mutate_outcome() %>%
       select(
         region, landsting, # OBS Ej sjukhus
-        period, starts_with("outcome"),
+        period, one_of(outcome(nkbcind)),
         one_of(other_vars(nkbcind))
       )
   }
@@ -184,7 +184,7 @@ for (i in seq(along = nkbcind_nams)) {
   rccShiny2(
     data = as.data.frame(df_tmp),
     folder = code(nkbcind),
-    outcome = names(df_tmp)[grep("^outcome", names(df_tmp))],
+    outcome = outcome(nkbcind),
     outcomeTitle = outcome_title(nkbcind),
     textBeforeSubtitle = textBeforeSubtitle(nkbcind),
     description = description(nkbcind, report_end_year),
@@ -245,7 +245,7 @@ df_tmp <- data.frame(
 rccShiny2(
   data = as.data.frame(df_tmp),
   folder = code(nkbc33),
-  outcome = names(df_tmp)[grep("^outcome", names(df_tmp))],
+  outcome = outcome(nkbc33),
   outcomeTitle = outcome_title(nkbc33),
   textBeforeSubtitle = textBeforeSubtitle(nkbc33),
   description = description(nkbc33, report_end_year),
