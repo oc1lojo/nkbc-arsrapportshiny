@@ -14,7 +14,7 @@ add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var) {
         region_sjh_txt == "Norr" ~ 6L,
         TRUE ~ NA_integer_
       ),
-      region = ifelse(is.na(region), d_region_lkf, region),
+      region = if_else(is.na(region), d_region_lkf, region),
       landsting = substr(sjhkod, 1, 2) %>% as.integer(),
       # Fulfix Bröstmottagningen, Christinakliniken Sh & Stockholms bröstklinik så hamnar i Stockholm
       landsting = if_else(
