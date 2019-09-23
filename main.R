@@ -112,6 +112,7 @@ nkbcind_nams <- c(
 
   # Primär behandling
   "nkbc40", # Typ av primär behandling
+  "nkbc47", # Preoperativ onkologisk behandling
 
   # Kirurgi
   "nkbc42", # Bröstbevarande operation
