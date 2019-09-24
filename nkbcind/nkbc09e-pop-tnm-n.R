@@ -18,7 +18,7 @@ nkbc09e <- list(
     )
   },
   sjhkod_var = "a_inr_sjhkod",
-  other_vars = "a_pat_alder",
+  other_vars = c("a_pat_alder", "d_invasiv"),
   om_indikatorn = "Kännedom om tumörspridning till axillens lymfkörtlar ger vägledning för behandling och information om prognos. Före kirurgi grundas bedömningen på bilddiagnostik och klinisk undersökning.",
   vid_tolkning = NULL,
   teknisk_beskrivning = NULL

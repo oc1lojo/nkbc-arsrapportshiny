@@ -23,7 +23,7 @@ nkbc07 <- list(
   sjhkod_var = "op_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv"),
   om_indikatorn = "Omedelbar rekonstruktion innebär att en bröstform återskapas i samband med att ett helt bröst opereras bort. Bröstrekonstruktion kan göras senare efter avslutad onkologisk behandling.",
-  vid_tolkning = NULL,
+  vid_tolkning = "Vissa enheter remitterar fall för omedelbar rekonstruktion till enhet med kompetens för bröstrekonstruktion och kan därmed falla utanför statistiken.",
   teknisk_beskrivning = NULL
 )
 class(nkbc07) <- "nkbcind"
