@@ -147,8 +147,8 @@ for (i in seq(along = nkbcind_nams)) {
   df_tmp <- df_main %>%
     add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
     filter(!is.na(region)) %>%
-    nkbcind$filter_pop() %>%
-    nkbcind$mutate_outcome() %>%
+    filter_pop(nkbcind)() %>%
+    mutate_outcome(nkbcind)() %>%
     select(
       one_of(geo_units_vars(nkbcind)),
       period, one_of(outcome(nkbcind)),

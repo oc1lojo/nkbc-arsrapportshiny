@@ -10,6 +10,8 @@ outcome <- function(x) UseMethod("outcome")
 outcome_title <- function(x) UseMethod("outcome_title")
 pop <- function(x) UseMethod("pop")
 pop_short <- function(x) UseMethod("pop_short")
+filter_pop <- function(x) UseMethod("filter_pop")
+mutate_outcome <- function(x) UseMethod("mutate_outcome")
 prop_within_unit <- function(x) UseMethod("prop_within_unit")
 prop_within_value <- function(x) UseMethod("prop_within_value")
 target_values <- function(x) UseMethod("target_values")
@@ -29,6 +31,8 @@ outcome.nkbcind <- function(x) if (!is.null(x$outcome)) x$outcome else "outcome"
 outcome_title.nkbcind <- function(x) if (!is.null(x$outcome_title)) x$outcome_title else x$lab
 pop.nkbcind <- function(x) x$pop
 pop_short.nkbcind <- function(x) ifelse(!is.null(x$pop_short), x$pop_short, x$pop)
+filter_pop <- function(x) x$filter_pop
+mutate_outcome <- function(x) x$mutate_outcome
 sjhkod_var.nkbcind <- function(x) x$sjhkod_var
 prop_within_unit.nkbcind <- function(x) x$prop_within_unit
 prop_within_value.nkbcind <- function(x) x$prop_within_value
