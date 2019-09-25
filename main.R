@@ -73,7 +73,7 @@ df_main <- df %>%
 
 nkbcind_nams <- c(
   # Täckningsgrad
-  # "nkbc33", # Täckningsgrad mot cancerregistret - Specielfall, se nedan
+  # "nkbc33", # Täckningsgrad mot cancerregistret - Specialfall, se nedan
   "nkbc13", # Täckningsgrad för rapportering av preoperativ onkologisk behandling
   "nkbc14", # Täckningsgrad för rapportering av postoperativ onkologisk behandling
 
