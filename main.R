@@ -124,7 +124,6 @@ nkbcind_nams <- c(
   # Onkologisk behandling
   "nkbc35", # Cytostatikabehandling, pre- respektive postoperativt
   "nkbc46", # Cytostatikabehandling, måluppfyllelse
-  "nkbc27", # Postoperativ cytostatikabehandling
   "nkbc28", # Strålbehandling efter bröstbevarande operation
   "nkbc29", # Strålbehandling efter mastektomi
   "nkbc31", # Endokrin behandling, måluppfyllelse
