@@ -12,14 +12,15 @@ nkbc30 <- list(
       outcome = surv_time >= 365.25 * 5
     )
   },
-  target_values = 88,
   sjhkod_var = "a_inr_sjhkod",
+  geo_units_vars = c("region", "landsting"), # OBS Inte redovisning på sjukhusnivå
   other_vars = c("a_pat_alder", "d_invasiv", "d_trigrp"),
   om_indikatorn =
     paste(
       "Total överlevnad betraktas som det viktigaste utfallsmåttet.",
+      "Dödsorsakerna kan vara andra än bröstcancer.",
       "Observerad överlevnad anger de bröstcancerfall som överlevt 5 år efter diagnos.",
-      "Dödsorsakerna kan vara andra än bröstcancer."
+      "Observera att analysen inte är justerad för skillnader i population."
     ),
   vid_tolkning = NULL,
   inkl_beskr_overlevnad_5ar = TRUE,

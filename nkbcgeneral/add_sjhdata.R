@@ -14,7 +14,7 @@ add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var) {
         region_sjh_txt == "Norr" ~ 6L,
         TRUE ~ NA_integer_
       ),
-      region = ifelse(is.na(region), d_region_lkf, region),
+      region = if_else(is.na(region), d_region_lkf, region),
       landsting = substr(sjhkod, 1, 2) %>% as.integer(),
       # Fulfix Bröstmottagningen, Christinakliniken Sh & Stockholms bröstklinik så hamnar i Stockholm
       landsting = if_else(
@@ -32,6 +32,16 @@ add_sjhdata <- function(x, sjukhuskoder = sjukhuskoder, sjhkod_var) {
         ),
         landsting,
         NA_integer_
+      ),
+      # Samredovisning av landsting SKAS
+      sjukhus = if_else(
+        sjukhus %in% c("Skövde", "Lidköping"), "Skaraborg", sjukhus
+      ),
+      # Samredovisning av Lund och Malmö avseende onkologisk behandling
+      sjukhus = if_else(
+        sjukhus %in% c("Malmö", "Lund") &
+          sjhkod_var %in% c("post_inr_sjhkod", "pre_inr_sjhkod", "d_onk_sjhkod", "d_onkpreans_sjhkod", "d_onkpostans_sjhkod", "d_prim_beh_sjhkod"),
+        "Lund/Malmö", sjukhus
       )
     )
 }

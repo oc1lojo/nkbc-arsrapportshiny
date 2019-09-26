@@ -6,13 +6,18 @@
 code <- function(x) UseMethod("code")
 lab <- function(x) UseMethod("lab")
 lab_short <- function(x) UseMethod("lab_short")
+outcome <- function(x) UseMethod("outcome")
+outcome_title <- function(x) UseMethod("outcome_title")
 pop <- function(x) UseMethod("pop")
 pop_short <- function(x) UseMethod("pop_short")
+filter_pop <- function(x) UseMethod("filter_pop")
+mutate_outcome <- function(x) UseMethod("mutate_outcome")
 prop_within_unit <- function(x) UseMethod("prop_within_unit")
 prop_within_value <- function(x) UseMethod("prop_within_value")
 target_values <- function(x) UseMethod("target_values")
 sjhkod_var <- function(x) UseMethod("sjhkod_var")
 other_vars <- function(x) UseMethod("other_vars")
+geo_units_vars <- function(x) UseMethod("geo_units_vars")
 
 textBeforeSubtitle <- function(x) UseMethod("textBeforeSubtitle")
 description <- function(x, report_end_year = report_end_year) UseMethod("description")
@@ -22,12 +27,23 @@ varOther <- function(x) UseMethod("varOther")
 code.nkbcind <- function(x) x$code
 lab.nkbcind <- function(x) x$lab
 lab_short.nkbcind <- function(x) ifelse(!is.null(x$lab_short), x$lab_short, x$lab)
+outcome.nkbcind <- function(x) if (!is.null(x$outcome)) x$outcome else "outcome"
+outcome_title.nkbcind <- function(x) if (!is.null(x$outcome_title)) x$outcome_title else x$lab
 pop.nkbcind <- function(x) x$pop
 pop_short.nkbcind <- function(x) ifelse(!is.null(x$pop_short), x$pop_short, x$pop)
+filter_pop <- function(x) x$filter_pop
+mutate_outcome <- function(x) x$mutate_outcome
 sjhkod_var.nkbcind <- function(x) x$sjhkod_var
 prop_within_unit.nkbcind <- function(x) x$prop_within_unit
 prop_within_value.nkbcind <- function(x) x$prop_within_value
 target_values.nkbcind <- function(x) x$target_values
+geo_units_vars.nkbcind <- function(x) {
+  if (!is.null(x$geo_units_vars)) {
+    x$geo_units_vars
+  } else {
+    c("region", "landsting", "sjukhus")
+  }
+}
 other_vars.nkbcind <- function(x) x$other_vars
 
 textBeforeSubtitle.nkbcind <- function(x, ...) {
@@ -71,7 +87,10 @@ description.nkbcind <- function(x, report_end_year = report_end_year, ...) {
           "Ett fall per bröst kan rapporterats till det nationella kvalitetsregistret för bröstcancer.",
           "Det innebär att samma person kan finnas med i statistiken upp till två gånger."
         ),
-        "Skövde och Lidköpings sjukhus presenteras tillsammans som Skaraborg."
+        "Skövde och Lidköpings sjukhus presenteras tillsammans som Skaraborg.",
+        if (x$sjhkod_var %in% c("post_inr_sjhkod", "pre_inr_sjhkod", "d_onk_sjhkod", "d_onkpreans_sjhkod", "d_onkpostans_sjhkod", "d_prim_beh_sjhkod")) {
+          "Malmö och Lunds sjukhus presenteras tillsammans som Lund/Malmö."
+        }
       ),
       collapse = "\n<p></p>\n"
     ),
@@ -86,13 +105,13 @@ description.nkbcind <- function(x, report_end_year = report_end_year, ...) {
             x$sjhkod_var %in% "a_inr_sjhkod" ~
             "anmälande sjukhus",
             x$sjhkod_var %in% c("post_inr_sjhkod", "pre_inr_sjhkod", "d_onk_sjhkod") ~
-            "onkologiskt sjukhus",
+            "sjukhus där onkologisk behandling ges",
             x$sjhkod_var %in% "op_inr_sjhkod" ~
             "opererande sjukhus",
             x$sjhkod_var %in% "d_prim_beh_sjhkod" ~
             "sjukhus ansvarig för primär behandling",
             x$sjhkod_var %in% c("d_onkpreans_sjhkod", "d_onkpostans_sjhkod") ~
-            "rapporterande onkologiskt sjukhus och om detta saknas sjukhus ansvarigt för rapportering av onkologisk behandling, onkologiskt sjukhus, anmälande sjukhus"
+            "rapporterande sjukhus där onkologisk behandling ges och om detta saknas, sjukhus ansvarigt för rapportering av onkologisk behandling, sjukhus för onkologisk behandling, anmälande sjukhus"
           ),
           "."
         )

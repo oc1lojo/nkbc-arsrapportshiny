@@ -17,8 +17,8 @@ nkbc17 <- list(
       outcome = ifelse(outcome < 0, 0, outcome)
     )
   },
-  prop_within_value = 7,
-  target_values = c(75, 90),
+  prop_within_value = 5,
+  target_values = 80,
   sjhkod_var = "a_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv"),
   om_indikatorn =

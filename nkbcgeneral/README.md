@@ -54,10 +54,9 @@ for (file_name in list.files(pattern = "*.R$")) {
 Läs in ögonblickskopia av NKBC exporterad från INCA.
 
 ``` r
-nkbc_data_dir <- Sys.getenv("NKBC_DATA_DIR")
 load(
   unzip(
-    file.path(nkbc_data_dir, "2018-08-31", "nkbc_nat_id 2018-08-31 09-22-09.zip"),
+    file.path(Sys.getenv("BRCA_DATA_DIR"), "2019-09-02", "nkbc_nat_id 2019-09-02 09-02-35.zip"),
     exdir = tempdir()
   )
 )

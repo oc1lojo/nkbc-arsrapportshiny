@@ -1,6 +1,6 @@
 nkbc35 <- list(
   code = "nkbc35",
-  lab = "Cytostatikabehandling",
+  lab = "Cytostatikabehandling, pre- respektive postoperativt",
   pop = "opererade, invasiva fall utan fjärrmetastaser vid diagnos",
   filter_pop = function(x, ...) {
     filter(

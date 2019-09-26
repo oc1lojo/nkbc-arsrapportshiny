@@ -26,7 +26,7 @@ nkbc15 <- list(
     )
   },
   prop_within_value = 28,
-  target_values = c(80),
+  target_values = 80,
   sjhkod_var = "op_inr_sjhkod",
   other_vars = c("a_pat_alder", "d_invasiv"),
   om_indikatorn =
