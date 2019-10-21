@@ -9,13 +9,13 @@ nkbc40 <- list(
       !is.na(op_kir_dat),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
       # Prim op eller preop onk beh
-      outcome = factor(d_prim_beh_Värde,
+      outcome = factor(d_prim_beh_Varde,
         levels = c(1, 2),
         labels = c(
           "Primär operation",

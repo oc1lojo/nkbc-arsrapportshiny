@@ -9,13 +9,13 @@ nkbc05 <- list(
       !is.na(op_kir_dat),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
       # Hantera missing
-      outcome = as.logical(ifelse(op_mdk_Värde %in% c(0, 1), op_mdk_Värde, NA))
+      outcome = as.logical(ifelse(op_mdk_Varde %in% c(0, 1), op_mdk_Varde, NA))
     )
   },
   target_values = c(90, 99),

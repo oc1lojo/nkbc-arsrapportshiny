@@ -3,7 +3,7 @@ mutate_nkbc_other_vars <- function(x, ...) {
 
     # Primär behandling
     d_prim_beh = factor(
-      replace_na(d_prim_beh_Värde, 99),
+      replace_na(d_prim_beh_Varde, 99),
       levels = c(1, 2, 99),
       labels = c(
         "Primär operation",
@@ -14,21 +14,21 @@ mutate_nkbc_other_vars <- function(x, ...) {
 
     # Invasivitet
     d_invasiv = factor(
-      replace_na(d_invasiv_Värde, 99),
+      replace_na(d_invasiv_Varde, 99),
       levels = c(1, 2, 99),
       labels = c("Invasiv cancer", "Enbart cancer in situ", "Uppgift saknas")
     ),
 
     # ER
     d_er = factor(
-      replace_na(d_er_Värde, 99),
+      replace_na(d_er_Varde, 99),
       levels = c(1, 2, 99),
       labels = c("Positiv", "Negativ", "Uppgift saknas")
     ),
 
     # Biologisk subtyp
     d_trigrp = factor(
-      d_trigrp_Värde,
+      d_trigrp_Varde,
       levels = c(3, 2, 1, 99),
       labels = c("Trippel negativ", "HER2 positiv", "Luminal", "Uppgift saknas")
     ),
@@ -36,17 +36,17 @@ mutate_nkbc_other_vars <- function(x, ...) {
     # T
     d_tstad = factor(
       case_when(
-        a_tnm_tklass_Värde == 0 ~ 1,
-        a_tnm_tklass_Värde == 5 ~ 1,
-        a_tnm_tklass_Värde == 10 ~ 1,
-        a_tnm_tklass_Värde == 20 ~ 2,
-        a_tnm_tklass_Värde == 30 ~ 2,
-        a_tnm_tklass_Värde == 42 ~ 2,
-        a_tnm_tklass_Värde == 44 ~ 2,
-        a_tnm_tklass_Värde == 45 ~ 2,
-        a_tnm_tklass_Värde == 46 ~ 2,
-        a_tnm_tklass_Värde == 50 ~ 99,
-        is.na(a_tnm_tklass_Värde) ~ 99,
+        a_tnm_tklass_Varde == 0 ~ 1,
+        a_tnm_tklass_Varde == 5 ~ 1,
+        a_tnm_tklass_Varde == 10 ~ 1,
+        a_tnm_tklass_Varde == 20 ~ 2,
+        a_tnm_tklass_Varde == 30 ~ 2,
+        a_tnm_tklass_Varde == 42 ~ 2,
+        a_tnm_tklass_Varde == 44 ~ 2,
+        a_tnm_tklass_Varde == 45 ~ 2,
+        a_tnm_tklass_Varde == 46 ~ 2,
+        a_tnm_tklass_Varde == 50 ~ 99,
+        is.na(a_tnm_tklass_Varde) ~ 99,
         TRUE ~ NA_real_
       ),
       levels = c(1, 2, 99),
@@ -56,12 +56,12 @@ mutate_nkbc_other_vars <- function(x, ...) {
     # N
     d_nstad = factor(
       case_when(
-        a_tnm_nklass_Värde == 0 ~ 1,
-        a_tnm_nklass_Värde == 10 ~ 2,
-        a_tnm_nklass_Värde == 20 ~ 2,
-        a_tnm_nklass_Värde == 30 ~ 2,
-        a_tnm_nklass_Värde == 40 ~ 99,
-        is.na(a_tnm_nklass_Värde) ~ 99,
+        a_tnm_nklass_Varde == 0 ~ 1,
+        a_tnm_nklass_Varde == 10 ~ 2,
+        a_tnm_nklass_Varde == 20 ~ 2,
+        a_tnm_nklass_Varde == 30 ~ 2,
+        a_tnm_nklass_Varde == 40 ~ 99,
+        is.na(a_tnm_nklass_Varde) ~ 99,
         TRUE ~ NA_real_
       ),
       levels = c(1, 2, 99),
@@ -71,10 +71,10 @@ mutate_nkbc_other_vars <- function(x, ...) {
     # M
     d_mstad = factor(
       case_when(
-        a_tnm_mklass_Värde == 0 ~ 1,
-        a_tnm_mklass_Värde == 10 ~ 2,
-        a_tnm_mklass_Värde == 20 ~ 99,
-        is.na(a_tnm_mklass_Värde) ~ 99,
+        a_tnm_mklass_Varde == 0 ~ 1,
+        a_tnm_mklass_Varde == 10 ~ 2,
+        a_tnm_mklass_Varde == 20 ~ 99,
+        is.na(a_tnm_mklass_Varde) ~ 99,
         TRUE ~ NA_real_
       ),
       levels = c(1, 2, 99),
@@ -100,6 +100,6 @@ mutate_nkbc_other_vars <- function(x, ...) {
 
     d_max_extent = pmax(op_pad_extentx, op_pad_extenty, na.rm = TRUE),
 
-    d_kemo = as.logical(pmax(post_kemo_Värde, pre_kemo_Värde, na.rm = TRUE))
+    d_kemo = as.logical(pmax(post_kemo_Varde, pre_kemo_Varde, na.rm = TRUE))
   )
 }

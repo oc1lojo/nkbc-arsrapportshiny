@@ -10,17 +10,17 @@ nkbc42 <- list(
       !is.na(op_kir_dat),
 
       # Exkludera enbart axillkirurgi eller missing
-      op_kir_brost_Värde %in% c(1, 2, 4),
+      op_kir_brost_Varde %in% c(1, 2, 4),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
       outcome = case_when(
-        op_kir_brost_Värde %in% 1 ~ TRUE,
-        op_kir_brost_Värde %in% c(2, 4) ~ FALSE,
+        op_kir_brost_Varde %in% 1 ~ TRUE,
+        op_kir_brost_Varde %in% c(2, 4) ~ FALSE,
         TRUE ~ NA
       )
     )

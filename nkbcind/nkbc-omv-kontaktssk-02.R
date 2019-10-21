@@ -13,7 +13,7 @@ nkbc02 <- list(
   mutate_outcome = function(x, ...) {
     mutate(x,
       # Hantera missing
-      outcome = as.logical(ifelse(a_omv_kssk_Värde %in% c(0, 1), a_omv_kssk_Värde, NA))
+      outcome = as.logical(ifelse(a_omv_kssk_Varde %in% c(0, 1), a_omv_kssk_Varde, NA))
     )
   },
   target_values = c(95, 99),

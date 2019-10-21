@@ -14,24 +14,24 @@ nkbc27 <- list(
 
       # Endast primär opereration (planerad om utfärd ej finns)
       # (pga att info om tumörstorlek och spridning till N behövs)
-      d_prim_beh_Värde == 1,
+      d_prim_beh_Varde == 1,
 
       # Endast invasiv cancer
       d_invasiv == "Invasiv cancer",
 
       # ER-
-      d_er_Värde == 2,
+      d_er_Varde == 2,
 
       # Tumörstorlek > 10 mm eller spridning till lymfkörtlar
       (op_pad_invstl > 10 | op_pad_lglmetant > 0),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
-      outcome = as.logical(post_kemo_Värde)
+      outcome = as.logical(post_kemo_Varde)
     )
   },
   target_values = c(80, 90),

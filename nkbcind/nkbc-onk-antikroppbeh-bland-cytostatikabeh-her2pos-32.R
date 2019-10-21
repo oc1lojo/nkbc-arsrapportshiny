@@ -19,16 +19,16 @@ nkbc32 <- list(
       d_kemo == TRUE,
 
       # HER2+ (amplifiering eller 3+).
-      d_her2_Värde == 1,
+      d_her2_Varde == 1,
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
       # Går på det som finns, pre eller postop. Om det ena saknas antas samma som finns för det andra.
-      outcome = as.logical(pmax(post_antikropp_Värde, pre_antikropp_Värde, na.rm = TRUE))
+      outcome = as.logical(pmax(post_antikropp_Varde, pre_antikropp_Varde, na.rm = TRUE))
     )
   },
   target_values = c(90, 95),

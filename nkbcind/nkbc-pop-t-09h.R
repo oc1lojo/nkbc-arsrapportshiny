@@ -8,13 +8,13 @@ nkbc09h <- list(
       x,
       # Enbart primärt opererade
       !is.na(op_kir_dat),
-      d_prim_beh_Värde %in% 1,
+      d_prim_beh_Varde %in% 1,
 
       # Enbart invasiv cancer
       d_invasiv == "Invasiv cancer",
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {

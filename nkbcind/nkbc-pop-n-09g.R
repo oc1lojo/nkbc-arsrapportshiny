@@ -10,7 +10,7 @@ nkbc09g <- list(
       !is.na(op_kir_dat),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {

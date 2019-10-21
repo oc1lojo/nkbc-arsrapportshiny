@@ -1,72 +1,72 @@
 mutate_nkbc_d_vars <- function(x, ...) {
   mutate(x,
     # Beräkna variabel för primär behandling
-    d_prim_beh_Värde = coalesce(op_kir_Värde, a_planbeh_typ_Värde),
+    d_prim_beh_Varde = coalesce(op_kir_Varde, a_planbeh_typ_Varde),
 
     # Beräkna variabel för invasiv cancer
-    d_invasiv_Värde = case_when(
-      a_pad_invasiv_Värde %in% 1 | op_pad_invasiv_Värde %in% 1 ~ 1L,
-      a_pad_invasiv_Värde %in% 2 | op_pad_invasiv_Värde %in% 2 ~ 2L,
+    d_invasiv_Varde = case_when(
+      a_pad_invasiv_Varde %in% 1 | op_pad_invasiv_Varde %in% 1 ~ 1L,
+      a_pad_invasiv_Varde %in% 2 | op_pad_invasiv_Varde %in% 2 ~ 2L,
       TRUE ~ NA_integer_
     ),
 
     # ER, 1 = pos, 2 = neg
-    d_er_op_Värde = case_when(
-      op_pad_erproc < 10 | is.na(op_pad_erproc) & op_pad_er_Värde %in% 2 ~ 2L,
-      op_pad_erproc >= 10 | is.na(op_pad_erproc) & op_pad_er_Värde %in% 1 ~ 1L
+    d_er_op_Varde = case_when(
+      op_pad_erproc < 10 | is.na(op_pad_erproc) & op_pad_er_Varde %in% 2 ~ 2L,
+      op_pad_erproc >= 10 | is.na(op_pad_erproc) & op_pad_er_Varde %in% 1 ~ 1L
     ),
 
-    d_er_a_Värde = case_when(
-      a_pad_erproc < 10 | is.na(a_pad_erproc) & a_pad_er_Värde %in% 2 ~ 2L,
-      a_pad_erproc >= 10 | is.na(a_pad_erproc) & a_pad_er_Värde %in% 1 ~ 1L
+    d_er_a_Varde = case_when(
+      a_pad_erproc < 10 | is.na(a_pad_erproc) & a_pad_er_Varde %in% 2 ~ 2L,
+      a_pad_erproc >= 10 | is.na(a_pad_erproc) & a_pad_er_Varde %in% 1 ~ 1L
     ),
 
-    d_er_Värde = case_when(
-      d_prim_beh_Värde == 1 ~ d_er_op_Värde,
-      d_prim_beh_Värde %in% c(2, 3) ~ d_er_a_Värde,
+    d_er_Varde = case_when(
+      d_prim_beh_Varde == 1 ~ d_er_op_Varde,
+      d_prim_beh_Varde %in% c(2, 3) ~ d_er_a_Varde,
       TRUE ~ NA_integer_
     ),
 
     # PR, 1 = pos, 2 = neg
-    d_pr_op_Värde = case_when(
-      op_pad_prproc < 10 | is.na(op_pad_prproc) & op_pad_pr_Värde %in% 2 ~ 2L,
-      op_pad_prproc >= 10 | is.na(op_pad_prproc) & op_pad_pr_Värde %in% 1 ~ 1L
+    d_pr_op_Varde = case_when(
+      op_pad_prproc < 10 | is.na(op_pad_prproc) & op_pad_pr_Varde %in% 2 ~ 2L,
+      op_pad_prproc >= 10 | is.na(op_pad_prproc) & op_pad_pr_Varde %in% 1 ~ 1L
     ),
 
-    d_pr_a_Värde = case_when(
-      a_pad_prproc < 10 | is.na(a_pad_prproc) & a_pad_pr_Värde %in% 2 ~ 2L,
-      a_pad_prproc >= 10 | is.na(a_pad_prproc) & a_pad_pr_Värde %in% 1 ~ 1L
+    d_pr_a_Varde = case_when(
+      a_pad_prproc < 10 | is.na(a_pad_prproc) & a_pad_pr_Varde %in% 2 ~ 2L,
+      a_pad_prproc >= 10 | is.na(a_pad_prproc) & a_pad_pr_Varde %in% 1 ~ 1L
     ),
 
-    d_pr_Värde = case_when(
-      d_prim_beh_Värde == 1 ~ d_pr_op_Värde,
-      d_prim_beh_Värde %in% c(2, 3) ~ d_pr_a_Värde,
+    d_pr_Varde = case_when(
+      d_prim_beh_Varde == 1 ~ d_pr_op_Varde,
+      d_prim_beh_Varde %in% c(2, 3) ~ d_pr_a_Varde,
       TRUE ~ NA_integer_
     ),
 
     # HER2, 1 = pos, 2 = neg
-    d_her2_op_Värde = case_when(
-      op_pad_her2_Värde %in% 3 | op_pad_her2ish_Värde %in% 1 ~ 1L,
-      op_pad_her2_Värde %in% c(1, 2) | op_pad_her2ish_Värde %in% 2 ~ 2L
+    d_her2_op_Varde = case_when(
+      op_pad_her2_Varde %in% 3 | op_pad_her2ish_Varde %in% 1 ~ 1L,
+      op_pad_her2_Varde %in% c(1, 2) | op_pad_her2ish_Varde %in% 2 ~ 2L
     ),
 
-    d_her2_a_Värde = case_when(
-      a_pad_her2_Värde %in% 3 | a_pad_her2ish_Värde %in% 1 ~ 1L,
-      a_pad_her2_Värde %in% c(1, 2) | a_pad_her2ish_Värde %in% 2 ~ 2L
+    d_her2_a_Varde = case_when(
+      a_pad_her2_Varde %in% 3 | a_pad_her2ish_Varde %in% 1 ~ 1L,
+      a_pad_her2_Varde %in% c(1, 2) | a_pad_her2ish_Varde %in% 2 ~ 2L
     ),
 
-    d_her2_Värde = case_when(
-      d_prim_beh_Värde == 1 ~ d_her2_op_Värde,
-      d_prim_beh_Värde %in% c(2, 3) ~ d_her2_a_Värde,
+    d_her2_Varde = case_when(
+      d_prim_beh_Varde == 1 ~ d_her2_op_Varde,
+      d_prim_beh_Varde %in% c(2, 3) ~ d_her2_a_Varde,
       TRUE ~ NA_integer_
     ),
 
     # Biologisk subtyp, 1 = Luminal, 2 = HER2, 3 = TNBC, 99 = Uppgift saknas
-    d_trigrp_Värde = case_when(
-      d_er_Värde %in% 2 & d_pr_Värde %in% 2 & d_her2_Värde %in% 2 ~ 3L,
-      is.na(d_er_Värde) | is.na(d_pr_Värde) | is.na(d_her2_Värde) ~ 99L,
-      d_her2_Värde %in% 1 ~ 2L,
-      d_er_Värde %in% 1 | d_pr_Värde %in% 1 ~ 1L,
+    d_trigrp_Varde = case_when(
+      d_er_Varde %in% 2 & d_pr_Varde %in% 2 & d_her2_Varde %in% 2 ~ 3L,
+      is.na(d_er_Varde) | is.na(d_pr_Varde) | is.na(d_her2_Varde) ~ 99L,
+      d_her2_Varde %in% 1 ~ 2L,
+      d_er_Varde %in% 1 | d_pr_Varde %in% 1 ~ 1L,
       TRUE ~ 99L
     ),
 
@@ -92,8 +92,8 @@ mutate_nkbc_d_vars <- function(x, ...) {
     ),
     # Sjukhus ansvarig för primär behandling
     d_prim_beh_sjhkod = case_when(
-      d_prim_beh_Värde == 1 ~ op_inr_sjhkod,
-      d_prim_beh_Värde == 2 ~ pre_inr_sjhkod,
+      d_prim_beh_Varde == 1 ~ op_inr_sjhkod,
+      d_prim_beh_Varde == 2 ~ pre_inr_sjhkod,
       TRUE ~ NA_integer_
     ),
 

@@ -12,15 +12,15 @@ nkbc39 <- list(
       !is.na(op_kir_dat),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
       # Hantera missing
-      a_beh_studie = as.logical(ifelse(a_beh_studie_Värde %in% c(0, 1), a_beh_studie_Värde, NA)),
-      pre_beh_studie = as.logical(ifelse(pre_beh_studie_Värde %in% c(0, 1), pre_beh_studie_Värde, NA)),
-      post_beh_studie = as.logical(ifelse(post_beh_studie_Värde %in% c(0, 1), post_beh_studie_Värde, NA)),
+      a_beh_studie = as.logical(ifelse(a_beh_studie_Varde %in% c(0, 1), a_beh_studie_Varde, NA)),
+      pre_beh_studie = as.logical(ifelse(pre_beh_studie_Varde %in% c(0, 1), pre_beh_studie_Varde, NA)),
+      post_beh_studie = as.logical(ifelse(post_beh_studie_Varde %in% c(0, 1), post_beh_studie_Varde, NA)),
       # Beräkna indikator
       outcome =
         case_when(

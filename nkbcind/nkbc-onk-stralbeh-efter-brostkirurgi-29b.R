@@ -9,10 +9,10 @@ nkbc29b <- list(
       year(a_diag_dat) >= 2012,
 
       # Opererade med bröstkirurgi (fall med enbart axillkirurgi exkluderade)
-      op_kir_brost_Värde %in% c(1, 2, 4),
+      op_kir_brost_Varde %in% c(1, 2, 4),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
@@ -29,14 +29,14 @@ nkbc29b <- list(
       ),
       d_op_kir_brost_kat = factor(
         case_when(
-          op_kir_brost_Värde %in% 1 ~ 1L,
-          op_kir_brost_Värde %in% c(2, 4) ~ 2L,
+          op_kir_brost_Varde %in% 1 ~ 1L,
+          op_kir_brost_Varde %in% c(2, 4) ~ 2L,
           TRUE ~ NA_integer_
         ),
         levels = c(1, 2),
         labels = c("Partiellt mastektomi", "Mastektomi")
       ),
-      outcome = as.logical(post_rt_Värde)
+      outcome = as.logical(post_rt_Varde)
     )
   },
   sjhkod_var = "post_inr_sjhkod",

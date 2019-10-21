@@ -13,7 +13,7 @@ nkbc29 <- list(
       d_invasiv == "Invasiv cancer",
 
       # Endast mastektomi och subkutan mastektomi
-      op_kir_brost_Värde %in% c(2, 4),
+      op_kir_brost_Varde %in% c(2, 4),
 
       # Spridning till lymfkörtlar
       op_pad_lglmetant > 0,
@@ -22,12 +22,12 @@ nkbc29 <- list(
       !((op_pad_snmakrometant == 0 & op_pad_snmikrometant > 0 & op_pad_lglmetant == op_pad_snmikrometant) %in% TRUE),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
-      outcome = as.logical(post_rt_Värde)
+      outcome = as.logical(post_rt_Varde)
     )
   },
   target_values = c(70, 85),

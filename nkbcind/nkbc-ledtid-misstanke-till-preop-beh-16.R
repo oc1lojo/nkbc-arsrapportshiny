@@ -12,10 +12,10 @@ nkbc16 <- list(
       !is.na(op_kir_dat),
 
       # Endast preop onk behandling (planerad om utförd ej finns)
-      d_prim_beh_Värde == 2,
+      d_prim_beh_Varde == 2,
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {

@@ -20,28 +20,28 @@ nkbc46 <- list(
       d_invasiv == "Invasiv cancer",
 
       # ER-
-      d_er_Värde == 2,
+      d_er_Varde == 2,
 
       # större tumörer eller spridning till lymfkörtlar
       (
         # Om operation efter påbörjad/genomförd preop onk beh: T2-T4 (>20mm) eller cN+
-        d_prim_beh_Värde == 2 &
-          (a_tnm_tklass_Värde %in% c(20, 30, 42, 44, 45, 46) | a_tnm_nklass_Värde %in% c(10, 20, 30))
+        d_prim_beh_Varde == 2 &
+          (a_tnm_tklass_Varde %in% c(20, 30, 42, 44, 45, 46) | a_tnm_nklass_Varde %in% c(10, 20, 30))
       ) | (
         # Om primär operation: tumörstorlek > 10 mm eller pN+
-        d_prim_beh_Värde == 1 &
+        d_prim_beh_Varde == 1 &
           (op_pad_invstl > 10 | op_pad_lglmetant > 0)
       ),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
       outcome = case_when(
-        d_prim_beh_Värde == 1 ~ as.logical(post_kemo_Värde),
-        d_prim_beh_Värde == 2 ~ as.logical(pre_kemo_Värde) | post_kemo_Värde %in% 1,
+        d_prim_beh_Varde == 1 ~ as.logical(post_kemo_Varde),
+        d_prim_beh_Varde == 2 ~ as.logical(pre_kemo_Varde) | post_kemo_Varde %in% 1,
         TRUE ~ NA
       )
     )

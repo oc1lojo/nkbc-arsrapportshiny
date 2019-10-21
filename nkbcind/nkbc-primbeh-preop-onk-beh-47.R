@@ -9,15 +9,15 @@ nkbc47 <- list(
       !is.na(op_kir_dat),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
       # Preop onk beh
       outcome = case_when(
-        d_prim_beh_Värde %in% 2 ~ TRUE,
-        d_prim_beh_Värde %in% 1 ~ FALSE,
+        d_prim_beh_Varde %in% 2 ~ TRUE,
+        d_prim_beh_Varde %in% 1 ~ FALSE,
         TRUE ~ NA
       )
     )

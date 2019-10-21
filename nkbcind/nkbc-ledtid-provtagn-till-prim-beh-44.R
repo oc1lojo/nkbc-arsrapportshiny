@@ -10,7 +10,7 @@ nkbc44 <- list(
       !is.na(op_kir_dat),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
@@ -21,8 +21,8 @@ nkbc44 <- list(
         na.rm = TRUE
       ),
       d_prim_beh_dat = case_when(
-        d_prim_beh_Värde == 1 ~ ymd(op_kir_dat),
-        d_prim_beh_Värde == 2 ~ d_pre_onk_dat,
+        d_prim_beh_Varde == 1 ~ ymd(op_kir_dat),
+        d_prim_beh_Varde == 2 ~ d_pre_onk_dat,
         TRUE ~ ymd(NA_character_)
       ),
       outcome = as.numeric(d_prim_beh_dat - ymd(a_diag_dat)),

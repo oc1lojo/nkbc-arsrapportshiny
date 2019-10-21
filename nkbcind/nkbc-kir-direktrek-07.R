@@ -7,16 +7,16 @@ nkbc07 <- list(
     filter(
       x,
       # Endast mastektomi och subkutan mastektomi
-      op_kir_brost_Värde %in% c(2, 4),
+      op_kir_brost_Varde %in% c(2, 4),
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
       # Hantera missing
-      outcome = as.logical(ifelse(op_kir_onkoplastik_Värde %in% c(0, 1), op_kir_onkoplastik_Värde, NA))
+      outcome = as.logical(ifelse(op_kir_onkoplastik_Varde %in% c(0, 1), op_kir_onkoplastik_Varde, NA))
     )
   },
   target_values = c(15, 20),

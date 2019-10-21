@@ -16,7 +16,7 @@ nkbc01 <- list(
   mutate_outcome = function(x, ...) {
     mutate(x,
       # Hantera missing
-      outcome = as.logical(ifelse(a_diag_screening_Värde %in% c(0, 1), a_diag_screening_Värde, NA))
+      outcome = as.logical(ifelse(a_diag_screening_Varde %in% c(0, 1), a_diag_screening_Varde, NA))
     )
   },
   target_values = c(60, 70),

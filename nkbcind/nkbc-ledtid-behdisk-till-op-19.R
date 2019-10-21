@@ -9,10 +9,10 @@ nkbc19 <- list(
       !is.na(op_kir_dat),
 
       # Endast primär opereration (planerad om utförd ej finns)
-      d_prim_beh_Värde == 1,
+      d_prim_beh_Varde == 1,
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {

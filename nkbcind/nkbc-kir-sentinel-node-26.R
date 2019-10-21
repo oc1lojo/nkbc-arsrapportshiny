@@ -10,23 +10,23 @@ nkbc26 <- list(
       d_invasiv == "Invasiv cancer",
 
       # Klinisk N0
-      a_tnm_nklass_Värde == 0,
+      a_tnm_nklass_Varde == 0,
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
       outcome = case_when(
-        op_kir_axilltyp_Värde == 1 ~ 1L,
-        op_kir_axilltyp_Värde == 2 ~ 0L,
-        op_kir_axilltyp_Värde == 3 ~ 1L,
-        op_kir_axilltyp_Värde == 4 ~ 0L,
-        op_kir_axilltyp_Värde == 98 ~ NA_integer_,
+        op_kir_axilltyp_Varde == 1 ~ 1L,
+        op_kir_axilltyp_Varde == 2 ~ 0L,
+        op_kir_axilltyp_Varde == 3 ~ 1L,
+        op_kir_axilltyp_Varde == 4 ~ 0L,
+        op_kir_axilltyp_Varde == 98 ~ NA_integer_,
         TRUE ~ NA_integer_
       ),
-      outcome = as.logical(ifelse(op_kir_axill_Värde %in% 0, 0, outcome))
+      outcome = as.logical(ifelse(op_kir_axill_Varde %in% 0, 0, outcome))
     )
   },
   target_values = c(90, 95),

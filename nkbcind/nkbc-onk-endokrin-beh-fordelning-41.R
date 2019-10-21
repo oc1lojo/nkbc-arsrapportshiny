@@ -16,10 +16,10 @@ nkbc41 <- list(
       d_invasiv == "Invasiv cancer",
 
       # ER+
-      d_er_Värde == 1,
+      d_er_Varde == 1,
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
@@ -27,10 +27,10 @@ nkbc41 <- list(
       # Pre eller postoperativ
       outcome = factor(
         case_when(
-          post_endo_Värde == 1 & pre_endo_Värde == 1 ~ 1,
-          pre_endo_Värde == 1 ~ 0,
-          post_endo_Värde == 1 ~ 2,
-          post_endo_Värde == 0 | pre_endo_Värde == 0 ~ 3
+          post_endo_Varde == 1 & pre_endo_Varde == 1 ~ 1,
+          pre_endo_Varde == 1 ~ 0,
+          post_endo_Varde == 1 ~ 2,
+          post_endo_Varde == 0 | pre_endo_Varde == 0 ~ 3
         ),
         levels = c(0, 1, 2, 3),
         labels = c(

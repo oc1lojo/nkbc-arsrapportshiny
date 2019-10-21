@@ -15,15 +15,15 @@ nkbc28 <- list(
       d_invasiv == "Invasiv cancer",
 
       # Endast bröstbevarande operation
-      op_kir_brost_Värde == 1,
+      op_kir_brost_Varde == 1,
 
       # Ej fjärrmetastaser vid diagnos
-      !a_tnm_mklass_Värde %in% 10
+      !a_tnm_mklass_Varde %in% 10
     )
   },
   mutate_outcome = function(x, ...) {
     mutate(x,
-      outcome = as.logical(post_rt_Värde)
+      outcome = as.logical(post_rt_Varde)
     )
   },
   target_values = c(90, 95),
