@@ -7,18 +7,11 @@ library(shiny)
 library(rccShiny)
 
 # install.packages("devtools")
-# devtools::install_bitbucket("cancercentrum/nkbcgeneral") # inte implementerad än
-# devtools::install_bitbucket("cancercentrum/nkbcind") # inte implementerad än
+# devtools::install_bitbucket("cancercentrum/nkbcgeneral")
+# devtools::install_bitbucket("cancercentrum/nkbcind")
 
-# library(nkbcgeneral) # inte implementerat än
-for (file_name in list.files("nkbcgeneral", pattern = "*.R$")) {
-  source(file.path("nkbcgeneral", file_name), encoding = "UTF-8")
-}
-
-# library(nkbcind) # inte implementerat än
-for (file_name in list.files("nkbcind", pattern = "*.R$")) {
-  source(file.path("nkbcind", file_name), encoding = "UTF-8")
-}
+library(nkbcgeneral)
+library(nkbcind)
 
 # Temporär work-around för att hantera NULL. TODO Bättre lösning
 one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
