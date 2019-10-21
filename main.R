@@ -6,9 +6,9 @@ library(readr)
 library(shiny)
 library(rccShiny)
 
-# install.packages("devtools")
-# devtools::install_bitbucket("cancercentrum/nkbcgeneral")
-# devtools::install_bitbucket("cancercentrum/nkbcind")
+# install.packages("remotes")
+# remotes::install_bitbucket("cancercentrum/nkbcgeneral")
+# remotes::install_bitbucket("cancercentrum/nkbcind")
 
 library(nkbcgeneral)
 library(nkbcind)
