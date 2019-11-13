@@ -31,7 +31,7 @@ load(
 
 # Bearbeta dataram med sjukhuskoder
 sjukhuskoder <- sjukhuskoder %>%
-  rename(
+  dplyr::rename(
     sjukhus = sjukhusnamn,
     region_sjh_txt = region
   ) %>%
