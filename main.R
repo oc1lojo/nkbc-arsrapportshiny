@@ -5,13 +5,8 @@ library(lubridate)
 library(readr)
 library(shiny)
 library(rccShiny)
-
-# install.packages("remotes")
-# remotes::install_bitbucket("cancercentrum/nkbcgeneral")
-# remotes::install_bitbucket("cancercentrum/nkbcind")
-
-library(nkbcgeneral)
-library(nkbcind)
+library(nkbcgeneral) # https://cancercentrum.bitbucket.io/nkbcgeneral/
+library(nkbcind) # https://cancercentrum.bitbucket.io/nkbcind/
 
 # Temporär work-around för att hantera NULL. TODO Bättre lösning
 one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
