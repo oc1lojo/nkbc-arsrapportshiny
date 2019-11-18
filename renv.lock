@@ -450,6 +450,18 @@
       "Repository": "CRAN",
       "Hash": "9111af6c6dec65538ebd3de6c0bae864"
     },
+    "nkbcgeneral": {
+      "Package": "nkbcgeneral",
+      "Version": "0.0.0.9008",
+      "Source": "Bitbucket",
+      "RemoteType": "bitbucket",
+      "RemoteHost": "api.bitbucket.org/2.0",
+      "RemoteRepo": "nkbcgeneral",
+      "RemoteUsername": "cancercentrum",
+      "RemoteRef": "0.0.0.9008",
+      "RemoteSha": "faf81b9d21eaea1e9f5ff737a92c2ce0fcf35bf2",
+      "Hash": "68e126640549c2fab964d10d056be97e"
+    },
     "nlme": {
       "Package": "nlme",
       "Version": "3.1-140",
