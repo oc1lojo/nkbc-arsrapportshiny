@@ -5,20 +5,8 @@ library(lubridate)
 library(readr)
 library(shiny)
 library(rccShiny)
-
-# install.packages("devtools")
-# devtools::install_bitbucket("cancercentrum/nkbcgeneral") # inte implementerad än
-# devtools::install_bitbucket("cancercentrum/nkbcind") # inte implementerad än
-
-# library(nkbcgeneral) # inte implementerat än
-for (file_name in list.files("nkbcgeneral", pattern = "*.R$")) {
-  source(file.path("nkbcgeneral", file_name), encoding = "UTF-8")
-}
-
-# library(nkbcind) # inte implementerat än
-for (file_name in list.files("nkbcind", pattern = "*.R$")) {
-  source(file.path("nkbcind", file_name), encoding = "UTF-8")
-}
+library(nkbcgeneral) # https://cancercentrum.bitbucket.io/nkbcgeneral/
+library(nkbcind) # https://cancercentrum.bitbucket.io/nkbcind/
 
 # Temporär work-around för att hantera NULL. TODO Bättre lösning
 one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
@@ -43,7 +31,7 @@ load(
 
 # Bearbeta dataram med sjukhuskoder
 sjukhuskoder <- sjukhuskoder %>%
-  rename(
+  dplyr::rename(
     sjukhus = sjukhusnamn,
     region_sjh_txt = region
   ) %>%
@@ -56,6 +44,7 @@ sjukhuskoder <- sjukhuskoder %>%
 # Bearbeta huvud-dataram
 df_main <- df %>%
   mutate_if(is.factor, as.character) %>%
+  rename_all(stringr::str_replace, "_Värde", "_Varde") %>%
   clean_nkbc_data() %>%
   mutate_nkbc_d_vars() %>%
   mutate_nkbc_other_vars() %>%
