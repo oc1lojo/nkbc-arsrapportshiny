@@ -47,7 +47,7 @@ df_main <- df %>%
   rename_all(stringr::str_replace, "_Värde", "_Varde") %>%
   clean_nkbc_data() %>%
   mutate_nkbc_d_vars() %>%
-  mutate_nkbc_other_vars() %>%
+  mutate_nkbcind_d_vars() %>%
   mutate(
     # Beräkna variabel för tidsperioder
     period = year(a_diag_dat)
