@@ -12,7 +12,7 @@ library(nkbcind) # https://cancercentrum.bitbucket.io/nkbcind/
 one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
 
 # Definera globala variabler ---------------------------------------------------
-report_end_year <- 2018
+report_end_year <- 2019
 
 # Läs in data ------------------------------------------------------------------
 
@@ -21,10 +21,7 @@ load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskode
 
 # Läs in ögonblickskopia av NKBC exporterad från INCA
 load(
-  unzip(
-    file.path(Sys.getenv("BRCA_DATA_DIR"), "2019-09-02", "nkbc_nat_id 2019-09-02 09-02-35.zip"),
-    exdir = tempdir()
-  )
+  file.path(Sys.getenv("BRCA_DATA_DIR"), "2020-03-12", "nkbc_nat_id 2020-03-12 08-21-44.RData")
 )
 
 # Bearbeta data ----------------------------------------------------------------
@@ -44,6 +41,8 @@ sjukhuskoder <- sjukhuskoder %>%
 # Bearbeta huvud-dataram
 df_main <- df %>%
   mutate_if(is.factor, as.character) %>%
+  rename_all(iconv, from = "UTF-8") %>%
+  mutate_if(is.character, iconv, from = "UTF-8") %>%
   rename_all(stringr::str_replace, "_Värde", "_Varde") %>%
   clean_nkbc_data() %>%
   mutate_nkbc_d_vars() %>%
