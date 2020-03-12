@@ -519,9 +519,9 @@
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "nkbcind",
       "RemoteUsername": "cancercentrum",
-      "RemoteRef": "develop",
-      "RemoteSha": "79966bf23e5badbe984fbe29b159e80b761c8f35",
-      "Hash": "0031636be914b1dbb8e2beac158333e1"
+      "RemoteRef": "aff8414",
+      "RemoteSha": "aff841460b26d4f67d58c379160644e8d089c80d",
+      "Hash": "5cd2f01b61474ec1366e3ed8ad790322"
     },
     "nlme": {
       "Package": "nlme",

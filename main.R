@@ -79,10 +79,10 @@ nkbcind_nams <- c(
 
   # Ledtider
   "nkbc17", # Välgrundad misstanke om cancer till första besök i specialiserad vård
-  "nkbc43", # Välgrundad misstanke om cancer till primär behandling
   "nkbc15", # Välgrundad misstanke om cancer till operation
   "nkbc16", # Välgrundad misstanke om cancer till preoperativ onkologisk behandling
-  "nkbc44", # Provtagningsdatum till primär behandling
+  "nkbc48", # Provtagningsdatum till operation
+  "nkbc49", # Provtagningsdatum till preoperativ onkologisk behandling
   "nkbc19", # Första behandlingsdiskussion till operation
   "nkbc20", # Första behandlingsdiskussion till preoperativ onkologisk behandling
   "nkbc22", # Operation till cytostatikabehandling
