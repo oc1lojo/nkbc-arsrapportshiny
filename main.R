@@ -138,9 +138,7 @@ for (i in seq(along = nkbcind_nams)) {
       one_of(other_vars(nkbcind))
     )
 
-  if (!is.null(nkbcind$inkl_beskr_onk_beh) && nkbcind$inkl_beskr_onk_beh |
-    nkbcind_nam %in% c("nkbc16", "nkbc20") # TODO skall inte dessa också ha kommentar i beskrivning?
-  ) {
+  if (!is.null(nkbcind$inkl_beskr_onk_beh) && nkbcind$inkl_beskr_onk_beh) {
     df_tmp <- df_tmp %>%
       # Ett år bakåt då info från onk behandling blanketter
       filter(period <= report_end_year - 1)
