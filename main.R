@@ -53,7 +53,7 @@ df_main <- df %>%
   ) %>%
   filter(
     # Standardinklusion av tidsperioder för de interaktiva rapporterna
-    period >= 2009,
+    period >= 2008,
     period <= report_end_year
   )
 
