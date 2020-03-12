@@ -118,9 +118,6 @@ nkbcind_nams <- c(
   "nkbc41", # Endokrin behandling, pre- respektive postoperativt
   "nkbc32", # Antikroppsbehandling bland cytostatikabehandlade
 
-  # Studier
-  "nkbc39", # Patienten ingår i studie
-
   # Överlevnad
   "nkbc30" # Observerad 5 års överlevnad
 )
