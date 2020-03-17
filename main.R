@@ -1,6 +1,7 @@
 # Läs in R-paket och verktygsfunktioner ----------------------------------------
 library(dplyr)
 library(tidyr)
+library(forcats)
 library(lubridate)
 library(readr)
 library(shiny)

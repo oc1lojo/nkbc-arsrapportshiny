@@ -268,6 +268,13 @@
       "Repository": "CRAN",
       "Hash": "83ab58a0518afe3d17e41da01af13b60"
     },
+    "forcats": {
+      "Package": "forcats",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1cb4279e697650f0bd78cd3601ee7576"
+    },
     "foreign": {
       "Package": "foreign",
       "Version": "0.8-75",
@@ -519,9 +526,9 @@
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "nkbcind",
       "RemoteUsername": "cancercentrum",
-      "RemoteRef": "80f8702",
-      "RemoteSha": "80f8702141a27356bc18362c837ccd544b159a99",
-      "Hash": "0f81ca230221af0a0f138f8cc6a2ae3e"
+      "RemoteRef": "99fdabf",
+      "RemoteSha": "99fdabf08935f3c9bf72b13c61c2bc09ae344b3e",
+      "Hash": "73fe02b252ddefac8a7311a261c8d81c"
     },
     "nlme": {
       "Package": "nlme",
