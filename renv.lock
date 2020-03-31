@@ -18,10 +18,10 @@
     },
     "DT": {
       "Package": "DT",
-      "Version": "0.12",
+      "Version": "0.13",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0e120603cc57e4f1d741f739aa8147ba"
+      "Hash": "a16cb2832248c7cff5a6f505e2aea45b"
     },
     "Formula": {
       "Package": "Formula",
@@ -32,10 +32,10 @@
     },
     "Hmisc": {
       "Package": "Hmisc",
-      "Version": "4.3-1",
+      "Version": "4.4-0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "b354bb2e63e1d6947eb05fa3bc355b2f"
+      "Hash": "1016ef46c7ebf841513624ecb22eebc7"
     },
     "KernSmooth": {
       "Package": "KernSmooth",
@@ -74,10 +74,10 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.3",
+      "Version": "1.0.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f3ca785924863b0e4c8cb23b6a5c75a1"
+      "Hash": "5ef9c463e30f8aea49c293e4b8d9d7be"
     },
     "TTR": {
       "Package": "TTR",
@@ -144,10 +144,10 @@
     },
     "callr": {
       "Package": "callr",
-      "Version": "3.4.2",
+      "Version": "3.4.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d16f6e202179e69c1400cc1f845bfc09"
+      "Hash": "643163a00cb536454c624883a10ae0bc"
     },
     "checkmate": {
       "Package": "checkmate",
@@ -193,10 +193,10 @@
     },
     "crosstalk": {
       "Package": "crosstalk",
-      "Version": "1.0.0",
+      "Version": "1.1.0.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "4ac529753d1e529966ef675d7f0c762b"
+      "Hash": "ae55f5d7c02f0ab43c58dd050694f2b4"
     },
     "curl": {
       "Package": "curl",
@@ -228,10 +228,10 @@
     },
     "dplyr": {
       "Package": "dplyr",
-      "Version": "0.8.4",
+      "Version": "0.8.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3ecb1deedd4c4ad6ebf4605d263616f2"
+      "Hash": "57a42ddf80f429764ff7987128c3fd0a"
     },
     "ellipsis": {
       "Package": "ellipsis",
@@ -305,10 +305,10 @@
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.3.1",
+      "Version": "1.3.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d4e25697c450c01b202c79ef35694a83"
+      "Hash": "af1f47b63d1aa2206c1fe4d3db1d9366"
     },
     "gplots": {
       "Package": "gplots",
@@ -333,10 +333,10 @@
     },
     "gtools": {
       "Package": "gtools",
-      "Version": "3.8.1",
+      "Version": "3.8.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "b7f3a3bee8ec0858e8cbc09cfdc35ced"
+      "Hash": "0a749b4458d19a54acae93c64e3e7c85"
     },
     "highcharter": {
       "Package": "highcharter",
@@ -389,10 +389,10 @@
     },
     "igraph": {
       "Package": "igraph",
-      "Version": "1.2.4.2",
+      "Version": "1.2.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "fffa635f747cd07ffc56bc13a23701e4"
+      "Hash": "3878c30ce67cdb7f2d7f72554e37f476"
     },
     "isoband": {
       "Package": "isoband",
@@ -515,20 +515,20 @@
       "RemoteRepo": "nkbcgeneral",
       "RemoteUsername": "cancercentrum",
       "RemoteRef": "develop",
-      "RemoteSha": "badc437afaeafff73704e9533e6cf4be8d2d31b1",
-      "Hash": "171f4d8e8b704be02875e3cda35e2b03"
+      "RemoteSha": "e01ffb158eefca7501c3e42459e1fa2ece7dc7a1",
+      "Hash": "1f824077a5d4fa7460d7376296932364"
     },
     "nkbcind": {
       "Package": "nkbcind",
-      "Version": "0.1.0",
+      "Version": "0.1.2",
       "Source": "Bitbucket",
       "RemoteType": "bitbucket",
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "nkbcind",
       "RemoteUsername": "cancercentrum",
-      "RemoteRef": "99fdabf",
-      "RemoteSha": "99fdabf08935f3c9bf72b13c61c2bc09ae344b3e",
-      "Hash": "73fe02b252ddefac8a7311a261c8d81c"
+      "RemoteRef": "develop",
+      "RemoteSha": "ee0f4e6c979471ce68c8c73f29825b9ff21f643b",
+      "Hash": "059aaf8c7666e63908c98c2bdf22242c"
     },
     "nlme": {
       "Package": "nlme",
@@ -581,10 +581,10 @@
     },
     "plyr": {
       "Package": "plyr",
-      "Version": "1.8.5",
+      "Version": "1.8.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3f1b0dbcc503320e6e7aae6c3ff87eaa"
+      "Hash": "ec0e5ab4e5f851f6ef32cd1d1984957f"
     },
     "png": {
       "Package": "png",
@@ -637,23 +637,22 @@
     },
     "quantmod": {
       "Package": "quantmod",
-      "Version": "0.4-16",
+      "Version": "0.4.17",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0730dd87227e9bb4c4086bdab4817939"
+      "Hash": "4de4156e52cd66215066d28c0577a56e"
     },
     "rccShiny": {
       "Package": "rccShiny",
-      "Version": "1.3",
+      "Version": "1.4.0",
       "Source": "Bitbucket",
-      "Repository": "bitbucket.org/cancercentrum/rccshiny",
       "RemoteType": "bitbucket",
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "rccshiny",
       "RemoteUsername": "cancercentrum",
-      "RemoteRef": "1.3",
-      "RemoteSha": "2cdfa271b3c3604ece10136d58d4ed84a82fe52c",
-      "Hash": "7e95405a6d33a4a3f2588c45c4e7f943"
+      "RemoteRef": "1.4.0",
+      "RemoteSha": "351e1eeb38c22328a22d8f63995ac4abe5c37caf",
+      "Hash": "c7f6c9216bf76dcc5b80aa6567f2a20f"
     },
     "readr": {
       "Package": "readr",
@@ -720,10 +719,10 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.4.0.1",
+      "Version": "1.4.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0db4f702de0f8e3b330f98d254e9ce88"
+      "Hash": "a56d058adfc9df30bdd45dbb01cec39f"
     },
     "shinyWidgets": {
       "Package": "shinyWidgets",
@@ -731,13 +730,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "4dc5aac6959cbc0f90a30b4614fd5c1e"
-    },
-    "shinycssloaders": {
-      "Package": "shinycssloaders",
-      "Version": "0.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "5b3c3722d8f548f1b8e095533d0a8e30"
     },
     "shinydashboard": {
       "Package": "shinydashboard",
@@ -790,10 +782,10 @@
     },
     "tibble": {
       "Package": "tibble",
-      "Version": "2.1.3",
+      "Version": "3.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8248ee35d1e15d1e506f05f5a5d46a75"
+      "Hash": "e742bc8d72071ef9aba29f71f132d773"
     },
     "tidyr": {
       "Package": "tidyr",
@@ -818,10 +810,10 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.2.3",
+      "Version": "0.2.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2c0f41d87be7a186139a6d3d5215848e"
+      "Hash": "6c839a149a30cb4ffc70443efa74c197"
     },
     "viridis": {
       "Package": "viridis",
