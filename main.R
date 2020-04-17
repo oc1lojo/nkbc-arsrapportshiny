@@ -22,7 +22,7 @@ load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskode
 
 # Läs in ögonblickskopia av NKBC exporterad från INCA
 load(
-  file.path(Sys.getenv("BRCA_DATA_DIR"), "2020-03-12", "nkbc_nat_id 2020-03-12 08-21-44.RData")
+  file.path(Sys.getenv("BRCA_DATA_DIR"), "2020-04-17", "nkbc_nat_id 2020-04-17 14-02-45.RData")
 )
 
 # Bearbeta data ----------------------------------------------------------------
@@ -42,8 +42,8 @@ sjukhuskoder <- sjukhuskoder %>%
 # Bearbeta huvud-dataram
 df_main <- df %>%
   mutate_if(is.factor, as.character) %>%
-  rename_all(iconv, from = "UTF-8") %>%
-  mutate_if(is.character, iconv, from = "UTF-8") %>%
+  # rename_all(iconv, from = "UTF-8") %>%
+  # mutate_if(is.character, iconv, from = "UTF-8") %>%
   rename_all(stringr::str_replace, "_Värde", "_Varde") %>%
   clean_nkbc_data() %>%
   mutate_nkbc_d_vars() %>%
