@@ -74,10 +74,10 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.4",
+      "Version": "1.0.4.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5ef9c463e30f8aea49c293e4b8d9d7be"
+      "Hash": "e652f23d8b1807cc975c51410d05b72f"
     },
     "TTR": {
       "Package": "TTR",
@@ -109,10 +109,10 @@
     },
     "backports": {
       "Package": "backports",
-      "Version": "1.1.5",
+      "Version": "1.1.6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e9f705633dc932bfd5b02b17a5053a06"
+      "Hash": "3997fd62345a616e59e8161ee0a5816f"
     },
     "base64enc": {
       "Package": "base64enc",
@@ -277,10 +277,10 @@
     },
     "foreign": {
       "Package": "foreign",
-      "Version": "0.8-75",
+      "Version": "0.8-76",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9a7efaa7320b9f327a904d1e615b0b46"
+      "Hash": "649b9c7a979d50d869578c73fed072cd"
     },
     "gdata": {
       "Package": "gdata",
@@ -305,10 +305,10 @@
     },
     "glue": {
       "Package": "glue",
-      "Version": "1.3.2",
+      "Version": "1.4.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "af1f47b63d1aa2206c1fe4d3db1d9366"
+      "Hash": "2aefa994e8df5da17dc09afd80f924d5"
     },
     "gplots": {
       "Package": "gplots",
@@ -396,10 +396,10 @@
     },
     "isoband": {
       "Package": "isoband",
-      "Version": "0.2.0",
+      "Version": "0.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "15f6d57a664cd953a31ae4ea61e5e60e"
+      "Hash": "9b2f7cf1899f583a36d367702ecf49a3"
     },
     "jpeg": {
       "Package": "jpeg",
@@ -438,10 +438,10 @@
     },
     "lattice": {
       "Package": "lattice",
-      "Version": "0.20-38",
+      "Version": "0.20-41",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "848f8c593fd1050371042d18d152e3d7"
+      "Hash": "fbd9285028b0263d76d18c95ae51a53d"
     },
     "latticeExtra": {
       "Package": "latticeExtra",
@@ -466,10 +466,10 @@
     },
     "lubridate": {
       "Package": "lubridate",
-      "Version": "1.7.4",
+      "Version": "1.7.8",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "796afeea047cda6bdb308d374a33eeb6"
+      "Hash": "6c04c31012c1be39783bebbbfc27b3a3"
     },
     "magrittr": {
       "Package": "magrittr",
@@ -532,17 +532,17 @@
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-144",
+      "Version": "3.1-145",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e80d41932d3cc235ccbbbb9732ae162e"
+      "Hash": "0ed9365684dc39cdd0bb5bd2f316dc67"
     },
     "nnet": {
       "Package": "nnet",
-      "Version": "7.3-12",
+      "Version": "7.3-13",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "68287aec1f476c41d16ce1ace445800c"
+      "Hash": "aaeb5c7cae85223cc6d282f295dff295"
     },
     "pillar": {
       "Package": "pillar",
@@ -644,15 +644,15 @@
     },
     "rccShiny": {
       "Package": "rccShiny",
-      "Version": "1.4.0",
+      "Version": "1.4.2",
       "Source": "Bitbucket",
       "RemoteType": "bitbucket",
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "rccshiny",
       "RemoteUsername": "cancercentrum",
-      "RemoteRef": "1.4.0",
-      "RemoteSha": "351e1eeb38c22328a22d8f63995ac4abe5c37caf",
-      "Hash": "c7f6c9216bf76dcc5b80aa6567f2a20f"
+      "RemoteRef": "master",
+      "RemoteSha": "82af4d35e30515b0994709adfef8bd94be1013aa",
+      "Hash": "d13d13c7366d17012d4e248ca5377479"
     },
     "readr": {
       "Package": "readr",
@@ -670,10 +670,10 @@
     },
     "reshape2": {
       "Package": "reshape2",
-      "Version": "1.4.3",
+      "Version": "1.4.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "15a23ad30f51789188e439599559815c"
+      "Hash": "bb5996d0bd962d214a11140d77589917"
     },
     "rlang": {
       "Package": "rlang",
@@ -768,10 +768,10 @@
     },
     "survival": {
       "Package": "survival",
-      "Version": "3.1-8",
+      "Version": "3.1-11",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ad25122f95d04988f6f79d69aaadd53d"
+      "Hash": "39c2135ecd56295df599417e034bb7a6"
     },
     "testthat": {
       "Package": "testthat",
@@ -845,10 +845,10 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.12",
+      "Version": "0.13",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ccd8453a7b9e380628f6cd2862e46cad"
+      "Hash": "3c1eeacd705ff1695db94bfd443b8a84"
     },
     "xtable": {
       "Package": "xtable",
