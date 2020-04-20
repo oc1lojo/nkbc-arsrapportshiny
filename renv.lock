@@ -277,10 +277,10 @@
     },
     "foreign": {
       "Package": "foreign",
-      "Version": "0.8-76",
+      "Version": "0.8-75",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "649b9c7a979d50d869578c73fed072cd"
+      "Hash": "9a7efaa7320b9f327a904d1e615b0b46"
     },
     "gdata": {
       "Package": "gdata",
@@ -438,10 +438,10 @@
     },
     "lattice": {
       "Package": "lattice",
-      "Version": "0.20-41",
+      "Version": "0.20-38",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "fbd9285028b0263d76d18c95ae51a53d"
+      "Hash": "848f8c593fd1050371042d18d152e3d7"
     },
     "latticeExtra": {
       "Package": "latticeExtra",
@@ -527,22 +527,22 @@
       "RemoteRepo": "nkbcind",
       "RemoteUsername": "cancercentrum",
       "RemoteRef": "develop",
-      "RemoteSha": "ee0f4e6c979471ce68c8c73f29825b9ff21f643b",
-      "Hash": "059aaf8c7666e63908c98c2bdf22242c"
+      "RemoteSha": "2bfcf1d0e93ee3f40b663267ccf5df257b4fb618",
+      "Hash": "7bb40d15e3a64232db771927015d88ab"
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-145",
+      "Version": "3.1-144",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0ed9365684dc39cdd0bb5bd2f316dc67"
+      "Hash": "e80d41932d3cc235ccbbbb9732ae162e"
     },
     "nnet": {
       "Package": "nnet",
-      "Version": "7.3-13",
+      "Version": "7.3-12",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "aaeb5c7cae85223cc6d282f295dff295"
+      "Hash": "68287aec1f476c41d16ce1ace445800c"
     },
     "pillar": {
       "Package": "pillar",
@@ -630,10 +630,10 @@
     },
     "purrr": {
       "Package": "purrr",
-      "Version": "0.3.3",
+      "Version": "0.3.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "22aca7d1181718e927d403a8c2d69d62"
+      "Hash": "97def703420c8ab10d8f0e6c72101e02"
     },
     "quantmod": {
       "Package": "quantmod",
@@ -768,10 +768,10 @@
     },
     "survival": {
       "Package": "survival",
-      "Version": "3.1-11",
+      "Version": "3.1-8",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "39c2135ecd56295df599417e034bb7a6"
+      "Hash": "ad25122f95d04988f6f79d69aaadd53d"
     },
     "testthat": {
       "Package": "testthat",
@@ -782,10 +782,10 @@
     },
     "tibble": {
       "Package": "tibble",
-      "Version": "3.0.0",
+      "Version": "3.0.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e742bc8d72071ef9aba29f71f132d773"
+      "Hash": "1c61e4cad000e03b1bd687db16a75926"
     },
     "tidyr": {
       "Package": "tidyr",
