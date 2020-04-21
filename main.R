@@ -34,6 +34,7 @@ sjukhuskoder <- sjukhuskoder %>%
     region_sjh_txt = region
   ) %>%
   mutate(
+    sjukhuskod = as.integer(sjukhuskod),
     sjukhus = if_else(
       sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA_character_, sjukhus
     )
