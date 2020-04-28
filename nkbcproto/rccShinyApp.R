@@ -428,7 +428,7 @@ rccShinyApp <-
                     tolower(GLOBAL_periodLabel),
                     rccShinyTXT(language = GLOBAL_language)$periodSplit2
                   ),
-                  value = FALSE,
+                  value = TRUE,
                   width = "100%"
                 )
               )

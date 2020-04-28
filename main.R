@@ -172,6 +172,11 @@ for (i in seq(along = setdiff(nkbcind_nams, "nkbcproto009"))) {
   )
 }
 
+# Hack
+load(file.path("sv", code(nkbcind), "data", "data.RData"))
+source(file.path("nkbcproto", "rccShinyApp.R"), encoding = "UTF-8")
+save(optionsList, rccShinyApp, file = file.path("sv", code(nkbcind), "data", "data.RData"))
+
 # Specialfall nkbcproto009 - Observerad 5 års överlevnad (PROTOYP) -------------
 
 nkbcind_nam <- "nkbcproto009"
