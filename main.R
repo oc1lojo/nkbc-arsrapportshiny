@@ -217,61 +217,61 @@ rccShiny2(
   sort = FALSE
 )
 
-# # Specialfall nkbc33 - Täckningsgrad mot cancerregistret -----------------------
-#
-# # Läs in data för täckningsgrad mot cancerregistret
-# df_list <- list() # initialisera
-# for (i in 1:6) {
-#   df_list[[i]] <-
-#     read_delim(
-#       file.path(
-#         "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2018.2/Täckningsgrader",
-#         paste0("nkbc_tg_oc", i, ".txt")
-#       ),
-#       delim = " ",
-#       col_types = cols(
-#         period = col_integer(),
-#         finns = col_integer(),
-#         finns_proc = col_double(),
-#         saknas = col_integer(),
-#         totalt = col_integer()
-#       )
-#     ) %>%
-#     mutate(region = i) %>%
-#     select(region, period, finns, saknas)
-# }
-# df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
-#   filter(
-#     # Standardinklusion av tidsperioder för de interaktiva rapporterna
-#     period >= 2009,
-#     period <= report_end_year
-#   )
-#
-# # Förbearbeta data för täckningsgrad mot cancerregistret
-# df_tmp <- data.frame(
-#   region = c(
-#     rep(df_tg$region, df_tg$finns),
-#     rep(df_tg$region, df_tg$saknas)
-#   ),
-#   period = c(
-#     rep(df_tg$period, df_tg$finns),
-#     rep(df_tg$period, df_tg$saknas)
-#   ),
-#   outcome = c(
-#     rep(rep(TRUE, dim(df_tg)[1]), df_tg$finns),
-#     rep(rep(FALSE, dim(df_tg)[1]), df_tg$saknas)
-#   )
-# )
-#
-# # Skapa webbapplikation för nkbc33
-# rccShiny2(
-#   data = as.data.frame(df_tmp),
-#   folder = code(nkbc33),
-#   outcome = outcome(nkbc33),
-#   outcomeTitle = outcome_title(nkbc33),
-#   periodLabel = "Diagnosår",
-#   textBeforeSubtitle = textBeforeSubtitle(nkbc33),
-#   description = description(nkbc33, report_end_year),
-#   varOther = varOther(nkbc33),
-#   targetValues = target_values(nkbc33)
-# )
+# Specialfall nkbc33 - Täckningsgrad mot cancerregistret -----------------------
+
+# Läs in data för täckningsgrad mot cancerregistret
+df_list <- list() # initialisera
+for (i in 1:6) {
+  df_list[[i]] <-
+    read_delim(
+      file.path(
+        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2019.1/Täckningsgrader",
+        paste0("nkbc_tg_rcc", i, ".txt")
+      ),
+      delim = " ",
+      col_types = cols(
+        period = col_integer(),
+        finns = col_integer(),
+        finns_proc = col_double(),
+        saknas = col_integer(),
+        totalt = col_integer()
+      )
+    ) %>%
+    mutate(region = i) %>%
+    select(region, period, finns, saknas)
+}
+df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
+  filter(
+    # Standardinklusion av tidsperioder för de interaktiva rapporterna
+    period >= 2009,
+    period <= report_end_year
+  )
+
+# Förbearbeta data för täckningsgrad mot cancerregistret
+df_tmp <- data.frame(
+  region = c(
+    rep(df_tg$region, df_tg$finns),
+    rep(df_tg$region, df_tg$saknas)
+  ),
+  period = c(
+    rep(df_tg$period, df_tg$finns),
+    rep(df_tg$period, df_tg$saknas)
+  ),
+  outcome = c(
+    rep(rep(TRUE, dim(df_tg)[1]), df_tg$finns),
+    rep(rep(FALSE, dim(df_tg)[1]), df_tg$saknas)
+  )
+)
+
+# Skapa webbapplikation för nkbc33
+rccShiny2(
+  data = as.data.frame(df_tmp),
+  folder = code(nkbc33),
+  outcome = outcome(nkbc33),
+  outcomeTitle = outcome_title(nkbc33),
+  periodLabel = "Diagnosår",
+  textBeforeSubtitle = textBeforeSubtitle(nkbc33),
+  description = description(nkbc33, report_end_year),
+  varOther = varOther(nkbc33),
+  targetValues = target_values(nkbc33)
+)
