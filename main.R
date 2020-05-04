@@ -220,13 +220,13 @@ rccShiny2(
 # Specialfall nkbc33 - Täckningsgrad mot cancerregistret -----------------------
 
 # Läs in data för täckningsgrad mot cancerregistret
-df_list <- list() # initialisera
-for (i in 1:6) {
-  df_list[[i]] <-
+df_list <- lapply(
+  seq(from = 1, to = 6),
+  function(x) {
     read_delim(
       file.path(
         "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2019.1/Täckningsgrader",
-        paste0("nkbc_tg_rcc", i, ".txt")
+        paste0("nkbc_tg_rcc", x, ".txt")
       ),
       delim = " ",
       col_types = cols(
@@ -237,9 +237,10 @@ for (i in 1:6) {
         totalt = col_integer()
       )
     ) %>%
-    mutate(region = i) %>%
-    select(region, period, finns, saknas)
-}
+      mutate(region = x) %>%
+      select(region, period, finns, saknas)
+  }
+)
 df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
   filter(
     # Standardinklusion av tidsperioder för de interaktiva rapporterna
