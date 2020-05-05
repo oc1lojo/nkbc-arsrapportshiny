@@ -274,5 +274,6 @@ rccShiny2(
   textBeforeSubtitle = textBeforeSubtitle(nkbc33),
   description = description(nkbc33, report_end_year),
   varOther = varOther(nkbc33),
-  targetValues = target_values(nkbc33)
+  targetValues = target_values(nkbc33),
+  sort = FALSE
 )
