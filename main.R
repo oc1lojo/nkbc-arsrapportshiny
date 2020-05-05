@@ -207,7 +207,6 @@ rccShiny2(
   periodLabel = "Diagnosår",
   textBeforeSubtitle = textBeforeSubtitle(nkbcind),
   description = description(nkbcind, report_end_year),
-  regionSelection = sum(!(geo_units_vars(nkbcind) %in% "region")) > 1,
   varOther = varOther(nkbcind, varbesk = varbesk_other_vars),
   propWithinUnit = ifelse(!is.null(prop_within_unit(nkbcind)), prop_within_unit(nkbcind), "dagar"), # work-around, använd standardvärde
   propWithinValue = ifelse(!is.null(prop_within_value(nkbcind)), prop_within_value(nkbcind), 30), # work-around, använd standardvärde
