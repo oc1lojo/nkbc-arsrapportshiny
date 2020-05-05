@@ -527,8 +527,8 @@
       "RemoteRepo": "nkbcind",
       "RemoteUsername": "cancercentrum",
       "RemoteRef": "develop",
-      "RemoteSha": "d4ab3431aa20cb551d0a1e54f703ba07b125c15e",
-      "Hash": "bb411bc468db41700e5d7b83f9e8f6e5"
+      "RemoteSha": "b58473a49400d7a160975bf6d628f4c318712188",
+      "Hash": "20fcbbf4519552e6c1ad8251d3b987a7"
     },
     "nlme": {
       "Package": "nlme",
