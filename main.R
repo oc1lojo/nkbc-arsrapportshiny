@@ -9,10 +9,6 @@ library(rccShiny)
 library(nkbcgeneral) # https://cancercentrum.bitbucket.io/nkbcgeneral/
 library(nkbcind) # https://cancercentrum.bitbucket.io/nkbcind/
 
-for (file_name in list.files("nkbcproto", pattern = "*.R$")) {
-  source(file.path("nkbcproto", file_name), encoding = "UTF-8")
-}
-
 # Temporär work-around för att hantera NULL. TODO Bättre lösning
 one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
 
@@ -171,50 +167,6 @@ for (i in seq(along = nkbcind_nams)) {
     sort = !all(geo_units_vars(nkbcind) %in% "region")
   )
 }
-
-# Specialfall nkbcproto009 - Observerad 5 års överlevnad (PROTOYP) -------------
-
-nkbcind_nam <- "nkbcproto009"
-nkbcind <- get(nkbcind_nam)
-
-# Förbearbeta data
-df_tmp <- df_main %>%
-  add_sjhdata(sjukhuskoder, sjhkod_var(nkbcind)) %>%
-  filter(!is.na(region)) %>%
-  filter_pop(nkbcind)() %>%
-  mutate_outcome(nkbcind)() %>%
-  select(
-    one_of(geo_units_vars(nkbcind)),
-    period, one_of(outcome(nkbcind)),
-    one_of(other_vars(nkbcind))
-  )
-
-df_tmp <- df_tmp %>%
-  # 5 års överlevnad så krävs 5 års uppföljning
-  filter(period <= report_end_year - 5)
-
-# Skapa webbapplikation
-rccShiny2(
-  data = as.data.frame(df_tmp),
-  folder = code(nkbcind),
-  outcome = outcome(nkbcind),
-  outcomeTitle = outcome_title(nkbcind),
-  periodLabel = "Diagnosår",
-  textBeforeSubtitle = textBeforeSubtitle(nkbcind),
-  description = description(nkbcind, report_end_year),
-  varOther = varOther(nkbcind, varbesk = varbesk_other_vars),
-  propWithinUnit = ifelse(!is.null(prop_within_unit(nkbcind)), prop_within_unit(nkbcind), "dagar"), # work-around, använd standardvärde
-  propWithinValue = ifelse(!is.null(prop_within_value(nkbcind)), prop_within_value(nkbcind), 30), # work-around, använd standardvärde
-  targetValues = target_values(nkbcind),
-  periodDefaultStart = report_end_year - 10,
-  periodDefaultEnd = report_end_year - 5,
-  sort = FALSE
-)
-
-# Hack
-load(file.path("sv", code(nkbcind), "data", "data.RData"))
-source(file.path("nkbcproto", "rccShinyApp.R"), encoding = "UTF-8")
-save(optionsList, rccShinyApp, file = file.path("sv", code(nkbcind), "data", "data.RData"))
 
 # Specialfall nkbc33 - Täckningsgrad mot cancerregistret -----------------------
 
