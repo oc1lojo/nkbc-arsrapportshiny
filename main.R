@@ -167,7 +167,8 @@ for (i in seq(along = nkbcind_nams)) {
     varOther = varOther(nkbcind),
     propWithinUnit = ifelse(!is.null(prop_within_unit(nkbcind)), prop_within_unit(nkbcind), "dagar"), # work-around, använd standardvärde
     propWithinValue = ifelse(!is.null(prop_within_value(nkbcind)), prop_within_value(nkbcind), 30), # work-around, använd standardvärde
-    targetValues = target_values(nkbcind)
+    targetValues = target_values(nkbcind),
+    sort = !all(geo_units_vars(nkbcind) %in% "region")
   )
 }
 
