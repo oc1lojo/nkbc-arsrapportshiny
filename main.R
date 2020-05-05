@@ -126,11 +126,10 @@ nkbcind_nams <- c(
   "nkbc32", # Antikroppsbehandling bland cytostatikabehandlade
 
   # Överlevnad
-  "nkbc30", # Observerad 5 års överlevnad
-  "nkbcproto009" # Observerad 5 års överlevnad (PROTOYP)
+  "nkbc30" # Observerad 5 års överlevnad
 )
 
-for (i in seq(along = setdiff(nkbcind_nams, "nkbcproto009"))) {
+for (i in seq(along = nkbcind_nams)) {
   nkbcind_nam <- nkbcind_nams[i]
   nkbcind <- get(nkbcind_nam)
 
