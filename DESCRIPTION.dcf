@@ -10,5 +10,5 @@ Description:
     bröstcancer (NKBC)
 URL: https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny
 Depends:
-    R (>= 3.3.3)
+    R (>= 3.6)
 Encoding: UTF-8
