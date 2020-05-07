@@ -508,27 +508,27 @@
     },
     "nkbcgeneral": {
       "Package": "nkbcgeneral",
-      "Version": "0.1.0",
+      "Version": "0.2.0",
       "Source": "Bitbucket",
       "RemoteType": "bitbucket",
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "nkbcgeneral",
       "RemoteUsername": "cancercentrum",
-      "RemoteRef": "develop",
-      "RemoteSha": "c7da8dcc7942ebc84f63b0e12001cc4dea4d110b",
-      "Hash": "27dd87f6bb5329996d79f10b58c33510"
+      "RemoteRef": "master",
+      "RemoteSha": "69a0045bcf21394951a906f53c08863c67e716a4",
+      "Hash": "b8d127d79920118e779f75314e26233d"
     },
     "nkbcind": {
       "Package": "nkbcind",
-      "Version": "0.1.2",
+      "Version": "0.2.0",
       "Source": "Bitbucket",
       "RemoteType": "bitbucket",
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "nkbcind",
       "RemoteUsername": "cancercentrum",
-      "RemoteRef": "develop",
-      "RemoteSha": "b58473a49400d7a160975bf6d628f4c318712188",
-      "Hash": "20fcbbf4519552e6c1ad8251d3b987a7"
+      "RemoteRef": "master",
+      "RemoteSha": "9b924ed6c960c97cd163fca31a105e3cb370727d",
+      "Hash": "6e836e576ead565b5187a29e864ec051"
     },
     "nlme": {
       "Package": "nlme",
@@ -644,15 +644,15 @@
     },
     "rccShiny": {
       "Package": "rccShiny",
-      "Version": "1.4.2",
+      "Version": "1.5.0",
       "Source": "Bitbucket",
       "RemoteType": "bitbucket",
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "rccshiny",
       "RemoteUsername": "cancercentrum",
       "RemoteRef": "master",
-      "RemoteSha": "82af4d35e30515b0994709adfef8bd94be1013aa",
-      "Hash": "d13d13c7366d17012d4e248ca5377479"
+      "RemoteSha": "b1a7573adfce3b4b1ce38bb360692ae688ec1123",
+      "Hash": "a42ff05f7dc4f9a0e581e8a8b0fe3755"
     },
     "readr": {
       "Package": "readr",
@@ -789,10 +789,10 @@
     },
     "tidyr": {
       "Package": "tidyr",
-      "Version": "1.0.2",
+      "Version": "1.0.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "fb73a010ace00d6c584c2b53a21b969c"
+      "Hash": "df860e8e4e1a1b454f18537c8bc96211"
     },
     "tidyselect": {
       "Package": "tidyselect",
