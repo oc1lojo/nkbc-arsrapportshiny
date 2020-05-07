@@ -164,7 +164,8 @@ for (i in seq(along = nkbcind_nams)) {
     propWithinUnit = ifelse(!is.null(prop_within_unit(nkbcind)), prop_within_unit(nkbcind), "dagar"), # work-around, använd standardvärde
     propWithinValue = ifelse(!is.null(prop_within_value(nkbcind)), prop_within_value(nkbcind), 30), # work-around, använd standardvärde
     targetValues = target_values(nkbcind),
-    sort = !all(geo_units_vars(nkbcind) %in% "region")
+    sort = !all(geo_units_vars(nkbcind) %in% "region"),
+    gaPath = "/brostcancer/_libs/ga.js"
   )
 }
 
@@ -226,5 +227,6 @@ rccShiny2(
   description = description(nkbc33, report_end_year),
   varOther = varOther(nkbc33),
   targetValues = target_values(nkbc33),
-  sort = FALSE
+  sort = FALSE,
+  gaPath = "/brostcancer/_libs/ga.js"
 )
