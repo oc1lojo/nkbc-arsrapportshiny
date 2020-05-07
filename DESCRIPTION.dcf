@@ -1,5 +1,5 @@
 Title: Interaktiva rapporter från NKBC
-Version: 2018.2.1
+Version: 2019.1
 Authors@R: c(
     person("John", "Lövrot", , "john.lovrot@sll.se", c("aut", "cre"), c(ORCID = "0000-0002-9339-8059")),
     person("Lina", "Benson", , , c("aut"), c(ORCID = "0000-0002-5393-0055")),
@@ -10,5 +10,5 @@ Description:
     bröstcancer (NKBC)
 URL: https://bitbucket.org/cancercentrum/nkbc-arsrapportshiny
 Depends:
-    R (>= 3.3.3)
+    R (>= 3.6)
 Encoding: UTF-8

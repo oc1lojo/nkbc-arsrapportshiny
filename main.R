@@ -1,6 +1,7 @@
 # Läs in R-paket och verktygsfunktioner ----------------------------------------
 library(dplyr)
 library(tidyr)
+library(forcats)
 library(lubridate)
 library(readr)
 library(shiny)
@@ -12,7 +13,7 @@ library(nkbcind) # https://cancercentrum.bitbucket.io/nkbcind/
 one_of <- function(x, ...) if (!is.null(x)) dplyr::one_of(x, ...)
 
 # Definera globala variabler ---------------------------------------------------
-report_end_year <- 2018
+report_end_year <- 2019
 
 # Läs in data ------------------------------------------------------------------
 
@@ -21,10 +22,7 @@ load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskode
 
 # Läs in ögonblickskopia av NKBC exporterad från INCA
 load(
-  unzip(
-    file.path(Sys.getenv("BRCA_DATA_DIR"), "2019-09-02", "nkbc_nat_id 2019-09-02 09-02-35.zip"),
-    exdir = tempdir()
-  )
+  file.path(Sys.getenv("BRCA_DATA_DIR"), "2020-05-04", "nkbc_nat_avid 2020-05-04 10-04-17.RData")
 )
 
 # Bearbeta data ----------------------------------------------------------------
@@ -36,6 +34,7 @@ sjukhuskoder <- sjukhuskoder %>%
     region_sjh_txt = region
   ) %>%
   mutate(
+    sjukhuskod = as.integer(sjukhuskod),
     sjukhus = if_else(
       sjukhus %in% c("Enhet utan INCA-rapp", "VC/Tjänsteläkare"), NA_character_, sjukhus
     )
@@ -44,17 +43,19 @@ sjukhuskoder <- sjukhuskoder %>%
 # Bearbeta huvud-dataram
 df_main <- df %>%
   mutate_if(is.factor, as.character) %>%
+  # rename_all(iconv, from = "UTF-8") %>%
+  # mutate_if(is.character, iconv, from = "UTF-8") %>%
   rename_all(stringr::str_replace, "_Värde", "_Varde") %>%
   clean_nkbc_data() %>%
   mutate_nkbc_d_vars() %>%
-  mutate_nkbc_other_vars() %>%
+  mutate_nkbcind_d_vars() %>%
   mutate(
     # Beräkna variabel för tidsperioder
     period = year(a_diag_dat)
   ) %>%
   filter(
     # Standardinklusion av tidsperioder för de interaktiva rapporterna
-    period >= 2009,
+    period >= 2008,
     period <= report_end_year
   )
 
@@ -63,6 +64,7 @@ df_main <- df %>%
 nkbcind_nams <- c(
   # Täckningsgrad
   # "nkbc33", # Täckningsgrad mot cancerregistret - Specialfall, se nedan
+  "nkbc36", # Täckningsgrad för rapportering av operation
   "nkbc13", # Täckningsgrad för rapportering av preoperativ onkologisk behandling
   "nkbc14", # Täckningsgrad för rapportering av postoperativ onkologisk behandling
 
@@ -79,10 +81,10 @@ nkbcind_nams <- c(
 
   # Ledtider
   "nkbc17", # Välgrundad misstanke om cancer till första besök i specialiserad vård
-  "nkbc43", # Välgrundad misstanke om cancer till primär behandling
   "nkbc15", # Välgrundad misstanke om cancer till operation
   "nkbc16", # Välgrundad misstanke om cancer till preoperativ onkologisk behandling
-  "nkbc44", # Provtagningsdatum till primär behandling
+  "nkbc48", # Provtagningsdatum till operation
+  "nkbc49", # Provtagningsdatum till preoperativ onkologisk behandling
   "nkbc19", # Första behandlingsdiskussion till operation
   "nkbc20", # Första behandlingsdiskussion till preoperativ onkologisk behandling
   "nkbc22", # Operation till cytostatikabehandling
@@ -119,9 +121,6 @@ nkbcind_nams <- c(
   "nkbc41", # Endokrin behandling, pre- respektive postoperativt
   "nkbc32", # Antikroppsbehandling bland cytostatikabehandlade
 
-  # Studier
-  "nkbc39", # Patienten ingår i studie
-
   # Överlevnad
   "nkbc30" # Observerad 5 års överlevnad
 )
@@ -142,9 +141,7 @@ for (i in seq(along = nkbcind_nams)) {
       one_of(other_vars(nkbcind))
     )
 
-  if (!is.null(nkbcind$inkl_beskr_onk_beh) && nkbcind$inkl_beskr_onk_beh |
-    nkbcind_nam %in% c("nkbc16", "nkbc20") # TODO skall inte dessa också ha kommentar i beskrivning?
-  ) {
+  if (!is.null(nkbcind$inkl_beskr_onk_beh) && nkbcind$inkl_beskr_onk_beh) {
     df_tmp <- df_tmp %>%
       # Ett år bakåt då info från onk behandling blanketter
       filter(period <= report_end_year - 1)
@@ -160,25 +157,28 @@ for (i in seq(along = nkbcind_nams)) {
     folder = code(nkbcind),
     outcome = outcome(nkbcind),
     outcomeTitle = outcome_title(nkbcind),
+    periodLabel = "Diagnosår",
     textBeforeSubtitle = textBeforeSubtitle(nkbcind),
     description = description(nkbcind, report_end_year),
     varOther = varOther(nkbcind),
     propWithinUnit = ifelse(!is.null(prop_within_unit(nkbcind)), prop_within_unit(nkbcind), "dagar"), # work-around, använd standardvärde
     propWithinValue = ifelse(!is.null(prop_within_value(nkbcind)), prop_within_value(nkbcind), 30), # work-around, använd standardvärde
-    targetValues = target_values(nkbcind)
+    targetValues = target_values(nkbcind),
+    sort = !all(geo_units_vars(nkbcind) %in% "region"),
+    gaPath = "/brostcancer/_libs/ga.js"
   )
 }
 
 # Specialfall nkbc33 - Täckningsgrad mot cancerregistret -----------------------
 
 # Läs in data för täckningsgrad mot cancerregistret
-df_list <- list() # initialisera
-for (i in 1:6) {
-  df_list[[i]] <-
+df_list <- lapply(
+  seq(from = 1, to = 6),
+  function(x) {
     read_delim(
       file.path(
-        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2018.2/Täckningsgrader",
-        paste0("nkbc_tg_oc", i, ".txt")
+        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2019.1/Täckningsgrader",
+        paste0("nkbc_tg_rcc", x, ".txt")
       ),
       delim = " ",
       col_types = cols(
@@ -189,9 +189,10 @@ for (i in 1:6) {
         totalt = col_integer()
       )
     ) %>%
-    mutate(region = i) %>%
-    select(region, period, finns, saknas)
-}
+      mutate(region = x) %>%
+      select(region, period, finns, saknas)
+  }
+)
 df_tg <- purrr::map_dfr(df_list, bind_rows) %>%
   filter(
     # Standardinklusion av tidsperioder för de interaktiva rapporterna
@@ -221,8 +222,11 @@ rccShiny2(
   folder = code(nkbc33),
   outcome = outcome(nkbc33),
   outcomeTitle = outcome_title(nkbc33),
+  periodLabel = "Diagnosår",
   textBeforeSubtitle = textBeforeSubtitle(nkbc33),
   description = description(nkbc33, report_end_year),
   varOther = varOther(nkbc33),
-  targetValues = target_values(nkbc33)
+  targetValues = target_values(nkbc33),
+  sort = FALSE,
+  gaPath = "/brostcancer/_libs/ga.js"
 )

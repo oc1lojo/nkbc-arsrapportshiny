@@ -10,4 +10,4 @@ Beror av externt dataset med sjukhuskoder, täckningsgrader och rådata från re
 
 ## Frågor och förbättringsförslag
 
-Kontakta nationellt ansvarig statistiker för NKBC vid Regionalt cancercentrum Stockholm – Gotland.
+Kontakta nationellt ansvarig statistiker för NKBC vid Regionalt cancercentrum Stockholm Gotland.
