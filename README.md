@@ -2,7 +2,7 @@
 
 ## Syfte
 
-Att skapa webbapplikationer med paketet [rccShiny](https://bitbucket.org/cancercentrum/rccshiny) till interaktiva rapporter från Nationellt kvalitetsregister för bröstcancer (NKBC),  http://statistik.incanet.se/brostcancer/.
+Att skapa webbapplikationer med R-paketen [rccShiny](https://cancercentrum.bitbucket.io/rccshiny), [nkbcgeneral](https://cancercentrum.bitbucket.io/nkbcgeneral) och [nkbcind](https://cancercentrum.bitbucket.io/nkbcind) till interaktiva rapporter från Nationellt kvalitetsregister för bröstcancer (NKBC), http://statistik.incanet.se/brostcancer/.
 
 ## Begränsningar
 

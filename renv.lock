@@ -520,15 +520,15 @@
     },
     "nkbcind": {
       "Package": "nkbcind",
-      "Version": "0.2.0",
+      "Version": "0.2.1",
       "Source": "Bitbucket",
       "RemoteType": "bitbucket",
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "nkbcind",
       "RemoteUsername": "cancercentrum",
       "RemoteRef": "master",
-      "RemoteSha": "9b924ed6c960c97cd163fca31a105e3cb370727d",
-      "Hash": "6e836e576ead565b5187a29e864ec051"
+      "RemoteSha": "37e396344927dba06e493a1ddc7ea5ed82ce8542",
+      "Hash": "81ccf423ee897542d5a56b891756f82b"
     },
     "nlme": {
       "Package": "nlme",
@@ -644,15 +644,15 @@
     },
     "rccShiny": {
       "Package": "rccShiny",
-      "Version": "1.5.0",
+      "Version": "1.5.1",
       "Source": "Bitbucket",
       "RemoteType": "bitbucket",
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "rccshiny",
       "RemoteUsername": "cancercentrum",
       "RemoteRef": "master",
-      "RemoteSha": "b1a7573adfce3b4b1ce38bb360692ae688ec1123",
-      "Hash": "a42ff05f7dc4f9a0e581e8a8b0fe3755"
+      "RemoteSha": "7e37b81859ee2fb16340f64fa39df0c3674934ce",
+      "Hash": "b03cecb020cc59d8a917bff07f24aa07"
     },
     "readr": {
       "Package": "readr",
