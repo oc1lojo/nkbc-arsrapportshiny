@@ -154,7 +154,7 @@ for (i in seq(along = nkbcind_nams)) {
   # Skapa webbapplikation
   rccShiny2(
     data = as.data.frame(df_tmp),
-    folder = code(nkbcind),
+    folder = gsub("_", "-", sub("^nkbc_", "", kortnamn(nkbcind))),
     outcome = outcome(nkbcind),
     outcomeTitle = outcome_title(nkbcind),
     periodLabel = "Diagnosår",
@@ -219,7 +219,7 @@ df_tmp <- data.frame(
 # Skapa webbapplikation för nkbc33
 rccShiny2(
   data = as.data.frame(df_tmp),
-  folder = code(nkbc33),
+  folder = gsub("_", "-", sub("^nkbc_", "", kortnamn(nkbc33))),
   outcome = outcome(nkbc33),
   outcomeTitle = outcome_title(nkbc33),
   periodLabel = "Diagnosår",
