@@ -644,15 +644,15 @@
     },
     "rccShiny": {
       "Package": "rccShiny",
-      "Version": "1.5.0",
+      "Version": "1.5.1",
       "Source": "Bitbucket",
       "RemoteType": "bitbucket",
       "RemoteHost": "api.bitbucket.org/2.0",
       "RemoteRepo": "rccshiny",
       "RemoteUsername": "cancercentrum",
       "RemoteRef": "master",
-      "RemoteSha": "b1a7573adfce3b4b1ce38bb360692ae688ec1123",
-      "Hash": "a42ff05f7dc4f9a0e581e8a8b0fe3755"
+      "RemoteSha": "7e37b81859ee2fb16340f64fa39df0c3674934ce",
+      "Hash": "b03cecb020cc59d8a917bff07f24aa07"
     },
     "readr": {
       "Package": "readr",
