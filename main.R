@@ -85,8 +85,6 @@ nkbcind_nams <- c(
   "nkbc16", # Välgrundad misstanke om cancer till preoperativ onkologisk behandling
   "nkbc48", # Provtagningsdatum till operation
   "nkbc49", # Provtagningsdatum till preoperativ onkologisk behandling
-  "nkbc19", # Första behandlingsdiskussion till operation
-  "nkbc20", # Första behandlingsdiskussion till preoperativ onkologisk behandling
   "nkbc22", # Operation till cytostatikabehandling
   "nkbc23", # Operation till strålbehandling
 
