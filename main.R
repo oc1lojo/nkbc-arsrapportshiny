@@ -22,7 +22,7 @@ load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskode
 
 # Läs in ögonblickskopia av NKBC exporterad från INCA
 load(
-  file.path(Sys.getenv("BRCA_DATA_DIR"), "2020-05-04", "nkbc_nat_avid 2020-05-04 10-04-17.RData")
+  file.path(Sys.getenv("BRCA_DATA_DIR"), "2020-09-01", "nkbc_nat_avid 2020-09-01 07-49-29.RData")
 )
 
 # Bearbeta data ----------------------------------------------------------------
