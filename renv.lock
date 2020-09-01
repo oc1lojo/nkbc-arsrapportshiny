@@ -528,14 +528,14 @@
     "nkbcind": {
       "Package": "nkbcind",
       "Version": "0.2.1",
-      "Source": "Bitbucket",
-      "RemoteType": "bitbucket",
-      "RemoteHost": "api.bitbucket.org/2.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteRepo": "nkbcind",
-      "RemoteUsername": "cancercentrum",
-      "RemoteRef": "master",
-      "RemoteSha": "37e396344927dba06e493a1ddc7ea5ed82ce8542",
-      "Hash": "81ccf423ee897542d5a56b891756f82b"
+      "RemoteUsername": "oc1lojo",
+      "RemoteRef": "develop",
+      "RemoteSha": "7639f253ff85e8f0e9b41a17cd714b22b9a5cfc4",
+      "Hash": "8bd2a21e7ea84361ea4fc62367bac8a1"
     },
     "nlme": {
       "Package": "nlme",
