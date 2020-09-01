@@ -77,7 +77,7 @@ nkbcind_nams <- c(
   "nkbc09h", # Tumörstorlek vid operation
   "nkbc09e", # Spridning till lymfkörtlarna vid diagnos
   "nkbc09g", # Spridning till lymfkörtlarna vid operation
-  "nkbc09f", # Fjärrmetastaser
+  "nkbc09f", # Fjärrmetastaser vid diagnos
 
   # Ledtider
   "nkbc17", # Välgrundad misstanke om cancer till första besök i specialiserad vård
@@ -122,7 +122,7 @@ nkbcind_nams <- c(
   "nkbc32", # Antikroppsbehandling bland cytostatikabehandlade
 
   # Överlevnad
-  "nkbc30" # Observerad 5 års överlevnad
+  "nkbc30" # Observerad 5-årsöverlevnad
 )
 
 for (i in seq(along = nkbcind_nams)) {
