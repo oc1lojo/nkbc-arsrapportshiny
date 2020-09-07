@@ -176,7 +176,7 @@ df_list <- lapply(
   function(x) {
     read_delim(
       file.path(
-        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2019.1/Täckningsgrader",
+        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2019.2/Täckningsgrader",
         paste0("nkbc_tg_rcc", x, ".txt")
       ),
       delim = " ",
