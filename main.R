@@ -103,7 +103,6 @@ nkbcind_nams <- c(
   "nkbc47", # Preoperativ onkologisk behandling
 
   # Kirurgi
-  "nkbc42", # Bröstbevarande operation
   "nkbc53", # Bröstbevarande operation vid små invasiva tumörer
   "nkbc54", # Bröstbevarande operation vid små icke-invasiva tumörer
   "nkbc07", # Omedelbara rekonstruktioner vid mastektomi
