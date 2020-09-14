@@ -22,7 +22,7 @@ load("G:/Hsf/RCC-Statistiker/_Generellt/INCA/Data/sjukhusKlinikKoder/sjukhuskode
 
 # Läs in ögonblickskopia av NKBC exporterad från INCA
 load(
-  file.path(Sys.getenv("BRCA_DATA_DIR"), "2020-05-04", "nkbc_nat_avid 2020-05-04 10-04-17.RData")
+  file.path(Sys.getenv("BRCA_DATA_DIR"), "2020-09-01", "nkbc_nat_avid 2020-09-01 07-49-29.RData")
 )
 
 # Bearbeta data ----------------------------------------------------------------
@@ -77,7 +77,7 @@ nkbcind_nams <- c(
   "nkbc09h", # Tumörstorlek vid operation
   "nkbc09e", # Spridning till lymfkörtlarna vid diagnos
   "nkbc09g", # Spridning till lymfkörtlarna vid operation
-  "nkbc09f", # Fjärrmetastaser
+  "nkbc09f", # Fjärrmetastaser vid diagnos
 
   # Ledtider
   "nkbc17", # Välgrundad misstanke om cancer till första besök i specialiserad vård
@@ -85,8 +85,6 @@ nkbcind_nams <- c(
   "nkbc16", # Välgrundad misstanke om cancer till preoperativ onkologisk behandling
   "nkbc48", # Provtagningsdatum till operation
   "nkbc49", # Provtagningsdatum till preoperativ onkologisk behandling
-  "nkbc19", # Första behandlingsdiskussion till operation
-  "nkbc20", # Första behandlingsdiskussion till preoperativ onkologisk behandling
   "nkbc22", # Operation till cytostatikabehandling
   "nkbc23", # Operation till strålbehandling
 
@@ -105,8 +103,8 @@ nkbcind_nams <- c(
   "nkbc47", # Preoperativ onkologisk behandling
 
   # Kirurgi
-  "nkbc42", # Bröstbevarande operation
-  "nkbc11", # Bröstbevarande operation vid små tumörer
+  "nkbc53", # Bröstbevarande operation vid små invasiva tumörer
+  "nkbc54", # Bröstbevarande operation vid små icke-invasiva tumörer
   "nkbc07", # Omedelbara rekonstruktioner vid mastektomi
   "nkbc08", # Enbart en operation
   "nkbc45", # Axillkirurgi
@@ -122,7 +120,7 @@ nkbcind_nams <- c(
   "nkbc32", # Antikroppsbehandling bland cytostatikabehandlade
 
   # Överlevnad
-  "nkbc30" # Observerad 5 års överlevnad
+  "nkbc30" # Observerad 5-årsöverlevnad
 )
 
 for (i in seq(along = nkbcind_nams)) {
@@ -177,7 +175,7 @@ df_list <- lapply(
   function(x) {
     read_delim(
       file.path(
-        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2019.1/Täckningsgrader",
+        "G:/Hsf/RCC-Statistiker/Brostcancer/Brostcancer/Utdata/Arsrapport/2019.2/Täckningsgrader",
         paste0("nkbc_tg_rcc", x, ".txt")
       ),
       delim = " ",
