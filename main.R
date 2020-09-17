@@ -135,8 +135,15 @@ for (i in seq(along = nkbcind_nams)) {
     mutate_outcome(nkbcind)() %>%
     select(
       one_of(geo_units_vars(nkbcind)),
-      period, one_of(outcome(nkbcind)),
-      one_of(other_vars(nkbcind))
+      period,
+      one_of(
+        outcome(nkbcind),
+        paste0(outcome(nkbcind), "_en")
+      ),
+      one_of(
+        other_vars(nkbcind),
+        paste0(other_vars(nkbcind), "_en")
+      )
     )
 
   if (!is.null(nkbcind$inkl_beskr_onk_beh) && nkbcind$inkl_beskr_onk_beh) {
@@ -145,21 +152,32 @@ for (i in seq(along = nkbcind_nams)) {
       filter(period <= report_end_year - 1)
   } else if (nkbcind_nam == "nkbc30") {
     df_tmp <- df_tmp %>%
-      # 5 års överlevnad så krävs 5 års uppföljning
+      # 5-årsöverlevnad så krävs 5 års uppföljning
       filter(period <= report_end_year - 5)
   }
 
   # Skapa webbapplikation
+  if (!is.null(prop_within_unit(nkbcind))) {
+    propWithinUnit <- prop_within_unit(nkbcind)
+  } else {
+    # work-around, använd standardvärde
+    propWithinUnit <- c(sv = "dagar", en = "days")
+  }
+
   rccShiny2(
+    language = c("sv", "en"),
     data = as.data.frame(df_tmp),
     folder = gsub("_", "-", sub("^nkbc_", "", kortnamn(nkbcind))),
     outcome = outcome(nkbcind),
-    outcomeTitle = outcome_title(nkbcind),
-    periodLabel = "Diagnosår",
-    textBeforeSubtitle = textBeforeSubtitle(nkbcind),
-    description = description(nkbcind, report_end_year),
-    varOther = varOther(nkbcind),
-    propWithinUnit = ifelse(!is.null(prop_within_unit(nkbcind)), prop_within_unit(nkbcind), "dagar"), # work-around, använd standardvärde
+    outcomeTitle = outcomeTitle(nkbcind, locale = c("sv", "en")),
+    periodLabel = c(
+      sv = "Diagnosår",
+      en = "Diagnosis year"
+    ),
+    textBeforeSubtitle = textBeforeSubtitle(nkbcind, locale = c("sv", "en")),
+    description = description(nkbcind, report_end_year, locale = c("sv", "en")),
+    varOther = varOther(nkbcind, locale = c("sv", "en")),
+    propWithinUnit = propWithinUnit,
     propWithinValue = ifelse(!is.null(prop_within_value(nkbcind)), prop_within_value(nkbcind), 30), # work-around, använd standardvärde
     targetValues = target_values(nkbcind),
     sort = !all(geo_units_vars(nkbcind) %in% "region"),
@@ -216,14 +234,18 @@ df_tmp <- data.frame(
 
 # Skapa webbapplikation för nkbc33
 rccShiny2(
+  language = c("sv", "en"),
   data = as.data.frame(df_tmp),
   folder = gsub("_", "-", sub("^nkbc_", "", kortnamn(nkbc33))),
   outcome = outcome(nkbc33),
-  outcomeTitle = outcome_title(nkbc33),
-  periodLabel = "Diagnosår",
-  textBeforeSubtitle = textBeforeSubtitle(nkbc33),
-  description = description(nkbc33, report_end_year),
-  varOther = varOther(nkbc33),
+  outcomeTitle = outcomeTitle(nkbc33, locale = c("sv", "en")),
+  periodLabel = c(
+    sv = "Diagnosår",
+    en = "Diagnosis year"
+  ),
+  textBeforeSubtitle = textBeforeSubtitle(nkbc33, locale = c("sv", "en")),
+  description = description(nkbc33, report_end_year, locale = c("sv", "en")),
+  varOther = varOther(nkbc33, locale = c("sv", "en")),
   targetValues = target_values(nkbc33),
   sort = FALSE,
   gaPath = "/brostcancer/_libs/ga.js"
