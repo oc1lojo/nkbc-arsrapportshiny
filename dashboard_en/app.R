@@ -25,6 +25,8 @@ server <- shinyServer(function(input, output) {
     )
   })
 
+  # Coverage compared to the Swedish Cancer Register
+  # https://statistik.incanet.se/brostcancer/en/tackning-mot-cancerreg-33/
   output$box3 <- renderValueBox({
     valueBox(
       paste0(99, " %"),
@@ -34,6 +36,8 @@ server <- shinyServer(function(input, output) {
     )
   })
 
+  # The patient was offered, as documented in the medical record, a contact nurse
+  # https://statistik.incanet.se/brostcancer/en/omv-kontaktssk-02/
   output$box4 <- renderValueBox({
     valueBox(
       paste0(98, " %"),
@@ -43,10 +47,13 @@ server <- shinyServer(function(input, output) {
     )
   })
 
+  # Time from well-founded suspicion of cancer to primary surgery within 28 days
+  # https://statistik.incanet.se/brostcancer/en/ledtid-misstanke-till-op-15/
+  # https://vardenisiffror.se/indikator/81c7d463-e117-4d26-b25c-428dbcc9b54f
   output$box5 <- renderValueBox({
     valueBox(
       paste0(38, " %"),
-      paste0("suspicion of cancer to surgery within 28 days ", report_end_year),
+      paste0("where time from suspicion of cancer to surgery is within 28 days ", report_end_year),
       icon = icon("bar-chart"),
       color = "red"
     )

@@ -25,15 +25,19 @@ server <- shinyServer(function(input, output) {
     )
   })
 
+  # Täckningsgrad mot cancerregistret
+  # https://statistik.incanet.se/brostcancer/sv/tackning-mot-cancerreg-33/
   output$box3 <- renderValueBox({
     valueBox(
       paste0(99, " %"),
-      paste0("täckningsgrad mot Cancerregistret år ", report_end_year),
+      paste0("täckningsgrad mot cancerregistret år ", report_end_year),
       icon = icon("bar-chart"),
       color = "green"
     )
   })
 
+  # Patienten har erbjudits, i journalen dokumenterad, kontaktsjuksköterska
+  # https://statistik.incanet.se/brostcancer/sv/omv-kontaktssk-02/
   output$box4 <- renderValueBox({
     valueBox(
       paste0(98, " %"),
@@ -43,10 +47,13 @@ server <- shinyServer(function(input, output) {
     )
   })
 
+  # Tid från välgrundad misstanke om cancer till primär operation inom 28 dagar
+  # https://statistik.incanet.se/brostcancer/sv/ledtid-misstanke-till-op-15/
+  # https://vardenisiffror.se/indikator/81c7d463-e117-4d26-b25c-428dbcc9b54f
   output$box5 <- renderValueBox({
     valueBox(
       paste0(38, " %"),
-      paste0("misstanke om cancer till operation inom 28 dagar år ", report_end_year),
+      paste0("där tid från misstanke om cancer till operation är inom 28 dagar ", report_end_year),
       icon = icon("bar-chart"),
       color = "red"
     )
