@@ -10,7 +10,7 @@ server <- shinyServer(function(input, output) {
   output$box1 <- renderValueBox({
     valueBox(
       formatC(9225, format = "d", big.mark = " "),
-      paste0("new cases registered i NKBC ", report_end_year),
+      paste0("new cases registered in NKBC ", report_end_year),
       icon = icon("line-chart"),
       color = "light-blue"
     )
