@@ -26,3 +26,14 @@ for (i in 1:n_apps) {
 
 # Lista alla publicerade webbapplikationer
 # rsconnect::applications()
+
+# # Startsida
+# setwd(startsida_dir)
+# rsconnect::deployApp(
+#   appDir = ".",
+#   appFiles = list.files(recursive = TRUE),
+#   appName = "brostcancer",
+#   appPrimaryDoc = "index.html",
+#   logLevel = "quiet",
+#   forceUpdate = TRUE
+# )
