@@ -6,7 +6,7 @@ app_dirs <- c(
 n_apps <- length(app_dirs)
 
 for (i in 1:n_apps) {
-  print(paste0("Publicerar (", i, "/", n_apps, "): ", app_dirs[i], "..."))
+  cat(paste0("Publicerar (", i, "/", n_apps, "): ", app_dirs[i], "...\n"))
 
   suppressMessages(
     suppressWarnings(
