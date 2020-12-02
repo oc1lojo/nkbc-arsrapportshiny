@@ -31,7 +31,7 @@ for (i in 1:n_apps) {
 # setwd(startsida_dir)
 # rsconnect::deployApp(
 #   appDir = ".",
-#   appFiles = list.files(recursive = TRUE),
+#   appFiles = stringr::str_subset(list.files(recursive = TRUE), "rsconnect", negate = TRUE),
 #   appName = "brostcancer",
 #   appPrimaryDoc = "index.html",
 #   logLevel = "quiet",
