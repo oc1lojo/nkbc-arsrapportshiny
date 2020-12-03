@@ -29,9 +29,16 @@ for (i in 1:n_apps) {
 
 # # Startsida
 # setwd(startsida_dir)
+#
+# # tempAppFiles <- stringr::str_subset(list.files(recursive = TRUE), "rsconnect", negate = TRUE)
+# tempAppFiles <- c("index.html", list.files("_libs", full.names = TRUE, recursive = TRUE))
+#
+# # Inspektera filer
+# tempAppFiles
+#
 # rsconnect::deployApp(
 #   appDir = ".",
-#   appFiles = stringr::str_subset(list.files(recursive = TRUE), "rsconnect", negate = TRUE),
+#   appFiles = tempAppFiles,
 #   appName = "brostcancer",
 #   appPrimaryDoc = "index.html",
 #   logLevel = "quiet",
