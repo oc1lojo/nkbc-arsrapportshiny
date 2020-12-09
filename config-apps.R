@@ -15,10 +15,14 @@ client <- connectapi::connect(
   api_key = connectAPIKey
 )
 
-# Hämta lista på alla applikationer på servern och välj ut de där namnet innehåller "brostcancer_sv_"
+# Hämta lista på alla applikationer på servern och välj ut de där namnet innehåller
+# "brostcancer_sv_" eller "brostcancer_en_"
 # (Observera att ens användare måste ha skrivrättigheter till de applikationer man önskas justera)
 tempListApplications <- connectapi::get_content(client, limit = Inf, page_size = 999999) %>%
-  dplyr::filter(stringr::str_detect(name, "brostcancer_"))
+  dplyr::filter(
+    stringr::str_detect(name, "brostcancer_sv_") |
+    stringr::str_detect(name, "brostcancer_en_")
+  )
 
 # Hämta lista på användare och grupper på servern
 tempUsers <- connectapi::get_users(client)
