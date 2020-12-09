@@ -28,8 +28,8 @@ tempListApplications <- connectapi::get_content(client, limit = Inf, page_size =
 tempUsers <- connectapi::get_users(client)
 tempGroups <- connectapi::get_groups(client)
 
-# # Definiera vilka användarnamn respektive gruppnamn som ska ges skrivrättigheter till applikationerna
-# tempListAddCollaboratorUsers <- c("testUser1", "testUser2")
+# Definiera vilka användarnamn respektive gruppnamn som ska ges skrivrättigheter till applikationerna
+tempListAddCollaboratorUsers <- c("soho01")
 # tempListAddCollaboratorGroups <- c("grp.usr.stat.testGroup1")
 
 # Loopa igenom alla applikationer i urvalet
@@ -50,16 +50,16 @@ for (i in 1:nrow(tempListApplications)) {
       guid = tempListApplications$guid[i]
     )
 
-  # # Lägg till användare
-  # for (j in tempListAddCollaboratorUsers) {
-  #   if (j %in% tempUsers$username) {
-  #     connectapi::acl_add_user(
-  #       content = tempContent,
-  #       user_guid = tempUsers$guid[tempUsers$username %in% j],
-  #       role = "owner"
-  #     )
-  #   }
-  # }
+  # Lägg till användare
+  for (j in tempListAddCollaboratorUsers) {
+    if (j %in% tempUsers$username) {
+      connectapi::acl_add_user(
+        content = tempContent,
+        user_guid = tempUsers$guid[tempUsers$username %in% j],
+        role = "owner"
+      )
+    }
+  }
   # # Lägg till grupper
   # for (j in tempListAddCollaboratorGroups) {
   #   if (j %in% tempGroups$name) {
