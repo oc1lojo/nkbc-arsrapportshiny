@@ -2,6 +2,7 @@
 # https://prestatistik.incanet.se/guide/rccShiny---RStudio-Connect.html#uppdatera-redan-publicerad-applikation
 
 library(dplyr)
+library(keyring)
 library(rsconnect)
 library(connectapi)
 
@@ -10,7 +11,7 @@ globalRegisterPrefix <- "brostcancer"
 
 # API --------------------------------------------------------------------------
 connectServer <- "https://prestatistik.incanet.se"
-connectAPIKey <- "..."
+connectAPIKey <- keyring::key_get("r-statistik.incanet.se-brostcancer-api", "jolo01")
 
 client <- connectapi::connect(
   host = connectServer,
