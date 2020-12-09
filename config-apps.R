@@ -1,5 +1,7 @@
+# Anpassat utifrån
+# https://prestatistik.incanet.se/guide/rccShiny---RStudio-Connect.html#uppdatera-redan-publicerad-applikation
+
 library(dplyr)
-# https://github.com/rstudio/connectapi
 library(connectapi)
 
 # Serveradress (justeras till produktionsservern om så behövs) och API Key
