@@ -1,12 +1,12 @@
 # Anpassat utifrån
-# https://prestatistik.incanet.se/guide/rccShiny---RStudio-Connect.html#uppdatera-redan-publicerad-applikation
+# https://statistik.incanet.se/guide/rccShiny---RStudio-Connect.html#uppdatera-redan-publicerad-applikation
 
 library(dplyr)
 library(keyring)
 library(connectapi)
 
-# Serveradress (justeras till produktionsservern om så behövs) och API Key
-connectServer <- "https://prestatistik.incanet.se"
+# Serveradress och API Key
+connectServer <- "https://statistik.incanet.se"
 connectAPIKey <- keyring::key_get("r-statistik.incanet.se-brostcancer-api", "jolo01")
 
 # Definiera uppkoppling för att använda i funktionerna i paketet connectapi

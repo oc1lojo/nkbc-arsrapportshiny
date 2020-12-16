@@ -1,5 +1,5 @@
 # Anpassat utifrån
-# https://prestatistik.incanet.se/guide/rccShiny---RStudio-Connect.html#uppdatera-redan-publicerad-applikation
+# https://statistik.incanet.se/guide/rccShiny---RStudio-Connect.html#uppdatera-redan-publicerad-applikation
 
 library(dplyr)
 library(keyring)
@@ -10,7 +10,7 @@ library(connectapi)
 globalRegisterPrefix <- "brostcancer"
 
 # API --------------------------------------------------------------------------
-connectServer <- "https://prestatistik.incanet.se"
+connectServer <- "https://statistik.incanet.se"
 connectAPIKey <- keyring::key_get("r-statistik.incanet.se-brostcancer-api", "jolo01")
 
 client <- connectapi::connect(
