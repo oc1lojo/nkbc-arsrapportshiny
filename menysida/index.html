@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang='sv'>
+<head>
+	<meta charset='utf-8' />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NKBC</title>
+	<link rel='stylesheet' href='_libs/bootstrap/css/bootstrap.min.css'>
+	<script src='_libs/ga.js'></script>
+	<script src='_libs/jquery/jquery.min.js'></script>
+	<script src='_libs/bootstrap/js/bootstrap.min.js'></script>
+	<script type='text/javascript'>
+	$(document).ready(function() {
+
+		language = 'sv';
+		$('#li_sv').addClass('active');
+		$('div.en').addClass('hidden');
+		$('a.languageLink').click(function() {
+			link_id = $(this).attr('id');
+			if (language != link_id) {
+				$('div.tab-pane').removeClass('active');
+				$('li.reportLi').removeClass('active');
+				$('li.reportTab').removeClass('active');
+				$('li.startTab').addClass('active');
+				if (link_id=='sv') {
+					language = 'sv';
+					$('div.en').addClass('hidden');
+					$('div.sv').removeClass('hidden');
+				} else if (link_id=='en') {
+					language = 'en';
+					$('div.sv').addClass('hidden');
+					$('div.en').removeClass('hidden');
+				}
+			}
+		});
+
+		$('a.reportLink').click(function() {
+			link_id = $(this).attr('id');
+			src = '/brostcancer_'+language+'_'+link_id;
+			$('#reportDiv iframe').attr('src',src);
+		});
+		$('a.homeLink').click(function() {
+			$('li.reportLi').removeClass('active');
+		});
+		$('a.reportLink').click(function() {
+			$('li.reportLi').removeClass('active');
+		});
+
+	});
+	</script>
+</head>
+<body>
+
+	<div class="container-fluid" style="max-width:1600px;">
+
+		<div class='container-fluid'>
+			<ul class='nav nav-pills'>
+				<li class='languageLi' id='li_sv'><a class='languageLink' data-toggle='pill' href='#home2' id='sv'>Svenska</a></li>
+				<li class='languageLi' id='li_en'><a class='languageLink' data-toggle='pill' href='#home2' id='en'>English</a></li>
+			</ul>
+		</div>
+
+		<div class='container-fluid sv'>
+
+			<h2>Nationellt kvalitetsregister för bröstcancer (NKBC)</h2>
+
+			<ul class='nav nav-tabs'>
+				<li class='startTab active'><a class='homeLink' data-toggle='tab' data-target='#sv_home1,#home2' href='#'>Start</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#menu_tackning'>Täckningsgrader</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#menu_population'>Population</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#menu_ledtider'>Ledtider</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#menu_diagnostik'>Diagnostik</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#menu_omvardnad'>Omvårdnad</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#menu_primbeh'>Primär behandling</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#menu_kirurgi'>Kirurgi</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#menu_onkologi'>Onkologisk behandling</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#menu_overlevnad'>Överlevnad</a></li>
+			</ul>
+
+			<div class='tab-content'>
+				<div id='sv_home1' class='tab-pane active'>
+				</div>
+				<div id='menu_tackning' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='tackning-mot-cancerreg-33'>Täckningsgrad mot cancerregistret</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='tackning-for-op-36'>Täckningsgrad för rapportering av operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='tackning-for-preop-beh-13'>Täckningsgrad för rapportering av preoperativ onkologisk behandling</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='tackning-for-postop-beh-14'>Täckningsgrad för rapportering av postoperativ onkologisk behandling</a></li>
+					</ul>
+				</div>
+				<div id='menu_population' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-kon-09a'>Kön</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-alder-09b'>Ålder</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-invasiv-09c'>Invasivitet</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-subtyp-09d'>Biologisk subtyp</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-tnm-t-09i'>Tumörstorlek (klinisk) vid diagnos</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-t-09h'>Tumörstorlek vid operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-tnm-n-09e'>Spridning till lymfkörtlarna vid diagnos</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-n-09g'>Spridning till lymfkörtlarna vid operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-tnm-m-09f'>Fjärrmetastaser vid diagnos</a></li>
+					</ul>
+				</div>
+				<div id='menu_ledtider' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-misstanke-till-besok-spec-17'>Välgrundad misstanke om cancer till första besök i specialiserad vård</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-misstanke-till-op-15'>Välgrundad misstanke om cancer till operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-misstanke-till-preop-beh-16'>Välgrundad misstanke om cancer till preoperativ onkologisk behandling</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-provtagn-till-op-48'>Provtagningsdatum till operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-provtagn-till-preop-beh-49'>Provtagningsdatum till preoperativ onkologisk behandling</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-op-till-cytostatikabeh-22'>Operation till cytostatikabehandling</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-op-till-stralbeh-23'>Operation till strålbehandling</a></li>
+					</ul>
+				</div>
+				<div id='menu_diagnostik' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-screening-01'>Screeningupptäckt bröstcancer</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-klar-innan-op-06'>Fastställd diagnos innan operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-mdk-innan-beh-04'>Multidisciplinär konferens inför behandlingsstart</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-mdk-efter-op-05'>Multidisciplinär konferens efter operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-komplett-patologi-10'>Fullständig patologirapport</a></li>
+					</ul>
+				</div>
+				<div id='menu_omvardnad' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='omv-kontaktssk-02'>Kontaktsjuksköterska</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='omv-vardplan-03'>Min vårdplan</a></li>
+					</ul>
+				</div>
+				<div id='menu_primbeh' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='primbeh-preop-onk-beh-47'>Preoperativ onkologisk behandling</a></li>
+					</ul>
+				</div>
+				<div id='menu_kirurgi' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-brostbev-op-42'>Bröstbevarande operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-brostbev-op-sma-tum-inv-53'>Bröstbevarande operation vid små invasiva tumörer</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-brostbev-op-sma-tum-insitu-54'>Bröstbevarande operation vid små icke-invasiva tumörer</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-direktrek-07'>Omedelbara rekonstruktioner vid mastektomi</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-omop-08'>Enbart en operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-axillkir-45'>Axillkirurgi</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-sentinel-node-26'>Sentinel node operation</a></li>
+					</ul>
+				</div>
+				<div id='menu_onkologi' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-cytostatikabeh-fordelning-35'>Cytostatikabehandling, pre- respektive postoperativt</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-cytostatikabeh-bland-erneg-maluppfyllelse-46'>Cytostatikabehandling, måluppfyllelse</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-stralbeh-efter-brostbev-op-28'>Strålbehandling efter bröstbevarande operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-stralbeh-efter-mastektomi-29'>Strålbehandling efter mastektomi</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-endokrin-beh-fordelning-41'>Endokrin behandling, pre- respektive postoperativt</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-endokrin-beh-maluppfyllelse-31'>Endokrin behandling, måluppfyllelse</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-antikroppbeh-bland-cytostatikabeh-her2pos-32'>Antikroppsbehandling bland cytostatikabehandlade</a></li>
+					</ul>
+				</div>
+				<div id='menu_overlevnad' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='overlevnad-5ar-30'>Observerad 5-årsöverlevnad</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+		<div class='container-fluid en'>
+
+			<h2>National Quality Register for Breast Cancer (NKBC)</h2>
+
+			<ul class='nav nav-tabs'>
+				<li class='startTab active'><a class='homeLink' data-toggle='tab' data-target='#en_home1,#home2' href='#'>Start</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#en_menu_tackning'>Coverage</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#en_menu_population'>Population</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#en_menu_ledtider'>Lead times</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#en_menu_diagnostik'>Diagnostics</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#en_menu_omvardnad'>Nursing</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#en_menu_primbeh'>Primary treatment</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#en_menu_kirurgi'>Surgery</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#en_menu_onkologi'>Oncological treatment</a></li>
+				<li class='reportTab'><a data-toggle='tab' href='#en_menu_overlevnad'>Survival</a></li>
+			</ul>
+
+			<div class='tab-content'>
+				<div id='en_home1' class='tab-pane active'>
+				</div>
+				<div id='en_menu_tackning' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='tackning-mot-cancerreg-33'>Coverage compared to the Swedish Cancer Register</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='tackning-for-op-36'>Coverage for reporting surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='tackning-for-preop-beh-13'>Coverage for reporting preoperative oncological treatment</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='tackning-for-postop-beh-14'>Coverage for reporting postoperative oncological treatment</a></li>
+					</ul>
+				</div>
+				<div id='en_menu_population' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-kon-09a'>Sex</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-alder-09b'>Age</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-invasiv-09c'>Invasive cancer</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-subtyp-09d'>Biological subtype</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-tnm-t-09i'>Tumour size (clinical) at diagnosis</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-t-09h'>Tumour size at surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-tnm-n-09e'>Spread to lymph nodes at diagnosis</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-n-09g'>Spread to lymph nodes at surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='pop-tnm-m-09f'>Distant metastases at diagnosis</a></li>
+					</ul>
+				</div>
+				<div id='en_menu_ledtider' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-misstanke-till-besok-spec-17'>Well-founded suspicion of cancer to first specialized care visit</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-misstanke-till-op-15'>Well-founded suspicion of cancer to surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-misstanke-till-preop-beh-16'>Well-founded suspicion of cancer to preoperative oncological treatment</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-provtagn-till-op-48'>Biopsy date to surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-provtagn-till-preop-beh-49'>Biopsy date to preoperative oncological treatment</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-op-till-cytostatikabeh-22'>Surgery to chemotherapy</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='ledtid-op-till-stralbeh-23'>Surgery to radiotherapy</a></li>
+					</ul>
+				</div>
+				<div id='en_menu_diagnostik' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-screening-01'>Screening-detected breast cancer</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-klar-innan-op-06'>Definitive diagnosis before surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-mdk-innan-beh-04'>Multidisciplinary team conference (MDT) before start of treatment</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-mdk-efter-op-05'>Multidisciplinary team conference (MDT) after surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='diag-komplett-patologi-10'>Complete pathology report</a></li>
+					</ul>
+				</div>
+				<div id='en_menu_omvardnad' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='omv-kontaktssk-02'>Contact nurse</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='omv-vardplan-03'>Individual care plan</a></li>
+					</ul>
+				</div>
+				<div id='en_menu_primbeh' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='primbeh-preop-onk-beh-47'>Preoperative oncological treatment</a></li>
+					</ul>
+				</div>
+				<div id='en_menu_kirurgi' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-brostbev-op-42'>Breast-conserving surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-brostbev-op-sma-tum-inv-53'>Breast-conserving surgery for small invasive tumours</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-brostbev-op-sma-tum-insitu-54'>Breast-conserving surgery for small non-invasive tumours</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-direktrek-07'>Immediate reconstructions at mastectomy</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-omop-08'>Only one breast operation</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-axillkir-45'>Axillary surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='kir-sentinel-node-26'>Sentinel node biopsy</a></li>
+					</ul>
+				</div>
+				<div id='en_menu_onkologi' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-cytostatikabeh-fordelning-35'>Chemotherapy, pre- and postoperative, respectively</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-cytostatikabeh-bland-erneg-maluppfyllelse-46'>Chemotherapy</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-stralbeh-efter-brostbev-op-28'>Radiotherapy after breast-conserving surgery</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-stralbeh-efter-mastektomi-29'>Radiotherapy after mastektomy</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-endokrin-beh-fordelning-41'>Endocrine treatment, pre- and postoperative, respectively</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-endokrin-beh-maluppfyllelse-31'>Endocrine treatment</a></li>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='onk-antikroppbeh-bland-cytostatikabeh-her2pos-32'>Anti-HER2 treatment among chemotherapy-treated</a></li>
+					</ul>
+				</div>
+				<div id='en_menu_overlevnad' class='tab-pane'>
+					<ul class='nav nav-pills'>
+						<li class='reportLi'><a data-toggle='pill' href='#reportDiv' class='reportLink' id='overlevnad-5ar-30'>Observed 5-year survival</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+		<div class='container-fluid'>
+
+			<div class='tab-content'>
+				<div id='home2' class='tab-pane active'>
+					<div class='sv'>
+
+						<h3>Årsrapport 2019</h3>
+						<p>
+							Här finns statistik från Nationellt kvalitetsregister för bröstcancer (NKBC).
+							Data om bröstcancer kommer från Sveriges alla vårdgivare.
+							Syftet är att vara en källa till kunskap om svensk vård för patienter, vårdpersonal, forskare och beslutsfattare.
+						</p>
+						<p>
+							Välj indikator i menyn högst upp. Det går att filtrera på region, år och sjukhus m.m.
+							I urvalsmenyn för vissa indikatorer, kan du själv begränsa och välja vilka indikatorer du vill studera (ålder, lymfkörtelstatus, receptorstatus och tumörstorlek).
+							På så vis skapas en skräddarsydd nationell eller regional rapport utifrån det egna behovet.
+							För behörig sjukvårdspersonal finns även dessa interaktiva rapporter tillgängliga på INCA-plattformen med dagsfärska siffror.
+							Det ges dessutom möjlighet att få utvalda indikatorer ("Koll på läget") via e-post.
+						</p>
+						<p>
+							Data är hämtat ur NKBC 2020-09-01. Siffrorna uppdateras två gånger per år, dels i maj och dels i september.
+						</p>
+						<p>
+							<a href="https://www.cancercentrum.se/globalassets/cancerdiagnoser/brost/kvalitetsregister/nkbc_rapport_20019.pdf">Sammanfattning och vägledning till interaktiva rapporter för 2019 (pdf)</a>,
+							<a href="https://www.cancercentrum.se/contentassets/c36b580a94ab4c3794aa9d41bb954871/ett-urval-av-data-fran-nkbc-rapporten-2019-vers-2-002.pdf">Ett urval av data från NKBC rapporten för 2019 (pdf)</a><br>
+						</p>
+						<p>
+							Tidigare år:<br>
+							<a href="https://www.cancercentrum.se/globalassets/cancerdiagnoser/brost/kvalitetsregister/sammanfattning-och-vagledning-till-interaktiva-rapporten-for-2018.pdf">Sammanfattning och vägledning till interaktiva rapporter för 2018 (pdf)</a>,
+							<a href="https://www.cancercentrum.se/globalassets/cancerdiagnoser/brost/kvalitetsregister/ett-urval-av-data-fran-nkbc-rapporten-2018.pdf">Ett urval av data från NKBC rapporten för 2018 (pdf)</a><br>
+							<a href="https://www.cancercentrum.se/globalassets/bilder/cancerdiagnoser/brostcancer/nkbc_rapport-_2017_slutlig_2019025-rev-b.pdf">Sammanfattning och vägledning till interaktiva rapporter för 2017 (pdf)</a><br>
+							<a href="https://www.cancercentrum.se/globalassets/cancerdiagnoser/brost/kvalitetsregister/nkbc_rapport_2016.pdf">Sammanfattning och vägledning till interaktiva rapporter för 2016 (pdf)</a><br>
+						</p>
+						<iframe id='dashboardFrame' src='/brostcancer_sv_dashboard' width='100%' height=1400 frameborder='0'></iframe>
+					</div>
+					<div class='en'>
+
+						<h3>Yearly report 2019</h3>
+						<p>
+							Herein  statistics from the Swedish National Quality Register for Breast Cancer (NKBC) are presented.
+							Breast cancer data comes from all of Sweden’s healthcare providers.
+							The purpose is to be a source of knowledge about care for patients, healthcare staff, researchers and decision makers in Sweden.
+						</p>
+						<p>
+							Select indicator in the menu at the top. It is possible to filter by healthcare region, year and hospital etc.
+							In the selection menu for some indicators, you can limit and choose which indicators you want to study (age, lymph node status, receptor status and tumour size).
+							In this way, a customized national or regional report is created based on your own need.
+						</p>
+						<p>
+							Data was retrieved from NKBC 2020-09-01. The figures are updated twice a year, in May and in September.</p>
+						<p>
+							<a href="https://www.cancercentrum.se/globalassets/cancerdiagnoser/brost/kvalitetsregister/nkbc_rapport_20019.pdf">Summary and guidance for interactive reports for 2019 (pdf)</a>,
+							<a href="https://www.cancercentrum.se/contentassets/c36b580a94ab4c3794aa9d41bb954871/ett-urval-av-data-fran-nkbc-rapporten-2019-vers-2-002.pdf">A selection of data from the NKBC report for 2019 (pdf, in Swedish)</a><br>
+						</p>
+						<p>
+							Yearlier years:<br>
+							<a href="https://www.cancercentrum.se/globalassets/cancerdiagnoser/brost/kvalitetsregister/sammanfattning-och-vagledning-till-interaktiva-rapporten-for-2018.pdf">Summary and guidance for interactive reports for 2018 (pdf)</a>,
+							<a href="https://www.cancercentrum.se/globalassets/cancerdiagnoser/brost/kvalitetsregister/ett-urval-av-data-fran-nkbc-rapporten-2018.pdf">A selection of data from the NKBC report for 2018 (pdf, in Swedish)</a><br>
+							<a href="https://www.cancercentrum.se/globalassets/bilder/cancerdiagnoser/brostcancer/nkbc_rapport-_2017_slutlig_2019025-rev-b.pdf">Summary and guidance for interactive reports for 2017 (pdf)</a><br>
+							<a href="https://www.cancercentrum.se/globalassets/cancerdiagnoser/brost/kvalitetsregister/nkbc_rapport_2016.pdf">Summary and guidance for interactive reports for 2016 (pdf)</a><br>
+						</p>
+						<iframe id='dashboardFrame' src='/brostcancer_en_dashboard'' width='100%' height=1400 frameborder='0'></iframe>
+					</div>
+				</div>
+				<div id='reportDiv' class='tab-pane'>
+					<iframe id='reportFrame' src='' width='100%' height=1400 frameborder='0'></iframe>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+</html>
