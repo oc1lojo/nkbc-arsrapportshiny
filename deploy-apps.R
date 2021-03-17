@@ -65,8 +65,9 @@ for (i in 1:length(tempListApps)) {
 }
 
 
-# Startsida --------------------------------------------------------------------
-# setwd(startsida_dir)
+# Menysida --------------------------------------------------------------------
+
+setwd("menysida")
 
 tempAppFiles <- c("index.html", list.files("_libs", full.names = TRUE, recursive = TRUE))
 
@@ -93,3 +94,5 @@ rsconnect::deployApp(
   logLevel = "quiet",
   forceUpdate = TRUE
 )
+
+setwd("..")

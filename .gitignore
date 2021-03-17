@@ -3,4 +3,5 @@
 .RData
 .Ruserdata
 apps
+menysida/rsconnect
 *.html
