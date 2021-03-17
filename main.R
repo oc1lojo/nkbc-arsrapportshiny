@@ -169,6 +169,7 @@ for (i in seq(along = nkbcind_nams)) {
     language = c("sv", "en"),
     data = as.data.frame(df_tmp),
     folder = gsub("_", "-", sub("^nkbc_", "", kortnamn(nkbcind))),
+    path = "apps",
     outcome = outcome(nkbcind),
     outcomeTitle = outcomeTitle(nkbcind, locale = c("sv", "en")),
     periodLabel = c(
@@ -238,6 +239,7 @@ rccShiny2(
   language = c("sv", "en"),
   data = as.data.frame(df_tmp),
   folder = gsub("_", "-", sub("^nkbc_", "", kortnamn(nkbc33))),
+  path = "apps",
   outcome = outcome(nkbc33),
   outcomeTitle = outcomeTitle(nkbc33, locale = c("sv", "en")),
   periodLabel = c(

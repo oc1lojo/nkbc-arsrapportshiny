@@ -27,8 +27,8 @@ tempListApplications <-
 # Publicera (om) appar ---------------------------------------------------------
 
 tempListApps <- c(
-  list.dirs(path = "sv", recursive = FALSE),
-  list.dirs(path = "en", recursive = FALSE)
+  list.dirs(path = "apps/sv", recursive = FALSE),
+  list.dirs(path = "apps/en", recursive = FALSE)
 )
 
 for (i in 1:length(tempListApps)) {
@@ -36,7 +36,7 @@ for (i in 1:length(tempListApps)) {
 
   # Namngivningskonvention: register_språk_app
   tempAppName <- paste(
-    c(globalRegisterPrefix, unlist(strsplit(tempListApps[i], split = .Platform$file.sep))),
+    c(globalRegisterPrefix, unlist(strsplit(tempListApps[i], split = .Platform$file.sep))[2:3]),
     collapse = "_"
   )
 
